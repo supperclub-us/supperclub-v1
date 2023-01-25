@@ -7,7 +7,7 @@ const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
     role: {
-      type: Sequelize.ENUM("CHEF", "MEMBER"),
+      type: Sequelize.ENUM(["CHEF", "MEMBER"]),
       allowNull: false
     },
     firstName: {
