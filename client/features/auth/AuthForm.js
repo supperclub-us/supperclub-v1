@@ -38,7 +38,6 @@ const AuthForm = ({ name, displayName }) => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {error && <div> {error} </div>}
       </form>
     </div>
   );
