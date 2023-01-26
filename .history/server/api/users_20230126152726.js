@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Booking },
+  models: { User, Booking, Cuisine },
 } = require("../db");
 module.exports = router;
 
@@ -68,26 +68,21 @@ router.get("/members/:id", async (req, res, next) => {
   }
 })
 
-// CHEFS GET /api/users/chefs/:id
+// MEMBERS GET /api/users/chefs/:id
 router.get("/chefs/:id", async (req, res, next) => {
   try {
     const chef = await User.findByPk(req.params.id, {
-      where: {
-        role: "CHEF"
-      },
       include: [
         {
+          where: {
+            role: "CHEF"
+          },
           model: Booking,
           as: "chefBooking",
         },
       ],
     });
-    if (chef.role === "CHEF"){
-      res.json(chef)
-    } else {
-      throw new Error ("Not Authenticated")
-    }
-
+    res.json(chef)
   } catch (err) {
     next (err);
   }
