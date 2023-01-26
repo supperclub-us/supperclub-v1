@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const {
-  models: { User, Booking, Cuisine },
+  models: { User, Booking },
 } = require("../db");
 module.exports = router;
 
-// USERS
+// USERS GET /api/users
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll();
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// CHEFS
+// CHEFS GET /api/users/chefs
 router.get("/chefs", async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -32,7 +32,7 @@ router.get("/chefs", async (req, res, next) => {
   }
 });
 
-// MEMBERS
+// MEMBERS GET /api/users/members
 router.get("/members", async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -50,26 +50,45 @@ router.get("/members", async (req, res, next) => {
   }
 });
 
-// MEMBERS
-router.get("/bookings", async (req, res, next) => {
+// --------------------------------------------------------------//
+// MEMBERS GET /api/users/members/:id
+router.get("/members/:id", async (req, res, next) => {
   try {
-    const booking = await Booking.findAll({
+    const member = await User.findByPk(req.params.id, {
       include: [
         {
-          model: User,
-          as: "chefBooking",
-        },
-        {
-          model: User,
+          model: Booking,
           as: "memberBooking",
         },
       ],
     });
-
-    // go through array and SQL calls to get each author and map over to create new array of object
-
-    res.json(booking);
+    res.json(member)
   } catch (err) {
-    next(err);
+    next (err);
   }
-});
+})
+
+// CHEFS GET /api/users/chefs/:id
+router.get("/chefs/:id", async (req, res, next) => {
+  try {
+    const chef = await User.findByPk(req.params.id, {
+      where: {
+        role: "CHEF"
+      },
+      include: [
+        {
+          model: Booking,
+          as: "chefBooking",
+        },
+      ],
+    });
+    if (chef.role === "CHEF"){
+      res.json(chef)
+    } else {
+      throw new Error ("Not Authenticated")
+    }
+
+  } catch (err) {
+    next (err);
+  }
+})

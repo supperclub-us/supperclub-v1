@@ -20,6 +20,17 @@ form div {
   display: inline-block;
 }
 
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  align-items: center;
+}
+
+.form-control > * {
+  margin: 3em;
+}
 .navBar {
   border: 1px solid purple;
 }

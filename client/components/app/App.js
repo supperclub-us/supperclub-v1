@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {Navbar} from '../index';
+import {Header, Navbar} from '../index';
 import AppRoutes from './AppRoutes';
 
 const App = () => {
   return (
     <div>
       <Navbar />
+      <Header />
       <AppRoutes />
     </div>
   );
