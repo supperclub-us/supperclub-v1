@@ -19,3 +19,11 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.navBar {
+  border: 1px solid purple;
+}
+
+.authForm {
+  border: 1px solid green;
+}
