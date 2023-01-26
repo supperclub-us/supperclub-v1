@@ -1,6 +1,6 @@
 const {
   db,
-  models: { User, Booking, Cuisine},
+  models: { User, Booking, Cuisine },
 } = require("../server/db");
 
 /**
@@ -225,7 +225,6 @@ async function seed() {
 
   // USER REVIEWS
   // GOLD LEVEL
-
 
   console.log(`seeded ${cuisines.length} cuisines`);
 
