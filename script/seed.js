@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User, Booking, Cuisine } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -10,20 +10,36 @@ async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
 
-  // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: 'cody', password: '123' }),
-  //   User.create({ username: 'murphy', password: '123' }),
-  // ])
+  //User order keeps switching!
+  // Need to capture lat/long.
+  // Fix zip code?
 
-  // console.log(`seeded ${users.length} users`)
-  // console.log(`seeded successfully`)
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1]
-  //   }
-  // }
+  // Creating Users
+  const users = await Promise.all([
+    User.create({ role: 'MEMBER', firstName: 'Tim', lastName: "Toolman", bio: "I like to eat great food!", mobileNumber: "(555)555-5555", email: "tim@email.com", password: "123" }),
+    User.create({ role: 'CHEF', firstName: 'Guy', lastName: "Fieri", bio: "Great eats, great times!", mobileNumber: "(555)555-5555", email: "guy@email.com", password: "123" }),
+  ])
+
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded successfully`)
+
+  const cuisines = await Promise.all([
+    Cuisine.create({ category: "Italian" }),
+    Cuisine.create({ category: "Chilean" })
+  ]);
+
+  console.log(`seeded ${cuisines.length} cuisines`)
+  console.log(`seeded successfully`)
+
+  // Need to capture lat/long.
+  // Fix zip code?
+  const bookings = await Promise.all([
+    Booking.create({ title: "Dinner with a Great Guy", menu: "Peanut butter burritos", startDateTime: "1/31/2023, 6:00 p.m. EST", endDateTime: "1/31/2023, 9:00 p.m. EST", maxSeats: 10, openSeats: 3, address1: "123 Main St.", city: "Anytown", state: "MT", zipCode: 12345, chefId: 1, cuisineId: 1 }),
+    Booking.create({ title: "Give a Guy a Fish", menu: "Fish tacos", startDateTime: "2/7/2023, 6:00 p.m. EST", endDateTime: "2/7/2023, 9:00 p.m. EST", maxSeats: 10, openSeats: 3, address1: "456 Oak Ave.", city: "Somewhere", state: "IL", zipCode: 12345, chefId: 1, cuisineId: 2 })
+  ]);
+
+  console.log(`seeded ${bookings.length} bookings`)
+  console.log(`seeded successfully`)
 }
 
 /*

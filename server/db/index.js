@@ -9,8 +9,6 @@ const Cuisine = require('./models/Cuisine')
 //associations could go here!
 
 // Many-to-Many b/t Member and Booking
-// ?Do we need a user table?
-// ?Need alias for "member"?
 User.belongsToMany(Booking, {
   through: "users_bookings",
   foreignKey: "memberId",

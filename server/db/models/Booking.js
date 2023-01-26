@@ -62,6 +62,11 @@ const states = [
 ];
 
 const Booking = db.define("booking", {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey:true,
+    autoIncrement: true,
+  },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -127,6 +132,6 @@ const Booking = db.define("booking", {
   longitude: {
     type: Sequelize.FLOAT,
   }
-});
+}, { timestamps: false });
 
 module.exports = Booking
