@@ -1,6 +1,6 @@
 const {
   db,
-  models: { User, Booking, Cuisine, UsersBookings },
+  models: { User, Booking, Cuisine },
 } = require("../server/db");
 
 /**
@@ -139,7 +139,7 @@ async function seed() {
   // Bookings of Chefs
   const booking1 = await Booking.create({
     title: "Delicious Mexican cuisine!",
-    menu: "A nice blend of - tacos and peanut butter in your burritos!",
+    menu: "A nice blend of - maduros and delicious brazilian steak!",
     startDateTime: "1/1/2023 5:30PM",
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
@@ -149,7 +149,7 @@ async function seed() {
     state: "MA",
     zipCode: 55555,
     chefId: 7,
-    cuisineId: 8,
+    cuisineId: 7,
   });
   const booking2 = await Booking.create({
     title: "Great East Asian Cuisine!",
@@ -177,7 +177,7 @@ async function seed() {
     state: "UT",
     zipCode: 20314,
     chefId: 9,
-    cuisineId: 5,
+    cuisineId: 8,
   });
 
   // USERS BOOKINGS JOIN TABLE - magic methods
@@ -211,9 +211,25 @@ async function seed() {
     through: "users_bookings",
   });
 
+  // CHEF CUISINES
+  // 7, 8, 9
+  await chefNick.addCuisine(cuisines[6], { through: "chef_cuisine" });
+  await chefNick.addCuisine(cuisines[7], { through: "chef_cuisine" });
+  await chefNick.addCuisine(cuisines[8], { through: "chef_cuisine" });
+  await chefEllie.addCuisine(cuisines[3], { through: "chef_cuisine" });
+  await chefEllie.addCuisine(cuisines[4], { through: "chef_cuisine" });
+  await chefEllie.addCuisine(cuisines[5], { through: "chef_cuisine" });
+  await chefJames.addCuisine(cuisines[1], { through: "chef_cuisine" });
+  await chefJames.addCuisine(cuisines[2], { through: "chef_cuisine" });
+  await chefJames.addCuisine(cuisines[7], { through: "chef_cuisine" });
+
+  // USER REVIEWS
+  // GOLD LEVEL
+
   console.log(`seeded ${cuisines.length} cuisines`);
 
   console.log("USER MAGIC METHODS: ", Object.keys(User.prototype));
+  console.log("CUISINE MAGIC METHODS: ", Object.keys(User.prototype));
   console.log("BOOKING MAGIC METHODS: ", Object.keys(Booking.prototype));
   console.log(`seeded successfully`);
 }

@@ -36,14 +36,16 @@ Booking.belongsTo(User, {
 
 // Many-to-Many b/t User and User (Member and Chef)
 User.belongsToMany(User, {
-  as: "member",
+  as: "memberReview",
   through: "chef_reviews",
   foreignKey: "memberId",
+  otherKey: "chefId"
 });
 User.belongsToMany(User, {
-  as: "chef",
+  as: "chefReview",
   through: "chef_reviews",
   foreignKey: "chefId",
+  otherKey: "memberId"
 });
 
 // Many-to-Many b/t Chef and Cuisine
