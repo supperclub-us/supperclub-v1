@@ -31,15 +31,17 @@ export const me = createAsyncThunk('auth/me', async () => {
   }
 });
 
+
+// create a thunk to authenticate signup
 export const authenticate = createAsyncThunk(
-  'auth/authenticate',
-  async ({ username, password, method }, thunkAPI) => {
-    try {
-      const res = await axios.post(`/auth/${method}`, { username, password });
+  'auth/authenticate', 
+  async ({role, firstName, lastName, bio , mobileNumber, email, password, method}, thunkAPI) => {
+    try{
+      const res = await axios.post(`/auth/${method}`, {role, firstName, lastName, bio ,mobileNumber, email, password});
       window.localStorage.setItem(TOKEN, res.data.token);
       thunkAPI.dispatch(me());
-    } catch (err) {
-      if (err.response.data) {
+    } catch(err){
+      if(err.response.data){
         return thunkAPI.rejectWithValue(err.response.data);
       } else {
         return 'There was an issue with your request.';
@@ -47,6 +49,7 @@ export const authenticate = createAsyncThunk(
     }
   }
 );
+
 
 /*
   SLICE
@@ -66,6 +69,9 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(me.fulfilled, (state, action) => {
+      
+      console.log("action.payload", action.payload)
+
       state.me = action.payload;
     });
     builder.addCase(me.rejected, (state, action) => {
