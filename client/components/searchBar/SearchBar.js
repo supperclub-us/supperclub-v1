@@ -38,7 +38,7 @@ const SearchBar = () => {
       variant="contained"
       sx={{ p: 2, border: "1px solid grey"}}
     >
-      <FormControl className="form-control" sx={{m: "1em"}}>
+      <FormControl className="form-control" sx={{display: "flex", justifyContent: "flex-start", alignItems: "flex-start", m: "1em"}}>
         <TextField
           id="outlined-basic"
           label="Location"
@@ -46,19 +46,19 @@ const SearchBar = () => {
           {...address}
         />
         {address.suggestions?.length > 0 && (
-        <div className="searchBar-suggestionWrapper">
+        <Box className="searchBar-suggestionWrapper" sx={{ bgcolor: '#FCFCFC', position:'absolute', width: 400, mt: 7, mb: 0, mx: 0, borderRadius: '5px', boxShadow: 3}} >
           {address.suggestions.map((suggestion, index) => {
             return (
-              <p className="searchBar-suggestion" key={index}
+              <Box className="searchBar-suggestion" sx={{maxWidth: 400, p: 0.4}} key={index}
               onClick={() => {
-                address.setValue(p.place_name);
+                address.setValue(suggestion.place_name);
                 address.setSuggestions([]);
               }}>
                 {suggestion.place_name}
-              </p>
+              </Box>
             )
           })}
-        </div>
+        </Box>
         )}
       </FormControl>
 
