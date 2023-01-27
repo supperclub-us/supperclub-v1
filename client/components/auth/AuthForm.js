@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -11,6 +11,9 @@ import { Button, TextField, Box } from '@mui/material';
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
+  // add state to role
+  const [role, setRole] = useState('');
+  console.log("role-->", role)
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
@@ -51,6 +54,7 @@ const AuthForm = ({ name, displayName }) => {
   };
 
   return (
+    
     <div className='authForm'>
       <form onSubmit={handleSubmit} name={name}>
 
@@ -58,15 +62,35 @@ const AuthForm = ({ name, displayName }) => {
           <div>
             
             <div>
-              <TextField name='role' type="text" placeholder='role'/>
+              <FormControl className="form-control">
+                <InputLabel id="demo-simple-select-label">
+                  Role
+                </InputLabel>
+                <Select
+
+
+                  labelId="demo-simple-select-label"
+                  value={role}
+                  label="Guests"
+                  onChange={(e) => setRole(e.target.value)}
+                  sx={{ width: "25ch" }}
+                  placeholder="Role"
+                >
+                  <MenuItem value="member" onChange={(e) => setRole(e.target.value)}>Member</MenuItem>
+                  <MenuItem value="chef" onChange={(e) => setRole(e.target.value)}>Chef</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
             <div>
+            <FormControl className="form-control">
               <TextField name='firstName' type="text" placeholder='First Name' />
+            </FormControl>
             </div>
 
+
             <div>
-              <input name='lastName' type="text" placeholder='Last Name' />
+              <TextField name='lastName' type="text" placeholder='Last Name' />
             </div>
 
             <div>
@@ -77,18 +101,14 @@ const AuthForm = ({ name, displayName }) => {
               <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
             </div>
 
-            
-
+      
           </div>
         ) : null }
         <div>
-          <TextField name="email" type="text" />
+          <TextField name="email" type="text" placeholder='Email'  />
         </div>
         <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+          <TextField name="password" type="password" placeholder='Password'  />
         </div>
         <div>
           <Button type="submit" variant="contained" color="primary">
