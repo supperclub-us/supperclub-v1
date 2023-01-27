@@ -2,13 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../auth/authSlice';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { Button, Typography, Modal, Box } from '@mui/material';
+
+
 
 import './navbar.css';
-import { Modal } from '@mui/material';
+
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
