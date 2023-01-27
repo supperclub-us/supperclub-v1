@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Box,
@@ -10,9 +10,9 @@ import {
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import styled from "styled-components";
 import useInput from "./useInput";
 import MapboxAccessToken from "../../env";
+import axios from "axios";
 import "./searchBar.css"
 
 const SearchBar = () => {
@@ -20,6 +20,10 @@ const SearchBar = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
+
+  useEffect(() => {
+    console.log("LOCATION", location)
+  }, [location])
 
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
@@ -29,15 +33,29 @@ const SearchBar = () => {
   //   setDistance(e.target.value);
   // };
 
-
   const address = useInput("");
 
   const handleClick = () => {
     setLocation(address.value)
-    console.log("LOCATION", location)
+    getCoordinates(location)
     // console.log("GUESTS", numGuests)
     // console.log("START DATE", startDate)
     // console.log("END DATE", endDate)
+  };
+
+  async function getCoordinates(address) {
+    try {
+      const { data } = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
+      );
+      console.log("THIS IS DATA RETURNED!!!!!!",data);
+      const [lng, lat] = data.features[0].geometry.coordinates;
+      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+      // setLatitude(lat);
+      // setLongitude(lng);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
