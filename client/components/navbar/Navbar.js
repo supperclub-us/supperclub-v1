@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../auth/authSlice';
 import './navbar.css';
+import { Modal } from '@mui/material';
 
 const Navbar = () => {
 
@@ -27,7 +28,9 @@ const Navbar = () => {
         <Link to="/chefs">Chefs</Link>
         <Link to="/cuisine">Cuisine </Link> 
         <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
+        <Link to="/signup">
+          
+          Sign Up</Link>
       </div>
 
     </div>

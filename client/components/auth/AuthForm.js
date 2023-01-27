@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
-import { Button, TextField, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, TextField, Box, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
+
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -15,6 +16,16 @@ const AuthForm = ({ name, displayName }) => {
   const [role, setRole] = useState('');
   console.log("role-->", role)
   const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
