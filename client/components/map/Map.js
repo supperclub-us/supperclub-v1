@@ -7,7 +7,7 @@ const Map = () => {
 
   const [viewport, setViewport] = useState({
     width: "100%",
-    height: "500vh",
+    height: "100%",
     zoom: 10,
     // Quincy --> lat: 42.251389 lng: -71.002342
     latitude: 42.251389,

@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { Button, TextField, Box } from '@mui/material';
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -60,38 +58,23 @@ const AuthForm = ({ name, displayName }) => {
           <div>
             
             <div>
-              <label htmlFor='role'>
-                <small>role</small>
-              </label>
               <TextField name='role' type="text" placeholder='role'/>
             </div>
 
             <div>
-              <label htmlFor='firstName'>
-                <small>first name</small>
-              </label>
-              <input name='firstName' type="text" placeholder='First Name' />
+              <TextField name='firstName' type="text" placeholder='First Name' />
             </div>
 
             <div>
-              <label htmlFor='lastName'>
-                <small>last name</small>
-              </label>
               <input name='lastName' type="text" placeholder='Last Name' />
             </div>
 
             <div>
-              <label htmlFor='bio'>
-                <small>bio</small>
-              </label>
-              <input name='bio' type="text" placeholder='Bio' />
+              <TextField name='bio' type="text" placeholder='Bio' />
             </div>
 
             <div>
-              <label htmlFor='mobileNumber'>
-                <small>mobile number</small>
-              </label>
-              <input name='mobileNumber' type="text" placeholder='Mobile Number' />
+              <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
             </div>
 
             
@@ -99,10 +82,7 @@ const AuthForm = ({ name, displayName }) => {
           </div>
         ) : null }
         <div>
-          <label htmlFor="email">
-            <small>email</small>
-          </label>
-          <input name="email" type="text" />
+          <TextField name="email" type="text" />
         </div>
         <div>
           <label htmlFor="password">
