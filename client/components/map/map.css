@@ -1,3 +1,7 @@
 .map-container {
   z-index: 1;
 }
+.map-pineapple-image {
+    width: 20px;
+    height: 30px
+}
