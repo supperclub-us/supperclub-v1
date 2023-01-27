@@ -124,6 +124,24 @@ const AuthForm = ({ name, displayName }) => {
 export default AuthForm;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { authenticate } from '../../store/store';
