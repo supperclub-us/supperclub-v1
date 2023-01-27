@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Header, Navbar} from '../index';
+import {Header, Map, Navbar} from '../index';
 import AppRoutes from './AppRoutes';
 
 const App = () => {
@@ -8,6 +8,7 @@ const App = () => {
     <div>
       <Navbar />
       <Header />
+      <Map />
       <AppRoutes />
     </div>
   );
