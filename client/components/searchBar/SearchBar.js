@@ -10,6 +10,8 @@ import {
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import styled from "styled-components";
+import useInput from "./useInput";
 
 const SearchBar = () => {
   const [numGuests, setNumGuests] = useState();
@@ -25,6 +27,8 @@ const SearchBar = () => {
     setDistance(e.target.value);
   };
 
+  const address = useInput("");
+
   return (
     // will switch box to formControl
     <Box
@@ -37,8 +41,22 @@ const SearchBar = () => {
           id="outlined-basic"
           label="Location"
           variant="outlined"
-
+          {...address}
         />
+        {address.suggestions?.length > 0 && (
+        <div>
+          {address.suggestions.map((suggestion, index) => {
+            return (
+              <p key={index}
+              onClick={() => {
+                address.setValue(suggestion.place_name);
+                address.setSuggestions([]);
+              }}>
+                {suggestion.place_name}
+              </p>
+            )
+          })}
+        </div>)}
       </FormControl>
 
       <FormControl className="form-control" sx={{m: "1em"}}>
@@ -91,3 +109,16 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+const SuggestionWrapper = styled.div`
+  background: white;
+  position: absolute;
+  width: 400px;
+  padding: 10px 20px;
+  border-radius: 0px 0px 10px 10px;
+`;
+
+const Suggestion = styled.p`
+  cursor: pointer;
+  max-width: 400px;
+`;
