@@ -1,5 +1,5 @@
 module.exports = {
-  entry: ['./client/index.js'],
+  entry: ["mapbox-gl/dist/mapbox-gl.css", './client/index.js'],
   output: {
     path: __dirname + '/public',
     filename: 'bundle.js',
@@ -8,6 +8,10 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
