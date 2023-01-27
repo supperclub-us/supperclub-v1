@@ -418,13 +418,6 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 .form-control > * {
   margin: 3em;
 }
-.navBar {
-  border: 1px solid purple;
-}
-
-.authForm {
-  border: 1px solid green;
-}
 
 .map-container {
   display: flex;
