@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
 import MapboxAccessToken from "../../env";
 import 'mapbox-gl/dist/mapbox-gl.css'
+import './map.css'
 
 const Map = () => {
   // console.log("///process.env///:", )

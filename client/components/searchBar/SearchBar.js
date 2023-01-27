@@ -49,7 +49,7 @@ const SearchBar = () => {
         <Box className="searchBar-suggestionWrapper" sx={{ bgcolor: '#FCFCFC', position:'absolute', width: 400, mt: 7, mb: 0, mx: 0, borderRadius: '5px', boxShadow: 3}} >
           {address.suggestions.map((suggestion, index) => {
             return (
-              <Box className="searchBar-suggestion" sx={{maxWidth: 400, p: 0.4}} key={index}
+              <Box className="searchBar-suggestion" sx={{maxWidth: 400, p: 0.4, "&:hover": {color: 'blue' }}} key={index}
               onClick={() => {
                 address.setValue(suggestion.place_name);
                 address.setSuggestions([]);
