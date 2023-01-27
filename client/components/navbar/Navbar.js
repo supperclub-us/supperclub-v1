@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../auth/authSlice';
@@ -7,6 +7,7 @@ import { Button, Typography, Modal, Box } from '@mui/material';
 
 
 import './navbar.css';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 
 const Navbar = () => {
@@ -14,6 +15,9 @@ const Navbar = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+  const [role, setRole] = useState('');
+  console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
@@ -35,8 +39,8 @@ const Navbar = () => {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    backgroundColor: `#1b202c`,
-    color: `#DFE2EA`,
+    // backgroundColor: `#1b202c`,
+    // color: `#DFE2EA`,
   };
 
   return (
@@ -47,10 +51,12 @@ const Navbar = () => {
       </div>
 
       <div className='navbar-right'>
-        <Link className='navbar-link-spacing' to="/home">Home</Link>
-        <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
-        <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
+        <Link className='navbar-link-spacing' to="/home">HOME</Link>
+        <Link className='navbar-link-spacing' to="/chefs">CHEFS</Link>
+        <Link className='navbar-link-spacing' to="/cuisine">CUISINE </Link> 
 
+        <Button onClick={handleOpen}>Log In</Button>
+  
         <Button onClick={handleOpen}>Sign Up</Button>
 
         <Modal
@@ -64,15 +70,41 @@ const Navbar = () => {
               Sign-Up to be Chef or Member
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Hey there! We are currently in the process of building our site. Please check back soon!
+              Create your account
             </Typography>
+
+            {/* <FormControl className="form-control">
+                <InputLabel id="demo-simple-select-label">
+                  Role
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  value={role}
+                  label="Guests"
+                  onChange={(e) => setRole(e.target.value)}
+                  sx={{ width: "25ch" }}
+                  placeholder="Role"
+                >
+                  <MenuItem value="member" onChange={(e) => setRole(e.target.value)}>Member</MenuItem>
+                  <MenuItem value="chef" onChange={(e) => setRole(e.target.value)}>Chef</MenuItem>
+                </Select>
+            </FormControl> */}
+
+            <TextField name='firstName' type="text" placeholder='First Name' />
+            <TextField name='lastName' type="text" placeholder='Last Name' />
+            <TextField name='bio' type="text" placeholder='Bio' />
+            <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
+            <TextField name="email" type="text" placeholder='Email'  />
+            <TextField name="password" type="password" placeholder='Password'  />
+            <Button type="submit" variant="contained" color="primary">
+              Sign Up
+            </Button>
+
           </Box>
         </Modal>
-        {/* 
-        <Link className='navbar-link-spacing' to="/login">Log In</Link>
-        <Link className='navbar-link-spacing' to="/signup">Sign Up</Link> */}
-      </div>
 
+       
+      </div>
     </div>
   );
 };
