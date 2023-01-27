@@ -28,6 +28,7 @@ const SearchBar = () => {
   };
 
   const address = useInput("");
+  console.log("ADDRESS", address)
 
   return (
     // will switch box to formControl
@@ -44,19 +45,20 @@ const SearchBar = () => {
           {...address}
         />
         {address.suggestions?.length > 0 && (
-        <div>
+        <SuggestionWrapper>
           {address.suggestions.map((suggestion, index) => {
             return (
-              <p key={index}
+              <Suggestion key={index}
               onClick={() => {
                 address.setValue(suggestion.place_name);
                 address.setSuggestions([]);
               }}>
                 {suggestion.place_name}
-              </p>
+              </Suggestion>
             )
           })}
-        </div>)}
+        </SuggestionWrapper>
+        )}
       </FormControl>
 
       <FormControl className="form-control" sx={{m: "1em"}}>
