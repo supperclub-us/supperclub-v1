@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import styled from "styled-components";
 import useInput from "./useInput";
+import "./searchBar.css"
 
 const SearchBar = () => {
   const [numGuests, setNumGuests] = useState();
@@ -45,19 +46,19 @@ const SearchBar = () => {
           {...address}
         />
         {address.suggestions?.length > 0 && (
-        <SuggestionWrapper>
+        <div className="searchBar-suggestionWrapper">
           {address.suggestions.map((suggestion, index) => {
             return (
-              <Suggestion key={index}
+              <p className="searchBar-suggestion" key={index}
               onClick={() => {
-                address.setValue(suggestion.place_name);
+                address.setValue(p.place_name);
                 address.setSuggestions([]);
               }}>
                 {suggestion.place_name}
-              </Suggestion>
+              </p>
             )
           })}
-        </SuggestionWrapper>
+        </div>
         )}
       </FormControl>
 
@@ -112,15 +113,3 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-const SuggestionWrapper = styled.div`
-  background: white;
-  position: absolute;
-  width: 400px;
-  padding: 10px 20px;
-  border-radius: 0px 0px 10px 10px;
-`;
-
-const Suggestion = styled.p`
-  cursor: pointer;
-  max-width: 400px;
-`;
