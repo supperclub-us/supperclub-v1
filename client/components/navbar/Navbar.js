@@ -12,6 +12,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/mater
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -20,6 +21,7 @@ const Navbar = () => {
   console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,7 +60,9 @@ const Navbar = () => {
         <Button onClick={handleOpen}>Log In</Button>
   
         <Button onClick={handleOpen}>Sign Up</Button>
-
+        <Button onClick={handleOpen}>Login</Button>
+        
+        
         <Modal
           open={open}
           onClose={handleClose}
@@ -67,40 +71,43 @@ const Navbar = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Sign-Up to be Chef or Member
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Create your account
+              Sign-Up Form
             </Typography>
 
-            {/* <FormControl className="form-control">
-                <InputLabel id="demo-simple-select-label">
-                  Role
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  value={role}
-                  label="Guests"
-                  onChange={(e) => setRole(e.target.value)}
-                  sx={{ width: "25ch" }}
-                  placeholder="Role"
-                >
-                  <MenuItem value="member" onChange={(e) => setRole(e.target.value)}>Member</MenuItem>
-                  <MenuItem value="chef" onChange={(e) => setRole(e.target.value)}>Chef</MenuItem>
-                </Select>
-            </FormControl> */}
+            <div className='navbar-select-role-container'>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                I would like to be a :
+              </Typography>
+              <br/>
+              <div className='navbar-role-selection'>
+                <FormControl fullWidth>
+                  <InputLabel>Role </InputLabel>
+                  <Select
+                    onChange={(e) => setRole(e.target.value)}
+                    value={role}
+                    label="role"
+                  >
+                    <MenuItem value='chef'>Chef</MenuItem>
+                    <MenuItem value='customer'>Customer</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+   
+            <div>
+              <TextField name='firstName' type="text" placeholder='First Name' />
+              <TextField name='lastName' type="text" placeholder='Last Name' />
+              <TextField name='bio' type="text" placeholder='Bio' />
+              <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
+              <TextField name="email" type="text" placeholder='Email'  />
+              <TextField name="password" type="password" placeholder='Password'  />
+              <Button type="submit" variant="contained" color="primary">
+                Sign Up
+              </Button>
+            </div>
 
-            <TextField name='firstName' type="text" placeholder='First Name' />
-            <TextField name='lastName' type="text" placeholder='Last Name' />
-            <TextField name='bio' type="text" placeholder='Bio' />
-            <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
-            <TextField name="email" type="text" placeholder='Email'  />
-            <TextField name="password" type="password" placeholder='Password'  />
-            <Button type="submit" variant="contained" color="primary">
-              Sign Up
-            </Button>
 
-          </Box>
+          </Box> 
         </Modal>
 
        
