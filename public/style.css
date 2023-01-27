@@ -38,3 +38,10 @@ form div {
 .authForm {
   border: 1px solid green;
 }
+
+.map-container {
+  display: flex;
+  height: 90vh;
+  padding: 2em;
+  margin: 2em;
+}
