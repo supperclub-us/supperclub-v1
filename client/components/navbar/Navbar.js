@@ -7,7 +7,10 @@ import { Button, Typography, Modal, Box } from '@mui/material';
 
 
 import './navbar.css';
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+
+// import SignUp from index.js
+import { SignUp } from '../index';
+
 
 
 const Navbar = () => {
@@ -17,8 +20,8 @@ const Navbar = () => {
   const handleClose = () => setOpen(false);
 
 
-  const [role, setRole] = useState('');
-  console.log("role-->", role)
+  // const [role, setRole] = useState('');
+  // console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
@@ -35,14 +38,15 @@ const Navbar = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
-    height: 600,
+    width: "400px",
+    height: "600px",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
     // backgroundColor: `#1b202c`,
     // color: `#DFE2EA`,
+    borderRadius: 7,
   };
 
   return (
@@ -53,14 +57,12 @@ const Navbar = () => {
       </div>
 
       <div className='navbar-right'>
-        <Link className='navbar-link-spacing' to="/home">HOME</Link>
-        <Link className='navbar-link-spacing' to="/chefs">CHEFS</Link>
-        <Link className='navbar-link-spacing' to="/cuisine">CUISINE </Link> 
+        <Link className='navbar-link-spacing' to="/home">Home</Link>
+        <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
+        <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
 
-        <Button onClick={handleOpen}>Log In</Button>
-  
-        <Button onClick={handleOpen}>Sign Up</Button>
-       
+        <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={handleOpen}>Sign Up</Button>
+        <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={handleOpen}>Log in</Button>
         
         
         <Modal
@@ -70,43 +72,8 @@ const Navbar = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Sign-Up Form
-            </Typography>
-
-            <div className='navbar-select-role-container'>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                I would like to be a :
-              </Typography>
-              <br/>
-              <div className='navbar-role-selection'>
-                <FormControl fullWidth>
-                  <InputLabel>Role </InputLabel>
-                  <Select
-                    onChange={(e) => setRole(e.target.value)}
-                    value={role}
-                    label="role"
-                  >
-                    <MenuItem value='chef'>Chef</MenuItem>
-                    <MenuItem value='customer'>Customer</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
-   
-            <div>
-              <TextField name='firstName' type="text" placeholder='First Name' />
-              <TextField name='lastName' type="text" placeholder='Last Name' />
-              <TextField name='bio' type="text" placeholder='Bio' />
-              <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
-              <TextField name="email" type="text" placeholder='Email'  />
-              <TextField name="password" type="password" placeholder='Password'  />
-              <Button type="submit" variant="contained" color="primary">
-                Sign Up
-              </Button>
-            </div>
-
-
+            <SignUp/>
+            
           </Box> 
         </Modal>
 
