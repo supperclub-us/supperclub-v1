@@ -81,15 +81,15 @@ const Booking = db.define("booking", {
   maxSeats: {
     type: Sequelize.INTEGER,
     validate: {
-      isInt: true,
+      // isInt: true,
       min: 1,
     },
   },
   openSeats: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    // allowNull: false,
     validate: {
-      isInt: true,
+      // isInt: true,
       min: 0,
     },
   },
@@ -114,10 +114,9 @@ const Booking = db.define("booking", {
     type: Sequelize.ENUM(states),
   },
   zipCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isInt: true,
       len: [5],
     },
   },

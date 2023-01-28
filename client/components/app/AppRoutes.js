@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../auth/AuthForm';
-import {Home} from "../index"
-import { me } from "../auth/authSlice"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../auth/AuthForm";
+import { ChefForm, Home, Map } from "../index";
+import { me } from "../auth/authSlice";
 
 /**
  * COMPONENT
@@ -18,14 +18,16 @@ const AppRoutes = () => {
   }, []);
 
   return (
-    <div>
-
-    </div>
+    <Routes>
+      <Route path="/*" element={<Home />} />
+      <Route to="/home" element={<Home />} />
+      <Route path="/chefs/:chefId/event" element={<ChefForm/>}/>
+      <Route path="/map" element={<Map/>} />
+    </Routes>
   );
 };
 
 export default AppRoutes;
-
 
 // import React, { useEffect } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';

@@ -36,7 +36,7 @@ const Map = () => {
     dispatch(fetchChefsBookingsAsync());
   }, []);
 
-  console.log(bookings);
+  // console.log(bookings);
 
   const addresses =
     bookings &&
@@ -44,7 +44,7 @@ const Map = () => {
       return `${booking.address1} ${booking.city} ${booking.state}`;
     });
 
-  console.log(addresses);
+  // console.log(addresses);
 
   // input is a singular address as PARAM in getCoordinates FN
   async function getCoordinates(address) {
@@ -52,9 +52,9 @@ const Map = () => {
       const { data } = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
       );
-      console.log("THIS IS DATA RETURNED!!!!!!",data);
+      // console.log("THIS IS DATA RETURNED!!!!!!",data);
       const [lng, lat] = data.features[0].geometry.coordinates;
-      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+      // console.log(`Latitude: ${lat}, Longitude: ${lng}`);
       setLatitude(lat);
       setLongitude(lng);
     } catch (err) {
@@ -63,7 +63,7 @@ const Map = () => {
   }
   // OUTPUT is a singular LAT and LONG value that is set in state
 
-  console.log("GET COORDINATES RESULTS: ", getCoordinates(addresses[0]))
+  // console.log("GET COORDINATES RESULTS: ", getCoordinates(addresses[0]))
   getCoordinates(addresses[0]);
 
   return (
