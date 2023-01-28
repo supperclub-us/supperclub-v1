@@ -6,7 +6,6 @@ export const fetchSingleChef = createAsyncThunk(
   async (id) => {
     try {
       const { data } = await axios.get(`/api/users/chefs/${id}`);
-      console.log("DATA IN THE ASYNC THUNK", data);
       return data;
     } catch (err) {
       console.log(err);
@@ -27,7 +26,6 @@ const singleChefSlice = createSlice({
 });
 
 export const selectSingleChef = (state) => {
-  console.log("select single chef SLICE", state);
   return state.singleChef;
 };
 

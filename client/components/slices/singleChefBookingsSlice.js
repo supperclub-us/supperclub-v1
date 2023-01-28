@@ -6,7 +6,6 @@ export const fetchSingleChefBooking = createAsyncThunk(
   async (id) => {
     try {
       const { data } = await axios.get(`/api/users/chefs/${id}/bookings`);
-      console.log("DATA IN THE ASYNC THUNK", data);
       return data;
     } catch (err) {
       console.log(err);
@@ -18,7 +17,7 @@ export const fetchSingleChefBooking = createAsyncThunk(
 export const addSingleChefBooking = createAsyncThunk(
   "add/singleChefBooking",
   async ({
-    chefId,
+    id,
     title,
     menu,
     start,
@@ -30,23 +29,14 @@ export const addSingleChefBooking = createAsyncThunk(
     city,
     state,
     zip,
+    latitude,
+    longitude
   }) => {
-    try {
-      console.log({
-        chefId,
-        title,
-        menu,
-        start,
-        end,
-        max,
-        openSeats,
-        address1,
-        address2,
-        city,
-        state,
-        zip,
-      });
-      const { data } = await axios.post(`/api/users/chefs/${chefId}/bookings`, {
+    try {;
+
+        console.log("ID IN SLICE--->", id)
+
+      const { data } = await axios.post(`/api/users/chefs/${id}/bookings`, {
         title,
         menu,
         startDateTime: start,
@@ -58,9 +48,10 @@ export const addSingleChefBooking = createAsyncThunk(
         city,
         state,
         zipCode: zip,
-        chefId: chefId
+        latitude,
+        longitude,
+        chefId: id
       });
-      console.log("DATA IN THE ASYNC THUNK", data);
       return data;
     } catch (err) {
       console.log(err);
@@ -83,7 +74,6 @@ const singleChefBookingsSlice = createSlice({
 });
 
 export const selectSingleChefBookings = (state) => {
-  console.log("select single chef SLICE", state.singleChefBookings);
   return state.singleChefBookings;
 };
 

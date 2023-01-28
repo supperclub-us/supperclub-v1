@@ -16,3 +16,8 @@
     width: 450px;
     gap: .5rem;
 }
+
+.chefEvent-form-divs {
+    display: flex;
+    flex-direction: column;
+}
