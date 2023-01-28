@@ -60,7 +60,7 @@ const Navbar = () => {
         <Button onClick={handleOpen}>Log In</Button>
   
         <Button onClick={handleOpen}>Sign Up</Button>
-        <Button onClick={handleOpen}>Login</Button>
+       
         
         
         <Modal
