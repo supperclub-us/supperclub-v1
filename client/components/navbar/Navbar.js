@@ -6,9 +6,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
 import './navbar.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+// import SignUp from index.js
+import { SignUp } from '../index';
+
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -17,8 +19,8 @@ const Navbar = () => {
   const handleClose = () => setOpen(false);
 
 
-  const [role, setRole] = useState('');
-  console.log("role-->", role)
+  // const [role, setRole] = useState('');
+  // console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
@@ -69,52 +71,8 @@ const Navbar = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Sign-Up Form
-            </Typography>
-            <hr/>
-            <div className='navbar-select-role-container'>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                I would like to be a :
-              </Typography>
-              <br/>
-              <div className='navbar-role-selection'>
-                <FormControl fullWidth>
-                  <InputLabel>Role </InputLabel>
-                  <Select
-                    onChange={(e) => setRole(e.target.value)}
-                    value={role}
-                    label="role"
-                  >
-                    <MenuItem value='chef'>Chef</MenuItem>
-                    <MenuItem value='member'>Member</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
-   
-            <div>
-              <TextField name='firstName' type="text" placeholder='First Name' />
-              <TextField name='lastName' type="text" placeholder='Last Name' />
-              <TextField name='bio' type="text" placeholder='Bio' />
-              <TextField name='mobileNumber' type="text" placeholder='Mobile Number' />
-              <TextField name="email" type="text" placeholder='Email'  />
-              <TextField name="password" type="password" placeholder='Password'  />
-              <TextField name="address1" type="address1" placeholder='address1'  />
-              <TextField name="address2" type="address2" placeholder='address2'  />
-              <TextField name="city" type="city" placeholder='city'  />
-              <TextField name="state" type="state" placeholder='state'  />
-              <TextField name="zipcode" type="zipcode" placeholder='zipcode'  />
-              
-              <div>
-                <Button type="submit" variant="contained" color="primary">
-                  Sign Up
-                </Button>
-              </div>
-
-            </div>
-
-
+            <SignUp/>
+            
           </Box> 
         </Modal>
       </div>

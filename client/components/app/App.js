@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {Header, Map, Navbar} from '../index';
+import {Header, Map, Navbar, SignUp} from '../index';
 import AppRoutes from './AppRoutes';
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar element={<SignUp/>} />
       <AppRoutes />
       <Header />
       <Map />
