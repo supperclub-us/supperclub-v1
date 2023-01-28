@@ -418,9 +418,7 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 .form-control > * {
   margin: 3em;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 .navBar {
   border: 1px solid purple;
 }
@@ -428,8 +426,8 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 .authForm {
   border: 1px solid green;
 }
-=======
->>>>>>> 9ea5b3de48b07d1327345ff0dbbc798278134db0
+
+
 
 .map-container {
   display: flex;
@@ -437,7 +435,4 @@ a:active  { color: #DFE2EA; text-decoration: none; }
   padding: 2em;
   margin: 2em;
 }
-<<<<<<< HEAD
->>>>>>> a4e18024fbead21770ca32f75ae815eb2fe446ac
-=======
->>>>>>> 9ea5b3de48b07d1327345ff0dbbc798278134db0
+
