@@ -33,9 +33,6 @@ export const addSingleChefBooking = createAsyncThunk(
     longitude
   }) => {
     try {;
-
-        console.log("ID IN SLICE--->", id)
-
       const { data } = await axios.post(`/api/users/chefs/${id}/bookings`, {
         title,
         menu,

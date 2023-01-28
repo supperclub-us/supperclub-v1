@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
@@ -90,7 +90,7 @@ const ChefForm = () => {
   const { chefId } = useParams();
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
+
   useSelector(selectSingleChefBookings);
   useSelector(selectSingleChef);
 
@@ -103,20 +103,6 @@ const ChefForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    //   if (
-    //     !title ||
-    //     !menu ||
-    //     !start ||
-    //     !end ||
-    //     !max ||
-    //     !openSeats ||
-    //     !address1 ||
-    //     !city ||
-    //     !state ||
-    //     zip
-    //   ) {
-    //     alert("Please fill out appropriate information!");
-    //   }
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
 
