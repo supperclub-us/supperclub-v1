@@ -62,7 +62,11 @@ const SearchBar = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  // export const setCenter(lat, long) => {
+
+  // }
 
   return (
     // will switch box to formControl
