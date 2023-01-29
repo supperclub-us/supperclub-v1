@@ -10,6 +10,7 @@ import './navbar.css';
 
 // import SignUp from index.js
 import { SignUp } from '../index';
+import { Login } from '../index';
 
 
 
@@ -74,8 +75,11 @@ const Navbar = () => {
           <Box sx={style}>
             <SignUp/>
             
+            
           </Box> 
+          
         </Modal>
+      
 
        
       </div>
