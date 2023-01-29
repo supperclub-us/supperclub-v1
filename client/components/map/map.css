@@ -1,4 +1,19 @@
 .map-pineapple-image {
-    width: 20px;
-    height: 30px
+    width: 13px;
+    height: 20px
+}
+
+.map-marker-button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.map-marker-popup {
+    background: transparent;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
 }

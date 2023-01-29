@@ -7,90 +7,96 @@ import ReactMapGL, {
 } from "react-map-gl";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
-import MapboxAccessToken from "../../env";
+import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
-import axios from "axios";
 
 const Map = () => {
-  // console.log("///process.env///:", )
+  // setting the viewport of the MapBox
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    // Quincy --> lat: 42.251389 lng: -71.002342
     latitude: 42.251389,
     longitude: -71.002342,
     zoom: 10,
   });
 
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  // states for the selected markers and their popups
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
-  const [coordinates, setCoordinates] = useState();
-  // console.log("viewport", viewport);
-
+  // selecting all bookings that have been created
   const bookings = useSelector((state) => state.chefsBookings);
   const dispatch = useDispatch();
 
+  // useEffect to run bookings
   useEffect(() => {
     dispatch(fetchChefsBookingsAsync());
   }, []);
 
-  // console.log(bookings);
-
-  const addresses =
-    bookings &&
-    bookings.map((booking) => {
-      return `${booking.address1} ${booking.city} ${booking.state}`;
-    });
-
-  // console.log(addresses);
-
-  // input is a singular address as PARAM in getCoordinates FN
-  async function getCoordinates(address) {
-    try {
-      const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
-      );
-      // console.log("THIS IS DATA RETURNED!!!!!!",data);
-      const [lng, lat] = data.features[0].geometry.coordinates;
-      // console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setLatitude(lat);
-      setLongitude(lng);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  // OUTPUT is a singular LAT and LONG value that is set in state
-
-  // console.log("GET COORDINATES RESULTS: ", getCoordinates(addresses[0]))
-  getCoordinates(addresses[0]);
-
   return (
+    // setting up the mapbox container
     <div className="map-container">
+
+      {/* React Map Component to Access the Map */}
       <ReactMapGL
-        mapStyle="mapbox://styles/wragyu/clddwwwkk003m01ryz75nmy56/draft"
-        mapboxAccessToken={MapboxAccessToken}
         {...viewport}
+        mapStyle={MapBoxStyle}
+        mapboxAccessToken={MapboxAccessToken}
+
+        // this let's us be able to move the map
         onMove={(e) => {
           setViewport(e.viewport);
-          // console.log("viewport", viewport);
         }}
       >
+        {/* navigation and geolocation control to get location, zoom, etc */}
         <NavigationControl />
         <GeolocateControl />
-        {/* {addresses &&
-          addresses.map((address) => {
-            const coordinate = getCoordinates(address);
-            console.log(coordinate)
-          })} */}
-              <Marker longitude={longitude} latitude={latitude}>
+
+        {/* If there are bookings then we want to render the markers on the map */}
+        {bookings &&
+          bookings.map((booking) => (
+            <Marker
+              key={booking.id}
+              longitude={booking.longitude}
+              latitude={booking.latitude}
+            >
+              <button
+                className="map-marker-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (selectedMarker === booking) {
+                    setSelectedMarker(null);
+                  } else setSelectedMarker(booking);
+                }}
+              >
                 <img
                   className="map-pineapple-image"
                   src="/pineapple.png"
-                  alt="MARKER"
+                  alt="pineapple marker"
                 />
-              </Marker>
+              </button>
+            </Marker>
+          ))}
+          
+        {/* These are actions to be able to handle the popups individually */}
+        {selectedMarker ? (
+          <Popup
+            key={selectedMarker.id}
+            longitude={selectedMarker.longitude}
+            latitude={selectedMarker.latitude}
+            closeButton={false}
+            closeOnClick={false}
+            onClose={() => setSelectedMarker(null)}
+          >
+            <div className="map-marker-popup">
+              <h3>{selectedMarker.title}</h3>
+              <p>{selectedMarker.menu}</p>
+              <p>
+                {selectedMarker.city}, {selectedMarker.state}
+              </p>
+            </div>
+          </Popup>
+        ) : null}
       </ReactMapGL>
     </div>
   );
