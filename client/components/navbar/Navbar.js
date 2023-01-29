@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './navbar.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-// import SignUp from index.js
 import { SignUp } from '../index';
 
 
@@ -17,10 +16,6 @@ const Navbar = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-
-  // const [role, setRole] = useState('');
-  // console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
@@ -43,15 +38,12 @@ const Navbar = () => {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    // backgroundColor: `#1b202c`,
-    // color: `#DFE2EA`,
     borderRadius: 7,
   };
 
   return (
     <div className='navbar-container'>
       <div className='navbar-left'>
-        {/* <img id='logo' src="https://i.imgur.com/q8UzAM2.jpg" /> */}
         <h1>SupperClub</h1>
       </div>
 
