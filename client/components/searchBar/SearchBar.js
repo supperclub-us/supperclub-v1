@@ -11,7 +11,7 @@ import Location from "./Location";
 import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
 
-const SearchBar = () => {
+const SearchBar = ({ viewport, setViewport }) => {
   const [numGuests, setNumGuests] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -57,6 +57,7 @@ const SearchBar = () => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+      setViewport({ latitude: lat, longitude: lng})
       setLatitude(lat);
       setLongitude(lng);
     } catch (err) {
@@ -64,8 +65,8 @@ const SearchBar = () => {
     }
   };
 
-  // export const setCenter(lat, long) => {
-
+  // const setCenter = () => {
+  //   setViewport({ latitude: lat, longitude: lng})
   // }
 
   return (
