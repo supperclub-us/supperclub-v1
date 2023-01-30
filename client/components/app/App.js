@@ -6,8 +6,7 @@ import AppRoutes from './AppRoutes';
 const App = () => {
   return (
     <div>
-      <Navbar element={<SignIn/>} />
-      
+      <Navbar />
       <AppRoutes />
       <Header />
       <Map />

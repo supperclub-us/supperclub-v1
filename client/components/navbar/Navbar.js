@@ -3,12 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../auth/authSlice';
 import { Button, Typography, Modal, Box } from '@mui/material';
-
-
-
 import './navbar.css';
-
-// import SignUp from index.js
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { SignUp } from '../index';
 import { Login } from '../index';
 
@@ -19,10 +15,6 @@ const Navbar = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-
-  // const [role, setRole] = useState('');
-  // console.log("role-->", role)
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
@@ -45,15 +37,12 @@ const Navbar = () => {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    // backgroundColor: `#1b202c`,
-    // color: `#DFE2EA`,
     borderRadius: 7,
   };
 
   return (
     <div className='navbar-container'>
       <div className='navbar-left'>
-        {/* <img id='logo' src="https://i.imgur.com/q8UzAM2.jpg" /> */}
         <h1>SupperClub</h1>
       </div>
 
@@ -65,7 +54,19 @@ const Navbar = () => {
         <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={handleOpen}>Sign Up</Button>
         <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={handleOpen}>Log in</Button>
         
-        
+         <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <SignUp/>
+            
+         
+          </Box> 
+          
+        </Modal>
         <Modal
           open={open}
           onClose={handleClose}
@@ -75,10 +76,12 @@ const Navbar = () => {
           <Box sx={style}>
             <SignUp/>
             
-            
+         
           </Box> 
           
         </Modal>
+
+       
       
 
        
