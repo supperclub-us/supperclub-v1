@@ -9,8 +9,8 @@ import { SignUp, Login } from '../index';
 
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
-  const [modalScreen, setModalScreen] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [modalScreen, setModalScreen] = useState("");
 
   const handleOpen = (str) => {
     setModalScreen(str);
@@ -58,6 +58,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar-container'>
+
       <div className='navbar-left'>
         <h1>SupperClub</h1>
       </div>
@@ -67,8 +68,23 @@ const Navbar = () => {
         <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
         <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
 
-        <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
-        <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
+        {isLoggedIn ? (
+          <>
+            <Link className='navbar-link-spacing' to="/users/profile">Profile </Link> 
+            <Button type="button" onClick={logoutAndRedirectHome}>
+              Log out
+            </Button>
+          </>
+          )
+          
+          :
+
+          (<>
+            <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
+            <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
+          </>)
+
+        }
         
         <Modal
           open={open}
