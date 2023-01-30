@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../auth/AuthForm";
-import { ChefForm, Home, Map, Chefs, Cuisines } from "../index";
+import { ChefForm, Home, Map, Chefs, Cuisines, Profile, PageNotFound } from "../index";
 import { me } from "../auth/authSlice";
+
 
 /**
  * COMPONENT
@@ -19,12 +20,15 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={<Home />} />
-      <Route to="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/chefs/:chefId/event" element={<ChefForm/>}/>
       <Route path="/map" element={<Map/>} />
-      <Route path="chefs" element={<Chefs/>}/>
-      <Route path="cuisines" element={<Cuisines/>}/>
+      <Route path="/chefs" element={<Chefs/>}/>
+      <Route path="/cuisines" element={<Cuisines/>}/>
+      {isLoggedIn ? <Route path="/users/profile" element={<Profile/>}/> : null}
+      <Route path="*" element={<PageNotFound />} />
+
     </Routes>
   );
 };
