@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Header } from "../index";
+import { Header, About } from "../index";
 
 /**
  * COMPONENT
@@ -10,8 +10,8 @@ const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
       <Header />
+      <About />
     </div>
   );
 };

@@ -11,19 +11,23 @@ import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
-const Map = ({ viewport, setViewport }) => {
-  // console.log("///process.env///:", )
-  // const [viewport, setViewport] = useState({
-  //   width: "100%",
-  //   height: "100%",
-  //   // Quincy --> lat: 42.251389 lng: -71.002342
-  //   latitude: 42.251389,
-  //   longitude: -71.002342,
-  //   zoom: 10,
-  // });
-
+const Map = () => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
+
+  const reduxViewport = useSelector((state) => state.viewport);
+  console.log("REDUX VIEWPORT", reduxViewport)
+  
+  const [viewport, setViewport] = useState({
+    ...reduxViewport
+    // width: "100%",
+    // height: "100%",
+    // // Quincy --> lat: 42.251389 lng: -71.002342
+    // latitude: -33.868,
+    // longitude: 151.21,
+    // zoom: 13,
+  });
+
 
   // selecting all bookings that have been created
   const bookings = useSelector((state) => state.chefsBookings);
@@ -33,6 +37,8 @@ const Map = ({ viewport, setViewport }) => {
   useEffect(() => {
     dispatch(fetchChefsBookingsAsync());
   }, []);
+
+
 
   return (
     // setting up the mapbox container
