@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../auth/AuthForm";
-import { ChefForm, Home, Map } from "../index";
+import { ChefForm, Home, Map, Chefs, Cuisines } from "../index";
 import { me } from "../auth/authSlice";
 
 /**
@@ -23,6 +23,8 @@ const AppRoutes = () => {
       <Route to="/home" element={<Home />} />
       <Route path="/chefs/:chefId/event" element={<ChefForm/>}/>
       <Route path="/map" element={<Map/>} />
+      <Route path="chefs" element={<Chefs/>}/>
+      <Route path="cuisines" element={<Cuisines/>}/>
     </Routes>
   );
 };

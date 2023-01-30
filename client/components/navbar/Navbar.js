@@ -37,7 +37,7 @@ const Navbar = () => {
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/');
   };
 
   
@@ -66,7 +66,7 @@ const Navbar = () => {
       <div className='navbar-right'>
         <Link className='navbar-link-spacing' to="/home">Home</Link>
         <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
-        <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
+        <Link className='navbar-link-spacing' to="/cuisines">Cuisines</Link> 
 
         {isLoggedIn ? (
           <>
