@@ -5,9 +5,7 @@ import { logout } from '../auth/authSlice';
 import { Button, Typography, Modal, Box } from '@mui/material';
 import './navbar.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { SignUp } from '../index';
-import { Login } from '../index';
-
+import { SignUp, Login } from '../index';
 
 
 const Navbar = () => {
