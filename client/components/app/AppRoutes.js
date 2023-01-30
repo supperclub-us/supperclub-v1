@@ -2,9 +2,16 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../auth/AuthForm";
-import { ChefForm, Home, Map, Chefs, Cuisines, Profile, PageNotFound } from "../index";
+import {
+  ChefForm,
+  Home,
+  Map,
+  Chefs,
+  Cuisines,
+  Profile,
+  PageNotFound,
+} from "../index";
 import { me } from "../auth/authSlice";
-
 
 /**
  * COMPONENT
@@ -12,6 +19,10 @@ import { me } from "../auth/authSlice";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const user = useSelector((state) => state.auth.me);
+
+  console.log("AM I LOGGED IN???---->", isLoggedIn);
+  console.log("FIND USER: ", user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,13 +33,16 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/chefs/:chefId/event" element={<ChefForm/>}/>
-      <Route path="/map" element={<Map/>} />
-      <Route path="/chefs" element={<Chefs/>}/>
-      <Route path="/cuisines" element={<Cuisines/>}/>
-      {isLoggedIn ? <Route path="/users/profile" element={<Profile/>}/> : null}
+      <Route path="/map" element={<Map />} />
+      <Route path="/chefs" element={<Chefs />} />
+      <Route path="/cuisines" element={<Cuisines />} />
+      {isLoggedIn && user.role === "CHEF" ? (
+        <Route path="/chefs/:chefId/event" element={<ChefForm />} />
+      ) : null}
+      {isLoggedIn ? (
+        <Route path="/users/profile" element={<Profile />} />
+      ) : null}
       <Route path="*" element={<PageNotFound />} />
-
     </Routes>
   );
 };
