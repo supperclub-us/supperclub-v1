@@ -6,7 +6,6 @@ import axios from "axios";
 export const fetchChefsBookingsAsync = createAsyncThunk('fetch/chefsBookings', async()=>{
     try {
         const { data } = await axios.get('/api/bookings')
-        console.log("AXIOS GET PAYLOAD!!!--------->", data)
         return data
     }
     catch(err){

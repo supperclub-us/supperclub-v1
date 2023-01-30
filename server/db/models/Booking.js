@@ -114,11 +114,10 @@ const Booking = db.define("booking", {
     type: Sequelize.ENUM(states),
   },
   zipCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isInt: true,
-      len: [5],
+      len: [5, 5],
     },
   },
   latitude: {
