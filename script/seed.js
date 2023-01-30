@@ -144,10 +144,12 @@ async function seed() {
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
     openSeats: 3,
-    address1: "567 Main St",
+    address1: "39 South Russell",
     city: "Boston",
     state: "MA",
-    zipCode: 55555,
+    zipCode: '02114',
+    latitude: 42.360060,
+    longitude: -71.066080,
     chefId: 7,
     cuisineId: 7,
   });
@@ -158,10 +160,12 @@ async function seed() {
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
     openSeats: 3,
-    address1: "123 Main St",
+    address1: "41 West 85th Street",
     city: "New York",
     state: "NY",
-    zipCode: 20314,
+    zipCode: '10024',
+    latitude: 40.785340,
+    longitude: -73.971100,
     chefId: 8,
     cuisineId: 5,
   });
@@ -172,10 +176,12 @@ async function seed() {
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
     openSeats: 3,
-    address1: "123 Main St",
+    address1: "371 Herbert Ave S",
     city: "Salt Lake",
     state: "UT",
-    zipCode: 20314,
+    zipCode: '84111',
+    latitude: 40.746613,
+    longitude: -111.8805877,
     chefId: 9,
     cuisineId: 8,
   });
@@ -227,7 +233,6 @@ async function seed() {
   // GOLD LEVEL
 
   console.log(`seeded ${cuisines.length} cuisines`);
-
   console.log("USER MAGIC METHODS: ", Object.keys(User.prototype));
   console.log("CUISINE MAGIC METHODS: ", Object.keys(User.prototype));
   console.log("BOOKING MAGIC METHODS: ", Object.keys(Booking.prototype));
