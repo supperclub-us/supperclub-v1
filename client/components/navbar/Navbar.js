@@ -9,8 +9,8 @@ import { SignUp, Login } from '../index';
 
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
-  const [modalScreen, setModalScreen] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [modalScreen, setModalScreen] = useState("");
 
   const handleOpen = (str) => {
     setModalScreen(str);
@@ -37,7 +37,7 @@ const Navbar = () => {
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/');
   };
 
   
@@ -58,6 +58,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar-container'>
+
       <div className='navbar-left'>
         <h1>SupperClub</h1>
       </div>
@@ -65,10 +66,25 @@ const Navbar = () => {
       <div className='navbar-right'>
         <Link className='navbar-link-spacing' to="/home">Home</Link>
         <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
-        <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
+        <Link className='navbar-link-spacing' to="/cuisines">Cuisines</Link> 
 
-        <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
-        <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
+        {isLoggedIn ? (
+          <>
+            <Link className='navbar-link-spacing' to="/users/profile">Profile </Link> 
+            <Button type="button" onClick={logoutAndRedirectHome}>
+              Log out
+            </Button>
+          </>
+          )
+          
+          :
+
+          (<>
+            <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
+            <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
+          </>)
+
+        }
         
         <Modal
           open={open}
@@ -84,32 +100,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-// return (
-//   <div className='navBar'>
-//     <div className='navBar-left'>
-//       <img id='logo' src="https://i.imgur.com/QpAv4b8.png" />
-//       <h1>SupperClub</h1>
-//     </div>
-
-//     <nav className='navBar-right'>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <button type="button" onClick={logoutAndRedirectHome}>
-//             Logout
-//           </button>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// 
