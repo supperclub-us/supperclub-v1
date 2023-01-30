@@ -1,0 +1,7 @@
+.searchBar-suggestionWrapper {
+z-index: 2;
+
+}
+.searchBar-suggestion {
+  cursor: pointer;
+}
