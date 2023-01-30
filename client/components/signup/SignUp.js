@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Alert, Button, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticate } from '../../store/store';
 
@@ -27,7 +27,8 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     console.log("password-->", password)
 
-    
+    const [open, setOpen] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
@@ -35,8 +36,18 @@ const SignUp = () => {
 
         console.log("button clicked!")
 
+        setOpen(true);
+
         dispatch(authenticate({ role, firstName, lastName, bio ,mobileNumber, email, password, method: "signup" }));
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    };
 
     return (
         <div>
@@ -125,6 +136,11 @@ const SignUp = () => {
                         </Button>
                     </div>
                 </div>
+                <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        You successfully signed up!
+                    </Alert>
+                </Snackbar>
             </form>
 
         </div>

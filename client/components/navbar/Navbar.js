@@ -12,10 +12,26 @@ import { Login } from '../index';
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
+  const [modalScreen, setModalScreen] = React.useState("");
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (str) => {
+    setModalScreen(str);
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
+  const renderModalScreen = () => {
+    if (modalScreen === "signup") {
+      return <SignUp />;
+    }
+
+    if (modalScreen === "login") {
+        return <Login />;
+    }
+    return <p>default</p>;
+  }
+  
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
   const dispatch = useDispatch();
@@ -25,6 +41,8 @@ const Navbar = () => {
     dispatch(logout());
     navigate('/login');
   };
+
+  
 
   const style = {
     position: 'absolute',
@@ -51,40 +69,17 @@ const Navbar = () => {
         <Link className='navbar-link-spacing' to="/chefs">Chefs</Link>
         <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
 
-        <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={handleOpen}>Sign Up</Button>
-        <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={handleOpen}>Log in</Button>
+        <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
+        <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
         
-         <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <SignUp/>
-            
-         
-          </Box> 
-          
-        </Modal>
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            <SignUp/>
-            
-         
-          </Box> 
-          
+          <Box sx={style}>{renderModalScreen()}</Box> 
         </Modal>
-
-       
-      
-
-       
       </div>
     </div>
   );
@@ -119,4 +114,4 @@ export default Navbar;
 //     </nav>
 //     <hr />
 //   </div>
-// );
+// 
