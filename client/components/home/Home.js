@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Header, About } from "../index";
+import { Header } from "../index";
+import { About } from "../index"
 
 /**
  * COMPONENT

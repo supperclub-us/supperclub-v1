@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SearchBar, Map } from '../../index'
+import { SearchBar, Map } from '../index'
 // import { setReduxViewport } from '../../slices/viewportSlice';
 // import { useDispatch } from "react-redux";
 
