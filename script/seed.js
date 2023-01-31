@@ -3,6 +3,8 @@ const {
   models: { User, Booking, Cuisine },
 } = require("../server/db");
 
+const { bookingData } = require("./bookingData")
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -137,82 +139,155 @@ async function seed() {
   ]);
 
   // Bookings of Chefs
-  const booking1 = await Booking.create({
-    title: "Delicious Mexican cuisine!",
-    menu: "A nice blend of - maduros and delicious brazilian steak!",
-    startDateTime: "1/1/2023 5:30PM",
-    endDateTime: "1/1/2023 7:30PM",
-    maxSeats: 5,
-    openSeats: 3,
-    address1: "39 South Russell",
-    city: "Boston",
-    state: "MA",
-    zipCode: '02114',
-    latitude: 42.360060,
-    longitude: -71.066080,
-    chefId: 7,
-    cuisineId: 7,
-  });
-  const booking2 = await Booking.create({
-    title: "Great East Asian Cuisine!",
-    menu: "A nice blend of xyz",
-    startDateTime: "1/1/2023 5:30PM",
-    endDateTime: "1/1/2023 7:30PM",
-    maxSeats: 5,
-    openSeats: 3,
-    address1: "41 West 85th Street",
-    city: "New York",
-    state: "NY",
-    zipCode: '10024',
-    latitude: 40.785340,
-    longitude: -73.971100,
-    chefId: 8,
-    cuisineId: 5,
-  });
-  const booking3 = await Booking.create({
-    title: "Best Tacos in the Salt Lake City Area",
-    menu: "It comes with Peanut Butter",
-    startDateTime: "1/1/2023 5:30PM",
-    endDateTime: "1/1/2023 7:30PM",
-    maxSeats: 5,
-    openSeats: 3,
-    address1: "371 Herbert Ave S",
-    city: "Salt Lake",
-    state: "UT",
-    zipCode: '84111',
-    latitude: 40.746613,
-    longitude: -111.8805877,
-    chefId: 9,
-    cuisineId: 8,
-  });
+  // const booking1 = await Booking.create({
+  //   title: "Delicious Mexican cuisine!",
+  //   menu: "A nice blend of - maduros and delicious brazilian steak!",
+  //   startDateTime: "1/1/2023 5:30PM",
+  //   endDateTime: "1/1/2023 7:30PM",
+  //   maxSeats: 5,
+  //   openSeats: 3,
+  //   address1: "39 South Russell",
+  //   city: "Boston",
+  //   state: "MA",
+  //   zipCode: '02114',
+  //   latitude: 42.360060,
+  //   longitude: -71.066080,
+  //   chefId: 7,
+  //   cuisineId: 7,
+  // });
+  // const booking2 = await Booking.create({
+  //   title: "Great East Asian Cuisine!",
+  //   menu: "A nice blend of xyz",
+  //   startDateTime: "1/1/2023 5:30PM",
+  //   endDateTime: "1/1/2023 7:30PM",
+  //   maxSeats: 5,
+  //   openSeats: 3,
+  //   address1: "41 West 85th Street",
+  //   city: "New York",
+  //   state: "NY",
+  //   zipCode: '10024',
+  //   latitude: 40.785340,
+  //   longitude: -73.971100,
+  //   chefId: 8,
+  //   cuisineId: 5,
+  // });
+  // const booking3 = await Booking.create({
+  //   title: "Best Tacos in the Salt Lake City Area",
+  //   menu: "It comes with Peanut Butter",
+  //   startDateTime: "1/1/2023 5:30PM",
+  //   endDateTime: "1/1/2023 7:30PM",
+  //   maxSeats: 5,
+  //   openSeats: 3,
+  //   address1: "371 Herbert Ave S",
+  //   city: "Salt Lake",
+  //   state: "UT",
+  //   zipCode: '84111',
+  //   latitude: 40.746613,
+  //   longitude: -111.8805877,
+  //   chefId: 9,
+  //   cuisineId: 8,
+  // });
 
+  const bookings = await Promise.all(bookingData.map(booking=>Booking.create(booking)))
   // USERS BOOKINGS JOIN TABLE - magic methods
-  await richard.addMemberBooking(booking1, {
+  await richard.addMemberBooking(bookings[0], {
     as: "memberBooking",
     through: "users_bookings",
   });
-  await roy.addMemberBooking(booking1, {
+  await richard.addMemberBooking(bookings[3], {
     as: "memberBooking",
     through: "users_bookings",
   });
-  await sarah.addMemberBooking(booking1, {
+  await richard.addMemberBooking(bookings[6], {
     as: "memberBooking",
     through: "users_bookings",
   });
-  await sarah.addMemberBooking(booking2, {
+  await richard.addMemberBooking(bookings[18], {
     as: "memberBooking",
     through: "users_bookings",
   });
-  await robert.addMemberBooking(booking2, {
+  await roy.addMemberBooking(bookings[0], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await roy.addMemberBooking(bookings[8], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await roy.addMemberBooking(bookings[10], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await roy.addMemberBooking(bookings[19], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await sarah.addMemberBooking(bookings[0], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await sarah.addMemberBooking(bookings[1], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await sarah.addMemberBooking(bookings[6], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await sarah.addMemberBooking(bookings[17], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await sarah.addMemberBooking(bookings[20], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await robert.addMemberBooking(bookings[16], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await robert.addMemberBooking(bookings[14], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await robert.addMemberBooking(bookings[12], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await robert.addMemberBooking(bookings[21], {
     as: "memberBooking",
     through: "users_bookings",
   });
 
-  await joe.addMemberBooking(booking3, {
+  await joe.addMemberBooking(bookings[2], {
     as: "memberBooking",
     through: "users_bookings",
   });
-  await david.addMemberBooking(booking3, {
+  await joe.addMemberBooking(bookings[4], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await joe.addMemberBooking(bookings[6], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await joe.addMemberBooking(bookings[22], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await david.addMemberBooking(bookings[2], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await david.addMemberBooking(bookings[8], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await david.addMemberBooking(bookings[9], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await david.addMemberBooking(bookings[22], {
     as: "memberBooking",
     through: "users_bookings",
   });
@@ -232,6 +307,7 @@ async function seed() {
   // USER REVIEWS
   // GOLD LEVEL
 
+  console.log(`There are currently ${bookings.length} bookings in the country`)
   console.log(`seeded ${cuisines.length} cuisines`);
   console.log("USER MAGIC METHODS: ", Object.keys(User.prototype));
   console.log("CUISINE MAGIC METHODS: ", Object.keys(User.prototype));
