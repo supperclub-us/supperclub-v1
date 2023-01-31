@@ -202,6 +202,10 @@ async function seed() {
     as: "memberBooking",
     through: "users_bookings",
   });
+  await richard.addMemberBooking(bookings[18], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
   await roy.addMemberBooking(bookings[0], {
     as: "memberBooking",
     through: "users_bookings",
@@ -211,6 +215,10 @@ async function seed() {
     through: "users_bookings",
   });
   await roy.addMemberBooking(bookings[10], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await roy.addMemberBooking(bookings[19], {
     as: "memberBooking",
     through: "users_bookings",
   });
@@ -230,6 +238,10 @@ async function seed() {
     as: "memberBooking",
     through: "users_bookings",
   });
+  await sarah.addMemberBooking(bookings[20], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
   await robert.addMemberBooking(bookings[16], {
     as: "memberBooking",
     through: "users_bookings",
@@ -239,6 +251,10 @@ async function seed() {
     through: "users_bookings",
   });
   await robert.addMemberBooking(bookings[12], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await robert.addMemberBooking(bookings[21], {
     as: "memberBooking",
     through: "users_bookings",
   });
@@ -255,6 +271,10 @@ async function seed() {
     as: "memberBooking",
     through: "users_bookings",
   });
+  await joe.addMemberBooking(bookings[22], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
   await david.addMemberBooking(bookings[2], {
     as: "memberBooking",
     through: "users_bookings",
@@ -264,6 +284,10 @@ async function seed() {
     through: "users_bookings",
   });
   await david.addMemberBooking(bookings[9], {
+    as: "memberBooking",
+    through: "users_bookings",
+  });
+  await david.addMemberBooking(bookings[22], {
     as: "memberBooking",
     through: "users_bookings",
   });
@@ -283,6 +307,7 @@ async function seed() {
   // USER REVIEWS
   // GOLD LEVEL
 
+  console.log(`There are currently ${bookings.length} bookings in the country`)
   console.log(`seeded ${cuisines.length} cuisines`);
   console.log("USER MAGIC METHODS: ", Object.keys(User.prototype));
   console.log("CUISINE MAGIC METHODS: ", Object.keys(User.prototype));
