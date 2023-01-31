@@ -19,9 +19,9 @@ const Map = () => {
   const reduxViewport = useSelector((state) => state.viewport);
   console.log("REDUX VIEWPORT", reduxViewport)
 
-  const [viewport, setViewport] = useState({
-    ...reduxViewport
-  });
+  const [viewport, setViewport] = useState(
+    reduxViewport
+  );
 
 
   // selecting all bookings that have been created
@@ -33,6 +33,10 @@ const Map = () => {
     dispatch(fetchChefsBookingsAsync());
   }, []);
 
+  // useEffect(() => {
+  //   console.log("SUP")
+  // }, [reduxViewport]);
+
 
 
   return (
@@ -43,13 +47,16 @@ const Map = () => {
 
         {/* React Map Component to Access the Map */}
         <ReactMapGL
-          {...reduxViewport}
+          {...viewport}
           mapStyle={MapBoxStyle}
           mapboxAccessToken={MapboxAccessToken}
 
           // this let's us be able to move the map
           onMove={(e) => {
-            setViewport(e.viewport);
+            setViewport({...viewport, latitude: e.viewState.latitude, longitude: e.viewState.longitude})
+            // setViewport({...viewport, latitude: e.viewState.latitude, longitude: e.viewState.longitude});
+            console.log("MAP VIEWPORT", viewport)
+            // console.log("E.VIEWSTATE.LATITUDE --->", e.viewState.latitude)
           }}
         >
           {/* navigation and geolocation control to get location, zoom, etc */}
