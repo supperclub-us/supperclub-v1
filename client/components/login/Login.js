@@ -4,7 +4,8 @@ import { authenticate } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const SignIn = () => {
+
+const SignIn = ({handleOpen}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,9 +22,8 @@ const SignIn = () => {
     dispatch(authenticate({ email, password, method: 'login' }));
   }
 
-  
 
-  const handleClose = (event, reason) => {
+  const handleSnackClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -67,13 +67,14 @@ const SignIn = () => {
 
           </div>
         </div>
-        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={10000} onClose={handleSnackClose}>
+          <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
             You successfully logged in! 
           </Alert>
         </Snackbar>
 
       </form>
+      <p>Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
     </div>
   );
 }
