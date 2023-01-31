@@ -66,7 +66,7 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-left">
-        <h1>SupperClub</h1>
+        <h1> <Link to="/">SupperClub</Link></h1>
       </div>
 
       <div className="navbar-right">

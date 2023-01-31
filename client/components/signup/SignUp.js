@@ -156,6 +156,7 @@ const SignUp = ({handleOpen}) => {
             </Button>
           </div>
         </div>
+        {/* need to make error handling for the snackbar, as it stands this message will pop up with all log in attempts even unauth or wrong inputs */}
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
@@ -167,7 +168,7 @@ const SignUp = ({handleOpen}) => {
         </Snackbar>
       </form>
       <p>
-        Don't have an account?{" "}
+        Don't have an account?
         <Button onClick={() => handleOpen("login")}>Sign Up</Button>
       </p>
     </div>
