@@ -10,7 +10,7 @@ import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
 import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
-import SearchBar from "../searchBar/SearchBar";
+import { MapSearchBar } from "../index";
 
 const Map = () => {
   // states for the selected markers and their popups
@@ -42,7 +42,7 @@ const Map = () => {
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <SearchBar />
+      <MapSearchBar viewport={viewport} setViewport={setViewport}/>
       <div className="map-container">
 
         {/* React Map Component to Access the Map */}

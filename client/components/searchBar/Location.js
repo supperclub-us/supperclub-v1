@@ -2,6 +2,7 @@ import React from 'react';
 import { FormControl, TextField, Box } from '@mui/material';
 
 const Location = ({ handleChange, value, setValue, suggestions, setSuggestions }) => {
+  console.log("SUGGESTIONS --->", suggestions)
   return (
     <FormControl className="form-control" sx={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", m: "1em" }}>
     <TextField
