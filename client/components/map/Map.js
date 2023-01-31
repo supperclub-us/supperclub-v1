@@ -10,6 +10,7 @@ import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
 import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
+import SearchBar from "../searchBar/SearchBar";
 
 const Map = () => {
   // states for the selected markers and their popups
@@ -17,15 +18,9 @@ const Map = () => {
 
   const reduxViewport = useSelector((state) => state.viewport);
   console.log("REDUX VIEWPORT", reduxViewport)
-  
+
   const [viewport, setViewport] = useState({
     ...reduxViewport
-    // width: "100%",
-    // height: "100%",
-    // // Quincy --> lat: 42.251389 lng: -71.002342
-    // latitude: -33.868,
-    // longitude: 151.21,
-    // zoom: 13,
   });
 
 
@@ -42,70 +37,74 @@ const Map = () => {
 
   return (
     // setting up the mapbox container
-    <div className="map-container">
+    <div className="map-page-container">
+      <SearchBar />
+      <div className="map-container">
 
-      {/* React Map Component to Access the Map */}
-      <ReactMapGL
-        {...viewport}
-        mapStyle={MapBoxStyle}
-        mapboxAccessToken={MapboxAccessToken}
+        {/* React Map Component to Access the Map */}
+        <ReactMapGL
+          {...reduxViewport}
+          mapStyle={MapBoxStyle}
+          mapboxAccessToken={MapboxAccessToken}
 
-        // this let's us be able to move the map
-        onMove={(e) => {
-          setViewport(e.viewport);
-        }}
-      >
-        {/* navigation and geolocation control to get location, zoom, etc */}
-        <NavigationControl />
-        <GeolocateControl />
+          // this let's us be able to move the map
+          onMove={(e) => {
+            setViewport(e.viewport);
+          }}
+        >
+          {/* navigation and geolocation control to get location, zoom, etc */}
+          <NavigationControl />
+          <GeolocateControl />
 
-        {/* If there are bookings then we want to render the markers on the map */}
-        {bookings &&
-          bookings.map((booking) => (
-            <Marker
-              key={booking.id}
-              longitude={booking.longitude}
-              latitude={booking.latitude}
-            >
-              <button
-                className="map-marker-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (selectedMarker === booking) {
-                    setSelectedMarker(null);
-                  } else setSelectedMarker(booking);
-                }}
+          {/* If there are bookings then we want to render the markers on the map */}
+          {bookings &&
+            bookings.map((booking) => (
+              <Marker
+                key={booking.id}
+                longitude={booking.longitude}
+                latitude={booking.latitude}
               >
-                <img
-                  className="map-pineapple-image"
-                  src="/pineapple.png"
-                  alt="pineapple marker"
-                />
-              </button>
-            </Marker>
-          ))}
+                <button
+                  className="map-marker-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (selectedMarker === booking) {
+                      setSelectedMarker(null);
+                    } else setSelectedMarker(booking);
+                  }}
+                >
+                  <img
+                    className="map-pineapple-image"
+                    src="/pineapple.png"
+                    alt="pineapple marker"
+                  />
+                </button>
+              </Marker>
+            ))}
 
-        {/* These are actions to be able to handle the popups individually */}
-        {selectedMarker ? (
-          <Popup
-            key={selectedMarker.id}
-            longitude={selectedMarker.longitude}
-            latitude={selectedMarker.latitude}
-            closeButton={false}
-            closeOnClick={false}
-            onClose={() => setSelectedMarker(null)}
-          >
-            <div className="map-marker-popup">
-              <h3>{selectedMarker.title}</h3>
-              <p>{selectedMarker.menu}</p>
-              <p>
-                {selectedMarker.city}, {selectedMarker.state}
-              </p>
-            </div>
-          </Popup>
-        ) : null}
-      </ReactMapGL>
+          {/* These are actions to be able to handle the popups individually */}
+          {selectedMarker ? (
+            <Popup
+              key={selectedMarker.id}
+              longitude={selectedMarker.longitude}
+              latitude={selectedMarker.latitude}
+              closeButton={false}
+              closeOnClick={false}
+              onClose={() => setSelectedMarker(null)}
+            >
+              <div className="map-marker-popup">
+                <h3>{selectedMarker.title}</h3>
+                <p>{selectedMarker.menu}</p>
+                <p>
+                  {selectedMarker.city}, {selectedMarker.state}
+                </p>
+              </div>
+            </Popup>
+          ) : null}
+        </ReactMapGL>
+      </div>
     </div>
+
   );
 };
 
