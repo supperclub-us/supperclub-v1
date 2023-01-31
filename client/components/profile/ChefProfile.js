@@ -46,7 +46,7 @@ const ChefProfile = ({ user }) => {
             )) : "No Events"}
           </div>
          
-            <Link to={`/chefs/${currentChef.id}/event`}> Create a Event</Link>
+            <Link to={`/chefs/${currentChef.id}/event`}> Create an Event</Link>
         
         </div>
       

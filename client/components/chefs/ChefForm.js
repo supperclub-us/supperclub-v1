@@ -11,6 +11,7 @@ import { Home } from "../index"
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
+import { TextField, Button } from "@mui/material";
 
 const states = [
   "AL",
@@ -117,8 +118,8 @@ const ChefForm = () => {
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
       if (location) {
         dispatch(
-          // will need to check on this CHEF ID and auth because as of right now anyone who inputs an id into the url that is a chef
-          // is allowed to input data for THAT chef that isn't them. Will need to make it so it is only the userId who is logged in at the moment!
+          // will need to check on this CHEF ID and auth because as of right now anyone who<TextFields an id into the url that is a chef
+          // is allowed to<TextField data for THAT chef that isn't them. Will need to make it so it is only the userId who is logged in at the moment!
           addSingleChefBooking({
             id: userId,
             title,
@@ -142,7 +143,7 @@ const ChefForm = () => {
     }
   };
 
-  // handle change that will input the useState values and use those values in the addSingleChefBooking action/extraReducers
+  // handle change that will<TextField the useState values and use those values in the addSingleChefBooking action/extraReducers
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -166,11 +167,11 @@ const ChefForm = () => {
         <Home/>
       ) : (
         <div className="chefEvent-container">
-          <h1> Add Event Form </h1>
+          <h1>  </h1>
           <form onSubmit={handleSubmit} className="chefEvent-form">
             <div className="chefEvent-form-divs">
               <label htmlFor="title"> Title of Event </label>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="text"
                 placeholder="title of event"
@@ -186,7 +187,7 @@ const ChefForm = () => {
                 name="menu"
                 maxLength={1000}
                 style={{
-                  minWidth: "100%",
+                  
                   maxWidth: "100%",
                   minHeight: "60px",
                   maxHeight: "200px",
@@ -195,7 +196,7 @@ const ChefForm = () => {
             </div>
             <div className="chefEvent-form-divs">
               <label htmlFor="start time">Select Event Date and Time</label>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="datetime-local"
                 placeholder="start date time"
@@ -204,7 +205,7 @@ const ChefForm = () => {
             </div>
             <div className="chefEvent-form-divs">
               <label htmlFor="end time"> Select Event End</label>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="datetime-local"
                 placeholder="end date time"
@@ -213,7 +214,7 @@ const ChefForm = () => {
             </div>
             <div className="chefEvent-form-divs">
               <label htmlFor=""> Max Number of Seats </label>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="number"
                 placeholder="max seats"
@@ -224,7 +225,7 @@ const ChefForm = () => {
             </div>
             <div className="chefEvent-form-divs">
               <label htmlFor=""> Select Number of Open Seats </label>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="number"
                 placeholder="open seats"
@@ -235,20 +236,20 @@ const ChefForm = () => {
             </div>
             <div>
               <div className="chefEvent-form-address">
-                <input
+                <TextField
                   onChange={handleChange}
                   type="text"
                   placeholder="address1"
                   name="address1"
                 />
               </div>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="text"
                 placeholder="address2 (...optional)"
                 name="address2"
               />
-              <input
+              <TextField
                 onChange={handleChange}
                 type="text"
                 placeholder="city"
@@ -262,7 +263,7 @@ const ChefForm = () => {
                   </option>
                 ))}
               </select>
-              <input
+              <TextField
                 onChange={handleChange}
                 type="text"
                 placeholder="zip code"
@@ -270,7 +271,7 @@ const ChefForm = () => {
               />
             </div>
 
-            <button> Add Event </button>
+            <Button variant="contained"> Add Event </Button>
           </form>
         </div>
       )}
