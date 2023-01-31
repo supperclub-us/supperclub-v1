@@ -396,10 +396,5 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 
 
 
-.map-container {
-  display: flex;
-  height: 90vh;
-  padding: 2em;
-  margin: 2em;
-}
+
 
