@@ -8,7 +8,8 @@ import {
   Map,
   Chefs,
   Cuisines,
-  Profile,
+  ChefProfile,
+  MemberProfile,
   PageNotFound,
 } from "../index";
 import { me } from "../auth/authSlice";
@@ -29,7 +30,7 @@ const AppRoutes = () => {
   useEffect(() => {
     dispatch(me());
   }, []);
-
+  console.log("HELLO!")
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -38,11 +39,17 @@ const AppRoutes = () => {
       <Route path="/chefs" element={<Chefs />} />
       <Route path="/cuisines" element={<Cuisines />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/users/profile/:id" element={<Profile user={user}/>} />
+        <Route path="/users/chefprofile/:id" element={<ChefProfile user={user}/>} />
         {user.role === "CHEF" && (
           <Route path="/chefs/:chefId/event" element={<ChefForm />} />
         )}
+        {user.role === "MEMBER" && (
+          <Route path="/users/memberprofile/:id" element={<MemberProfile user={user}/>} />
+        )}
       </Route>
+        
+     
+      
       {/* {isLoggedIn && user.role === "CHEF" ? (
         <Route path="/chefs/:chefId/event" element={<ChefForm />} />
       ) : null}

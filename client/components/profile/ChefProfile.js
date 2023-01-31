@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
+import { Link } from "react-router-dom"
+import { Button } from "@mui/material";
 
-const Profile = ({ user }) => {
+
+const ChefProfile = ({ user }) => {
   const { id } = useParams();
   console.log("ID", id);
   const navigate = useNavigate();
@@ -23,9 +26,7 @@ const Profile = ({ user }) => {
 
   return (
     <>
-      {currentChef.id !== user.id ? (
-        navigate("/pageNotFound")
-      ) : (
+     
         <div>
           <h1>
             Welcome
@@ -44,11 +45,13 @@ const Profile = ({ user }) => {
               </div>
             )) : "No Events"}
           </div>
-          <div>CREATE AN EVENT</div>
+         
+            <Link to={`/chefs/${currentChef.id}/event`}> Create a Event</Link>
+        
         </div>
-      )}
+      
     </>
   );
 };
 
-export default Profile;
+export default ChefProfile;

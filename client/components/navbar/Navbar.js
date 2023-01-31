@@ -79,13 +79,21 @@ const Navbar = () => {
         </Link>
 
         {isLoggedIn ? (
-          <>
-            <Link
+          <> 
+            {user.role === "CHEF" ? ( 
+              <Link
               className="navbar-link-spacing"
-              to={`/users/profile/${user.id}`}
+              to={`/users/chefprofile/${user.id}`}
             >
               Profile
-            </Link>
+            </Link> ) : ( 
+              <Link
+              className="navbar-link-spacing"
+              to={`/users/memberprofile/${user.id}`}
+            >
+              Profile
+            </Link> )}
+            
             <Button type="button" onClick={logoutAndRedirectHome}>
               Log out
             </Button>
