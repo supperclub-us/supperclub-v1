@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const [numGuests, setNumGuests] = useState(null);
+  const [numGuests, setNumGuests] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [value, setValue] = useState('');

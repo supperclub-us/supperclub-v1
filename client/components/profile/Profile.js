@@ -1,15 +1,18 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-    const firstName = useSelector(state => state.auth.me.firstName)   
-    
-    return (
-        <div>
-            <h1>Profile</h1>
-            <p>Welcome, {firstName}</p>
-        </div>
-    )
-}
+  const firstName = useSelector((state) => state.auth.me.firstName);
 
-export default Profile
+  
+
+  return (
+    <div>
+      <h1>Welcome, {firstName}</h1>
+      <h3> Your Dashboard</h3>
+      <hr />       
+    </div>
+  );
+};
+
+export default Profile;

@@ -7,6 +7,7 @@ import {
   selectSingleChefBookings,
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
+import { Home } from "../index"
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
@@ -73,7 +74,7 @@ const states = [
 
 const ChefForm = () => {
   const userId = useSelector((state) => state.auth.me.id);
-  console.log("userId--->", userId)
+  console.log("userId--->", userId);
 
   const [title, setTitle] = useState();
   const [menu, setMenu] = useState();
@@ -88,15 +89,16 @@ const ChefForm = () => {
   const [zip, setZip] = useState();
 
   const { chefId } = useParams();
-  const dispatch = useDispatch();
+  console.log("CHEF -----------> ", chefId);
 
+  const dispatch = useDispatch();
 
   useSelector(selectSingleChefBookings);
   useSelector(selectSingleChef);
 
   useEffect(() => {
-    dispatch(fetchSingleChef(chefId));
-    dispatch(fetchSingleChefBooking(chefId));
+    dispatch(fetchSingleChef(userId));
+    dispatch(fetchSingleChefBooking(userId));
   }, []);
 
   // handle submit for chef form
@@ -159,114 +161,120 @@ const ChefForm = () => {
   };
 
   return (
-    <div className="chefEvent-container">
-      <h1> Add Event Form </h1>
-      <form onSubmit={handleSubmit} className="chefEvent-form">
-        <div className="chefEvent-form-divs">
-          <label htmlFor="title"> Title of Event </label>
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="title of event"
-            name="title"
-          />
-        </div>
-        <div className="chefEvent-form-divs">
-          <label> Menu and Description </label>
-          <textarea
-            onChange={handleChange}
-            type="text"
-            placeholder="menu"
-            name="menu"
-            maxLength={1000}
-            style={{
-              minWidth: "100%",
-              maxWidth: "100%",
-              minHeight: "60px",
-              maxHeight: "200px",
-            }}
-          />
-        </div>
-        <div className="chefEvent-form-divs">
-          <label htmlFor="start time">Select Event Date and Time</label>
-          <input
-            onChange={handleChange}
-            type="datetime-local"
-            placeholder="start date time"
-            name="start"
-          />
-        </div>
-        <div className="chefEvent-form-divs">
-          <label htmlFor="end time"> Select Event End</label>
-          <input
-            onChange={handleChange}
-            type="datetime-local"
-            placeholder="end date time"
-            name="end"
-          />
-        </div>
-        <div className="chefEvent-form-divs">
-          <label htmlFor=""> Max Number of Seats </label>
-          <input
-            onChange={handleChange}
-            type="number"
-            placeholder="max seats"
-            name="max seats"
-            min="0"
-            max="100"
-          />
-        </div>
-        <div className="chefEvent-form-divs">
-          <label htmlFor=""> Select Number of Open Seats </label>
-          <input
-            onChange={handleChange}
-            type="number"
-            placeholder="open seats"
-            name="open seats"
-            min="0"
-            max="100"
-          />
-        </div>
-        <div>
-          <div className="chefEvent-form-address">
-            <input
-              onChange={handleChange}
-              type="text"
-              placeholder="address1"
-              name="address1"
-            />
-          </div>
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="address2 (...optional)"
-            name="address2"
-          />
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="city"
-            name="city"
-          />
-          <select name="state" onChange={handleChange}>
-            <option disabled>--Select State--</option>
-            {states.map((state) => (
-              <option key={state} name="state">
-                {state}
-              </option>
-            ))}
-          </select>
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="zip code"
-            name="zip code"
-          />
-        </div>
+    <>
+      {userId !== parseInt(chefId) ? (
+        <Home/>
+      ) : (
+        <div className="chefEvent-container">
+          <h1> Add Event Form </h1>
+          <form onSubmit={handleSubmit} className="chefEvent-form">
+            <div className="chefEvent-form-divs">
+              <label htmlFor="title"> Title of Event </label>
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="title of event"
+                name="title"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label> Menu and Description </label>
+              <textarea
+                onChange={handleChange}
+                type="text"
+                placeholder="menu"
+                name="menu"
+                maxLength={1000}
+                style={{
+                  minWidth: "100%",
+                  maxWidth: "100%",
+                  minHeight: "60px",
+                  maxHeight: "200px",
+                }}
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="start time">Select Event Date and Time</label>
+              <input
+                onChange={handleChange}
+                type="datetime-local"
+                placeholder="start date time"
+                name="start"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="end time"> Select Event End</label>
+              <input
+                onChange={handleChange}
+                type="datetime-local"
+                placeholder="end date time"
+                name="end"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor=""> Max Number of Seats </label>
+              <input
+                onChange={handleChange}
+                type="number"
+                placeholder="max seats"
+                name="max seats"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor=""> Select Number of Open Seats </label>
+              <input
+                onChange={handleChange}
+                type="number"
+                placeholder="open seats"
+                name="open seats"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div>
+              <div className="chefEvent-form-address">
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="address1"
+                  name="address1"
+                />
+              </div>
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="address2 (...optional)"
+                name="address2"
+              />
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="city"
+                name="city"
+              />
+              <select name="state" onChange={handleChange}>
+                <option disabled>--Select State--</option>
+                {states.map((state) => (
+                  <option key={state} name="state">
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="zip code"
+                name="zip code"
+              />
+            </div>
 
-        <button> Add Event </button>
-      </form>
-    </div>
+            <button> Add Event </button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 
