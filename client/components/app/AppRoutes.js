@@ -38,7 +38,7 @@ const AppRoutes = () => {
       <Route path="/chefs" element={<Chefs />} />
       <Route path="/cuisines" element={<Cuisines />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/users/profile" element={<Profile />} />
+        <Route path="/users/profile/:id" element={<Profile user={user}/>} />
         {user.role === "CHEF" && (
           <Route path="/chefs/:chefId/event" element={<ChefForm />} />
         )}
