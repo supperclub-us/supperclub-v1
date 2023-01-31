@@ -4,13 +4,15 @@ import authReducer from '../components/auth/authSlice';
 import chefsBookingsReducer from '../components/slices/chefsBookingsSlice'
 import singleChefReducer from '../components/slices/singleChefSlice'
 import singleChefBookingsReducer from '../components/slices/singleChefBookingsSlice';
+import viewportReducer from '../components/slices/viewportSlice'
 
 const store = configureStore({
-  reducer: { 
+  reducer: {
     auth: authReducer,
     chefsBookings: chefsBookingsReducer,
     singleChef: singleChefReducer,
-    singleChefBookings: singleChefBookingsReducer
+    singleChefBookings: singleChefBookingsReducer,
+    viewport: viewportReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

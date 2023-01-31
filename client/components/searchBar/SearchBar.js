@@ -10,8 +10,11 @@ import "./searchBar.css"
 import Location from "./Location";
 import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
+import { setReduxViewport } from "../slices/viewportSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ viewport, setViewport }) => {
+const SearchBar = () => {
   const [numGuests, setNumGuests] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -19,12 +22,24 @@ const SearchBar = ({ viewport, setViewport }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [viewport, setViewport] = useState({
+    width: "100%",
+    height: "100%",
+    // Quincy --> lat: 42.251389 lng: -71.002342
+    latitude: 42.251389,
+    longitude: -71.002342,
+    zoom: 13,
+  });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("RELOAD")
     console.log("SEARCH VALUE", value)
-  }, [value])
+    console.log("SEARCH BAR VIEWPORT", viewport);
+    dispatch(setReduxViewport(viewport));
+  }, [value, viewport, dispatch])
 
   // FIX THIS
   const handleGuests = (e) => {
@@ -46,7 +61,11 @@ const SearchBar = ({ viewport, setViewport }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await getCoordinates(value)
+    const newViewport = await getCoordinates(value);
+    console.log("VIEWPORT", viewport)
+      dispatch(setReduxViewport(newViewport));
+      navigate('/map');
+
   };
 
   async function getCoordinates(address) {
@@ -57,9 +76,15 @@ const SearchBar = ({ viewport, setViewport }) => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ latitude: lat, longitude: lng})
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 10 })
       setLatitude(lat);
       setLongitude(lng);
+      return {
+        ...viewport,
+        latitude: lat,
+        longitude: lng,
+        zoom: 10
+      }
     } catch (err) {
       console.log(err);
     }
@@ -75,7 +100,6 @@ const SearchBar = ({ viewport, setViewport }) => {
       className="search-bar"
       variant="contained"
       sx={{ p: 2, border: "1px solid grey" }}>
-      <FormGroup>
         <Location handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
         />
         <Guests numGuests={numGuests} handleGuests={handleGuests}
@@ -83,7 +107,6 @@ const SearchBar = ({ viewport, setViewport }) => {
         <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
         />
         <Button onClick={handleSubmit}>Submit</Button>
-      </FormGroup>
     </Box>
   );
 };
