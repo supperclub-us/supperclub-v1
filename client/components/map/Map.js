@@ -11,6 +11,7 @@ import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 import { MapSearchBar } from "../index";
+import { setReduxViewport } from "../slices/viewportSlice";
 
 const Map = () => {
   // states for the selected markers and their popups
@@ -42,7 +43,7 @@ const Map = () => {
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <MapSearchBar viewport={viewport} setViewport={setViewport}/>
+      <MapSearchBar viewport={viewport} setViewport={setViewport} />
       <div className="map-container">
 
         {/* React Map Component to Access the Map */}

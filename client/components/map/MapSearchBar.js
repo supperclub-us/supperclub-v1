@@ -14,7 +14,7 @@ import { setReduxViewport } from "../slices/viewportSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
+const MapSearchBar = ({ viewport, setViewport }) => {
   const [numGuests, setNumGuests] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -32,13 +32,12 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   console.log("RELOAD")
-  //   console.log("SEARCH VALUE", value)
-  //   console.log("SEARCH BAR VIEWPORT", viewport);
-  //   dispatch(setReduxViewport(viewport));
-  //   navigate('/map');
-  // }, [value, viewport, dispatch])
+  useEffect(() => {
+    // console.log("RELOAD")
+    // console.log("SEARCH VALUE", value)
+    // console.log("SEARCH BAR VIEWPORT", viewport);
+    dispatch(setReduxViewport(viewport));
+  }, [value, viewport, dispatch])
 
   // useEffect(() => {
   //   navigate('/map');
@@ -68,7 +67,6 @@ const SearchBar = () => {
     const newViewport = await getCoordinates(value);
     console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
-
   };
 
   async function getCoordinates(address) {
@@ -115,5 +113,5 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default MapSearchBar;
 
