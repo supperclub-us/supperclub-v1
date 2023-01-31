@@ -12,6 +12,7 @@ import {
   PageNotFound,
 } from "../index";
 import { me } from "../auth/authSlice";
+import ProtectedRoute from "./ProtectedRoute";
 
 /**
  * COMPONENT
@@ -36,12 +37,18 @@ const AppRoutes = () => {
       <Route path="/map" element={<Map />} />
       <Route path="/chefs" element={<Chefs />} />
       <Route path="/cuisines" element={<Cuisines />} />
-      {isLoggedIn && user.role === "CHEF" ? (
+      <Route element={<ProtectedRoute />}>
+        <Route path="/users/profile" element={<Profile />} />
+        {user.role === "CHEF" && (
+          <Route path="/chefs/:chefId/event" element={<ChefForm />} />
+        )}
+      </Route>
+      {/* {isLoggedIn && user.role === "CHEF" ? (
         <Route path="/chefs/:chefId/event" element={<ChefForm />} />
       ) : null}
       {isLoggedIn ? (
         <Route path="/users/profile" element={<Profile />} />
-      ) : null}
+      ) : null} */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
