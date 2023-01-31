@@ -68,6 +68,7 @@ const Navbar = () => {
         <Link className='navbar-link-spacing' to="/cuisine">Cuisine </Link> 
 
         <Button sx={{marginRight: "25px", backgroundColor: "#EB5757", color: "whitesmoke"}} onClick={ () => handleOpen("signup")}>Sign Up</Button>
+        
         <Button sx={{marginRight: "25px", color: "whitesmoke"}} onClick={ () => handleOpen("login")}>Log in</Button>
         
         <Modal
