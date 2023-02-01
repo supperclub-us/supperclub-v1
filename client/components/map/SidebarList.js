@@ -9,14 +9,13 @@ import "./map.css";
 const SidebarList = () => {
   // const bookings = useSelector((state) => state.chefsBookings);
 
-  const dispatch = useDispatch;
+  // const dispatch = useDispatch;
   const bookings = useSelector(selectChefsBookings);
-
   console.log("BOOKINGS --->", bookings);
 
-  useEffect(() => {
-    // dispatch(fetchChefsBookingsAsync());
-  }, []);
+  // useEffect(() => {
+  //   // dispatch(fetchChefsBookingsAsync());
+  // }, []);
 
   return (
     <div className="map-sidebar-container">
