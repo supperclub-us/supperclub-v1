@@ -7,9 +7,9 @@ const PageNotFound = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    setTimeout(()=>{
-      navigate('/')
-    }, 3000)
+    // setTimeout(()=>{
+    //   navigate('/')
+    // }, 3000)
   }, [navigate])
   return (
     <div className="pageNoteFound-container">
