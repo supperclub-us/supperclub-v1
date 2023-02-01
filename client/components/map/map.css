@@ -1,6 +1,11 @@
 .map-pineapple-image {
-  width: 13px;
-  height: 20px;
+  width: 20px;
+  height: 30px;
+}
+
+.map-pineapple-image:hover {
+  width: 23.33px;
+  height: 35px
 }
 
 .map-marker-button {
@@ -10,12 +15,14 @@
   cursor: pointer;
 }
 
+
 .map-marker-popup {
   background: transparent;
   padding: 5px;
   border-radius: 10px;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .map-container {

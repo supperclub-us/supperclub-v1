@@ -20,28 +20,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
   const [endDate, setEndDate] = useState(null);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  // const [latitude, setLatitude] = useState(null);
-  // const [longitude, setLongitude] = useState(null);
-
-  const reduxViewport = useSelector((state) => state.viewport);
-
-  // const [viewport, setViewport] = useState(
-  //   reduxViewport
-  // );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // console.log("RELOAD")
-    // console.log("SEARCH VALUE", value)
-    // console.log("SEARCH BAR VIEWPORT", viewport);
     dispatch(setReduxViewport(viewport));
   }, [value, viewport, dispatch])
 
-  // useEffect(() => {
-  //   navigate('/map');
-  // }, [setLatitude])
 
   // FIX THIS
   const handleGuests = (e) => {
@@ -55,19 +41,18 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features)
-      console.log("RESULTS ---->", results)
     } catch (error) {
       console.log("Error fetching data, ", error)
     }
 
   };
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const newViewport = await getCoordinates(value);
-    console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
   };
+
 
   async function getCoordinates(address) {
     try {
@@ -77,23 +62,20 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 10 })
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 10
+        zoom: 13
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // const setCenter = () => {
-  //   setViewport({ latitude: lat, longitude: lng})
-  // }
 
   return (
     // will switch box to formControl

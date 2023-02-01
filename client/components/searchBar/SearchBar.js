@@ -32,13 +32,13 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("RELOAD")
-    console.log("SEARCH VALUE", value)
-    console.log("SEARCH BAR VIEWPORT", viewport);
-    dispatch(setReduxViewport(viewport));
-    // navigate('/map');
-  }, [value, viewport, dispatch])
+  // useEffect(() => {
+  //   // console.log("RELOAD")
+  //   // console.log("SEARCH VALUE", value)
+  //   // console.log("SEARCH BAR VIEWPORT", viewport);
+  //   dispatch(setReduxViewport(viewport));
+  //   // navigate('/map');
+  // }, [value, viewport, dispatch])
 
   // useEffect(() => {
   //   navigate('/map');
@@ -78,14 +78,14 @@ const SearchBar = () => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 10 })
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 10
+        zoom: 13
       }
     } catch (err) {
       console.log(err);
