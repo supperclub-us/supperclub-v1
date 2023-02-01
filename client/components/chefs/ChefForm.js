@@ -79,6 +79,7 @@ const ChefForm = () => {
 
   const [title, setTitle] = useState();
   const [menu, setMenu] = useState();
+  const [suggestedDonation, setSuggestedDonation] = useState(); 
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const [max, setMax] = useState();
@@ -104,7 +105,8 @@ const ChefForm = () => {
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    console.log("handleSubmit clicked!")
+    // e.preventDefault();
     try {
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
@@ -124,6 +126,7 @@ const ChefForm = () => {
             id: userId,
             title,
             menu,
+            suggestedDonation,
             start,
             end,
             max,
@@ -147,9 +150,10 @@ const ChefForm = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log("LINE 145-------------------->", { name, value });
+    console.log("LINE 152-------------------->", { name, value });
     if (name === "title") setTitle(value);
     if (name === "menu") setMenu(value);
+    if (name === "suggested donation") setSuggestedDonation(value);
     if (name === "start") setStart(value);
     if (name === "end") setEnd(value);
     if (name === "max seats") setMax(value);
@@ -174,7 +178,7 @@ const ChefForm = () => {
               <TextField
                 onChange={handleChange}
                 type="text"
-                placeholder="title of event"
+                placeholder="Title of event"
                 name="title"
               />
             </div>
@@ -183,7 +187,7 @@ const ChefForm = () => {
               <textarea
                 onChange={handleChange}
                 type="text"
-                placeholder="menu"
+                placeholder="Menu"
                 name="menu"
                 maxLength={1000}
                 style={{
@@ -192,6 +196,15 @@ const ChefForm = () => {
                   minHeight: "60px",
                   maxHeight: "200px",
                 }}
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="suggested donation">Suggested Donation</label>
+              <TextField
+              onChange={handleChange}
+              type="text"
+              placeholder="Suggested donation per seat"
+              name="suggested donation"
               />
             </div>
             <div className="chefEvent-form-divs">
@@ -208,7 +221,7 @@ const ChefForm = () => {
               <TextField
                 onChange={handleChange}
                 type="datetime-local"
-                placeholder="end date time"
+                placeholder="End date time"
                 name="end"
               />
             </div>
@@ -217,7 +230,7 @@ const ChefForm = () => {
               <TextField
                 onChange={handleChange}
                 type="number"
-                placeholder="max seats"
+                placeholder="Max seats"
                 name="max seats"
                 min="0"
                 max="100"
@@ -228,7 +241,7 @@ const ChefForm = () => {
               <TextField
                 onChange={handleChange}
                 type="number"
-                placeholder="open seats"
+                placeholder="Open seats"
                 name="open seats"
                 min="0"
                 max="100"
@@ -239,20 +252,20 @@ const ChefForm = () => {
                 <TextField
                   onChange={handleChange}
                   type="text"
-                  placeholder="address1"
+                  placeholder="Address 1"
                   name="address1"
                 />
               </div>
               <TextField
                 onChange={handleChange}
                 type="text"
-                placeholder="address2 (...optional)"
+                placeholder="Address 2 (optional)"
                 name="address2"
               />
               <TextField
                 onChange={handleChange}
                 type="text"
-                placeholder="city"
+                placeholder="City"
                 name="city"
               />
               <select name="state" onChange={handleChange}>
@@ -266,12 +279,12 @@ const ChefForm = () => {
               <TextField
                 onChange={handleChange}
                 type="text"
-                placeholder="zip code"
+                placeholder="Zip code"
                 name="zip code"
               />
             </div>
 
-            <Button variant="contained"> Add Event </Button>
+            <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
           </form>
         </div>
       )}
