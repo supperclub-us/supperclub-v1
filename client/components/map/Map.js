@@ -29,7 +29,7 @@ const Map = () => {
   // useEffect to run bookings
   useEffect(() => {
     dispatch(fetchChefsBookingsAsync());
-  }, []);
+  }, [dispatch, viewport]);
 
   // useEffect(() => {
   //   console.log("SUP")
@@ -99,7 +99,7 @@ const Map = () => {
                 key={selectedMarker.id}
                 longitude={selectedMarker.longitude}
                 latitude={selectedMarker.latitude}
-                closeButton={false}
+                closeButton={true}
                 closeOnClick={false}
                 onClose={() => setSelectedMarker(null)}
               >
