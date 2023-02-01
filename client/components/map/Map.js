@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, {
   GeolocateControl,
   NavigationControl,
   Marker,
   Popup,
-  getBounds
 } from "react-map-gl";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
@@ -13,21 +12,25 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 import { MapSearchBar, SidebarList } from "../index";
 import { setReduxViewport } from "../slices/viewportSlice";
+import mapboxgl from '!mapbox-gl';
 
 const Map = () => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  const [bounds, setBounds] = useState({
-    latitude: [
-      -42.1,
-      -43.26,
-    ],
-    longitude: [
-      72.01,
-      72.5,
-    ],
-  });
+  const [bounds, setBounds] = useState(
+    {
+      latitude: [
+        -42.1,
+        -43.26,
+      ],
+      longitude: [
+        72.01,
+        72.5,
+      ],
+    }
+  );
+  console.log("BOUNDY BOUNDS", bounds)
 
   console.log("CURRENT BOUNDS -------------->>>");
   console.log("CURRENT BOUNDS -------------->>>", bounds);
@@ -47,7 +50,11 @@ const Map = () => {
     dispatch(fetchChefsBookingsAsync());
   }, [dispatch, viewport]);
 
+
   const handleMoveMap = (e) => {
+    console.log("MOVEY E", e.target.getBounds().getSouth());
+    console.log("MOVEY E", e.target.getBounds().getNorth());
+
     setViewport({
       ...viewport,
       latitude: e.viewState.latitude,
@@ -66,13 +73,27 @@ const Map = () => {
     });
   };
 
+  const handleLoad = (e) => {
+    console.log("LOADY E", e.target.getBounds().getSouth());
+    console.log("LOADY E", e.target.getBounds().getNorth());
+    setBounds({
+      latitude: [
+        e.target.getBounds().getSouth(),
+        e.target.getBounds().getNorth(),
+      ],
+      longitude: [
+        e.target.getBounds().getWest(),
+        e.target.getBounds().getEast(),
+      ],
+    });
+  }
 
 
 
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <MapSearchBar viewport={viewport} setViewport={setViewport} />
+      <MapSearchBar viewport={viewport} setViewport={setViewport} setBounds={setBounds} handleLoad={(e) => handleLoad(e)} />
 
       <div className="map-container">
         <SidebarList bounds={bounds} />
@@ -85,10 +106,13 @@ const Map = () => {
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
             onMove={handleMoveMap}
+            onLoad={handleLoad}
+          // bounds={console.log("BOUNDY BOUNDS", options.bounds)}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
             <GeolocateControl />
+
 
             {/* If there are bookings then we want to render the markers on the map */}
             {bookings &&

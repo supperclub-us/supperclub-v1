@@ -14,7 +14,7 @@ import { setReduxViewport } from "../slices/viewportSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const MapSearchBar = ({ viewport, setViewport }) => {
+const MapSearchBar = ({ viewport, setViewport, handleLoad }) => {
   const [numGuests, setNumGuests] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -62,12 +62,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
 
   };
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const newViewport = await getCoordinates(value);
     console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
+    handleLoad();
   };
+
 
   async function getCoordinates(address) {
     try {
