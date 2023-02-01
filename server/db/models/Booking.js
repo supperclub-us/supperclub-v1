@@ -70,6 +70,10 @@ const Booking = db.define("booking", {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  suggestedDonation: {
+    type: Sequelize.FLOAT,
+   
+  },
   startDateTime: {
     type: Sequelize.TEXT,
     allowNull: false,

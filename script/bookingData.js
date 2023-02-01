@@ -5,6 +5,7 @@ const bookingData = [
   {
     title: "Delicious Mexican cuisine!",
     menu: "A nice blend of - maduros and delicious brazilian steak!",
+    suggestedDonation: 75,
     startDateTime: "1/1/2023 5:30PM",
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
@@ -21,6 +22,7 @@ const bookingData = [
   {
     title: "Great East Asian Cuisine!",
     menu: "A nice blend of xyz",
+    suggestedDonation: 60,
     startDateTime: "1/1/2023 5:30PM",
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
@@ -37,6 +39,7 @@ const bookingData = [
   {
     title: "Best Tacos in the Salt Lake City Area",
     menu: "It comes with Peanut Butter",
+    suggestedDonation: 50,
     startDateTime: "1/1/2023 5:30PM",
     endDateTime: "1/1/2023 7:30PM",
     maxSeats: 5,
@@ -55,6 +58,7 @@ const bookingData = [
   {
     title: "Learn how to make Pasta",
     menu: "Your own labor and love",
+    suggestedDonation: 85,
     startDateTime: "2/14/2023 5:30PM",
     endDateTime: "2/14/2023 7:30PM",
     maxSeats: 10,
@@ -71,6 +75,7 @@ const bookingData = [
   {
     title: "Fresh Bread and Charcuterie ",
     menu: "Nothing like the smell of fresh baked bread to go with your wine and meats",
+    suggestedDonation: 85,
     startDateTime: "2/14/2023 5:30PM",
     endDateTime: "2/14/2023 7:30PM",
     maxSeats: 12,
@@ -87,6 +92,7 @@ const bookingData = [
   {
     title: "Masala for All",
     menu: "Welcome to the real Flavor Town",
+    suggestedDonation: 90,
     startDateTime: "2/04/2023 5:30PM",
     endDateTime: "2/04/2023 7:30PM",
     maxSeats: 16,
@@ -103,6 +109,7 @@ const bookingData = [
   {
     title: "N'hau - Vietnamese Dishes paired with Drinking (BYOB)",
     menu: "Street food styles to pair with your drinks, the Vietnamese Way",
+    suggestedDonation: 70,
     startDateTime: "2/09/2023 8:30PM",
     endDateTime: "2/09/2023 11:30PM",
     maxSeats: 20,
@@ -119,6 +126,7 @@ const bookingData = [
   {
     title: "Filipino Tailgating - Ihawan",
     menu: "Football and Family Filipino Barbeque - Street Style",
+    suggestedDonation: 85,
     startDateTime: "3/20/2023 12:00PM",
     endDateTime: "3/20/2023 9:30PM",
     maxSeats: 30,
@@ -137,6 +145,7 @@ const bookingData = [
   {
     title: "Taste of Italy",
     menu: "Best Italian You Ever Had",
+    suggestedDonation: 95,
     startDateTime: "1/30/2023 7:00PM",
     endDateTime: "1/30/2023 9:00PM",
     maxSeats: 7,
@@ -153,6 +162,7 @@ const bookingData = [
   {
     title: "Something Thai",
     menu: "The Best At BangKok",
+    suggestedDonation: 65,
     startDateTime: "1/31/2023 8:00PM",
     endDateTime: "1/31/2023 10:00PM",
     maxSeats: 10,
@@ -169,6 +179,7 @@ const bookingData = [
   {
     title: "Chinese Delight",
     menu: "A Northern Taste of China",
+    suggestedDonation: 55,
     startDateTime: "2/2/2023 5:00PM",
     endDateTime: "2/2/2023 7:00PM",
     maxSeats: 7,
@@ -185,6 +196,7 @@ const bookingData = [
   {
     title: "The Only Nigerian Menu",
     menu: "Super Yummy Nigerian Cuisine ",
+    suggestedDonation: 70,
     startDateTime: "2/4/2023 4:00PM",
     endDateTime: "2/4/2023 6:00PM",
     maxSeats: 6,
@@ -201,6 +213,7 @@ const bookingData = [
   {
     title: "The French Kiss",
     menu: "A Night of Delicious French Cuisine",
+    suggestedDonation: 80,
     startDateTime: "2/8/2023 6:00PM",
     endDateTime: "2/8/2023 8:00PM",
     maxSeats: 8,
@@ -217,6 +230,7 @@ const bookingData = [
   {
     title: "Okinawa Akino",
     menu: "The Freshest Sushi In Homewood",
+    suggestedDonation: 90,
     startDateTime: "2/9/2023 7:00PM",
     endDateTime: "2/9/2023 9:00PM",
     maxSeats: 8,
@@ -249,6 +263,7 @@ const bookingData = [
   {
     title: "New India",
     menu: "Super Flavorful Indian Cuisine ",
+    suggestedDonation: 65,
     startDateTime: "2/12/2023 7:00PM",
     endDateTime: "2/12/2023 9:00PM",
     maxSeats: 7,
@@ -282,6 +297,7 @@ const bookingData = [
   {
     title: "Hong Kong Taste",
     menu: "The Best Cantonese Food ",
+    suggestedDonation: 50,
     startDateTime: "2/16/2023 4:00PM",
     endDateTime: "2/16/2023 6:00PM",
     maxSeats: 9,
@@ -298,6 +314,7 @@ const bookingData = [
   {
     title: "Rachael Ray Yay!",
     menu: "Russian borsht and tea",
+    suggestedDonation: 75,
     startDateTime: "3/2/2023 7:30PM",
     endDateTime: "3/2/2023 10:30PM",
     maxSeats: 12,
@@ -314,6 +331,7 @@ const bookingData = [
   {
     title: "Grubbin' with Guy",
     menu: "Good ol' fashioned American goodness! ",
+    suggestedDonation: 65,
     startDateTime: "2/10/2023 7:00PM",
     endDateTime: "2/10/2023 11:00PM",
     maxSeats: 10,
@@ -330,6 +348,7 @@ const bookingData = [
   {
     title: "Gordon's Eats",
     menu: "Spicy Korean for any occasion ",
+    suggestedDonation: 85,
     startDateTime: "2/16/2023 6:45PM",
     endDateTime: "2/16/2023 9:45PM",
     maxSeats: 15,
@@ -346,6 +365,7 @@ const bookingData = [
   {
     title: "Emeril and Friends",
     menu: "French at its finest",
+    suggestedDonation: 65,
     startDateTime: "2/13/2023 6:30PM",
     endDateTime: "2/13/2023 9:30PM",
     maxSeats: 8,
@@ -363,6 +383,7 @@ const bookingData = [
   {
     title: "Martha Stewart Cooks",
     menu: "German awesomeness ",
+    suggestedDonation: 115,
     startDateTime: "3/7/2023 5:00PM",
     endDateTime: "3/7/2023 8:00PM",
     maxSeats: 7,
