@@ -5,6 +5,7 @@ import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Link } from "react-router-dom";
 import { Button, LinearProgress } from "@mui/material";
 import { PageNotFound } from "../index";
+import "./profile.css";
 
 const ChefProfile = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const ChefProfile = () => {
   }
 
   if (isLoading) {
-    return <LinearProgress/>;
+    return <LinearProgress />;
   }
 
   // if (!currentChef) {
@@ -38,7 +39,7 @@ const ChefProfile = () => {
 
   return (
     <>
-      <div>
+      <div className="links">
         <h1>
           Welcome
           {currentChef.role === "CHEF"
@@ -47,19 +48,21 @@ const ChefProfile = () => {
         </h1>
         <h3> Your Dashboard</h3>
         <hr />
-        <div>
-          <h3>YOUR EVENTS</h3>
+        <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create an Event</Button>
+        <h3>YOUR EVENTS</h3>
+        <div className="profileContainer">
+
           {currentChef && currentChef.chefBooking?.length
             ? currentChef.chefBooking.map((booking) => (
-                <div key={booking.id}>
-                  <h5>{booking.title}</h5>
-                  <p>{booking.menu}</p>
-                </div>
-              ))
+              <div key={booking.id} className="cards">
+                <h5>{booking.title}</h5>
+                <p>{booking.menu}</p>
+              </div>
+            ))
             : "No Events"}
         </div>
 
-        <Link to={`/chefs/${currentChef.id}/event`}> Create an Event</Link>
+
       </div>
     </>
   );
