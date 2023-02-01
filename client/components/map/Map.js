@@ -17,6 +17,21 @@ const Map = () => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
 
+  const [bounds, setBounds] = useState({
+    latitude: [
+      -42.1,
+      -43.26,
+    ],
+    longitude: [
+      72.01,
+      72.5,
+    ],
+  });
+
+  console.log("CURRENT BOUNDS -------------->>>");
+  console.log("CURRENT BOUNDS -------------->>>", bounds);
+  console.log("CURRENT BOUNDS -------------->>>");
+
   const reduxViewport = useSelector((state) => state.viewport);
   console.log("REDUX VIEWPORT", reduxViewport);
 
@@ -31,9 +46,25 @@ const Map = () => {
     dispatch(fetchChefsBookingsAsync());
   }, [dispatch, viewport]);
 
-  // useEffect(() => {
-  //   console.log("SUP")
-  // }, [reduxViewport]);
+  const handleMoveMap = (e) => {
+    setViewport({
+      ...viewport,
+      latitude: e.viewState.latitude,
+      longitude: e.viewState.longitude,
+      zoom: e.viewState.zoom,
+    });
+    setBounds({
+      latitude: [
+        e.target.getBounds().getSouth(),
+        e.target.getBounds().getNorth(),
+      ],
+      longitude: [
+        e.target.getBounds().getWest(),
+        e.target.getBounds().getEast(),
+      ],
+    });
+  };
+
 
   return (
     // setting up the mapbox container
@@ -41,27 +72,16 @@ const Map = () => {
       <MapSearchBar viewport={viewport} setViewport={setViewport} />
 
       <div className="map-container">
-        <SidebarList />
+        <SidebarList bounds={bounds} />
 
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}
           <ReactMapGL
-            {...viewport }
+            {...viewport}
             mapStyle={MapBoxStyle}
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
-            onMove={(e) => {
-              console.log("ON MOVE: ", e.viewState)
-              setViewport({
-                ...viewport,
-                latitude: e.viewState.latitude,
-                longitude: e.viewState.longitude,
-                zoom: e.viewState.zoom
-              });
-              // setViewport({...viewport, latitude: e.viewState.latitude, longitude: e.viewState.longitude});
-              console.log("MAP VIEWPORT", viewport);
-              // console.log("E.VIEWSTATE.LATITUDE --->", e.viewState.latitude)
-            }}
+            onMove={handleMoveMap}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
