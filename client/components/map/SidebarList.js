@@ -6,13 +6,21 @@ import {
 } from "../slices/chefsBookingsSlice";
 import "./map.css";
 
-const SidebarList = () => {
-  // const bookings = useSelector((state) => state.chefsBookings);
+const SidebarList = ({ bounds }) => {
 
   const dispatch = useDispatch;
   const bookings = useSelector(selectChefsBookings);
 
+  const filteredBookings = bookings.filter((booking) => {
+    return (
+      booking.latitude >= bounds.latitude[0] &&
+      booking.latitude <= bounds.latitude[1] &&
+      booking.longitude >= bounds.longitude[0] &&
+      booking.longitude <= bounds.longitude[1]
+    );
+  });
   console.log("BOOKINGS --->", bookings);
+  console.log("filteredBookings", filteredBookings)
 
   useEffect(() => {
     // dispatch(fetchChefsBookingsAsync());
@@ -20,8 +28,8 @@ const SidebarList = () => {
 
   return (
     <div className="map-sidebar-container">
-      {bookings && bookings.length ? (
-        bookings.map((booking) => {
+      {filteredBookings && filteredBookings.length ? (
+        filteredBookings.map((booking) => {
           return (
             <div key={booking.id} className="map-booking-container">
               <p>{booking.title}</p>
