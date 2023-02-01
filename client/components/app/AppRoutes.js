@@ -11,6 +11,7 @@ import {
   ChefProfile,
   MemberProfile,
   PageNotFound,
+  MemberBooking,
 } from "../index";
 import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
@@ -40,18 +41,19 @@ const AppRoutes = () => {
       <Route path="/map" element={<Map />} />
       <Route path="/chefs" element={<Chefs />} />
       <Route path="/cuisines" element={<Cuisines />} />
+      <Route path="/bookings/:bookingId" element={<MemberBooking />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/users/chefprofile/:id" element={<ChefProfile user={user}/>} />
+        <Route path="/users/chefprofile/:id" element={<ChefProfile user={user} />} />
         {user.role === "CHEF" && (
           <Route path="/chefs/:chefId/event" element={<ChefForm />} />
         )}
         {user.role === "MEMBER" && (
-          <Route path="/users/memberprofile/:id" element={<MemberProfile user={user}/>} />
+          <Route path="/users/memberprofile/:id" element={<MemberProfile user={user} />} />
         )}
       </Route>
-        
-     
-      
+
+
+
       {/* {isLoggedIn && user.role === "CHEF" ? (
         <Route path="/chefs/:chefId/event" element={<ChefForm />} />
       ) : null}

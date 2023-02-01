@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   fetchChefsBookingsAsync,
   selectChefsBookings,
@@ -8,7 +9,7 @@ import "./map.css";
 
 const SidebarList = ({ bounds }) => {
 
-  const dispatch = useDispatch;
+  const navigate = useNavigate();
   const bookings = useSelector(selectChefsBookings);
 
   const filteredBookings = bookings.filter((booking) => {
@@ -26,12 +27,16 @@ const SidebarList = ({ bounds }) => {
     // dispatch(fetchChefsBookingsAsync());
   }, []);
 
+  const handleClick = (bookingId) => {
+    navigate(`/bookings/${bookingId}`)
+  }
+
   return (
     <div className="map-sidebar-container">
       {filteredBookings && filteredBookings.length ? (
         filteredBookings.map((booking) => {
           return (
-            <div key={booking.id} className="map-booking-container">
+            <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)}>
               <p>{booking.title}</p>
               {/* <p>{booking.menu}</p>
                   <p>
