@@ -13,6 +13,8 @@ import "./map.css";
 import { MapSearchBar, SidebarList } from "../index";
 import { setReduxViewport } from "../slices/viewportSlice";
 import mapboxgl from '!mapbox-gl';
+import { useNavigate } from "react-router-dom";
+
 
 const Map = () => {
   // states for the selected markers and their popups
@@ -44,6 +46,7 @@ const Map = () => {
   // selecting all bookings that have been created
   const bookings = useSelector((state) => state.chefsBookings);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // useEffect to run bookings
   useEffect(() => {
@@ -89,6 +92,10 @@ const Map = () => {
       ],
     });
   };
+
+  const handleClick = (markerId) => {
+    navigate(`/bookings/${markerId}`)
+  }
 
   return (
     // setting up the mapbox container
@@ -149,7 +156,7 @@ const Map = () => {
                 closeOnClick={false}
                 onClose={() => setSelectedMarker(null)}
               >
-                <div className="map-marker-popup">
+                <div className="map-marker-popup" onClick={() => handleClick(selectedMarker.id)} >
                   <h3>{selectedMarker.title}</h3>
                   <p>{selectedMarker.menu}</p>
                   <p>
