@@ -4,6 +4,7 @@ import ReactMapGL, {
   NavigationControl,
   Marker,
   Popup,
+  getBounds
 } from "react-map-gl";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
@@ -35,6 +36,8 @@ const Map = () => {
   //   console.log("SUP")
   // }, [reduxViewport]);
 
+
+
   return (
     // setting up the mapbox container
     <div className="map-page-container">
@@ -46,7 +49,7 @@ const Map = () => {
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}
           <ReactMapGL
-            {...viewport }
+            {...viewport}
             mapStyle={MapBoxStyle}
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
@@ -60,6 +63,8 @@ const Map = () => {
               });
               // setViewport({...viewport, latitude: e.viewState.latitude, longitude: e.viewState.longitude});
               console.log("MAP VIEWPORT", viewport);
+              const bounds = mapView.getMapboxMap().coordinateBoundsForCamera();
+              console.log("BOUNDS", bounds)
               // console.log("E.VIEWSTATE.LATITUDE --->", e.viewState.latitude)
             }}
           >
