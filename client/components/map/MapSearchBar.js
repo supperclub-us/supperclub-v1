@@ -77,14 +77,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 10 })
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        // zoom: 10
+        zoom: 13
       }
     } catch (err) {
       console.log(err);
