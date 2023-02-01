@@ -61,6 +61,7 @@ const Map = () => {
       longitude: e.viewState.longitude,
       zoom: e.viewState.zoom,
     });
+    console.log("GET BOUNDS ON MOVE--->", e.target.getBounds());
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -74,8 +75,9 @@ const Map = () => {
   };
 
   const handleLoad = (e) => {
-    console.log("LOADY E", e.target.getBounds().getSouth());
-    console.log("LOADY E", e.target.getBounds().getNorth());
+    console.log("HANDLE LOAD ------------------>");
+    console.log("HANDLE LOAD ------------------>", e.target);
+    console.log("<------------------HANDLE LOAD");
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -86,9 +88,7 @@ const Map = () => {
         e.target.getBounds().getEast(),
       ],
     });
-  }
-
-
+  };
 
   return (
     // setting up the mapbox container
@@ -107,7 +107,6 @@ const Map = () => {
             // this let's us be able to move the map
             onMove={handleMoveMap}
             onRender={handleLoad}
-          // bounds={console.log("BOUNDY BOUNDS", options.bounds)}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
