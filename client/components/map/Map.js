@@ -16,16 +16,9 @@ import { setReduxViewport } from "../slices/viewportSlice";
 const Map = () => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
-
   const [bounds, setBounds] = useState({
-    latitude: [
-      -42.1,
-      -43.26,
-    ],
-    longitude: [
-      72.01,
-      72.5,
-    ],
+    latitude: [-42, -43],
+    longitude: [72, 73]
   });
 
   console.log("CURRENT BOUNDS -------------->>>");
@@ -53,6 +46,7 @@ const Map = () => {
       longitude: e.viewState.longitude,
       zoom: e.viewState.zoom,
     });
+    console.log("GET BOUNDS ON MOVE--->", e.target.getBounds());
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -65,6 +59,21 @@ const Map = () => {
     });
   };
 
+  const handleLoad = (e) => {
+    console.log("HANDLE LOAD ------------------>");
+    console.log("HANDLE LOAD ------------------>", e.target);
+    console.log("<------------------HANDLE LOAD");
+    setBounds({
+      latitude: [
+        e.target.getBounds().getSouth(),
+        e.target.getBounds().getNorth(),
+      ],
+      longitude: [
+        e.target.getBounds().getWest(),
+        e.target.getBounds().getEast(),
+      ],
+    });
+  };
 
   return (
     // setting up the mapbox container
@@ -82,6 +91,7 @@ const Map = () => {
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
             onMove={handleMoveMap}
+            onRender={handleLoad}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
