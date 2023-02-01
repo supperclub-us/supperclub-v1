@@ -11,7 +11,7 @@ import { Home } from "../index"
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const states = [
   "AL",
@@ -89,6 +89,7 @@ const ChefForm = () => {
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [zip, setZip] = useState();
+  const [cuisine, setCuisine] = useState();
 
   const { chefId } = useParams();
   console.log("CHEF -----------> ", chefId);
@@ -182,6 +183,64 @@ const ChefForm = () => {
                 name="title"
               />
             </div>
+
+            <div className="chefForm-container">
+              <div className="chefEvent-form-address">
+                <TextField
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Address 1"
+                  name="address1"
+                />
+              </div>
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="Address 2 (optional)"
+                name="address2"
+              />
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="City"
+                name="city"
+              />
+              <select name="state" onChange={handleChange}>
+                <option disabled>--Select State--</option>
+                {states.map((state) => (
+                  <option key={state} name="state">
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="Zip code"
+                name="zip code"
+              />
+            </div>
+
+            <div className="chefForm-cuisines-category-container">
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
+                    <Select
+                      onChange={(e)=> setCuisine(e.target.value)}
+                      value={cuisine}
+                      label="cuisine"
+                    >
+                      <MenuItem value="Chinese">Chinese</MenuItem>
+                      <MenuItem value="Japanese">Japanese</MenuItem>
+                      <MenuItem value="Indian">Indian</MenuItem>
+                      <MenuItem value="French">French</MenuItem>
+                      <MenuItem value="Thai">Thai</MenuItem>
+                      <MenuItem value="Mexican">Mexican</MenuItem>
+                      <MenuItem value="Brazilian">Brazilian</MenuItem>
+                      <MenuItem value="Italian">Italian</MenuItem>
+                    </Select>
+                  </FormControl>
+            </div>
+
             <div className="chefEvent-form-divs">
               <label> Menu and Description </label>
               <textarea
@@ -247,42 +306,7 @@ const ChefForm = () => {
                 max="100"
               />
             </div>
-            <div>
-              <div className="chefEvent-form-address">
-                <TextField
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="Address 1"
-                  name="address1"
-                />
-              </div>
-              <TextField
-                onChange={handleChange}
-                type="text"
-                placeholder="Address 2 (optional)"
-                name="address2"
-              />
-              <TextField
-                onChange={handleChange}
-                type="text"
-                placeholder="City"
-                name="city"
-              />
-              <select name="state" onChange={handleChange}>
-                <option disabled>--Select State--</option>
-                {states.map((state) => (
-                  <option key={state} name="state">
-                    {state}
-                  </option>
-                ))}
-              </select>
-              <TextField
-                onChange={handleChange}
-                type="text"
-                placeholder="Zip code"
-                name="zip code"
-              />
-            </div>
+
 
             <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
           </form>
