@@ -20,28 +20,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
   const [endDate, setEndDate] = useState(null);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  // const [latitude, setLatitude] = useState(null);
-  // const [longitude, setLongitude] = useState(null);
-
-  // const reduxViewport = useSelector((state) => state.viewport);
-
-  // const [viewport, setViewport] = useState(
-  //   reduxViewport
-  // );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // console.log("RELOAD")
-    // console.log("SEARCH VALUE", value)
-    // console.log("SEARCH BAR VIEWPORT", viewport);
     dispatch(setReduxViewport(viewport));
   }, [value, viewport, dispatch])
 
-  // useEffect(() => {
-  //   navigate('/map');
-  // }, [setLatitude])
 
   // FIX THIS
   const handleGuests = (e) => {
@@ -55,7 +41,6 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features)
-      console.log("RESULTS ---->", results)
     } catch (error) {
       console.log("Error fetching data, ", error)
     }
@@ -65,7 +50,6 @@ const MapSearchBar = ({ viewport, setViewport }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newViewport = await getCoordinates(value);
-    console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
   };
 
@@ -92,9 +76,6 @@ const MapSearchBar = ({ viewport, setViewport }) => {
     }
   };
 
-  // const setCenter = () => {
-  //   setViewport({ latitude: lat, longitude: lng})
-  // }
 
   return (
     // will switch box to formControl

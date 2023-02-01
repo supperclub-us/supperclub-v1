@@ -32,14 +32,8 @@ const Map = () => {
       ],
     }
   );
-  console.log("BOUNDY BOUNDS", bounds)
-
-  console.log("CURRENT BOUNDS -------------->>>");
-  console.log("CURRENT BOUNDS -------------->>>", bounds);
-  console.log("CURRENT BOUNDS -------------->>>");
 
   const reduxViewport = useSelector((state) => state.viewport);
-  console.log("REDUX VIEWPORT", reduxViewport);
 
   const [viewport, setViewport] = useState(reduxViewport);
 
@@ -55,8 +49,6 @@ const Map = () => {
 
 
   const handleMoveMap = (e) => {
-    console.log("MOVEY E", e.target.getBounds().getSouth());
-    console.log("MOVEY E", e.target.getBounds().getNorth());
 
     setViewport({
       ...viewport,
@@ -64,7 +56,7 @@ const Map = () => {
       longitude: e.viewState.longitude,
       zoom: e.viewState.zoom,
     });
-    console.log("GET BOUNDS ON MOVE--->", e.target.getBounds());
+
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -78,9 +70,7 @@ const Map = () => {
   };
 
   const handleLoad = (e) => {
-    console.log("HANDLE LOAD ------------------>");
-    console.log("HANDLE LOAD ------------------>", e.target);
-    console.log("<------------------HANDLE LOAD");
+
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -103,7 +93,7 @@ const Map = () => {
       <MapSearchBar viewport={viewport} setViewport={setViewport} />
 
       <div className="map-container">
-        <SidebarList bounds={bounds} />
+        <SidebarList bounds={bounds} selectedMarker={selectedMarker} />
 
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}

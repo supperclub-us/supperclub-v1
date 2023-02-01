@@ -26,7 +26,6 @@ const chefsBookingsSlice = createSlice({
 });
 
 export const selectChefsBookings = (state) => {
-  console.log(state);
   return state.chefsBookings;
 };
 

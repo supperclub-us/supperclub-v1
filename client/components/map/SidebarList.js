@@ -7,7 +7,7 @@ import {
 } from "../slices/chefsBookingsSlice";
 import "./map.css";
 
-const SidebarList = ({ bounds }) => {
+const SidebarList = ({ bounds, selectedMarker }) => {
 
   const navigate = useNavigate();
   const bookings = useSelector(selectChefsBookings);
@@ -20,8 +20,6 @@ const SidebarList = ({ bounds }) => {
       booking.longitude <= bounds.longitude[1]
     );
   });
-  console.log("BOOKINGS --->", bookings);
-  console.log("filteredBookings", filteredBookings)
 
   useEffect(() => {
     // dispatch(fetchChefsBookingsAsync());
@@ -36,7 +34,7 @@ const SidebarList = ({ bounds }) => {
       {filteredBookings && filteredBookings.length ? (
         filteredBookings.map((booking) => {
           return (
-            <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)}>
+            <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)} style={selectedMarker && selectedMarker.id === booking.id ? {background: "green"} : {background: "#f2f2f2"}}>
               <p>{booking.title}</p>
               {/* <p>{booking.menu}</p>
                   <p>
