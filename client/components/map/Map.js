@@ -48,7 +48,7 @@ const Map = () => {
   // useEffect to run bookings
   useEffect(() => {
     dispatch(fetchChefsBookingsAsync());
-  }, [dispatch, viewport]);
+  }, [dispatch, viewport, handleLoad]);
 
 
   const handleMoveMap = (e) => {
@@ -93,7 +93,7 @@ const Map = () => {
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <MapSearchBar viewport={viewport} setViewport={setViewport} setBounds={setBounds} handleLoad={(e) => handleLoad(e)} />
+      <MapSearchBar viewport={viewport} setViewport={setViewport} />
 
       <div className="map-container">
         <SidebarList bounds={bounds} />
@@ -106,7 +106,7 @@ const Map = () => {
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
             onMove={handleMoveMap}
-            onLoad={handleLoad}
+            onRender={handleLoad}
           // bounds={console.log("BOUNDY BOUNDS", options.bounds)}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
