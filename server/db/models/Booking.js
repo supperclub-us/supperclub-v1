@@ -71,9 +71,8 @@ const Booking = db.define("booking", {
     allowNull: false,
   },
   suggestedDonation: {
-    type: Sequelize.FLOAT,
-   
-  },
+    type: Sequelize.DOUBLE,
+   },
   startDateTime: {
     type: Sequelize.TEXT,
     allowNull: false,

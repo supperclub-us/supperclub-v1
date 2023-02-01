@@ -247,6 +247,7 @@ const bookingData = [
   {
     title: "Meat Brazil",
     menu: "The Freshest Cuts of Meat to Your Table",
+    suggestedDonation: 50,
     startDateTime: "2/10/2023 5:00PM",
     endDateTime: "2/10/2023 7:00PM",
     maxSeats: 10,
@@ -280,6 +281,7 @@ const bookingData = [
   {
     title: "Tijuana's Favorite",
     menu: "Try Our Homemade Caeser Salad ",
+    suggestedDonation: 50,
     startDateTime: "2/14/2023 8:00PM",
     endDateTime: "2/14/2023 10:00PM",
     maxSeats: 8,

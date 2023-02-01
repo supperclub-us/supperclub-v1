@@ -105,7 +105,8 @@ const ChefForm = () => {
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    console.log("handleSubmit clicked!")
+    // e.preventDefault();
     try {
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
@@ -149,7 +150,7 @@ const ChefForm = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log("LINE 145-------------------->", { name, value });
+    console.log("LINE 152-------------------->", { name, value });
     if (name === "title") setTitle(value);
     if (name === "menu") setMenu(value);
     if (name === "suggested donation") setSuggestedDonation(value);
@@ -203,7 +204,7 @@ const ChefForm = () => {
               onChange={handleChange}
               type="text"
               placeholder="Suggested donation per seat"
-              name="donation"
+              name="suggested donation"
               />
             </div>
             <div className="chefEvent-form-divs">
@@ -283,7 +284,7 @@ const ChefForm = () => {
               />
             </div>
 
-            <Button variant="contained"> Add Event </Button>
+            <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
           </form>
         </div>
       )}
