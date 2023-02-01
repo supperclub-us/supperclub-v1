@@ -23,7 +23,7 @@ const MapSearchBar = ({ viewport, setViewport }) => {
   // const [latitude, setLatitude] = useState(null);
   // const [longitude, setLongitude] = useState(null);
 
-  const reduxViewport = useSelector((state) => state.viewport);
+  // const reduxViewport = useSelector((state) => state.viewport);
 
   // const [viewport, setViewport] = useState(
   //   reduxViewport
@@ -84,7 +84,7 @@ const MapSearchBar = ({ viewport, setViewport }) => {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 10
+        // zoom: 10
       }
     } catch (err) {
       console.log(err);

@@ -32,13 +32,13 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("RELOAD")
-    console.log("SEARCH VALUE", value)
-    console.log("SEARCH BAR VIEWPORT", viewport);
-    dispatch(setReduxViewport(viewport));
-    // navigate('/map');
-  }, [value, viewport, dispatch])
+  // useEffect(() => {
+  //   // console.log("RELOAD")
+  //   // console.log("SEARCH VALUE", value)
+  //   // console.log("SEARCH BAR VIEWPORT", viewport);
+  //   dispatch(setReduxViewport(viewport));
+  //   // navigate('/map');
+  // }, [value, viewport, dispatch])
 
   // useEffect(() => {
   //   navigate('/map');
@@ -85,7 +85,7 @@ const SearchBar = () => {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 10
+        // zoom: 10
       }
     } catch (err) {
       console.log(err);
