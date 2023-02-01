@@ -1,0 +1,28 @@
+.profileContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1rem;
+	text-align: center;
+	
+}
+
+.cards {
+	border: 2px grey solid;
+	border-radius: 30px;
+	width: 292.66px;
+	height: 380px;
+	margin: 10px;
+	padding: 10px;
+}
+
+h3 {
+    text-align: center;
+}
+
+.links {
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+}

@@ -11,8 +11,7 @@ import { Home } from "../index"
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Link, OutlinedInput, InputAdornment } from "@mui/material";
-import { Box } from "@mui/system";
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const states = [
   "AL",
@@ -95,9 +94,6 @@ const ChefForm = () => {
   const { chefId } = useParams();
   console.log("CHEF -----------> ", chefId);
 
-  // the different states from the selectSingleChef State
-  const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-
   const dispatch = useDispatch();
 
   useSelector(selectSingleChefBookings);
@@ -178,7 +174,7 @@ const ChefForm = () => {
         <div className="chefEvent-container">
           <form onSubmit={handleSubmit} className="chefEvent-form">
 
-            <Box className="chefForm-title-of-event">
+            <div className="chefForm-title-of-event">
               <TextField
                 onChange={handleChange}
                 type="text"
@@ -186,63 +182,134 @@ const ChefForm = () => {
                 name="title"
                 fullWidth
               />
-            </Box>
+            </div>
 
-            <Box className="chefEvent-cuisineCategory">
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
-                <Select
-                  onChange={(e)=> setCuisine(e.target.value)}
-                  value={cuisine}
-                  label="cuisine"
-                >
-                  <MenuItem value="Chinese">Chinese</MenuItem>
-                  <MenuItem value="Japanese">Japanese</MenuItem>
-                  <MenuItem value="Indian">Indian</MenuItem>
-                  <MenuItem value="French">French</MenuItem>
-                  <MenuItem value="Thai">Thai</MenuItem>
-                  <MenuItem value="Mexican">Mexican</MenuItem>
-                  <MenuItem value="Brazilian">Brazilian</MenuItem>
-                  <MenuItem value="Italian">Italian</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box 
-              className="chefForm-menu-and-description"
-              component="form"
-              sx={{
-                '& .MuiTextField-root': {width: '100%' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="outlined-multiline-static"
-                label="Menu"
-                multiline
-                rows={20}
-                // defaultValue="Type your menu here"
-                placeholder="Type your menu here"
-              />
-            </Box>
-
-            <Box className="chefForm-suggested-donation">
-              <FormControl fullWidth>
-                <InputLabel htmlFor="outlined-adornment-amount">Donation</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-amount"
-                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                  label="Donation"
-                  placeholder="Suggested donation per member to chef"
+            <div className="chefForm-container">
+              <div className="chefEvent-form-address">
+                <TextField
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Address 1"
+                  name="address1"
                 />
-              </FormControl>
-            </Box>
+              </div>
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="Address 2 (optional)"
+                name="address2"
+              />
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="City"
+                name="city"
+              />
+              <select name="state" onChange={handleChange}>
+                <option disabled>--Select State--</option>
+                {states.map((state) => (
+                  <option key={state} name="state">
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <TextField
+                onChange={handleChange}
+                type="text"
+                placeholder="Zip code"
+                name="zip code"
+              />
+            </div>
 
+            <div className="chefForm-cuisines-category-container">
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
+                    <Select
+                      onChange={(e)=> setCuisine(e.target.value)}
+                      value={cuisine}
+                      label="cuisine"
+                    >
+                      <MenuItem value="Chinese">Chinese</MenuItem>
+                      <MenuItem value="Japanese">Japanese</MenuItem>
+                      <MenuItem value="Indian">Indian</MenuItem>
+                      <MenuItem value="French">French</MenuItem>
+                      <MenuItem value="Thai">Thai</MenuItem>
+                      <MenuItem value="Mexican">Mexican</MenuItem>
+                      <MenuItem value="Brazilian">Brazilian</MenuItem>
+                      <MenuItem value="Italian">Italian</MenuItem>
+                    </Select>
+                  </FormControl>
+            </div>
+
+            <div className="chefEvent-form-divs">
+              <label> Menu and Description </label>
+              <textarea
+                onChange={handleChange}
+                type="text"
+                placeholder="Menu"
+                name="menu"
+                maxLength={1000}
+                style={{
+                  maxWidth: "100%",
+                  minHeight: "60px",
+                  maxHeight: "200px",
+                }}
+              />
+            </div>
             
-          </form>
-          <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="suggested donation">Suggested Donation</label>
+              <TextField
+              onChange={handleChange}
+              type="text"
+              placeholder="Suggested donation per seat"
+              name="suggested donation"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="start time">Select Event Date and Time</label>
+              <TextField
+                onChange={handleChange}
+                type="datetime-local"
+                placeholder="start date time"
+                name="start"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor="end time"> Select Event End</label>
+              <TextField
+                onChange={handleChange}
+                type="datetime-local"
+                placeholder="End date time"
+                name="end"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor=""> Max Number of Seats </label>
+              <TextField
+                onChange={handleChange}
+                type="number"
+                placeholder="Max seats"
+                name="max seats"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div className="chefEvent-form-divs">
+              <label htmlFor=""> Select Number of Open Seats </label>
+              <TextField
+                onChange={handleChange}
+                type="number"
+                placeholder="Open seats"
+                name="open seats"
+                min="0"
+                max="100"
+              />
+            </div>
 
+
+            <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
+          </form>
         </div>
       )}
     </>
@@ -250,15 +317,3 @@ const ChefForm = () => {
 };
 
 export default ChefForm;
-
-
-{/* <div className="chefForm-your-host">
-  <p>
-    Your Host: {<Link 
-                  underline="hover"
-                  href={`/chefs/`}
-                >
-                  {currentChef.role === "CHEF" ? `Chef ${currentChef.firstName} ${currentChef.lastName}` : null}
-                </Link>} 
-  </p>
-</div> */}

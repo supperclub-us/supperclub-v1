@@ -21,9 +21,9 @@ const SidebarList = ({ bounds, selectedMarker }) => {
     );
   });
 
-  useEffect(() => {
-    // dispatch(fetchChefsBookingsAsync());
-  }, []);
+  // useEffect(() => {
+  //   // dispatch(fetchChefsBookingsAsync());
+  // }, []);
 
   const handleClick = (bookingId) => {
     navigate(`/bookings/${bookingId}`)

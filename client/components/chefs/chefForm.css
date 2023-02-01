@@ -1,24 +1,56 @@
 .chefEvent-container {
-   
+
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+
 }
 
 .chefEvent-form {
-    border: 2px solid green;
+    /* border: 2px solid green; */
     display: flex;
     flex-direction: column;
     gap: .1em;
     min-width: 300px;
     width: 500px;
-    
+
 }
 
 .chefEvent-form-divs {
     display: flex;
     flex-direction: column;
+}
+
+.chefs-allCards-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.chefs-page-container {
+    display: flex;
+    
+}
+
+.chefs-card-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+}
+
+.chefs-card-bookingcards-container {
+    display: flex;
+
+}
+
+.chefs-card-bookingcard {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 1em;
+    margin: 0 .5em;
 }
