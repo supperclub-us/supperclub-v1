@@ -5,6 +5,9 @@ import chefsBookingsReducer from '../components/slices/chefsBookingsSlice'
 import singleChefReducer from '../components/slices/singleChefSlice'
 import singleChefBookingsReducer from '../components/slices/singleChefBookingsSlice';
 import viewportReducer from '../components/slices/viewportSlice'
+import singleMemberReducer from '../components/slices/singleMemberSlice'
+import singleBookingReducer from '../components/slices/singleBookingSlice'
+
 
 const store = configureStore({
   reducer: {
@@ -12,7 +15,9 @@ const store = configureStore({
     chefsBookings: chefsBookingsReducer,
     singleChef: singleChefReducer,
     singleChefBookings: singleChefBookingsReducer,
-    viewport: viewportReducer
+    viewport: viewportReducer,
+    singleMember: singleMemberReducer,
+    singleBooking: singleBookingReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

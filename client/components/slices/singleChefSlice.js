@@ -1,11 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 export const fetchSingleChef = createAsyncThunk(
   "fetch/singleChef",
   async (id) => {
+    const token = localStorage.getItem("token")
     try {
-      const { data } = await axios.get(`/api/users/chefs/${id}`);
+      const { data } = await axios.get(`/api/users/chefs/${id}`, { headers: { authorization: token }});
+      console.log("data in slice",data)
       return data;
     } catch (err) {
       console.log(err);
@@ -14,14 +17,29 @@ export const fetchSingleChef = createAsyncThunk(
 );
 
 
+const initialState = {
+  currentChef: {},
+  isLoading: false,
+  error: null
+}
+
 const singleChefSlice = createSlice({
   name: "singleChef",
-  initialState: {},
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSingleChef.fulfilled, (state, action) => {
-      return action.payload;
+    builder.addCase(fetchSingleChef.pending, (state, action) => {
+      state.isLoading = true;
+      state.error = null
     });
+    builder.addCase(fetchSingleChef.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.currentChef = action.payload;
+    });
+    builder.addCase(fetchSingleChef.rejected, (state, action)=> {
+      state.isLoading = false;
+      state.error = action.error.message
+    })
   },
 });
 

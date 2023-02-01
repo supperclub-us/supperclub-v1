@@ -26,21 +26,17 @@ const Navbar = () => {
 
   const renderModalScreen = () => {
     if (modalScreen === "signup") {
-      return (
-        <SignUp handleOpen={handleOpen} />
-      );
+      return <SignUp handleOpen={handleOpen} />;
     }
 
     if (modalScreen === "login") {
-      return (
-        <Login handleOpen={handleOpen} />
-      );
+      return <Login handleOpen={handleOpen} />;
     }
     return <p>default</p>;
   };
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-
+  const user = useSelector((state) => state.auth.me);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -66,7 +62,9 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-left">
-        <h1> <Link to="/">SupperClub</Link></h1>
+        <h1>
+          <Link to="/">SupperClub</Link>
+        </h1>
       </div>
 
       <div className="navbar-right">
@@ -81,10 +79,21 @@ const Navbar = () => {
         </Link>
 
         {isLoggedIn ? (
-          <>
-            <Link className="navbar-link-spacing" to="/users/profile">
-              Profile{" "}
-            </Link>
+          <> 
+            {user.role === "CHEF" ? ( 
+              <Link
+              className="navbar-link-spacing"
+              to={`/users/chefprofile/${user.id}`}
+            >
+              Profile
+            </Link> ) : ( 
+              <Link
+              className="navbar-link-spacing"
+              to={`/users/memberprofile/${user.id}`}
+            >
+              Profile
+            </Link> )}
+            
             <Button type="button" onClick={logoutAndRedirectHome}>
               Log out
             </Button>

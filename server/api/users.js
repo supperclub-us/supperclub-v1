@@ -5,6 +5,20 @@ const {
 module.exports = router;
 
 
+const requireToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token){
+      return res.status(401).send("Access denied")
+    }
+    const user = await User.findByToken(token);
+    req.user = user;
+    next();
+  } catch(error) {
+    next(error);
+  }
+};
+
 // USERS GET /api/users
 router.get("/", async (req, res, next) => {
   try {
@@ -70,7 +84,7 @@ router.get("/members/:id", async (req, res, next) => {
 })
 
 // CHEFS GET /api/users/chefs/:id
-router.get("/chefs/:id", async (req, res, next) => {
+router.get("/chefs/:id", requireToken, async (req, res, next) => {
   try {
     const chef = await User.findByPk(req.params.id, {
       where: {

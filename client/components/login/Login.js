@@ -64,6 +64,7 @@ const SignIn = ({handleOpen}) => {
               </Button>
             </div>
 
+           
 
           </div>
         </div>
@@ -74,7 +75,7 @@ const SignIn = ({handleOpen}) => {
         </Snackbar>
 
       </form>
-      <p>Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
+      <p style={{fontSize: ".7rem"}}>Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
     </div>
   );
 }
