@@ -30,7 +30,9 @@ const AppRoutes = () => {
   useEffect(() => {
     dispatch(me());
   }, []);
-  console.log("HELLO!")
+
+  console.log("HELLO USER!", user)
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

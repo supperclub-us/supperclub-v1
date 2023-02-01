@@ -374,14 +374,6 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 } */
 
 
-.search-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
-  align-items: center;
-}
-
 .form-control > * {
   margin: 3em;
 }

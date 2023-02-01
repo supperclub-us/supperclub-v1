@@ -1,41 +1,59 @@
-.map-container {
-    display: flex;
-    flex: 1;
-    height: 90vh;
-    padding: 2em;
-    margin: 2em;
-    z-index: 1;
-}
-
 .map-pineapple-image {
-    width: 13px;
-    height: 20px
+  width: 13px;
+  height: 20px;
 }
 
 .map-marker-button {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .map-marker-popup {
-    background: transparent;
-    padding: 5px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
+  background: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.map-container {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+}
+.map-sidebar-container {
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: auto;
+  gap: 1rem;
+  border: 2px solid red;
+  padding: 1rem;
+}
+
+.map-map-container {
+  width: 100%;
 }
 
 .map-booking-container {
-    border: 1px solid black;
+  display: flex;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
-.map-sidebar-container {
-    display: flex;
-    flex: .5;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-
+.map-booking-container:hover {
+    background: #f2f2f2;
+    cursor: pointer;
 }
+

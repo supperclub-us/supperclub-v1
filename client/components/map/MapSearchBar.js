@@ -108,7 +108,6 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
       <Button onClick={handleSubmit}>Submit</Button>
-      <h1>Hello World!@</h1>
     </Box>
   );
 };

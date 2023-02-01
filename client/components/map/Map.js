@@ -41,10 +41,7 @@ const Map = () => {
       <MapSearchBar viewport={viewport} setViewport={setViewport} />
 
       <div className="map-container">
-
-        <div className="map-sidbar-container">
-          <SidebarList />
-        </div>
+        <SidebarList />
 
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}
