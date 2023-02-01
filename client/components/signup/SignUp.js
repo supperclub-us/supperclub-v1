@@ -167,9 +167,9 @@ const SignUp = ({handleOpen}) => {
           </Alert>
         </Snackbar>
       </form>
-      <p>
-        Have an account?
-        <Button onClick={() => handleOpen("login")}>Log In</Button>
+      <p style={{fontSize: ".7rem"}}>
+        Already have an account?
+        <Button onClick={() => handleOpen("login")}>Login</Button>
       </p>
     </div>
   );

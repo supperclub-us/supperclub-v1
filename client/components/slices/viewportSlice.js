@@ -11,11 +11,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const viewportSlice = createSlice({
   name: "viewport",
   initialState: {
-    width: "100%",
-    height: "100%",
+    width: "50%",
+    height: "50%",
+    float: "right",
     latitude: 42.251389,
     longitude: -71.002342,
-    zoom: 13
+    zoom: 14
   },
   reducers: {
     setReduxViewport(state, action) {

@@ -374,14 +374,6 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 } */
 
 
-.search-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
-  align-items: center;
-}
-
 .form-control > * {
   margin: 3em;
 }
@@ -396,10 +388,5 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 
 
 
-.map-container {
-  display: flex;
-  height: 90vh;
-  padding: 2em;
-  margin: 2em;
-}
+
 

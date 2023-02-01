@@ -6,38 +6,37 @@ import {
 } from "@mui/material";
 import MapboxAccessToken from "../../env";
 import axios from "axios";
-import "./searchBar.css"
-import Location from "./Location";
-import Guests from "./Guests";
-import StartEndDate from "./StartEndDate";
+import "../searchBar/searchBar.css"
+import Location from "../searchBar/Location";
+import Guests from "../searchBar/Guests";
+import StartEndDate from "../searchBar/StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
+const MapSearchBar = ({ viewport, setViewport }) => {
   const [numGuests, setNumGuests] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  // const [latitude, setLatitude] = useState(null);
+  // const [longitude, setLongitude] = useState(null);
 
   const reduxViewport = useSelector((state) => state.viewport);
 
-  const [viewport, setViewport] = useState(
-    reduxViewport
-  );
+  // const [viewport, setViewport] = useState(
+  //   reduxViewport
+  // );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("RELOAD")
-    console.log("SEARCH VALUE", value)
-    console.log("SEARCH BAR VIEWPORT", viewport);
+    // console.log("RELOAD")
+    // console.log("SEARCH VALUE", value)
+    // console.log("SEARCH BAR VIEWPORT", viewport);
     dispatch(setReduxViewport(viewport));
-    // navigate('/map');
   }, [value, viewport, dispatch])
 
   // useEffect(() => {
@@ -56,6 +55,7 @@ const SearchBar = () => {
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features)
+      console.log("RESULTS ---->", results)
     } catch (error) {
       console.log("Error fetching data, ", error)
     }
@@ -67,7 +67,6 @@ const SearchBar = () => {
     const newViewport = await getCoordinates(value);
     console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
-    navigate('/map');
   };
 
   async function getCoordinates(address) {
@@ -113,5 +112,5 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default MapSearchBar;
 
