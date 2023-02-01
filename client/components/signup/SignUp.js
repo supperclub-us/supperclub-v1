@@ -168,8 +168,8 @@ const SignUp = ({handleOpen}) => {
         </Snackbar>
       </form>
       <p>
-        Don't have an account?
-        <Button onClick={() => handleOpen("login")}>Sign Up</Button>
+        Have an account?
+        <Button onClick={() => handleOpen("login")}>Log In</Button>
       </p>
     </div>
   );
