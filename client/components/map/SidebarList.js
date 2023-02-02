@@ -12,12 +12,25 @@ const SidebarList = ({ bounds, selectedMarker }) => {
   const navigate = useNavigate();
   const bookings = useSelector(selectChefsBookings);
 
+  const reduxStartDate = useSelector((state) => state.startEndDate.startDate);
+  const reduxEndDate = useSelector((state) => state.startEndDate.endDate)
+
   const filteredBookings = bookings.filter((booking) => {
+    const bookingDateTime = booking.startDateTime.split(' ');
+    const bookingDate = bookingDateTime[0].split('/')
+    // console.log("BOOKING DATE", bookingDate)
+    const intBookingDate = bookingDate.map((element) => parseInt(element))
+    // console.log(" INTBOOKING DATE", intBookingDate)
+
     return (
       booking.latitude >= bounds.latitude[0] &&
       booking.latitude <= bounds.latitude[1] &&
       booking.longitude >= bounds.longitude[0] &&
-      booking.longitude <= bounds.longitude[1]
+      booking.longitude <= bounds.longitude[1] &&
+      reduxStartDate[0] <= intBookingDate[0] &&
+      reduxEndDate[0] >= intBookingDate[0] &&
+      reduxStartDate[1] <= intBookingDate[1] &&
+      reduxEndDate[1] >= intBookingDate[1]
     );
   });
 
@@ -34,7 +47,7 @@ const SidebarList = ({ bounds, selectedMarker }) => {
       {filteredBookings && filteredBookings.length ? (
         filteredBookings.map((booking) => {
           return (
-            <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)} style={selectedMarker && selectedMarker.id === booking.id ? {background: "green"} : {background: "#f2f2f2"}}>
+            <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)} style={selectedMarker && selectedMarker.id === booking.id ? { background: "green" } : { background: "#f2f2f2" }}>
               <p>{booking.title}</p>
               {/* <p>{booking.menu}</p>
                   <p>

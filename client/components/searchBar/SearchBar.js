@@ -32,10 +32,6 @@ const SearchBar = () => {
     reduxViewport
   );
 
-  // console.log("NUM GUESTS", numGuests)
-  // console.log("START DATE", startDate)
-  // console.log("END DATE", endDate)
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,11 +39,6 @@ const SearchBar = () => {
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
   };
-
-
-  // const newMonth = parseInt(newStartDate[0])
-  // const newDay = parseInt(newStartDate[1])
-  // const newYear = parseInt(newStartDate[2])
 
   const newStartDate = startDate.format('M DD YYYY').split(' ');
   const newEndDate = endDate.format('M DD YYYY').split(' ');
