@@ -87,14 +87,31 @@ const ChefForm = () => {
   console.log("title--->", title)
 
   const [menu, setMenu] = useState("");
-  const [cuisine, setCuisine] = useState("");
+  console.log("menu--->", menu)
+
+  const [cuisineId, setCuisineId] = useState("");
+  console.log("cuisineId--->", cuisineId)
+
   const [suggestedDonation, setSuggestedDonation] = useState(null); 
+  console.log("suggestedDonation--->", suggestedDonation)
+
   const [startValue, setStartValue] = useState(dayjs());
+  console.log("startValue--->", startValue)
+
   const [endValue, setEndValue] = useState(dayjs());
+  console.log("endValue--->", endValue)
+
   const [max, setMax] = useState(null);
+  console.log("max--->", max)
+
   const [openSeats, setOpenSeats] = useState("");
+  console.log("openSeats--->", openSeats)
+
   const [address1, setAddress1] = useState("");
+  console.log("address1--->", address1)
+
   const [address2, setAddress2] = useState("");
+  console.log("address2--->", address2)
 
   const [city, setCity] = useState("");
   console.log("city--->", city)
@@ -103,7 +120,7 @@ const ChefForm = () => {
   console.log("state--->", state)
 
   const [zip, setZip] = useState("");
-
+  console.log("zip--->", zip) 
 
   const { chefId } = useParams();
   // console.log("CHEF -----------> ", chefId);
@@ -143,7 +160,7 @@ const ChefForm = () => {
           addSingleChefBooking({
             id: userId,
             title,
-            cuisine,
+            cuisineId,
             menu,
             suggestedDonation,
             startValue,
@@ -165,25 +182,6 @@ const ChefForm = () => {
     }
   };
 
-  // handle change that will<TextField the useState values and use those values in the addSingleChefBooking action/extraReducers
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log("LINE 152-------------------->", { name, value });
-  //   if (name === "title") setTitle(value);
-  //   if (name === "menu") setMenu(value);
-  //   if (name === "suggested donation") setSuggestedDonation(value);
-  //   if (name === "start") setStartValue(value);
-  //   if (name === "end") setEndValue(value);
-  //   if (name === "max seats") setMax(value);
-  //   if (name === "open seats") setOpenSeats(value);
-  //   if (name === "address1") setAddress1(value);
-  //   if (name === "address2") setAddress2(value);
-  //   if (name === "city") setCity(value);
-  //   if (name === "state") setState(value);
-  //   if (name === "zip code") setZip(value);
-  // };
-
   return (
     <>
       {userId !== parseInt(chefId) ? (
@@ -203,12 +201,24 @@ const ChefForm = () => {
             </div>
 
             <div className="chefEvent-cuisineCategory">
-              <TextField 
-                placeholder="Cuisine"
-                onChange={(e) => setCuisine(e.target.value)}
-                type="text"
-                fullWidth
-              />
+              <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
+                    <Select
+                      onChange={(e)=> setCuisineId(Number(e.target.value))}
+                      value={cuisineId}
+                      label="cuisine"
+                    >
+                      <MenuItem value="1">Chinese</MenuItem>
+                      <MenuItem value="2">Japanese</MenuItem>
+                      <MenuItem value="3">Indian</MenuItem>
+                      <MenuItem value="4">French</MenuItem>
+                      <MenuItem value="5">Thai</MenuItem>
+                      <MenuItem value="6">Nigerian</MenuItem>
+                      <MenuItem value="7">Brazilian</MenuItem>
+                      <MenuItem value="8">Mexican</MenuItem>
+                      <MenuItem value="9">Italian</MenuItem>
+                    </Select>
+              </FormControl>
             </div>
 
             <Box 
@@ -325,7 +335,7 @@ const ChefForm = () => {
                     fullWidth
                   />
                 </div>
-                <div>
+                <div className="chefForm-state">
                   <FormControl fullWidth>
                     <InputLabel>State</InputLabel>
                     <Select
@@ -343,6 +353,14 @@ const ChefForm = () => {
                       ))}
                     </Select>
                   </FormControl>
+                </div>
+                <div className="chefForm-zipcode">
+                  <TextField
+                    onChange={(e) => setZip(e.target.value)}
+                    type="text"
+                    placeholder="Zip code"
+                    name="zip code"
+                  />  
                 </div>
               </div>
             </div>
