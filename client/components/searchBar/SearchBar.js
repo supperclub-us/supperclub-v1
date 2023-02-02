@@ -11,13 +11,16 @@ import Location from "./Location";
 import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
+import { setReduxStartDate, setReduxEndDate } from "../slices/startEndDateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+
 
 const SearchBar = () => {
-  const [numGuests, setNumGuests] = useState();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [numGuests, setNumGuests] = useState(0);
+  const [startDate, setStartDate] = React.useState(dayjs())
+  const [endDate, setEndDate] = React.useState(dayjs())
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [latitude, setLatitude] = useState(null);
@@ -32,22 +35,24 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   // console.log("RELOAD")
-  //   // console.log("SEARCH VALUE", value)
-  //   // console.log("SEARCH BAR VIEWPORT", viewport);
-  //   dispatch(setReduxViewport(viewport));
-  //   // navigate('/map');
-  // }, [value, viewport, dispatch])
-
-  // useEffect(() => {
-  //   navigate('/map');
-  // }, [setLatitude])
-
   // FIX THIS
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
   };
+
+  const newStartDate = startDate.format('M DD YYYY').split(' ');
+  const newEndDate = endDate.format('M DD YYYY').split(' ');
+
+
+  const newIntStartDate = newStartDate.map((element) => parseInt(element))
+  console.log("newIntStartDate", newIntStartDate)
+  const newIntEndDate = newEndDate.map((element) => parseInt(element))
+  console.log("newIntEndDate", newIntEndDate)
+
+
+  // const handleStartDate = () => {
+  //   console.log("START DATE", startDate)
+  // };
 
   const handleChange = async (event) => {
     setValue(event.target.value);
@@ -67,6 +72,8 @@ const SearchBar = () => {
     const newViewport = await getCoordinates(value);
     console.log("VIEWPORT", viewport)
     dispatch(setReduxViewport(newViewport));
+    dispatch(setReduxStartDate(newIntStartDate));
+    dispatch(setReduxEndDate(newIntEndDate));
     navigate('/map');
   };
 
