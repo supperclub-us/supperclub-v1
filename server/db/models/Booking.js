@@ -70,6 +70,10 @@ const Booking = db.define("booking", {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    
+  },
   suggestedDonation: {
     type: Sequelize.DOUBLE,
    },

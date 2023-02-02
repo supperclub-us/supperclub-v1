@@ -5,6 +5,7 @@ const bookingData = [
   {
     title: "Delicious Mexican cuisine!",
     menu: "A nice blend of - maduros and delicious brazilian steak!",
+    imageUrl: "https://i.postimg.cc/xCPHGHh5/mexican.jpg",
     suggestedDonation: 75,
     startDateTime: "1/1/2023 5:30PM",
     endDateTime: "1/1/2023 7:30PM",

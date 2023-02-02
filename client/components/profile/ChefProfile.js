@@ -13,6 +13,7 @@ const ChefProfile = () => {
 
   // the different states from the selectSingleChef State
   const { currentChef, isLoading, error } = useSelector(selectSingleChef);
+  console.log("DAVID", currentChef)
 
   const dispatch = useDispatch();
 
@@ -57,6 +58,7 @@ const ChefProfile = () => {
               <div key={booking.id} className="cards">
                 <h5>{booking.title}</h5>
                 <p>{booking.menu}</p>
+                <img className="food-image" src={booking.imageUrl}/>
               </div>
             ))
             : "No Events"}
