@@ -14,6 +14,8 @@ import "./chefForm.css";
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Link, OutlinedInput, InputAdornment } from "@mui/material";
 import { Box } from "@mui/system";
 
+
+
 const states = [
   "AL",
   "AK",
@@ -178,7 +180,7 @@ const ChefForm = () => {
         <div className="chefEvent-container">
           <form onSubmit={handleSubmit} className="chefEvent-form">
 
-            <Box className="chefForm-title-of-event">
+            <div className="chefForm-title-of-event">
               <TextField
                 onChange={handleChange}
                 type="text"
@@ -186,9 +188,9 @@ const ChefForm = () => {
                 name="title"
                 fullWidth
               />
-            </Box>
+            </div>
 
-            <Box className="chefEvent-cuisineCategory">
+            <div className="chefEvent-cuisineCategory">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
                 <Select
@@ -206,7 +208,7 @@ const ChefForm = () => {
                   <MenuItem value="Italian">Italian</MenuItem>
                 </Select>
               </FormControl>
-            </Box>
+            </div>
 
             <Box 
               className="chefForm-menu-and-description"
@@ -227,7 +229,7 @@ const ChefForm = () => {
               />
             </Box>
 
-            <Box className="chefForm-suggested-donation">
+            <div className="chefForm-suggested-donation">
               <FormControl fullWidth>
                 <InputLabel htmlFor="outlined-adornment-amount">Donation</InputLabel>
                 <OutlinedInput
@@ -237,8 +239,28 @@ const ChefForm = () => {
                   placeholder="Suggested donation per member to chef"
                 />
               </FormControl>
-            </Box>
+            </div>
 
+            <div className="chefForm-event-date-and-time">
+              <div className="chefEvent-form-divs">
+                <TextField
+                  onChange={handleChange}
+                  type="datetime-local"
+                  placeholder="start date time"
+                  name="start"
+                />
+              </div>
+              
+              <div className="chefEvent-form-divs">
+                <TextField
+                  onChange={handleChange}
+                  type="datetime-local"
+                  placeholder="End date time"
+                  name="end"
+                />
+              </div>
+
+            </div>
             
           </form>
           <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
