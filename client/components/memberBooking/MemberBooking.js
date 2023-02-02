@@ -50,10 +50,11 @@ const MemberBooking = () => {
       setLoginSignup(true);
     }
     if (user.id) {
-      setLoginSignup(false);
+      setLoginSignup(!loginSignUp);
       navigate("/checkout");
     }
   };
+
 
   const openSeatsArray = [];
   // openSeats
@@ -70,9 +71,9 @@ const MemberBooking = () => {
   }
 
   return (
-    <Box className="memberBooking-container">
-      <Box className="memberBooking-allInfo">
-        <Box className="memberBooking-images-title">
+    <div className="memberBooking-container">
+      <div className="memberBooking-allInfo">
+        <div className="memberBooking-images-title">
           <ImageList className="memberBooking-images">
             <ImageListItem>
               <img /> A BUNCH OF IMAGES GO HERE!!!
@@ -87,7 +88,7 @@ const MemberBooking = () => {
               <img /> A BUNCH OF IMAGES GO HERE!!!
             </ImageListItem>
           </ImageList>
-          <Box className="memberBooking-title">
+          <div className="memberBooking-title">
             <h1>{booking.title}</h1>
             <p>
               <small>
@@ -98,36 +99,36 @@ const MemberBooking = () => {
                 in {booking?.city}
               </small>
             </p>
-          </Box>
-        </Box>
-        <Box className="memberBooking-experience">
-          <Box className="memberBooking-experience-shortDetails">
-            <Box className="memberBooking-experience-cuisine">
+          </div>
+        </div>
+        <div className="memberBooking-experience">
+          <div className="memberBooking-experience-shortDetails">
+            <div className="memberBooking-experience-cuisine">
               Cuisine: {booking?.cuisine?.category}
-            </Box>
-            <Box className="memberBooking-experience-guests">
+            </div>
+            <div className="memberBooking-experience-guests">
               {booking.openSeats} seats left
-            </Box>
-            <Box className="memberBooking-experience-guests">
+            </div>
+            <div className="memberBooking-experience-guests">
               {booking.maxSeats} guests maximum
-            </Box>
-            <Box className="memberBooking-experience-time">
-              <Box className="memberBooking-experience-time-start">
+            </div>
+            <div className="memberBooking-experience-time">
+              <div className="memberBooking-experience-time-start">
                 Start: {booking.startDateTime}
-              </Box>
-              <Box className="memberBooking-experience-time-end">
+              </div>
+              <div className="memberBooking-experience-time-end">
                 End: {booking.endDateTime}
-              </Box>
-            </Box>
-          </Box>
-          <Box className="memberBooking-experience-menu">
+              </div>
+            </div>
+          </div>
+          <div className="memberBooking-experience-menu">
             Menu: {booking.menu}
-          </Box>
-        </Box>
-      </Box>
-      <Box className="memberBooking-form">
+          </div>
+        </div>
+      </div>
+      <Box className="memberBooking-form-container">
         <Box className="memberBooking-form" component="form">
-          <FormControl>
+          <FormControl fullWidth>
             <InputLabel id="guests">Guests</InputLabel>
             <Select
               value={guests}
@@ -143,7 +144,7 @@ const MemberBooking = () => {
               ))}
             </Select>
           </FormControl>
-          <Box className="memberBooking-form-donation">
+          <Box className="memberBooking-form-donation" fullwidth="true">
             <Box
               id="outlined-adornment-amount"
               label="Donation Amount"
@@ -153,16 +154,16 @@ const MemberBooking = () => {
               {`$${booking?.suggestedDonation}`}
             </Box>
           </Box>
-          <Button variant="contained" onClick={handleClick}>
-            {" "}
-            Book{" "}
+          <Button variant="contained" onClick={handleClick} sx={{alignSelf: "center"}}>
+            
+            Book
           </Button>
         </Box>
         <Box className="memberBooking-login-signup">
           {loginSignUp ? "PLEASE LOGIN OR SIGNUP TO BOOK EVENT" : null}{" "}
         </Box>
       </Box>
-    </Box>
+    </div>
   );
 };
 
