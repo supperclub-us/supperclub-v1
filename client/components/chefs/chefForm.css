@@ -31,12 +31,24 @@
 
 .chefs-page-container {
     display: flex;
-    
+    flex-direction: column;
+    align-items: center;
+}
+
+.chefs-page-banner {
+    display: flex;
+    flex-direction: column;
+    background-color: ;
+    align-items: center;
+
+    padding: 2em;
 }
 
 .chefs-card-container {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+
     border: 1px solid black;
     border-radius: 1em;
     margin: 1em;
@@ -44,13 +56,11 @@
 }
 
 .chefs-card-bookingcards-container {
+    max-width: 75vw;
     display: flex;
-
+    overflow-x: auto;
+    border-top: 1px solid rgb(208, 208, 208);
+    padding: 1em;
+    margin: 1em;
 }
 
-.chefs-card-bookingcard {
-    display: flex;
-    border: 1px solid black;
-    border-radius: 1em;
-    margin: 0 .5em;
-}
