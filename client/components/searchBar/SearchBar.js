@@ -40,19 +40,15 @@ const SearchBar = () => {
     setNumGuests(e.target.value);
   };
 
-  const newStartDate = startDate.format('M DD YYYY').split(' ');
-  const newEndDate = endDate.format('M DD YYYY').split(' ');
-
-
+  // formatting of start and end date to array of integers
+  const newStartDate = startDate.format('MM DD YYYY').split(' ');
+  const newEndDate = endDate.format('MM DD YYYY').split(' ');
+  //change array elements to integers
   const newIntStartDate = newStartDate.map((element) => parseInt(element))
   console.log("newIntStartDate", newIntStartDate)
   const newIntEndDate = newEndDate.map((element) => parseInt(element))
   console.log("newIntEndDate", newIntEndDate)
 
-
-  // const handleStartDate = () => {
-  //   console.log("START DATE", startDate)
-  // };
 
   const handleChange = async (event) => {
     setValue(event.target.value);
@@ -85,14 +81,14 @@ const SearchBar = () => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 13
+        zoom: 11
       }
     } catch (err) {
       console.log(err);
