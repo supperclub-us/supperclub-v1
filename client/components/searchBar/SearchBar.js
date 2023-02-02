@@ -108,7 +108,7 @@ const SearchBar = () => {
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
-      <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+      <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
     </Box>
   );
 };
