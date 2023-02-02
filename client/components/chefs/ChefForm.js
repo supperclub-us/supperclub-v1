@@ -13,7 +13,10 @@ import axios from "axios";
 import "./chefForm.css";
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Link, OutlinedInput, InputAdornment } from "@mui/material";
 import { Box } from "@mui/system";
-
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 const states = [
@@ -79,6 +82,9 @@ const states = [
 const ChefForm = () => {
   const userId = useSelector((state) => state.auth.me.id);
   console.log("userId--->", userId);
+
+  const [startValue, setStartValue] = useState(dayjs());
+  const [endValue, setEndValue] = useState(dayjs());
 
   const [title, setTitle] = useState();
   const [menu, setMenu] = useState();
@@ -242,23 +248,26 @@ const ChefForm = () => {
             </div>
 
             <div className="chefForm-event-date-and-time">
-              <div className="chefEvent-form-divs">
-                <TextField
-                  onChange={handleChange}
-                  type="datetime-local"
-                  placeholder="start date time"
-                  name="start"
-                />
-              </div>
-              
-              <div className="chefEvent-form-divs">
-                <TextField
-                  onChange={handleChange}
-                  type="datetime-local"
-                  placeholder="End date time"
-                  name="end"
-                />
-              </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                  renderInput={(props) => <TextField {...props} />}
+                  label="Start"
+                  value={startValue}
+                  onChange={(newValue) => {
+                  setStartValue(newValue);
+                  }}
+              />
+              </LocalizationProvider>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                  renderInput={(props) => <TextField {...props} />}
+                  label="End"
+                  value={endValue}
+                  onChange={(newValue) => {
+                  setEndValue(newValue);
+                  }}
+              /> 
+            </LocalizationProvider>
 
             </div>
             
