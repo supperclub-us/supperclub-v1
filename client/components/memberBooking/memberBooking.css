@@ -1,0 +1,49 @@
+.memberBooking-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.memberBooking-allInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 3px dashed black;
+}
+
+.memberBooking-images-title {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+    min-width: 650px;
+}
+
+.memberBooking-experience {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    min-width: 650px;
+}
+
+.memberBooking-experience-shortDetails {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid black;
+}
+
+.memberBooking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+}
+
+.memberBooking-form-donation {
+    display: flex;
+    flex-direction: column;
+}
+
+.memberBooking-login-signup {
+    color: red;
+    width: 50%;
+}
