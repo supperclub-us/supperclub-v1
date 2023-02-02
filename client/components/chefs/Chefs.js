@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Modal, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,43 @@ const Chefs = () => {
     navigate(`/bookings/${bookingId}`)
   }
 
+  const [open, setOpen] = useState(false);
+  const [modalScreen, setModalScreen] = useState({});
+
+  const handleOpen = (booking) => {
+    setModalScreen(booking);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const renderModalScreen = () => {
+    if (modalScreen === "booking") {
+      return <chefBooking handleOpen={handleOpen} />;
+    }
+
+    return <p>default</p>;
+  };
+
+
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "400px",
+    height: "600px",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 7,
+  };
+
+
   return (
     <div className="chefs-page-container">
       <header className="chefs-page-banner">
@@ -33,34 +70,37 @@ const Chefs = () => {
             return (
               // Box
               <div key={chef.id} className="chefs-card-container">
-                <h3>Chef {chef.firstName} {chef.lastName}</h3>
+                <h3 className="chefName">Chef {chef.firstName} {chef.lastName}</h3>
                 <p>{chef.bio}</p>
                 <p1>Current Hostings:</p1>
 
                 <div className="chefs-card-bookingcards-container">
 
-                  {chef.chefBooking && chef.chefBooking.length ? chef.chefBooking.map((booking) =>  {
+                  {chef.chefBooking && chef.chefBooking.length ? chef.chefBooking.map((booking) => {
                     return (
                       // Button
                       <Button
-                      className="chefs-card-bookingcard"
-                      variant="outlined"
-                      size="small"
-                      key={booking.id}
-                      onClick={() => handleClick(booking.id)}
-                      sx={{
-                        display: "flex",
-                        alignContent: "flex-start",
-                        margin: "0em 0em 0em 0.5em",
-                        minWidth: "10em",
-                        height: "5em",
-                        overflow: "clip",
-                        padding: "1em"
-                      }}>
+                        className="chefs-card-bookingcard"
+                        variant="outlined"
+                        size="small"
+                        key={booking.id}
+                        onClick={() => handleClick(booking.id)}
+                        sx={{
+                          display: "flex",
+                          alignContent: "flex-start",
+                          margin: "0em 0em 0em 0.5em",
+                          minWidth: "10em",
+                          height: "5em",
+                          overflow: "clip",
+                          padding: "1em"
+                        }}>
                         <p>{booking.title}</p>
                       </Button>
                     )
+
+
                   }) : <p>No Hostings Yet...</p>}
+                 
                 </div>
 
               </div>
@@ -69,6 +109,15 @@ const Chefs = () => {
         ) : (
           <h1>No Chefs Around...</h1>
         )}
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>{renderModalScreen()}</Box>
+        </Modal>
       </div>
     </div>
   );
