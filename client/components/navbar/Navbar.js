@@ -94,7 +94,7 @@ const Navbar = () => {
               Profile
             </Link> )}
             
-            <Button type="button" onClick={logoutAndRedirectHome}>
+            <Button type="button" onClick={logoutAndRedirectHome} sx={{ marginRight: "25px", color: "whitesmoke" }}>
               Log out
             </Button>
           </>
@@ -103,6 +103,7 @@ const Navbar = () => {
             <Button
               sx={{
                 marginRight: "25px",
+                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
                 backgroundColor: "#EB5757",
                 color: "whitesmoke",
               }}

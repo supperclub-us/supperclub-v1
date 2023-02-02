@@ -48,7 +48,7 @@ const ChefProfile = () => {
         </h1>
         <h3> Your Dashboard</h3>
         <hr />
-        <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create an Event</Button>
+        <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create Event</Button>
         <h3>YOUR EVENTS</h3>
         <div className="profileContainer">
 

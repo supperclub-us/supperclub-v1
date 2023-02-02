@@ -382,8 +382,14 @@ const ChefForm = () => {
               className="chefForm-button"
               onClick={() => handleSubmit()}
               variant="contained"
+              // sx={{"&:hover": {backgroundColor: "transparent", }}}
+              sx={{
+                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                backgroundColor: "#EB5757",
+                color: "whitesmoke",
+              }}
             >
-              Add Event
+              Create Event
             </Button>
           </div>
         </>
