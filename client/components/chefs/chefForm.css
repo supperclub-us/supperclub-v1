@@ -1,56 +1,130 @@
 .chefEvent-container {
-
+    /* border: 2px solid purple; */
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    padding: 10px;
+    gap: 1.5em;
+    margin: 25px;
 }
 
 .chefEvent-form {
-    /* border: 2px solid green; */
     display: flex;
     flex-direction: column;
-    gap: .1em;
+    gap: 1em;
+    min-width: 300px;
+    width: 500px;
+}
+
+.chefForm-title-of-event {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0em;
     min-width: 300px;
     width: 500px;
 
 }
 
-.chefEvent-form-divs {
+.chefForm-event-address-information {
     display: flex;
     flex-direction: column;
+    gap: 1.0em;
+    min-width: 300px;
+    width: 500px;
 }
 
-.chefs-allCards-container {
+.chefForm-max-open-seats-container {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    gap: 1.0em;
+    min-width: 300px;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.chefForm-open-seats {
     display: flex;
     flex-direction: column;
-
+    gap: 1.0em;
+    /* min-width: 300px; */
+    width: 242px;
 }
 
-.chefs-page-container {
-    display: flex;
-    
-}
-
-.chefs-card-container {
+.chefForm-max-seats {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    border-radius: 1em;
-    margin: 1em;
-    padding: 1em;
+    gap: 1.0em;
+    /* min-width: 300px; */
+    width: 242px;
 }
 
-.chefs-card-bookingcards-container {
+.chefForm-event-date-and-time {
     display: flex;
-
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.chefs-card-bookingcard {
+.chefForm-event-start-date {
     display: flex;
-    border: 1px solid black;
-    border-radius: 1em;
-    margin: 0 .5em;
+    flex-direction: column;
+    gap: 1.0em;
+    width: 242px;
+}
+
+.chefForm-event-end-date {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0em;
+    width: 242px;
+}
+
+.chefForm-state-and-zipcode {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chefForm-state {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0em;
+    width: 242px;
+}
+
+.chefForm-zipcode {
+    display: flex;
+    flex-direction: column;
+    gap: 1.0em;
+    width: 242px;
+}
+
+.cuisineCategory-and-donation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chefEvent-cuisineCategory {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1.0em; */
+    width: 242px;
+    /* border: 1px solid red; */
+}
+
+.chefForm-suggested-donation {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1.0em; */
+    width: 242px;
+    /* border: 1px solid blue; */
+}
+
+.chefForm-button {
+    margin-top: 20px;
+    padding: 20px;
+    gap: 1.0em;
 }

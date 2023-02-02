@@ -7,17 +7,26 @@ import {
   selectSingleChefBookings,
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
-import { Home } from "../index"
+import { Home } from "../index";
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Link, OutlinedInput, InputAdornment } from "@mui/material";
+import {
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Link,
+  OutlinedInput,
+  InputAdornment,
+} from "@mui/material";
 import { Box } from "@mui/system";
-import dayjs from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
   "AL",
@@ -84,43 +93,43 @@ const ChefForm = () => {
   // console.log("userId--->", userId);
 
   const [title, setTitle] = useState("");
-  console.log("title--->", title)
+  console.log("title--->", title);
 
   const [menu, setMenu] = useState("");
-  console.log("menu--->", menu)
+  console.log("menu--->", menu);
 
   const [cuisineId, setCuisineId] = useState("");
-  console.log("cuisineId--->", cuisineId)
+  console.log("cuisineId--->", cuisineId);
 
-  const [suggestedDonation, setSuggestedDonation] = useState(null); 
-  console.log("suggestedDonation--->", suggestedDonation)
+  const [suggestedDonation, setSuggestedDonation] = useState(null);
+  console.log("suggestedDonation--->", suggestedDonation);
 
   const [startValue, setStartValue] = useState(dayjs());
-  console.log("startValue--->", startValue)
+  console.log("startValue--->", startValue);
 
   const [endValue, setEndValue] = useState(dayjs());
-  console.log("endValue--->", endValue)
+  console.log("endValue--->", endValue);
 
   const [max, setMax] = useState(null);
-  console.log("max--->", max)
+  console.log("max--->", max);
 
   const [openSeats, setOpenSeats] = useState("");
-  console.log("openSeats--->", openSeats)
+  console.log("openSeats--->", openSeats);
 
   const [address1, setAddress1] = useState("");
-  console.log("address1--->", address1)
+  console.log("address1--->", address1);
 
   const [address2, setAddress2] = useState("");
-  console.log("address2--->", address2)
+  console.log("address2--->", address2);
 
   const [city, setCity] = useState("");
-  console.log("city--->", city)
+  console.log("city--->", city);
 
   const [state, setState] = useState("");
-  console.log("state--->", state)
+  console.log("state--->", state);
 
   const [zip, setZip] = useState("");
-  console.log("zip--->", zip) 
+  console.log("zip--->", zip);
 
   const { chefId } = useParams();
   // console.log("CHEF -----------> ", chefId);
@@ -140,7 +149,7 @@ const ChefForm = () => {
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
-    console.log("handleSubmit clicked!")
+    console.log("handleSubmit clicked!");
     // e.preventDefault();
     try {
       // grabbing full address from the useState
@@ -185,26 +194,30 @@ const ChefForm = () => {
   return (
     <>
       {userId !== parseInt(chefId) ? (
-        <Home/>
+        <Home />
       ) : (
-        <div className="chefEvent-container">
-          <Box component="form" onSubmit={handleSubmit} className="chefEvent-form">
-
-            <div className="chefForm-title-of-event">
-              <TextField
-                label="Title of Event"
-                onChange={(e) => setTitle(e.target.value)}
-                type="text"
-                placeholder="Title of event"
-                fullWidth
-              />
-            </div>
-
-            <div className="chefEvent-cuisineCategory">
-              <FormControl fullWidth>
+        <>
+          <div className="chefEvent-container">
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              className="chefEvent-form"
+            >
+              <div className="chefForm-title-of-event">
+                <TextField
+                  label="Title of Event"
+                  onChange={(e) => setTitle(e.target.value)}
+                  type="text"
+                  placeholder="Title of event"
+                  fullWidth
+                />
+              </div>
+              <div className="cuisineCategory-and-donation">
+                <div className="chefEvent-cuisineCategory">
+                  <FormControl>
                     <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
                     <Select
-                      onChange={(e)=> setCuisineId(Number(e.target.value))}
+                      onChange={(e) => setCuisineId(Number(e.target.value))}
                       value={cuisineId}
                       label="cuisine"
                     >
@@ -218,99 +231,103 @@ const ChefForm = () => {
                       <MenuItem value="8">Mexican</MenuItem>
                       <MenuItem value="9">Italian</MenuItem>
                     </Select>
-              </FormControl>
-            </div>
+                  </FormControl>
+                </div>
+                <div className="chefForm-suggested-donation">
+                  <FormControl>
+                    <InputLabel htmlFor="outlined-adornment-amount">
+                      Donation
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-amount"
+                      startAdornment={
+                        <InputAdornment position="start">$</InputAdornment>
+                      }
+                      label="Donation"
+                      placeholder="Donation per member"
+                      onChange={(e) => setSuggestedDonation(e.target.value)}
+                    />
+                  </FormControl>
+                </div>
+              </div>
 
-            <Box 
-              className="chefForm-menu-and-description"
-              component="div"
-              sx={{
-                '& .MuiTextField-root': {width: '100%' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="outlined-multiline-static"
-                label="Menu"
-                multiline
-                rows={20}
-                placeholder="Type your menu here"
-                onChange={(e) => setMenu(e.target.value)}
-              />
-            </Box>
-
-            <div className="chefForm-suggested-donation">
-              <FormControl fullWidth>
-                <InputLabel htmlFor="outlined-adornment-amount">Donation</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-amount"
-                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                  label="Donation"
-                  placeholder="Suggested donation per member to chef"
-                  onChange={(e) => setSuggestedDonation(e.target.value)}
+              
+              <Box
+                className="chefForm-menu-and-description"
+                component="div"
+                sx={{
+                  "& .MuiTextField-root": { width: "100%" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Menu"
+                  multiline
+                  rows={20}
+                  placeholder="Type your menu here"
+                  onChange={(e) => setMenu(e.target.value)}
                 />
-              </FormControl>
-            </div>
+              </Box>
 
-            <div className="chefForm-event-date-and-time">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
+              
+
+              <div className="chefForm-event-date-and-time">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
                     renderInput={(props) => <TextField {...props} />}
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
-                    setStartValue(newValue);
+                      setStartValue(newValue);
                     }}
-                    name="start"
-                />
+                    className="chefForm-event-start-date"
+                  />
                 </LocalizationProvider>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker
+                  <DateTimePicker
                     renderInput={(props) => <TextField {...props} />}
                     label="End"
                     value={endValue}
                     onChange={(newValue) => {
-                    setEndValue(newValue);
+                      setEndValue(newValue);
                     }}
-                    name="end"
-                /> 
-              </LocalizationProvider>
-            </div>
-
-            <div className="chefForm-max-open-seats-container">
-              <div className="chefForm-max-seats">
-                <TextField
-                  label="Max Seats"
-                  onChange={(e) => setMax(e.target.value)}
-                  type="number"
-                  placeholder="Max seats"
-                  name="max seats"
-                  InputProps={{
-                    inputProps: { min: 0 }
-                  }}
-                />
-              </div>
-              <div className="chefForm-open-">
-                <TextField
-                  label="Open Seats"
-                  onChange={(e) => setOpenSeats(e.target.value)}
-                  type="number"
-                  placeholder="Open seats"
-                  name="open seats"
-                  InputProps={{
-                    inputProps: { min: 0 }
-                  }}
-                />
+                    className="chefForm-event-end-date"
+                  />
+                </LocalizationProvider>
               </div>
 
+              <div className="chefForm-max-open-seats-container">
+                <div className="chefForm-open-seats">
+                  <TextField
+                    label="Open Seats"
+                    onChange={(e) => setOpenSeats(e.target.value)}
+                    type="number"
+                    placeholder="Open seats"
+                    InputProps={{
+                      inputProps: { min: 0 },
+                    }}
+                  />
+                </div>
+                <div className="chefForm-max-seats">
+                  <TextField
+                    label="Max Seats"
+                    onChange={(e) => setMax(e.target.value)}
+                    type="number"
+                    placeholder="Max seats"
+                    InputProps={{
+                      inputProps: { min: 0 },
+                    }}
+                  />
+                </div>
+              </div>
               <div className="chefForm-event-address-information">
                 <div className="chefForm-address1">
                   <TextField
                     onChange={(e) => setAddress1(e.target.value)}
                     type="text"
                     placeholder="Address 1"
-                    name="address1"
                     label="Address 1"
                     fullWidth
                   />
@@ -320,7 +337,6 @@ const ChefForm = () => {
                     onChange={(e) => setAddress2(e.target.value)}
                     type="text"
                     placeholder="Address 2 (optional)"
-                    name="address2"
                     label="Address 2"
                     fullWidth
                   />
@@ -330,45 +346,47 @@ const ChefForm = () => {
                     onChange={(e) => setCity(e.target.value)}
                     type="text"
                     placeholder="City"
-                    name="city"
                     label="City"
                     fullWidth
                   />
                 </div>
-                <div className="chefForm-state">
-                  <FormControl fullWidth>
-                    <InputLabel>State</InputLabel>
-                    <Select
-                      onChange={(e) => setState(e.target.value)}
-                      label="State"
-                      value={state}
-                    >
-                      {states.map((state) => (
-                        <MenuItem
-                          key={state} 
-                          value={state}
-                        >
-                          {state}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="chefForm-zipcode">
-                  <TextField
-                    onChange={(e) => setZip(e.target.value)}
-                    type="text"
-                    placeholder="Zip code"
-                    name="zip code"
-                  />  
+                <div className="chefForm-state-and-zipcode">
+                  <div className="chefForm-state">
+                    <FormControl fullWidth>
+                      <InputLabel>State</InputLabel>
+                      <Select
+                        onChange={(e) => setState(e.target.value)}
+                        label="State"
+                        value={state}
+                      >
+                        {states.map((state) => (
+                          <MenuItem key={state} value={state}>
+                            {state}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="chefForm-zipcode">
+                    <TextField
+                      onChange={(e) => setZip(e.target.value)}
+                      type="text"
+                      placeholder="Zip code"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Box>
+            </Box>
 
-          <Button onClick={() => handleSubmit()} variant="contained"> Add Event </Button>
-
-        </div>
+            <Button
+              className="chefForm-button"
+              onClick={() => handleSubmit()}
+              variant="contained"
+            >
+              Add Event
+            </Button>
+          </div>
+        </>
       )}
     </>
   );
