@@ -1,4 +1,4 @@
-import { Button, Modal, Box} from "@mui/material";
+import { Button, Modal, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const Chefs = () => {
   const [modalScreen, setModalScreen] = useState("");
   const [selectBooking, setSelectBooking] = useState()
   const handleOpen = (booking) => {
-    console.log("ME",booking)
+    console.log("ME", booking)
     // setModalScreen(booking);
     setSelectBooking(booking);
     setOpen(true);
@@ -60,7 +60,7 @@ const Chefs = () => {
     border: "none",
     boxShadow: 24,
     p: 4,
-   
+
     textAlign: "center",
   };
 
@@ -77,10 +77,11 @@ const Chefs = () => {
             return (
               // Box
               <div key={chef.id} className="chefs-card-container">
-                <h3 className="chefName">Chef {chef.firstName} {chef.lastName}</h3>
-                <p>{chef.bio}</p>
-                <p1>Current Hostings:</p1>
-
+                <h3 className="chefName" style={{ marginBottom: '10px' }}>
+                  Chef {chef.firstName} {chef.lastName}
+                </h3>
+                <p style={{ marginBottom: '10px' }}>{chef.bio}</p>
+                <p1 style={{ marginBottom: '10px' }}>Current Hostings:</p1>
                 <div className="chefs-card-bookingcards-container">
 
                   {chef.chefBooking && chef.chefBooking.length ? chef.chefBooking.map((booking) => {
@@ -124,18 +125,18 @@ const Chefs = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ModalCard booking={selectBooking}/>
-            <Button 
-            onClick={handleClose}
-            startIcon={<ClearIcon />}
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-            }}>
-           </Button> 
+            <ModalCard booking={selectBooking} />
+            <Button
+              onClick={handleClose}
+              startIcon={<ClearIcon />}
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+              }}>
+            </Button>
           </Box>
-      
+
         </Modal>
 
       </div>
