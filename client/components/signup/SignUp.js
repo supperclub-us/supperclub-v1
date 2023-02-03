@@ -88,7 +88,7 @@ const SignUp = ({handleOpen}) => {
           <br />
 
           <div className="navbar-role-selection">
-            <FormControl fullWidth>
+            <FormControl fullWidth >
               <InputLabel>Role </InputLabel>
               <Select
                 onChange={(e) => setRole(e.target.value)}
