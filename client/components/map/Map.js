@@ -37,9 +37,9 @@ const Map = () => {
   const [endDate, setEndDate] = useState(dayjs());
 
   // boolean logic useStates
-  const [ filterNumGuests, setFilterNumGuests ] = useState(false);
-  const [ filterStartDate, setFilterStartDate ] = useState(false);
-  const [ filterEndDate, setFilterEndDate ] = useState(false);
+  const [filterNumGuests, setFilterNumGuests] = useState(false);
+  const [filterStartDate, setFilterStartDate] = useState(false);
+  const [filterEndDate, setFilterEndDate] = useState(false);
 
   // LOGS FOR FILTERS
   console.log("FILTERING NUMBER OF GUESTS BOOLEAN --->", filterNumGuests)
@@ -66,9 +66,24 @@ const Map = () => {
     const intBookingDate = bookingDate.map((element) => parseInt(element));
     // console.log(" INTBOOKING DATE", intBookingDate)
 
-    // if (filterStartDate && filterEndDate) {
-
-    // }
+    // logic to filter map bounds on start/end dates
+    if (filterStartDate && filterEndDate) {
+      return (
+        booking.latitude >= bounds.latitude[0] &&
+        booking.latitude <= bounds.latitude[1] &&
+        booking.longitude >= bounds.longitude[0] &&
+        booking.longitude <= bounds.longitude[1] &&
+        // year
+        reduxStartDate[2] == intBookingDate[2] &&
+        // edgeCase:booking near the end of the year
+        // month
+        reduxStartDate[0] <= intBookingDate[0] &&
+        reduxEndDate[0] >= intBookingDate[0] &&
+        // day
+        reduxStartDate[1] <= intBookingDate[1] &&
+        reduxEndDate[1] >= intBookingDate[1]
+      )
+    }
 
     return (
       booking.latitude >= bounds.latitude[0] &&
@@ -145,7 +160,7 @@ const Map = () => {
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <MapSearchBar viewport={viewport} setViewport={setViewport} numGuests={numGuests}setNumGuests={setNumGuests} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} setFilterStartDate={setFilterStartDate} setFilterEndDate={setFilterEndDate} setFilterNumGuests={setFilterNumGuests}/>
+      <MapSearchBar viewport={viewport} setViewport={setViewport} numGuests={numGuests} setNumGuests={setNumGuests} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} setFilterStartDate={setFilterStartDate} setFilterEndDate={setFilterEndDate} setFilterNumGuests={setFilterNumGuests} />
 
       <div className="map-container">
         <SidebarList bounds={bounds} selectedMarker={selectedMarker} filteredBookings={filteredBookings} />
