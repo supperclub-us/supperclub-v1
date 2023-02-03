@@ -246,7 +246,7 @@ const ChefForm = () => {
                         <InputAdornment position="start">$</InputAdornment>
                       }
                       label="Donation"
-                      placeholder="Donation per member"
+                      placeholder="Per member donation"
                       onChange={(e) => setSuggestedDonation(e.target.value)}
                     />
                   </FormControl>
