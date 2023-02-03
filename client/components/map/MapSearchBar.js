@@ -16,9 +16,15 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 const MapSearchBar = ({ viewport, setViewport }) => {
-  const [numGuests, setNumGuests] = useState();
-  const [startDate, setStartDate] = useState(dayjs());
-  const [endDate, setEndDate] = useState(dayjs());
+
+  const reduxNumGuests = useSelector((state) => state.numGuests)
+  const [numGuests, setNumGuests] = useState(reduxNumGuests);
+
+  const reduxStartDate = useSelector((state) => state.startEndDate.startDate);
+  const reduxEndDate = useSelector((state) => state.startEndDate.endDate)
+  const [startDate, setStartDate] = useState(reduxStartDate);
+  const [endDate, setEndDate] = useState(reduxEndDate);
+  
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
