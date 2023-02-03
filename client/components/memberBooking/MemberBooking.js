@@ -21,9 +21,14 @@ import {
 
 //css
 import "./memberBooking.css";
+import {
+  addMemberBookings,
+  fetchSingleMember,
+  selectSingleMember,
+} from "../slices/singleMemberSlice";
 
-const MemberBooking = () => {
-  const user = useSelector((state) => state.auth.me);
+const MemberBooking = ({user}) => {
+  // const user = useSelector((state) => state.auth.me);
 
   console.log("--->", user, "<---");
 
@@ -40,8 +45,12 @@ const MemberBooking = () => {
   const [loginSignUp, setLoginSignup] = useState(false);
   console.log("loginSignup ---->", loginSignUp);
 
+  const { currentMember } = useSelector(selectSingleMember);
+  console.log("current member, ", currentMember)
+
   useEffect(() => {
-    dispatch(fetchSingleBookingAsync(bookingId));
+    dispatch(fetchSingleBookingAsync(bookingId))
+    dispatch(fetchSingleMember(user.id))
   }, [dispatch]);
 
   const handleClick = (e) => {
@@ -51,10 +60,11 @@ const MemberBooking = () => {
     }
     if (user.id) {
       setLoginSignup(!loginSignUp);
-      navigate("/checkout");
+      console.log("BOOKING ---><>",  {...booking}, "USER ID", user.id );
+      dispatch(addMemberBookings({...booking, userId: user.id}));
+      navigate("/");
     }
   };
-
 
   const openSeatsArray = [];
   // openSeats
@@ -154,8 +164,7 @@ const MemberBooking = () => {
               {`$${booking?.suggestedDonation}`}
             </Box>
           </Box>
-          <Button variant="contained" onClick={handleClick} sx={{alignSelf: "center"}}>
-            
+          <Button variant="contained" onClick={handleClick}>
             Book
           </Button>
         </Box>

@@ -26,11 +26,11 @@ const SidebarList = ({ bounds, selectedMarker }) => {
       booking.latitude >= bounds.latitude[0] &&
       booking.latitude <= bounds.latitude[1] &&
       booking.longitude >= bounds.longitude[0] &&
-      booking.longitude <= bounds.longitude[1] &&
-      reduxStartDate[0] <= intBookingDate[0] &&
-      reduxEndDate[0] >= intBookingDate[0] &&
-      reduxStartDate[1] <= intBookingDate[1] &&
-      reduxEndDate[1] >= intBookingDate[1]
+      booking.longitude <= bounds.longitude[1]
+      // reduxStartDate[0] <= intBookingDate[0] &&
+      // reduxEndDate[0] >= intBookingDate[0] &&
+      // reduxStartDate[1] <= intBookingDate[1] &&
+      // reduxEndDate[1] >= intBookingDate[1]
     );
   });
 
