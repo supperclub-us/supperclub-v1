@@ -106,10 +106,10 @@ const ChefForm = () => {
   console.log("suggestedDonation--->", suggestedDonation);
 
   const [startValue, setStartValue] = useState(dayjs());
-  console.log("startValue--->", startValue);
+  console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
 
   const [endValue, setEndValue] = useState(dayjs());
-  console.log("endValue--->", endValue);
+  console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
 
   const [max, setMax] = useState(null);
   console.log("max--->", max);
@@ -173,8 +173,8 @@ const ChefForm = () => {
             cuisineId,
             menu,
             suggestedDonation,
-            startValue,
-            endValue,
+            startValue: startValue.format("MM/DD/YYYY h:mmA"),
+            endValue: endValue.format("MM/DD/YYYY h:mmA"),
             max,
             openSeats,
             address1,
