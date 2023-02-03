@@ -15,12 +15,10 @@ import dayjs from "dayjs";
 
 const SearchBar = () => {
   const [numGuests, setNumGuests] = useState();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(dayjs());
+  const [endDate, setEndDate] = useState(dayjs());
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
 
   const reduxViewport = useSelector((state) => state.viewport);
 
