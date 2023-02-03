@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authSlice";
 import { Button, Typography, Modal, Box } from "@mui/material";
 import "./navbar.css";
+import ClearIcon from '@mui/icons-material/Clear'
 import {
   FormControl,
   InputLabel,
@@ -126,7 +127,19 @@ const Navbar = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>{renderModalScreen()}</Box>
+          <Box sx={style}>{renderModalScreen()}
+          <Button 
+            onClick={handleClose}
+            startIcon={<ClearIcon />}
+            
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+            }}>
+              
+              </Button> 
+          </Box>
         </Modal>
       </div>
     </div>

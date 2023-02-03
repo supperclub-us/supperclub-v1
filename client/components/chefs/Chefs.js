@@ -1,10 +1,13 @@
-import { Button, Modal, Box } from "@mui/material";
+import { Button, Modal, Box} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
 import { Card, ModalCard } from "../card/Card";
+import ClearIcon from '@mui/icons-material/Clear';
+
+
 
 const Chefs = () => {
   const navigate = useNavigate()
@@ -66,7 +69,7 @@ const Chefs = () => {
     <div className="chefs-page-container">
       <header className="chefs-page-banner">
         <h1>Check Out Who's Cooking!</h1>
-        <p>Chefs who want to share their passion with you!</p>
+        <p3>Chefs who want to share their passion with you!</p3>
       </header>
       <div className="chefs-allCards-container">
         {chefs && chefs.length ? (
@@ -122,8 +125,17 @@ const Chefs = () => {
         >
           <Box sx={style}>
             <ModalCard booking={selectBooking}/>
-            
+            <Button 
+            onClick={handleClose}
+            startIcon={<ClearIcon />}
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+            }}>
+           </Button> 
           </Box>
+      
         </Modal>
 
       </div>
