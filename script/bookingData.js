@@ -171,7 +171,7 @@ const bookingData = [
   {
     title: "Something Thai",
     menu: "The Best At BangKok",
-    imageUrl: "https://i.postimg.cc/ZnV8m3Ln/thai-Small.jpg",
+    imageUrl: "https://i.postimg.cc/Kcw5nYbT/thai.jpg",
     suggestedDonation: 65,
     startDateTime: "1/31/2023 8:00PM",
     endDateTime: "1/31/2023 10:00PM",
@@ -388,7 +388,7 @@ const bookingData = [
   {
     title: "Emeril and Friends",
     menu: "French at its finest",
-    imageUrl: "https://i.postimg.cc/Xq88vtnV/french2.jpg",
+    imageUrl: "https://i.postimg.cc/zDghYFmL/french22.jpg",
     suggestedDonation: 65,
     startDateTime: "2/13/2023 6:30PM",
     endDateTime: "2/13/2023 9:30PM",
