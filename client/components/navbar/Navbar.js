@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authSlice";
 import { Button, Typography, Modal, Box } from "@mui/material";
 import "./navbar.css";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear'
+
 import { SignUp, Login } from "../index";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
+  
 
   const handleOpen = (str) => {
     setModalScreen(str);
     setOpen(true);
   };
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setModalScreen("");
+  };
 
   const renderModalScreen = () => {
     if (modalScreen === "signup") {
@@ -36,9 +35,18 @@ const Navbar = () => {
   };
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  
   const user = useSelector((state) => state.auth.me);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setTimeout(() => {
+        setOpen(false);
+      }, 500);
+    }
+  }, [isLoggedIn]);
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -126,7 +134,19 @@ const Navbar = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>{renderModalScreen()}</Box>
+          <Box sx={style}>{renderModalScreen()}
+          <Button 
+            onClick={handleClose}
+            startIcon={<ClearIcon />}
+            
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+            }}>
+              
+              </Button> 
+          </Box>
         </Modal>
       </div>
     </div>
