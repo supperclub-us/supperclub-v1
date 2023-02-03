@@ -20,9 +20,10 @@ export const addSingleChefBooking = createAsyncThunk(
     id,
     title,
     menu,
+    cuisineId,
     suggestedDonation,
-    start,
-    end,
+    startValue,
+    endValue,
     max,
     openSeats,
     address1,
@@ -33,13 +34,14 @@ export const addSingleChefBooking = createAsyncThunk(
     latitude,
     longitude
   }) => {
-    try {;
+    try {
       const { data } = await axios.post(`/api/users/chefs/${id}/bookings`, {
         title,
         menu,
+        cuisineId,
         suggestedDonation,
-        startDateTime: start,
-        endDateTime: end,
+        startDateTime: startValue,
+        endDateTime: endValue,
         maxSeats: max,
         openSeats,
         address1,
