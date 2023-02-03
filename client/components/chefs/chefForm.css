@@ -1,186 +1,182 @@
-
 .chefEvent-container {
-    /* border: 2px solid purple; */
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    gap: 1.5em;
-    /* margin: 25px; */
-    /* background-color: #252b3d; */
-
+  /* border: 2px solid purple; */
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 1.5em;
+  /* margin: 25px; */
+  /* background-color: #252b3d; */
 }
 
 .chefEvent-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    min-width: 300px;
-    width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 300px;
+  width: 500px;
 }
 
 .chefForm-title-of-event {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    min-width: 300px;
-    width: 500px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 300px;
+  width: 500px;
 }
 
 .chefForm-event-address-information {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    min-width: 300px;
-    width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 300px;
+  width: 500px;
 }
 
 .chefForm-max-open-seats-container {
-    /* border: 2px solid red; */
-    display: flex;
-    flex-direction: row;
-    gap: 1.0em;
-    min-width: 300px;
-    width: 500px;
-    justify-content: space-between;
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  min-width: 300px;
+  width: 500px;
+  justify-content: space-between;
 }
 
 .chefForm-open-seats {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    /* min-width: 300px; */
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  /* min-width: 300px; */
+  width: 242px;
 }
 
 .chefs-page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .chefs-page-banner {
-    display: flex;
-    flex-direction: column;
-    
-    align-items: center;
+  display: flex;
+  flex-direction: column;
 
-    padding: 2em;
+  align-items: center;
+
+  padding: 2em;
 }
 
 .chefs-card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    
-    border: 1px solid black;
-    border-radius: 1em;
-    margin: 1em;
-    padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: 1px solid black;
+  border-radius: 1em;
+  margin: 1em;
+  padding: 1em;
 }
 
 .chefs-card-bookingcards-container {
-    max-width: 100%;
-    display: flex;
-    
-    overflow-x: auto;
-    border-top: 1px solid rgb(208, 208, 208);
-    padding: 1em;
-    margin: 1em;
-   justify-content: center;
-   object-fit: covered;
+  max-width: 100%;
+  display: flex;
+
+  overflow-x: auto;
+  border-top: 1px solid rgb(208, 208, 208);
+  padding: 1em;
+  margin: 1em;
+  justify-content: center;
+  object-fit: covered;
 }
 
 .chefName {
-    text-align: center;
-    margin: auto;
+  text-align: center;
+  margin: auto;
 }
 
 p {
-    margin: auto;
-    text-align: center;
- 
+  margin: auto;
+  text-align: center;
 }
 
 p1 {
-    margin: auto;
+  margin: auto;
 }
 
 .chefForm-max-seats {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    /* min-width: 300px; */
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  /* min-width: 300px; */
+  width: 242px;
 }
 
 .chefForm-event-date-and-time {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .chefForm-event-start-date {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 242px;
 }
 
 .chefForm-event-end-date {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 242px;
 }
 
 .chefForm-state-and-zipcode {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .chefForm-state {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 242px;
 }
 
 .chefForm-zipcode {
-    display: flex;
-    flex-direction: column;
-    gap: 1.0em;
-    width: 242px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 242px;
 }
 
 .cuisineCategory-and-donation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .chefEvent-cuisineCategory {
-    display: flex;
-    flex-direction: column;
-    /* gap: 1.0em; */
-    width: 242px;
-    /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  /* gap: 1.0em; */
+  width: 242px;
+  /* border: 1px solid red; */
 }
 
 .chefForm-suggested-donation {
-    display: flex;
-    flex-direction: column;
-    /* gap: 1.0em; */
-    width: 242px;
-    /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  /* gap: 1.0em; */
+  width: 242px;
+  /* border: 1px solid blue; */
 }
 
 .chefForm-button {
-    margin-top: 20px;
-    padding: 20px;
-    gap: 1.0em;
+  margin-top: 20px;
+  padding: 20px;
+  gap: 1em;
 }
