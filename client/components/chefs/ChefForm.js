@@ -373,7 +373,8 @@ const ChefForm = () => {
                     <TextField
                       onChange={(e) => setZip(e.target.value)}
                       type="text"
-                      placeholder="Zip code"
+                      placeholder="Zip Code"
+                      label="Zip Code"
                     />
                   </div>
                 </div>
@@ -384,7 +385,6 @@ const ChefForm = () => {
               className="chefForm-button"
               onClick={() => handleSubmit()}
               variant="contained"
-              // sx={{"&:hover": {backgroundColor: "transparent", }}}
               sx={{
                 "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
                 backgroundColor: "#EB5757",
