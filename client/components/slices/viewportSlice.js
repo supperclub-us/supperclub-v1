@@ -9,7 +9,7 @@ const viewportSlice = createSlice({
     float: "right",
     latitude: 42.251389,
     longitude: -71.002342,
-    zoom: 13
+    zoom: 11,
   },
   reducers: {
     setReduxViewport(state, action) {

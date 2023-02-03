@@ -8,6 +8,7 @@ import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
 import { setReduxStartDate, setReduxEndDate } from "../slices/startEndDateSlice";
+import { setReduxNumGuests } from "../slices/numGuestsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -31,22 +32,21 @@ const SearchBar = () => {
 
   // FIX THIS
   const handleGuests = (e) => {
-    setNumGuests(e.target.value);
+    const guestString = e.target.value
+    const guestNum = parseInt(guestString)
+    setNumGuests(guestNum);
   };
 
-  const newStartDate = startDate.format('M DD YYYY').split(' ');
-  const newEndDate = endDate.format('M DD YYYY').split(' ');
 
-
+  // formatting of start and end date to array of integers
+  const newStartDate = startDate.format('MM DD YYYY').split(' ');
+  const newEndDate = endDate.format('MM DD YYYY').split(' ');
+  //change array elements to integers
   const newIntStartDate = newStartDate.map((element) => parseInt(element))
   console.log("newIntStartDate", newIntStartDate)
   const newIntEndDate = newEndDate.map((element) => parseInt(element))
   console.log("newIntEndDate", newIntEndDate)
 
-
-  // const handleStartDate = () => {
-  //   console.log("START DATE", startDate)
-  // };
 
   const handleChange = async (event) => {
     setValue(event.target.value);
@@ -65,6 +65,9 @@ const SearchBar = () => {
     const newViewport = await getCoordinates(value);
     console.log("VIEWPORT", viewport);
     dispatch(setReduxViewport(newViewport));
+    dispatch(setReduxStartDate(newIntStartDate));
+    dispatch(setReduxEndDate(newIntEndDate));
+    dispatch(setReduxNumGuests(numGuests))
     navigate('/map');
   };
 
@@ -76,23 +79,19 @@ const SearchBar = () => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13 });
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 13,
-      };
+        zoom: 11
+      }
     } catch (err) {
       console.log(err);
     }
   }
-
-  // const setCenter = () => {
-  //   setViewport({ latitude: lat, longitude: lng})
-  // }
 
   return (
     // will switch box to formControl
@@ -108,7 +107,8 @@ const SearchBar = () => {
         suggestions={suggestions}
         setSuggestions={setSuggestions}
       />
-      <Guests numGuests={numGuests} handleGuests={handleGuests} />
+      <Guests numGuests={numGuests} setNumGuests={setNumGuests} handleGuests={handleGuests} />
+
       <StartEndDate
         startDate={startDate}
         setStartDate={setStartDate}
