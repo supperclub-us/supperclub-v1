@@ -2,46 +2,72 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleMember, selectSingleMember } from "../slices/singleMemberSlice"
-import { Link } from "react-router-dom"
+import { LinearProgress, Button } from "@mui/material";
+import { PageNotFound } from "../"
 
 const MemberProfile = ({ user }) => {
     const { id } = useParams();
-    console.log("ID", id);
     const navigate = useNavigate();
-
-    const currentMember = useSelector(selectSingleMember);
-
-    console.log("CHECK ---->", currentMember.id !== user.id);
-
     const dispatch = useDispatch();
+
+    const { currentMember, isLoading, error } = useSelector(selectSingleMember);
 
     useEffect(() => {
         dispatch(fetchSingleMember(user.id));
     }, [dispatch]);
 
-    console.log("this is current member in profile ------>", currentMember);
-
     
+    if (isLoading) {
+        return <LinearProgress />;
+    }
 
+    if (error) {
+        return <PageNotFound />;
+    }
 
-return (
-    <>
-      
-            <div>
+    // if (!currentMember) {
+    //   return <PageNotFound />;
+    // }
+
+    if (user.id !== Number(id)) {
+        return <PageNotFound />;
+    }
+
+    return (
+        <>
+            <div className="links">
+                <h1>
+                    {`Welcome, ${currentMember.firstName}!`}
+                </h1>
+                <h3> Your Dashboard</h3>
+                <hr />
+                {/* <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create an Event</Button> */}
+                <h3>YOUR UPCOMING SUPPERS</h3>
+                <div className="profileContainer">
+                    {currentMember && currentMember.memberBooking?.length
+                        ? currentMember.memberBooking.map((booking) => (
+                            <div key={booking.id} className="cards">
+                                <h5>{booking.title}</h5>
+                                <p>{booking.menu}</p>
+                            </div>
+                        ))
+                        : "No Events"}
+                </div>
+            </div>
+
+            {/* <div>
                 <h1>
                     Welcome {`${currentMember.firstName}`}
                 </h1>
                 <div>
                     <h3>
-                        YOUR UPCOMING EVENTS 
+                        YOUR UPCOMING EVENTS
                     </h3>
                 </div>
-            </div>
-            
-        
-    </>
+            </div> */}
+        </>
 
-)
+    )
 
 }
 

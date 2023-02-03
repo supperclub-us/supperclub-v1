@@ -13,11 +13,12 @@ import StartEndDate from "../searchBar/StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 const MapSearchBar = ({ viewport, setViewport }) => {
   const [numGuests, setNumGuests] = useState();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(dayjs());
+  const [endDate, setEndDate] = useState(dayjs());
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
@@ -89,7 +90,16 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button 
+        onClick={handleSubmit}
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Booking },
+  models: { User, Booking, Cuisine },
 } = require("../db");
 module.exports = router;
 
@@ -18,6 +18,9 @@ router.get("/", async (req, res, next) => {
           model: User,
           as: "memberBooking",
         },
+        {
+          model: Cuisine
+        }
       ],
     });
     res.json(bookings);
@@ -39,6 +42,9 @@ router.get("/:id", async (req, res, next) => {
           model: User,
           as: "memberBooking",
         },
+        {
+          model: Cuisine
+        }
       ],
     });
     res.json(booking)

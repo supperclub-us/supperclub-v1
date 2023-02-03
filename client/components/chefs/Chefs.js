@@ -81,19 +81,14 @@ const Chefs = () => {
                       // Button
                       <Button
                         className="chefs-card-bookingcard"
-                        variant="outlined"
+                        variant="contained"
                         size="small"
-                        key={booking.id}
-                        onClick={() => handleClick(booking.id)}
                         sx={{
-                          display: "flex",
-                          alignContent: "flex-start",
-                          margin: "0em 0em 0em 0.5em",
-                          minWidth: "10em",
-                          height: "5em",
-                          overflow: "clip",
-                          padding: "1em"
-                        }}>
+                          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                          backgroundColor: "#EB5757",
+                          color: "whitesmoke",
+                        }}
+                      >
                         <p>{booking.title}</p>
                       </Button>
                     )
