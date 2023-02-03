@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import { GeolocateControl } from "react-map-gl";
 import {
   Box,
   FormGroup,
@@ -145,6 +146,7 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
         Locate
         <LocationSearchingIcon />
       </Button>
+      {/* <GeolocateControl /> */}
       <Guests numGuests={numGuests} handleGuests={handleGuests}
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} handleStartDate={handleStartDate} handleEndDate={handleEndDate} endDate={endDate} setEndDate={setEndDate}
