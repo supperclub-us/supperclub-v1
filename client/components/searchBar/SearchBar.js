@@ -19,6 +19,8 @@ const SearchBar = () => {
   const [endDate, setEndDate] = useState(dayjs());
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [ latitude, setLatitude] = useState();
+  const [ longitude, setLongitude ] = useState();
 
   const reduxViewport = useSelector((state) => state.viewport);
 
