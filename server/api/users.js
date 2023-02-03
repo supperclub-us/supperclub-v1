@@ -4,17 +4,16 @@ const {
 } = require("../db");
 module.exports = router;
 
-
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    if (!token){
-      return res.status(401).send("Access denied")
+    if (!token) {
+      return res.status(401).send("Access denied");
     }
     const user = await User.findByToken(token);
     req.user = user;
     next();
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
 };
@@ -77,18 +76,59 @@ router.get("/members/:id", async (req, res, next) => {
         },
       ],
     });
-    res.json(member)
+    res.json(member);
   } catch (err) {
-    next (err);
+    next(err);
   }
-})
+});
+
+// MEMBERS GET/api/users/members/:id/bookings
+router.get("/members/:id/bookings", async (req, res, next) => {
+  try {
+    const member = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: Booking,
+          as: "memberBooking",
+        },
+      ],
+    });
+    const { memberBooking } = member;
+    res.json(memberBooking);
+  } catch {
+    next(err);
+  }
+});
+
+// MEMBERS POST /api/users/members/:id/bookings
+router.post("/members/:id/bookings", async (req, res, next) => {
+  try {
+    const member = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: Booking,
+          as: "memberBooking",
+        },
+      ],
+    });
+    console.log("REQ BODY!!!", req.body);
+    res.status(201).json(
+      member.addMemberBooking(req.body.id, {
+        as: "memberBooking",
+        through: "users_bookings",
+      })
+    );
+  } catch (err) {
+    next(err);
+  }
+});
 
 // CHEFS GET /api/users/chefs/:id
 router.get("/chefs/:id", requireToken, async (req, res, next) => {
   try {
     const chef = await User.findByPk(req.params.id, {
       where: {
-        role: "CHEF"
+        role: "CHEF",
       },
       include: [
         {
@@ -97,23 +137,22 @@ router.get("/chefs/:id", requireToken, async (req, res, next) => {
         },
       ],
     });
-    if (chef.role === "CHEF"){
-      res.json(chef)
+    if (chef.role === "CHEF") {
+      res.json(chef);
     } else {
-      throw new Error ("Not Authenticated")
+      throw new Error("Not Authenticated");
     }
-
   } catch (err) {
-    next (err);
+    next(err);
   }
-})
+});
 
-// CHEFS BOOKINGS GET /api/users/chefs/:id
+// CHEFS BOOKINGS GET /api/users/chefs/:id/bookings
 router.get("/chefs/:id/bookings", async (req, res, next) => {
   try {
     const chef = await User.findByPk(req.params.id, {
       where: {
-        role: "CHEF"
+        role: "CHEF",
       },
       include: [
         {
@@ -122,26 +161,24 @@ router.get("/chefs/:id/bookings", async (req, res, next) => {
         },
       ],
     });
-    if (chef.role === "CHEF"){
-      const { chefBooking } = chef
-      res.json(chefBooking)
+    if (chef.role === "CHEF") {
+      const { chefBooking } = chef;
+      res.json(chefBooking);
     } else {
-      throw new Error ("Not Authenticated")
+      throw new Error("Not Authenticated");
     }
-
   } catch (err) {
-    next (err);
+    next(err);
   }
-})
+});
 
-
-// CHEFS BOOKINGS GET /api/users/chefs/:id
+// CHEFS BOOKINGS POST /api/users/chefs/:id/bookings
 router.post("/chefs/:id/bookings", async (req, res, next) => {
   try {
     // might need to add authentication here to make sure the user is the user and adding to their own booking rather than someone else's!!
     const chef = await User.findByPk(req.params.id, {
       where: {
-        role: "CHEF"
+        role: "CHEF",
       },
       include: [
         {
@@ -150,14 +187,13 @@ router.post("/chefs/:id/bookings", async (req, res, next) => {
         },
       ],
     });
-    if (chef.role === "CHEF"){
-      console.log("REQ BODY", req.body)
-      res.status(201).json(await Booking.create(req.body))
+    if (chef.role === "CHEF") {
+      console.log("REQ BODY", req.body);
+      res.status(201).json(await Booking.create(req.body));
     } else {
-      throw new Error ("Not Authenticated")
+      throw new Error("Not Authenticated");
     }
-
   } catch (err) {
-    next (err);
+    next(err);
   }
-})
+});

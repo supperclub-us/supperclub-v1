@@ -189,6 +189,7 @@ async function seed() {
   // });
 
   const bookings = await Promise.all(bookingData.map(booking=>Booking.create(booking)))
+  console.log("bookings!!!!!:LKSJD F:LKJSD:", bookings[0])
   // USERS BOOKINGS JOIN TABLE - magic methods
   await richard.addMemberBooking(bookings[0], {
     as: "memberBooking",
