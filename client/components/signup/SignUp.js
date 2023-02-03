@@ -79,8 +79,8 @@ const SignUp = ({handleOpen}) => {
         <hr />
 
         <div className="navbar-select-role-container">
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            I would like to be a :
+          <Typography variant="p" id="modal-modal-description" sx={{ mt: 2 }}>
+            I would like to be a:
           </Typography>
           <br />
 
