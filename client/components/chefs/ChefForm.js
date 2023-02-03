@@ -21,6 +21,7 @@ import {
   Link,
   OutlinedInput,
   InputAdornment,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import dayjs from "dayjs";
@@ -198,6 +199,7 @@ const ChefForm = () => {
       ) : (
         <>
           <div className="chefEvent-container">
+            <Typography variant="h5">Create Your Supper Club Event!</Typography>
             <Box
               component="form"
               onSubmit={handleSubmit}
