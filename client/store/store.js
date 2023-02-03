@@ -9,6 +9,7 @@ import singleMemberReducer from '../components/slices/singleMemberSlice'
 import allChefsReducer from '../components/slices/allChefsSlice'
 import singleBookingReducer from '../components/slices/singleBookingSlice'
 import startEndDateReducer from '../components/slices/startEndDateSlice'
+import numGuestsReducer from '../components/slices/numGuestsSlice'
 
 
 const store = configureStore({
@@ -22,6 +23,7 @@ const store = configureStore({
     allChefs: allChefsReducer,
     singleBooking: singleBookingReducer,
     startEndDate: startEndDateReducer,
+    numGuests: numGuestsReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

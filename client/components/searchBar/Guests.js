@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const Guests = ({ numGuests, handleGuests }) => {
+const Guests = ({ numGuests, setNumGuests, handleGuests }) => {
   return (
     <FormControl className="form-control" sx={{ m: "1em" }}>
       <InputLabel id="demo-simple-select-label">Guests</InputLabel>
@@ -11,7 +11,7 @@ const Guests = ({ numGuests, handleGuests }) => {
         id="guestNumber-picker"
         value={numGuests}
         label="Guests"
-        onChange={handleGuests}
+        onChange={(e) => handleGuests(e)}
         sx={{ width: "25ch" }}
         placeholder="Guests"
       >

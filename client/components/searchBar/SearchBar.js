@@ -12,6 +12,7 @@ import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
 import { setReduxStartDate, setReduxEndDate } from "../slices/startEndDateSlice";
+import { setReduxNumGuests } from "../slices/numGuestsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -37,8 +38,11 @@ const SearchBar = () => {
 
   // FIX THIS
   const handleGuests = (e) => {
-    setNumGuests(e.target.value);
+    const guestString = e.target.value
+    const guestNum = parseInt(guestString)
+    setNumGuests(guestNum);
   };
+
 
   // formatting of start and end date to array of integers
   const newStartDate = startDate.format('MM DD YYYY').split(' ');
@@ -70,6 +74,7 @@ const SearchBar = () => {
     dispatch(setReduxViewport(newViewport));
     dispatch(setReduxStartDate(newIntStartDate));
     dispatch(setReduxEndDate(newIntEndDate));
+    dispatch(setReduxNumGuests(numGuests))
     navigate('/map');
   };
 
@@ -95,10 +100,6 @@ const SearchBar = () => {
     }
   };
 
-  // const setCenter = () => {
-  //   setViewport({ latitude: lat, longitude: lng})
-  // }
-
   return (
     // will switch box to formControl
     <Box
@@ -107,7 +108,7 @@ const SearchBar = () => {
       sx={{ p: 2, border: "1px solid grey" }}>
       <Location handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
       />
-      <Guests numGuests={numGuests} handleGuests={handleGuests}
+      <Guests numGuests={numGuests} setNumGuests={setNumGuests} handleGuests={handleGuests}
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
