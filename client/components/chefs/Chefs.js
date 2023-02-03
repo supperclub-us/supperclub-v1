@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
-import { Card } from "../card/Card";
+import { Card, ModalCard } from "../card/Card";
 
 const Chefs = () => {
   const navigate = useNavigate()
@@ -52,12 +52,13 @@ const Chefs = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "400px",
-    height: "600px",
+    height: "500px",
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "none",
     boxShadow: 24,
     p: 4,
-    borderRadius: 7,
+   
+    textAlign: "center",
   };
 
 
@@ -115,7 +116,7 @@ const Chefs = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Card booking={selectBooking}/>
+            <ModalCard booking={selectBooking}/>
             
           </Box>
         </Modal>

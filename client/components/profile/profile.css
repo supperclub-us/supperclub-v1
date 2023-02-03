@@ -17,6 +17,18 @@
 	padding: 10px;
 }
 
+.modal-cards {
+	/* border: 2px grey solid; */
+	border-radius: 30px;
+	width: 320px;
+	height: 400px;
+	margin: auto;
+	padding: 10px;
+	justify-content: center;
+	align-items: center;
+
+}
+
 h3 {
     text-align: center;
 }
@@ -37,6 +49,10 @@ h3 {
 	object-fit: cover;
   }
 
-  p {
+  p2 {
 	height: 50px;
+  }
+
+  modalCards {
+	border: none;
   }
