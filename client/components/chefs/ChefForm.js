@@ -237,7 +237,9 @@ const ChefForm = () => {
                 </div>
                 <div className="chefForm-suggested-donation">
                   <FormControl>
-                    <InputLabel>Donation</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-amount">
+                      Donation
+                    </InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-amount"
                       startAdornment={
@@ -372,7 +374,6 @@ const ChefForm = () => {
                       onChange={(e) => setZip(e.target.value)}
                       type="text"
                       placeholder="Zip code"
-                      label="Zip code"
                     />
                   </div>
                 </div>
