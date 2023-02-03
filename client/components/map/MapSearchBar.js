@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   FormGroup,
-  Button
+  Button,
 } from "@mui/material";
 import MapboxAccessToken from "../../env";
 import axios from "axios";
@@ -14,6 +14,7 @@ import { setReduxViewport } from "../slices/viewportSlice";
 import { setReduxStartDate, setReduxEndDate, setReduxNumGuests } from "../slices/searchBarFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 
 const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, filterStartDate, setFilterStartDate, filterEndDate, setFilterEndDate, setFilterNumGuests, endDate, setEndDate }) => {
 
@@ -130,7 +131,7 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
       className="search-bar"
       variant="contained"
       sx={{ p: 2, border: "1px solid grey" }}>
-      <Location style={{ borderRadius: "50px" }} sx={{ borderRadius: "50px" }} handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
+      <Location style={{ borderRadius: "50px" }} sx={{ borderRadius: "50px" }} endIcon={<LocationSearchingIcon />} handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
       />
       <Button
         onClick={handleSubmit}
@@ -138,9 +139,11 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
           backgroundColor: "#EB5757",
           color: "whitesmoke",
+          width: "200px"
         }}
       >
         Locate
+        <LocationSearchingIcon />
       </Button>
       <Guests numGuests={numGuests} handleGuests={handleGuests}
       />

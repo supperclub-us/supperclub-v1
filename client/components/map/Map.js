@@ -55,79 +55,97 @@ const Map = () => {
 
   const [viewport, setViewport] = useState(reduxViewport);
 
+  const rawDate = dayjs().format('MM/DD/YYYY hh:mmA')
+  console.log("RAW DATE", rawDate)
+  const currentDateTime = rawDate.split(' ');
+  const currentDate = currentDateTime[0].split('/');
+  // console.log("BOOKING DATE", bookingDate)
+  const intCurrentDate = currentDate.map((element) => parseInt(element));
+  console.log(" FINAL DATE", intCurrentDate)
+
   //FILTER LOGIC
   // selecting all bookings that have been created
   const bookings = useSelector((state) => state.chefsBookings);
 
+  // get the current date right now
+
   const filteredBookings = bookings.filter((booking) => {
+    const bookingBooking = booking.startDateTime;
+    console.log("BOOKING DATEZ", bookingBooking)
+    console.log("DAYJS", dayjs())
     const bookingDateTime = booking.startDateTime.split(' ');
     const bookingDate = bookingDateTime[0].split('/');
     // console.log("BOOKING DATE", bookingDate)
     const intBookingDate = bookingDate.map((element) => parseInt(element));
+
+    console.log("DATES PAST AND FUTURE--->", {currYear: intCurrentDate[2], bookingYr: intBookingDate[2], currMonth: intCurrentDate[0], bookingMonth: intBookingDate[0], currDay: intCurrentDate[1], bookingDay: intBookingDate[1]})
     // console.log(" INTBOOKING DATE", intBookingDate)
+    console.log("DAY IS BEFORE TODAY? ----->", dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`)))
+    
 
-    // logic to filter map bounds on start/end dates
-    if (filterNumGuests && filterStartDate && filterEndDate) {
+    // filter from current date onward
+    // return currentDate and onwards
+    // *********  2 PAST BOOKINGS NOT SHOWING ********************************************
+    if (dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))) {
+      // logic to filter map bounds on start/end dates
+      if (filterNumGuests && filterStartDate && filterEndDate) {
+        return (
+          booking.latitude >= bounds.latitude[0] &&
+          booking.latitude <= bounds.latitude[1] &&
+          booking.longitude >= bounds.longitude[0] &&
+          booking.longitude <= bounds.longitude[1] &&
+
+          // year
+          reduxStartDate[2] == intBookingDate[2] &&
+          // edgeCase:booking near the end of the year
+          // month
+          reduxStartDate[0] <= intBookingDate[0] &&
+          reduxEndDate[0] >= intBookingDate[0] &&
+          // day
+          reduxStartDate[1] <= intBookingDate[1] &&
+          reduxEndDate[1] >= intBookingDate[1] &&
+
+          booking.openSeats >= reduxNumGuests
+          // console.log("BOOKING OPENSEATS", booking.openSeats);
+          // console.log("REDUX NUMGUESTS", reduxNumGuests)
+        )
+      }
+
+      if (filterStartDate && filterEndDate) {
+        return (
+          booking.latitude >= bounds.latitude[0] &&
+          booking.latitude <= bounds.latitude[1] &&
+          booking.longitude >= bounds.longitude[0] &&
+          booking.longitude <= bounds.longitude[1] &&
+          // year
+          reduxStartDate[2] == intBookingDate[2] &&
+          // edgeCase:booking near the end of the year
+          // month
+          reduxStartDate[0] <= intBookingDate[0] &&
+          reduxEndDate[0] >= intBookingDate[0] &&
+          // day
+          reduxStartDate[1] <= intBookingDate[1] &&
+          reduxEndDate[1] >= intBookingDate[1]
+        )
+      }
+
+      if (filterNumGuests) {
+        return (
+          booking.latitude >= bounds.latitude[0] &&
+          booking.latitude <= bounds.latitude[1] &&
+          booking.longitude >= bounds.longitude[0] &&
+          booking.longitude <= bounds.longitude[1] &&
+          booking.openSeats >= reduxNumGuests
+        )
+      }
+
       return (
         booking.latitude >= bounds.latitude[0] &&
         booking.latitude <= bounds.latitude[1] &&
         booking.longitude >= bounds.longitude[0] &&
-        booking.longitude <= bounds.longitude[1] &&
-
-        // year
-        reduxStartDate[2] == intBookingDate[2] &&
-        // edgeCase:booking near the end of the year
-        // month
-        reduxStartDate[0] <= intBookingDate[0] &&
-        reduxEndDate[0] >= intBookingDate[0] &&
-        // day
-        reduxStartDate[1] <= intBookingDate[1] &&
-        reduxEndDate[1] >= intBookingDate[1] &&
-
-        booking.openSeats >= reduxNumGuests
-        // console.log("BOOKING OPENSEATS", booking.openSeats);
-        // console.log("REDUX NUMGUESTS", reduxNumGuests)
-      )
-
+        booking.longitude <= bounds.longitude[1]
+      );
     }
-
-    if (filterStartDate && filterEndDate) {
-      return (
-        booking.latitude >= bounds.latitude[0] &&
-        booking.latitude <= bounds.latitude[1] &&
-        booking.longitude >= bounds.longitude[0] &&
-        booking.longitude <= bounds.longitude[1] &&
-        // year
-        reduxStartDate[2] == intBookingDate[2] &&
-        // edgeCase:booking near the end of the year
-        // month
-        reduxStartDate[0] <= intBookingDate[0] &&
-        reduxEndDate[0] >= intBookingDate[0] &&
-        // day
-        reduxStartDate[1] <= intBookingDate[1] &&
-        reduxEndDate[1] >= intBookingDate[1]
-      )
-    }
-
-    if (filterNumGuests) {
-      return (
-        booking.latitude >= bounds.latitude[0] &&
-        booking.latitude <= bounds.latitude[1] &&
-        booking.longitude >= bounds.longitude[0] &&
-        booking.longitude <= bounds.longitude[1] &&
-        booking.openSeats >= reduxNumGuests
-      )
-    }
-
-    return (
-      booking.latitude >= bounds.latitude[0] &&
-      booking.latitude <= bounds.latitude[1] &&
-      booking.longitude >= bounds.longitude[0] &&
-      booking.longitude <= bounds.longitude[1]
-    );
-
-
-
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
