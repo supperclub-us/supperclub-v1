@@ -47,6 +47,8 @@ const SignUp = ({handleOpen}) => {
 
     setOpen(true);
 
+    
+
     dispatch(
       authenticate({
         role,
@@ -59,6 +61,7 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
+      handleOpen();
   };
 
   const handleClose = (event, reason) => {
