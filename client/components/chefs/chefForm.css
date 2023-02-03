@@ -56,6 +56,59 @@
     width: 242px;
 }
 
+.chefs-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chefs-page-banner {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+
+    padding: 2em;
+}
+
+.chefs-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    border: 1px solid black;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+}
+
+.chefs-card-bookingcards-container {
+    max-width: 100%;
+    display: flex;
+    
+    overflow-x: auto;
+    border-top: 1px solid rgb(208, 208, 208);
+    padding: 1em;
+    margin: 1em;
+   justify-content: center;
+   object-fit: covered;
+}
+
+.chefName {
+    text-align: center;
+    margin: auto;
+}
+
+p {
+    margin: auto;
+    text-align: center;
+ 
+}
+
+p1 {
+    margin: auto;
+}
+
 .chefForm-max-seats {
     display: flex;
     flex-direction: column;
