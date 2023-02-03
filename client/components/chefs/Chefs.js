@@ -22,7 +22,7 @@ const Chefs = () => {
   }
 
   const [open, setOpen] = useState(false);
-  const [modalScreen, setModalScreen] = useState({});
+  const [modalScreen, setModalScreen] = useState("");
 
   const handleOpen = (booking) => {
     setModalScreen(booking);
