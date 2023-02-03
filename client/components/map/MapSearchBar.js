@@ -15,7 +15,7 @@ import { setReduxStartDate, setReduxEndDate, setReduxNumGuests } from "../slices
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 
-const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, setFilterStartDate, setFilterEndDate, setFilterNumGuests, endDate, setEndDate }) => {
+const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, filterStartDate, setFilterStartDate, filterEndDate, setFilterEndDate, setFilterNumGuests, endDate, setEndDate }) => {
 
 
   // value that is input into the search bar
@@ -28,9 +28,9 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
 
   useEffect(() => {
     dispatch(setReduxViewport(viewport));
-    // dispatch(setReduxNumGuests(numGuests));
-    // dispatch(setReduxStartDate(newIntStartDate));
-    // dispatch(setReduxEndDate(newIntEndDate));
+    dispatch(setReduxNumGuests(numGuests));
+    dispatch(setReduxStartDate(newIntStartDate));
+    dispatch(setReduxEndDate(newIntEndDate));
   }, [value, viewport, numGuests, startDate, endDate, dispatch])
 
 
@@ -44,17 +44,22 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
   const newIntEndDate = newEndDate.map((element) => parseInt(element))
   console.log("newIntEndDate", newIntEndDate)
 
-  // BOOLEAN Logic for handling the filter function in the map search bar
+
   const handleStartDate = (newValue) => {
     setStartDate(newValue);
+    setFilterStartDate(true);
+    // dispatch(setReduxStartDate(newIntStartDate));
   }
 
   const handleEndDate = (newValue) => {
     setEndDate(newValue);
+    setFilterEndDate(true);
+    // dispatch(setReduxEndDate(newIntEndDate));
   }
 
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
+    setFilterNumGuests(true);
   };
 
   const handleReset = () => {
@@ -76,16 +81,22 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
 
   };
 
+  // submit function to map search and filter
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
-    dispatch(setReduxNumGuests(numGuests));
-    dispatch(setReduxStartDate(newIntStartDate));
-    dispatch(setReduxEndDate(newIntEndDate));
-    setFilterNumGuests(true);
-    setFilterStartDate(true);
-    setFilterEndDate(true);
+    // setFilterNumGuests(true);
+    // dispatch(setReduxNumGuests(numGuests));
+
+
+
+    // BOOLEAN Logic for handling the filter function in the map search bar - need conditional logic
+
+
+    // if(filterStartDate && filterEndDate) {
+
+    // }
 
   };
 
@@ -121,10 +132,6 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
       sx={{ p: 2, border: "1px solid grey" }}>
       <Location style={{ borderRadius: "50px" }} sx={{ borderRadius: "50px" }} handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
       />
-      <Guests numGuests={numGuests} handleGuests={handleGuests}
-      />
-      <StartEndDate startDate={startDate} setStartDate={setStartDate} handleStartDate={handleStartDate} handleEndDate={handleEndDate} endDate={endDate} setEndDate={setEndDate}
-      />
       <Button
         onClick={handleSubmit}
         sx={{
@@ -133,8 +140,12 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
           color: "whitesmoke",
         }}
       >
-        Submit
+        Locate
       </Button>
+      <Guests numGuests={numGuests} handleGuests={handleGuests}
+      />
+      <StartEndDate startDate={startDate} setStartDate={setStartDate} handleStartDate={handleStartDate} handleEndDate={handleEndDate} endDate={endDate} setEndDate={setEndDate}
+      />
       <Button onClick={handleReset}> Reset </Button>
     </Box>
   );
