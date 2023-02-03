@@ -21,7 +21,7 @@ const SignIn = ({handleOpen}) => {
 
     dispatch(authenticate({ email, password, method: 'login' }));
   }
-
+  
 
   const handleSnackClose = (event, reason) => {
     if (reason === 'clickaway') {
