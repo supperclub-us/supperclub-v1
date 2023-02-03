@@ -89,7 +89,16 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button 
+        onClick={handleSubmit}
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };

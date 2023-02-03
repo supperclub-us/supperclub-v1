@@ -34,9 +34,15 @@ const Chefs = () => {
                     return (
                       // Button
                       <Button
-                      className="chefs-card-bookingcard"
-                      variant="outlined"
-                      size="small">
+                        className="chefs-card-bookingcard"
+                        variant="contained"
+                        size="small"
+                        sx={{
+                          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                          backgroundColor: "#EB5757",
+                          color: "whitesmoke",
+                        }}
+                      >
                         <p>{booking.title}</p>
                       </Button>
                     )
