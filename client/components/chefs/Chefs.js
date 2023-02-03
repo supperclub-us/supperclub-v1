@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
+import { Card } from "../card/Card";
 
 const Chefs = () => {
   const navigate = useNavigate()
@@ -18,14 +19,16 @@ const Chefs = () => {
 
   const handleClick = (bookingId) => {
     console.log("chefs booking clicked!!!")
-    navigate(`/bookings/${bookingId}`)
+    // navigate(`/bookings/${bookingId}`)
   }
 
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
-
+  const [selectBooking, setSelectBooking] = useState()
   const handleOpen = (booking) => {
-    setModalScreen(booking);
+    console.log("ME",booking)
+    // setModalScreen(booking);
+    setSelectBooking(booking);
     setOpen(true);
   };
 
@@ -79,7 +82,7 @@ const Chefs = () => {
                   {chef.chefBooking && chef.chefBooking.length ? chef.chefBooking.map((booking) => {
                     return (
                       // Button
-                      <Button
+                      <Button onClick={() => handleOpen(booking)}
                         className="chefs-card-bookingcard"
                         variant="contained"
                         size="small"
@@ -95,7 +98,7 @@ const Chefs = () => {
 
 
                   }) : <p>No Hostings Yet...</p>}
-                 
+
                 </div>
 
               </div>
@@ -111,8 +114,12 @@ const Chefs = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>{renderModalScreen()}</Box>
+          <Box sx={style}>
+            <Card booking={selectBooking}/>
+            
+          </Box>
         </Modal>
+
       </div>
     </div>
   );
