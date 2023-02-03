@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
-import { Card, ModalCard } from "../card/Card";
+import { Card, ModalCard } from "../profile/card/Card";
 import ClearIcon from '@mui/icons-material/Clear';
 
 

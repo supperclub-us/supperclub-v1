@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Button, LinearProgress } from "@mui/material";
 import { PageNotFound } from "../index";
 import "./profile.css";
-import { Card } from "../card/Card";
+import { Card } from "./card/Card";
 
 const ChefProfile = () => {
   const { id } = useParams();

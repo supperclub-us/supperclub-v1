@@ -49,8 +49,8 @@ h3 {
 	object-fit: cover;
   }
 
-  p2 {
-	height: 50px;
+  .bookingMenu {
+	height: 70px;
   }
 
   modalCards {
