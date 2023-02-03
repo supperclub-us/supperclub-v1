@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button, LinearProgress } from "@mui/material";
 import { PageNotFound } from "../index";
 import "./profile.css";
+import EditIcon from '@mui/icons-material/Edit';
 
 const ChefProfile = () => {
   const { id } = useParams();
@@ -68,6 +69,12 @@ const ChefProfile = () => {
                 <h5>{booking.title}</h5>
                 <p>{booking.menu}</p>
                 <img className="food-image" src={booking.imageUrl}/>
+                <Button
+                  variant="contained"
+                  startIcon={<EditIcon />}
+                >
+                  Edit Event
+                </Button>
               </div>
             ))
             : "No Events"}
