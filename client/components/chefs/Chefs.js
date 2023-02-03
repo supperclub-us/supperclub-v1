@@ -84,9 +84,14 @@ const Chefs = () => {
                     return (
                       // Button
                       <Button onClick={() => handleOpen(booking)}
-                        className="chefs-card-bookingcard"
+                        className="chefs-card-bookingcard common-button"
                         variant="contained"
                         size="small"
+                        style={{
+                          fontSize: "11px",
+                          height: "65px",
+                          width: "140px",
+                        }}
                         sx={{
                           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
                           backgroundColor: "#EB5757",

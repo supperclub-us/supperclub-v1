@@ -89,9 +89,16 @@
     overflow-x: auto;
     border-top: 1px solid rgb(208, 208, 208);
     padding: 1em;
-    margin: 1em;
+    margin: auto;
    justify-content: center;
    object-fit: covered;
+}
+
+.common-button {
+    height: 80px;
+    width: 150px;
+    font-size: 50px;
+    margin: auto;
 }
 
 .chefName {
@@ -185,5 +192,13 @@ p1 {
     gap: 1.0em;
 }
 
+.modalCard {
+   
+	width: 500px;
+	height: 400px;
+	margin: 10px;
+	padding: 10px;
+    border: none;
 
+}
 
