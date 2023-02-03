@@ -8,8 +8,7 @@ import viewportReducer from '../components/slices/viewportSlice'
 import singleMemberReducer from '../components/slices/singleMemberSlice'
 import allChefsReducer from '../components/slices/allChefsSlice'
 import singleBookingReducer from '../components/slices/singleBookingSlice'
-import startEndDateReducer from '../components/slices/startEndDateSlice'
-import numGuestsReducer from '../components/slices/numGuestsSlice'
+import searchBarFilterReducer from '../components/slices/searchBarFilterSlice'
 
 
 const store = configureStore({
@@ -22,8 +21,7 @@ const store = configureStore({
     singleMember: singleMemberReducer,
     allChefs: allChefsReducer,
     singleBooking: singleBookingReducer,
-    startEndDate: startEndDateReducer,
-    numGuests: numGuestsReducer
+    searchBarFilter: searchBarFilterReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

@@ -11,20 +11,15 @@ import Location from "../searchBar/Location";
 import Guests from "../searchBar/Guests";
 import StartEndDate from "../searchBar/StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
+import { setReduxStartDate, setReduxEndDate, setReduxNumGuests } from "../slices/searchBarFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
-const MapSearchBar = ({ viewport, setViewport }) => {
+const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, endDate, setEndDate }) => {
 
-  const reduxNumGuests = useSelector((state) => state.numGuests)
-  const [numGuests, setNumGuests] = useState(reduxNumGuests);
 
-  const reduxStartDate = useSelector((state) => state.startEndDate.startDate);
-  const reduxEndDate = useSelector((state) => state.startEndDate.endDate)
-  const [startDate, setStartDate] = useState(reduxStartDate);
-  const [endDate, setEndDate] = useState(reduxEndDate);
-  
+
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
@@ -33,7 +28,10 @@ const MapSearchBar = ({ viewport, setViewport }) => {
 
   useEffect(() => {
     dispatch(setReduxViewport(viewport));
-  }, [value, viewport, dispatch])
+    dispatch(setReduxNumGuests(numGuests));
+    dispatch(setReduxStartDate(startDate));
+    dispatch(setReduxEndDate(endDate));
+  }, [value, viewport, numGuests, startDate, endDate, dispatch])
 
 
   // FIX THIS
@@ -57,7 +55,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newViewport = await getCoordinates(value);
+
     dispatch(setReduxViewport(newViewport));
+    // if (value){
+    //   dispatch(setReduxViewport(newViewport));
+    // } else
+    // if () {
+
+    // }
   };
 
 
@@ -69,14 +74,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11})
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 13
+        zoom: 11
       }
     } catch (err) {
       console.log(err);
@@ -96,7 +101,7 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       />
       <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
       />
-      <Button 
+      <Button
         onClick={handleSubmit}
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
