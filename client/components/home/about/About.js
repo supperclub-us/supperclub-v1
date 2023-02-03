@@ -1,15 +1,28 @@
+import { Box } from '@mui/system'
 import React from 'react'
 
 const About = () => {
+
   return (
-    <h2>
-      Eatwith events are always private & personal
-      If your group is made up of 2 or more, you can choose to privatize the experience for yourself and your loved ones.
-      We're committed to your well-being
-      All necessary precautions have been taken so that you can attend our events with total peace of mind. Click here to find out more.
-      Hand-selected hosts
-      Our team hand-picks each host to ensure that you have the best possible experience.
-    </h2>
+    <>
+      <Box
+        className="about-image"
+        sx={{
+          backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
+          width: "100%",
+          backgroundAttachment: "fixed",
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box",
+          backgroundBlendMode: "normal",
+          color: "#f5f5f5"
+        }}
+      >
+      </Box>
+    </>
   )
 }
 

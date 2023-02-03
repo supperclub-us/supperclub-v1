@@ -229,14 +229,15 @@ const ChefForm = () => {
                       value={cuisine}
                       label="cuisine"
                     >
-                      <MenuItem value="Chinese">Chinese</MenuItem>
-                      <MenuItem value="Japanese">Japanese</MenuItem>
-                      <MenuItem value="Indian">Indian</MenuItem>
-                      <MenuItem value="French">French</MenuItem>
-                      <MenuItem value="Thai">Thai</MenuItem>
-                      <MenuItem value="Mexican">Mexican</MenuItem>
-                      <MenuItem value="Brazilian">Brazilian</MenuItem>
-                      <MenuItem value="Italian">Italian</MenuItem>
+                      <MenuItem value="1">Chinese</MenuItem>
+                      <MenuItem value="2">Japanese</MenuItem>
+                      <MenuItem value="3">Indian</MenuItem>
+                      <MenuItem value="4">French</MenuItem>
+                      <MenuItem value="5">Thai</MenuItem>
+                      <MenuItem value="6">Nigerian</MenuItem>
+                      <MenuItem value="7">Brazilian</MenuItem>
+                      <MenuItem value="8">Mexican</MenuItem>
+                      <MenuItem value="9">Italian</MenuItem>
                     </Select>
                   </FormControl>
             </div>

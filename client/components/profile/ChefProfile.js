@@ -48,10 +48,19 @@ const ChefProfile = () => {
         </h1>
         <h3> Your Dashboard</h3>
         <hr />
-        <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create an Event</Button>
+        <Button 
+          variant="contained" 
+          onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}
+          sx={{
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            backgroundColor: "#EB5757",
+            color: "whitesmoke",
+          }}
+        >
+            Create Event
+        </Button>
         <h3>YOUR EVENTS</h3>
         <div className="profileContainer">
-
           {currentChef && currentChef.chefBooking?.length
             ? currentChef.chefBooking.map((booking) => (
               <div key={booking.id} className="cards">
@@ -61,8 +70,6 @@ const ChefProfile = () => {
             ))
             : "No Events"}
         </div>
-
-
       </div>
     </>
   );

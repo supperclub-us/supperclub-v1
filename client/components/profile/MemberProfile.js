@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleMember, selectSingleMember } from "../slices/singleMemberSlice"
 import { LinearProgress, Button } from "@mui/material";
+import { PageNotFound } from "../"
 
 const MemberProfile = ({ user }) => {
     const { id } = useParams();
@@ -15,12 +16,13 @@ const MemberProfile = ({ user }) => {
         dispatch(fetchSingleMember(user.id));
     }, [dispatch]);
 
-    if (error) {
-        return <PageNotFound />;
-    }
-
+    
     if (isLoading) {
         return <LinearProgress />;
+    }
+
+    if (error) {
+        return <PageNotFound />;
     }
 
     // if (!currentMember) {

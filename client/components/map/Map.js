@@ -20,18 +20,15 @@ const Map = () => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  const [bounds, setBounds] = useState(
-    {
-      latitude: [
-        -42.1,
-        -43.26,
-      ],
-      longitude: [
-        72.01,
-        72.5,
-      ],
-    }
-  );
+  // adding a flag so that bookings doesn't get called everytime we move the map around
+
+  const [hasFetchedBookings, setHasFetchedBookings] = useState(false);
+
+  // useState for the bounds which will be how we filter out what is rendered in the sidebar
+  const [bounds, setBounds] = useState({
+    latitude: [-42.1, -43.26],
+    longitude: [72.01, 72.5],
+  });
 
   const reduxViewport = useSelector((state) => state.viewport);
 
@@ -76,8 +73,12 @@ const Map = () => {
 
   // useEffect to run bookings
   useEffect(() => {
-    dispatch(fetchChefsBookingsAsync());
-  }, [dispatch, viewport, handleLoad]);
+    // this will prevent the terminal to call endpoint on every move of the map.
+    if (!hasFetchedBookings) {
+      dispatch(fetchChefsBookingsAsync());
+      setHasFetchedBookings(true);
+    }
+  }, [dispatch, viewport, handleRender, hasFetchedBookings]);
 
 
   const handleMoveMap = (e) => {
@@ -101,7 +102,7 @@ const Map = () => {
     });
   };
 
-  const handleLoad = (e) => {
+  const handleRender = (e) => {
 
     setBounds({
       latitude: [
@@ -135,7 +136,7 @@ const Map = () => {
             mapboxAccessToken={MapboxAccessToken}
             // this let's us be able to move the map
             onMove={handleMoveMap}
-            onRender={handleLoad}
+            onRender={handleRender}
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />

@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  FormGroup,
-  Button
-} from "@mui/material";
+import { Box, FormGroup, Button } from "@mui/material";
 import MapboxAccessToken from "../../env";
 import axios from "axios";
-import "./searchBar.css"
+import "./searchBar.css";
 import Location from "./Location";
 import Guests from "./Guests";
 import StartEndDate from "./StartEndDate";
@@ -19,19 +15,17 @@ import dayjs from "dayjs";
 
 
 const SearchBar = () => {
-  const [numGuests, setNumGuests] = useState(0);
-  const [startDate, setStartDate] = React.useState(dayjs())
-  const [endDate, setEndDate] = React.useState(dayjs())
+  const [numGuests, setNumGuests] = useState();
+  const [startDate, setStartDate] = useState(dayjs());
+  const [endDate, setEndDate] = useState(dayjs());
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [ latitude, setLatitude] = useState();
+  const [ longitude, setLongitude ] = useState();
 
   const reduxViewport = useSelector((state) => state.viewport);
 
-  const [viewport, setViewport] = useState(
-    reduxViewport
-  );
+  const [viewport, setViewport] = useState(reduxViewport);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,17 +54,16 @@ const SearchBar = () => {
       const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${MapboxAccessToken}&autocomplete=true`;
       const response = await fetch(endpoint);
       const results = await response.json();
-      setSuggestions(results?.features)
+      setSuggestions(results?.features);
     } catch (error) {
-      console.log("Error fetching data, ", error)
+      console.log("Error fetching data, ", error);
     }
-
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const newViewport = await getCoordinates(value);
-    console.log("VIEWPORT", viewport)
+    console.log("VIEWPORT", viewport);
     dispatch(setReduxViewport(newViewport));
     dispatch(setReduxStartDate(newIntStartDate));
     dispatch(setReduxEndDate(newIntEndDate));
@@ -98,24 +91,43 @@ const SearchBar = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   return (
     // will switch box to formControl
     <Box
       className="search-bar"
       variant="contained"
-      sx={{ p: 2, border: "1px solid grey" }}>
-      <Location handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
+      sx={{ p: 2, border: "1px solid grey" }}
+    >
+      <Location
+        handleChange={handleChange}
+        value={value}
+        setValue={setValue}
+        suggestions={suggestions}
+        setSuggestions={setSuggestions}
       />
-      <Guests numGuests={numGuests} setNumGuests={setNumGuests} handleGuests={handleGuests}
+      <Guests numGuests={numGuests} setNumGuests={setNumGuests} handleGuests={handleGuests} />
+
+      <StartEndDate
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
       />
-      <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
-      />
-      <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      >
+        Submit
+      </Button>
     </Box>
   );
 };
 
 export default SearchBar;
-
