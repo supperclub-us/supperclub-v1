@@ -1,12 +1,13 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const Guests = ({ numGuests, setNumGuests, handleGuests }) => {
+const guestRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+const Guests = ({ numGuests, handleGuests }) => {
   return (
     <FormControl className="form-control" sx={{ m: "1em" }}>
       <InputLabel id="demo-simple-select-label">Guests</InputLabel>
       <Select
-        defaultValue={""}
+        defaultValue={1}
         labelId="demo-simple-select-label"
         id="guestNumber-picker"
         value={numGuests}
@@ -15,9 +16,10 @@ const Guests = ({ numGuests, setNumGuests, handleGuests }) => {
         sx={{ width: "25ch" }}
         placeholder="Guests"
       >
-        <MenuItem value="1">1</MenuItem>
-        <MenuItem value="2">2</MenuItem>
-        <MenuItem value="3">3</MenuItem>
+        {guestRange.map(num => (
+          <MenuItem key={num} value={num}>{num === 1 ? `${num} guest` : `${num} guests`}</MenuItem>
+        ))}
+
       </Select>
     </FormControl>
   );

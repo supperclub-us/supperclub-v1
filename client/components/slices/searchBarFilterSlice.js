@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const startEndDateSlice = createSlice({
-  name: "startEndDate",
+const searchBarFilterSlice = createSlice({
+  name: "searchBarFilter",
   initialState: {
     startDate: [],
-    endDate: []
+    endDate: [],
+    numGuests: 1,
   },
   reducers: {
     setReduxStartDate(state, action) {
@@ -14,13 +15,18 @@ const startEndDateSlice = createSlice({
     setReduxEndDate(state, action) {
       state.endDate = action.payload
       return state;
-    }
+    },
+    setReduxNumGuests(state, action) {
+      state.numGuests = action.payload
+      return state;
+    },
   }
 })
 
-export default startEndDateSlice.reducer;
+export default searchBarFilterSlice.reducer;
 
 export const {
   setReduxStartDate,
   setReduxEndDate,
-} = startEndDateSlice.actions
+  setReduxNumGuests
+} = searchBarFilterSlice.actions
