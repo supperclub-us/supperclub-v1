@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
-const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, endDate, setEndDate }) => {
+const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, setFilterStartDate, setFilterEndDate, setFilterNumGuests, endDate, setEndDate }) => {
 
 
 
@@ -28,16 +28,36 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
 
   useEffect(() => {
     dispatch(setReduxViewport(viewport));
-    dispatch(setReduxNumGuests(numGuests));
-    dispatch(setReduxStartDate(startDate));
-    dispatch(setReduxEndDate(endDate));
-  }, [value, viewport, numGuests, startDate, endDate, dispatch])
+    // dispatch(setReduxNumGuests(numGuests));
+    // dispatch(setReduxStartDate(newIntStartDate));
+    // dispatch(setReduxEndDate(newIntEndDate));
+  }, [ value, viewport, numGuests, startDate, endDate, dispatch ])
 
 
   // FIX THIS
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
   };
+
+  // formatting of start and end date to array of integers
+  const newStartDate = startDate.format('MM DD YYYY').split(' ');
+  const newEndDate = endDate.format('MM DD YYYY').split(' ');
+  //change array elements to integers
+  const newIntStartDate = newStartDate.map((element) => parseInt(element))
+  console.log("newIntStartDate", newIntStartDate)
+  const newIntEndDate = newEndDate.map((element) => parseInt(element))
+  console.log("newIntEndDate", newIntEndDate)
+
+  const handleStartDate = (newValue) => {
+    setStartDate(newValue);
+    setFilterStartDate(true);
+  }
+
+  const handleEndDate = (newValue) => {
+    setEndDate(newValue);
+    setFilterEndDate(true);
+  }
+
 
   const handleChange = async (event) => {
     setValue(event.target.value);
@@ -55,14 +75,11 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newViewport = await getCoordinates(value);
-
     dispatch(setReduxViewport(newViewport));
-    // if (value){
-    //   dispatch(setReduxViewport(newViewport));
-    // } else
-    // if () {
+    dispatch(setReduxNumGuests(numGuests));
+    dispatch(setReduxStartDate(newIntStartDate));
+    dispatch(setReduxEndDate(newIntEndDate));
 
-    // }
   };
 
 
@@ -95,11 +112,11 @@ const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDat
       className="search-bar"
       variant="contained"
       sx={{ p: 2, border: "1px solid grey" }}>
-      <Location handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
+      <Location style={{borderRadius: "50px"}} sx={{borderRadius: "50px"}} handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
       />
       <Guests numGuests={numGuests} handleGuests={handleGuests}
       />
-      <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
+      <StartEndDate startDate={startDate} setStartDate={setStartDate} handleStartDate= {handleStartDate} handleEndDate={handleEndDate} endDate={endDate} setEndDate={setEndDate}
       />
       <Button
         onClick={handleSubmit}

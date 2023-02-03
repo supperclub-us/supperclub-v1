@@ -98,7 +98,7 @@ const SearchBar = () => {
     <Box
       className="search-bar"
       variant="contained"
-      sx={{ p: 2, border: "1px solid grey" }}
+      sx={{ p: 2, border: "1px solid grey", borderRadius: "50px" }}
     >
       <Location
         handleChange={handleChange}
