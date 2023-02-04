@@ -201,7 +201,6 @@ router.post("/chefs/:id/bookings", async (req, res, next) => {
 // CHEFS BOOKINGS PUT /api/users/chefs/:id/bookings/:bookingId
 router.put("/chefs/:id/bookings/:bookingId", async (req, res, next) => {
 
-  console.log("REQ-->", req)
   console.log("REQ BODY", req.body)
 
   try {
