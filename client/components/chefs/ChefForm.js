@@ -285,6 +285,7 @@ const ChefForm = () => {
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
+                    disablePast
                   />
                 </LocalizationProvider>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -296,6 +297,7 @@ const ChefForm = () => {
                       setEndValue(newValue);
                     }}
                     className="chefForm-event-end-date"
+                    disablePast
                   />
                 </LocalizationProvider>
               </div>
