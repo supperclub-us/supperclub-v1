@@ -7,6 +7,7 @@ import { Button, LinearProgress } from "@mui/material";
 import { PageNotFound } from "../index";
 import "./profile.css";
 import EditIcon from '@mui/icons-material/Edit';
+import { Card } from "./card/Card";
 
 const ChefProfile = () => {
   const { id } = useParams();
@@ -77,6 +78,7 @@ const ChefProfile = () => {
                 </Button>
               </div>
             ))
+            ? currentChef.chefBooking.map((booking) => (<Card booking={booking} />))
             : "No Events"}
         </div>
       </div>

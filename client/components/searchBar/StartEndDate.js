@@ -7,7 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const StartEndDate = ({ startDate, setStartDate, endDate, setEndDate, handleStartDate }) => {
+const StartEndDate = ({ startDate, handleStartDate, endDate, setEndDate, handleEndDate }) => {
   return (
     <>
       <FormControl className="form-control" sx={{ m: "1em" }}>
@@ -15,7 +15,7 @@ const StartEndDate = ({ startDate, setStartDate, endDate, setEndDate, handleStar
           <DatePicker
             label="Start Date"
             value={startDate}
-            onChange={(newValue) => setStartDate(newValue)}
+            onChange={(newValue) => handleStartDate(newValue)}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
@@ -25,7 +25,7 @@ const StartEndDate = ({ startDate, setStartDate, endDate, setEndDate, handleStar
           <DatePicker
             label="End Date"
             value={endDate}
-            onChange={(newValue) => setEndDate(newValue)}
+            onChange={(newValue) => handleEndDate(newValue)}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>

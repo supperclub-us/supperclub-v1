@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+// import { GeolocateControl } from "react-map-gl";
 import {
   Box,
   FormGroup,
-  Button
+  Button,
 } from "@mui/material";
 import MapboxAccessToken from "../../env";
 import axios from "axios";
@@ -11,35 +12,63 @@ import Location from "../searchBar/Location";
 import Guests from "../searchBar/Guests";
 import StartEndDate from "../searchBar/StartEndDate";
 import { setReduxViewport } from "../slices/viewportSlice";
+import { setReduxStartDate, setReduxEndDate, setReduxNumGuests } from "../slices/searchBarFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 
-const MapSearchBar = ({ viewport, setViewport }) => {
+const MapSearchBar = ({ viewport, setViewport, numGuests, setNumGuests, startDate, setStartDate, filterStartDate, setFilterStartDate, filterEndDate, setFilterEndDate, setFilterNumGuests, endDate, setEndDate }) => {
 
-  const reduxNumGuests = useSelector((state) => state.numGuests)
-  const [numGuests, setNumGuests] = useState(reduxNumGuests);
 
-  const reduxStartDate = useSelector((state) => state.startEndDate.startDate);
-  const reduxEndDate = useSelector((state) => state.startEndDate.endDate)
-  const [startDate, setStartDate] = useState(reduxStartDate);
-  const [endDate, setEndDate] = useState(reduxEndDate);
-  
+  // value that is input into the search bar
   const [value, setValue] = useState('');
+
+  // actual suggestions that populate underneath the value
   const [suggestions, setSuggestions] = useState([]);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setReduxViewport(viewport));
-  }, [value, viewport, dispatch])
+    dispatch(setReduxNumGuests(numGuests));
+    dispatch(setReduxStartDate(newIntStartDate));
+    dispatch(setReduxEndDate(newIntEndDate));
+  }, [value, viewport, numGuests, startDate, endDate, dispatch])
 
 
-  // FIX THIS
+
+  // formatting of start and end date to array of integers
+  const newStartDate = startDate.format('MM DD YYYY').split(' ');
+  const newEndDate = endDate.format('MM DD YYYY').split(' ');
+  //change array elements to integers
+  const newIntStartDate = newStartDate.map((element) => parseInt(element))
+  console.log("newIntStartDate", newIntStartDate)
+  const newIntEndDate = newEndDate.map((element) => parseInt(element))
+  console.log("newIntEndDate", newIntEndDate)
+
+
+  const handleStartDate = (newValue) => {
+    setStartDate(newValue);
+    setFilterStartDate(true);
+    // dispatch(setReduxStartDate(newIntStartDate));
+  }
+
+  const handleEndDate = (newValue) => {
+    setEndDate(newValue);
+    setFilterEndDate(true);
+    // dispatch(setReduxEndDate(newIntEndDate));
+  }
+
   const handleGuests = (e) => {
     setNumGuests(e.target.value);
+    setFilterNumGuests(true);
   };
+
+  const handleReset = () => {
+    setFilterStartDate(false)
+    setFilterEndDate(false)
+    setFilterNumGuests(false)
+  }
 
   const handleChange = async (event) => {
     setValue(event.target.value);
@@ -54,10 +83,23 @@ const MapSearchBar = ({ viewport, setViewport }) => {
 
   };
 
+  // submit function to map search and filter
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
+    // setFilterNumGuests(true);
+    // dispatch(setReduxNumGuests(numGuests));
+
+
+
+    // BOOLEAN Logic for handling the filter function in the map search bar - need conditional logic
+
+
+    // if(filterStartDate && filterEndDate) {
+
+    // }
+
   };
 
 
@@ -69,14 +111,14 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 13})
+      setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11 })
       setLatitude(lat);
       setLongitude(lng);
       return {
         ...viewport,
         latitude: lat,
         longitude: lng,
-        zoom: 13
+        zoom: 11
       }
     } catch (err) {
       console.log(err);
@@ -90,22 +132,26 @@ const MapSearchBar = ({ viewport, setViewport }) => {
       className="search-bar"
       variant="contained"
       sx={{ p: 2, border: "1px solid grey" }}>
-      <Location handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
+      <Location style={{ borderRadius: "50px" }} sx={{ borderRadius: "50px" }} endIcon={<LocationSearchingIcon />} handleChange={handleChange} value={value} setValue={setValue} suggestions={suggestions} setSuggestions={setSuggestions}
       />
-      <Guests numGuests={numGuests} handleGuests={handleGuests}
-      />
-      <StartEndDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
-      />
-      <Button 
+      <Button
         onClick={handleSubmit}
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
           backgroundColor: "#EB5757",
           color: "whitesmoke",
+          width: "200px"
         }}
       >
-        Submit
+        Locate
+        <LocationSearchingIcon />
       </Button>
+      {/* <GeolocateControl /> */}
+      <Guests numGuests={numGuests} handleGuests={handleGuests}
+      />
+      <StartEndDate startDate={startDate} setStartDate={setStartDate} handleStartDate={handleStartDate} handleEndDate={handleEndDate} endDate={endDate} setEndDate={setEndDate}
+      />
+      <Button onClick={handleReset}> Reset </Button>
     </Box>
   );
 };

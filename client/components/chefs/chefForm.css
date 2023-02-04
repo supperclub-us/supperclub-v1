@@ -80,15 +80,22 @@
 }
 
 .chefs-card-bookingcards-container {
-  max-width: 100%;
-  display: flex;
+    max-width: 100%;
+    display: flex;
+    
+    overflow-x: auto;
+    border-top: 1px solid rgb(208, 208, 208);
+    padding: 1em;
+    margin: auto;
+   justify-content: center;
+   object-fit: covered;
+}
 
-  overflow-x: auto;
-  border-top: 1px solid rgb(208, 208, 208);
-  padding: 1em;
-  margin: 1em;
-  justify-content: center;
-  object-fit: covered;
+.common-button {
+    height: 80px;
+    width: 150px;
+    font-size: 50px;
+    margin: auto;
 }
 
 .chefName {
@@ -180,3 +187,16 @@ p1 {
   padding: 20px;
   gap: 1em;
 }
+
+.modalCard {
+   
+	width: 500px;
+	height: 400px;
+	margin: 10px;
+	padding: 10px;
+    border: none;
+
+}
+
+
+

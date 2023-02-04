@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleMember, selectSingleMember } from "../slices/singleMemberSlice"
 import { LinearProgress, Button } from "@mui/material";
 import { PageNotFound } from "../"
+import { Card } from "./card/Card";
 
 const MemberProfile = ({ user }) => {
     const { id } = useParams();
@@ -45,13 +46,7 @@ const MemberProfile = ({ user }) => {
                 <h3>YOUR UPCOMING SUPPERS</h3>
                 <div className="profileContainer">
                     {currentMember && currentMember.memberBooking?.length
-                        ? currentMember.memberBooking.map((booking) => (
-                            <div key={booking.id} className="cards">
-                                <h5>{booking.title}</h5>
-                                <p>{booking.menu}</p>
-                                <img className="food-image" src={booking.imageUrl}/>
-                            </div>
-                        ))
+                        ? currentMember.memberBooking.map((booking) => (<Card booking={booking} />))
                         : "No Events"}
                 </div>
             </div>
