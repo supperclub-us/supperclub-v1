@@ -17,6 +17,7 @@ const StartEndDate = ({ startDate, handleStartDate, endDate, setEndDate, handleE
             value={startDate}
             onChange={(newValue) => handleStartDate(newValue)}
             renderInput={(params) => <TextField {...params} />}
+            disablePast
           />
         </LocalizationProvider>
       </FormControl>
@@ -27,6 +28,7 @@ const StartEndDate = ({ startDate, handleStartDate, endDate, setEndDate, handleE
             value={endDate}
             onChange={(newValue) => handleEndDate(newValue)}
             renderInput={(params) => <TextField {...params} />}
+            disablePast
           />
         </LocalizationProvider>
       </FormControl>

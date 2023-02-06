@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
-import "./signup.css";
+import "./signUp.css";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
