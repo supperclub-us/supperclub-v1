@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   fetchSingleBookingAsync,
-  selectSingleChefBookings,
+  selectSingleBooking,
 } from "../slices/singleBookingSlice";
 import {
   Box,
@@ -42,7 +42,7 @@ const MemberBooking = ({ user }) => {
     dispatch(fetchSingleMember(userId));
   }, [dispatch, user, bookingId]);
 
-  const { booking, error, isLoading } = useSelector(selectSingleChefBookings);
+  const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
 
   const [loginSignUp, setLoginSignup] = useState(false);
