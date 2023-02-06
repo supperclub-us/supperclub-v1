@@ -227,7 +227,6 @@ const EditChefForm = () => {
             latitude: location[1], // the location variable sends back an array of [long, lat]
             longitude: location[0], // the location variable sends back an array of [long, lat]
             bookingsId,
-            // bookingsId: bookingsId
           })
         );
       }
