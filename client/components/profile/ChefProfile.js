@@ -65,7 +65,7 @@ const ChefProfile = () => {
         <h3>YOUR EVENTS</h3>
         <div className="profileContainer">
           {currentChef && currentChef.chefBooking?.length
-            ? currentChef.chefBooking.map((booking) => (<Card booking={booking} />))
+            ? currentChef.chefBooking.map((booking) => (<Card key={booking.id} booking={booking} />))
             : "No Events"}
         </div>
             <Button

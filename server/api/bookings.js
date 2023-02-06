@@ -53,7 +53,7 @@ router.get("/:id", async (req, res, next) => {
   }
 })
 
-// BOOKINGS PUT /api/bookings/:id
+// BOOKINGS PUT /api/bookings/:bookingId/user/:userId
 router.put("/:bookingId/user/:userId", async (req, res, next) => {
   try {
     const booking = await Booking.findByPk(req.params.bookingId, {
@@ -71,16 +71,11 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
         }
       ]
     })
-
-    console.log("booking put req in api folder BEFORE DECREMENT --->", booking)
-
     const user = await User.findByPk(req.params.userId)
-    
+    if (!booking) {
+      res.status(401).send("no booking available")
+    }
     await booking.update(req.body)
-
-    console.log("booking put req in api folder --->", booking)
-    console.log("user put req in api folder --->", user)
-
     res.status(201).json(await booking.addMemberBooking(user))
   }
   catch(err){
