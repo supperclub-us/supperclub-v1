@@ -1,5 +1,6 @@
 import React from "react"
 import { Button } from "@mui/material"
+import EditIcon from '@mui/icons-material/Edit';
 
 
 export const Card = ({booking}) => {
@@ -11,6 +12,12 @@ export const Card = ({booking}) => {
             <h5>{booking.title}</h5>
             <p className="bookingMenu">{booking.menu}</p>
             <img className="food-image" src={booking.imageUrl} />
+            <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+            >
+                Edit Event
+            </Button>
         </div>
     )
 }
