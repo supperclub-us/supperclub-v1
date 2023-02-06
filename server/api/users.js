@@ -124,7 +124,7 @@ router.post("/members/:id/bookings", async (req, res, next) => {
 });
 
 // CHEFS GET /api/users/chefs/:id
-router.get("/chefs/:id", requireToken, async (req, res, next) => {
+router.get("/chefs/:id", async (req, res, next) => {
   try {
     const chef = await User.findByPk(req.params.id, {
       where: {
@@ -197,3 +197,34 @@ router.post("/chefs/:id/bookings", async (req, res, next) => {
     next(err);
   }
 });
+
+// CHEFS BOOKINGS PUT /api/users/chefs/:id/bookings/:bookingId
+router.put("/chefs/:id/bookings/:bookingId", async (req, res, next) => {
+
+  console.log("REQ BODY", req.body)
+
+  try {
+    const chef = await User.findByPk(req.params.id, {
+      where: {
+        role: "CHEF",
+      },
+      include: [
+        {
+          model: Booking,
+          as: "chefBooking",
+        },
+      ],
+    });
+    
+    // console.log("CHEF-->", chef)
+
+    if (chef.role === "CHEF") {
+      const booking = await Booking.findByPk(req.params.bookingId);
+      res.json(await booking.update(req.body));
+    } else {
+      throw new Error("Not Authenticated");
+    }
+  } catch (err) {
+    next(err);
+  }
+})

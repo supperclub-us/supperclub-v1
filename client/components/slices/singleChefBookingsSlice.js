@@ -60,6 +60,51 @@ export const addSingleChefBooking = createAsyncThunk(
   }
 );
 
+// create thunk to edit chef bookings
+export const editSingleChefBooking = createAsyncThunk(
+  "edit/singleChefBooking",
+  async ({id,
+    title,
+    menu,
+    cuisineId,
+    suggestedDonation,
+    startValue,
+    endValue,
+    max,
+    openSeats,
+    address1,
+    address2,
+    city,
+    state,
+    zip,
+    latitude,
+    longitude
+  }) => {
+    try {
+      const { data } = await axios.put(`/api/users/chefs/${id}/bookings/`, {
+        title,
+        menu,
+        cuisineId,
+        suggestedDonation,
+        startDateTime: startValue,
+        endDateTime: endValue,
+        maxSeats: max,
+        openSeats,
+        address1,
+        address2,
+        city,
+        state,
+        zipCode: zip,
+        latitude,
+        longitude,
+        chefId: id
+      });
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+});
+
 const singleChefBookingsSlice = createSlice({
   name: "singleChefBookings",
   initialState: [],
@@ -71,6 +116,9 @@ const singleChefBookingsSlice = createSlice({
     builder.addCase(addSingleChefBooking.fulfilled, (state, action) => {
       state.push(action.payload);
     });
+    builder.addCase(editSingleChefBooking.fulfilled, (state, action) => {
+      return action.payload;
+    })
   },
 });
 
