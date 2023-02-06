@@ -65,22 +65,15 @@ const ChefProfile = () => {
         <h3>YOUR EVENTS</h3>
         <div className="profileContainer">
           {currentChef && currentChef.chefBooking?.length
-            ? currentChef.chefBooking.map((booking) => (
-              <div key={booking.id} className="cards">
-                <h5>{booking.title}</h5>
-                <p>{booking.menu}</p>
-                <img className="food-image" src={booking.imageUrl}/>
-                <Button
-                  variant="contained"
-                  startIcon={<EditIcon />}
-                >
-                  Edit Event
-                </Button>
-              </div>
-            ))
             ? currentChef.chefBooking.map((booking) => (<Card booking={booking} />))
             : "No Events"}
         </div>
+            <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+            >
+                Edit Event
+            </Button>
       </div>
     </>
   );

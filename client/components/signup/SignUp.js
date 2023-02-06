@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
+import "./signup.css";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
@@ -47,8 +48,6 @@ const SignUp = ({handleOpen}) => {
 
     setOpen(true);
 
-    
-
     dispatch(
       authenticate({
         role,
@@ -73,7 +72,7 @@ const SignUp = ({handleOpen}) => {
   };
 
   return (
-    <div>
+    <div className="signup-form-container">
       <form id="signup-signup-form" onSubmit={handleSubmit}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Sign-Up Form
@@ -109,6 +108,7 @@ const SignUp = ({handleOpen}) => {
             value={firstName}
             type="text"
             placeholder="First Name"
+            label="First Name"
             required
           />
 
@@ -118,6 +118,7 @@ const SignUp = ({handleOpen}) => {
             value={lastName}
             type="text"
             placeholder="Last Name"
+            label="Last Name"
             required
           />
 
@@ -126,7 +127,8 @@ const SignUp = ({handleOpen}) => {
             name="bio"
             value={bio}
             type="text"
-            placeholder="Bio"
+            placeholder="Biography"
+            label="Biography"
           />
 
           <TextField
@@ -135,22 +137,23 @@ const SignUp = ({handleOpen}) => {
             value={mobileNumber}
             type="text"
             placeholder="Mobile Number"
+            label="Mobile Number"
           />
 
           <TextField
             onChange={(e) => setEmail(e.target.value)}
-            name="email"
             value={email}
             type="text"
             placeholder="Email"
+            label="Email"
           />
 
           <TextField
             onChange={(e) => setPassword(e.target.value)}
-            name="password"
             value={password}
             type="password"
             placeholder="Password"
+            label="Password"
           />
 
           <div>
