@@ -27,19 +27,23 @@ import {
   selectSingleMember,
 } from "../slices/singleMemberSlice";
 
-const MemberBooking = ({user}) => {
-  // const user = useSelector((state) => state.auth.me);
+const MemberBooking = ({ user }) => {
 
-  console.log("--->", user, "<---");
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { booking, error, isLoading } = useSelector(selectSingleChefBookings);
+  console.log("----USER--->", user, "<---USE----");
 
   const { bookingId } = useParams();
-
+  const { id } = user
+  const userId = id
   const [guests, setGuests] = useState(1);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("booking id and user id", {bookingId, userId})
+    dispatch(fetchSingleBookingAsync(bookingId))
+    dispatch(fetchSingleMember(userId))
+  }, [dispatch, user, bookingId]);
+  
+  const { booking, error, isLoading } = useSelector(selectSingleChefBookings);
   console.log("booking ---<>>>", booking);
 
   const [loginSignUp, setLoginSignup] = useState(false);
@@ -48,20 +52,16 @@ const MemberBooking = ({user}) => {
   const { currentMember } = useSelector(selectSingleMember);
   console.log("current member, ", currentMember)
 
-  useEffect(() => {
-    dispatch(fetchSingleBookingAsync(bookingId))
-    dispatch(fetchSingleMember(user.id))
-  }, [dispatch]);
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (!user.id) {
+    if (!userId) {
       setLoginSignup(true);
     }
-    if (user.id) {
+    if (userId) {
       setLoginSignup(!loginSignUp);
-      console.log("BOOKING ---><>",  {...booking}, "USER ID", user.id );
-      dispatch(addMemberBookings({...booking, userId: user.id}));
+      console.log("BOOKING ---><>",  {...booking}, "USER ID", userId );
+      dispatch(addMemberBookings({...booking, userId,}));
       navigate("/");
     }
   };
