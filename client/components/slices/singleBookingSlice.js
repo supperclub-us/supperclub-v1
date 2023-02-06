@@ -13,6 +13,25 @@ export const fetchSingleBookingAsync = createAsyncThunk(
   }
 );
 
+export const addMemberBookings = createAsyncThunk(
+  "add/memberBooking",
+  async ({ ...booking }) => {
+    const { id, userId, newAmountOfOpenSeats } = booking
+    try {
+      console.log("BOOKING", booking);
+      console.log("NEW AMT OF OPEN SEATS --->", newAmountOfOpenSeats)
+      const { data } = await axios.put(`/api/bookings/${id}/user/${userId}`, {
+        id,
+        openSeats: newAmountOfOpenSeats,
+      });
+      console.log("DATA FROM BOOKINGS ---->", data);
+      return data
+    } catch (err) {
+      console.error(err);
+    }
+  }
+);
+
 const singleBookingSlice = createSlice({
   name: "singleBooking",
   initialState: {
@@ -33,6 +52,9 @@ const singleBookingSlice = createSlice({
     builder.addCase(fetchSingleBookingAsync.rejected, (state, action)=> {
       state.isLoading = false;
       state.error = action.error.message
+    })
+    builder.addCase(addMemberBookings.fulfilled, (state, action) => {
+      state.booking = action.payload
     })
   },
 });

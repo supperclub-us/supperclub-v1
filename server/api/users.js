@@ -100,28 +100,6 @@ router.get("/members/:id/bookings", async (req, res, next) => {
   }
 });
 
-// MEMBERS POST /api/users/members/:id/bookings
-router.post("/members/:id/bookings", async (req, res, next) => {
-  try {
-    const member = await User.findByPk(req.params.id, {
-      include: [
-        {
-          model: Booking,
-          as: "memberBooking",
-        },
-      ],
-    });
-    console.log("REQ BODY!!!", req.body);
-    res.status(201).json(
-      member.addMemberBooking(req.body.id, {
-        as: "memberBooking",
-        through: "users_bookings",
-      })
-    );
-  } catch (err) {
-    next(err);
-  }
-});
 
 // CHEFS GET /api/users/chefs/:id
 router.get("/chefs/:id", async (req, res, next) => {
