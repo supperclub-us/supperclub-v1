@@ -1,11 +1,14 @@
 import React from "react"
 import { Button } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
 
 
 export const Card = ({booking}) => {
     console.log("holaaaa", booking)
     console.log("adios", booking.id)
+
+    const navigate = useNavigate();
     
     return (
         <div key={booking.id} className="cards">
@@ -15,6 +18,7 @@ export const Card = ({booking}) => {
             <Button
                 variant="contained"
                 startIcon={<EditIcon />}
+                onClick={ () => {console.log("you clicked the edit event button!")}}
             >
                 Edit Event
             </Button>
