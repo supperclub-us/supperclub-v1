@@ -118,16 +118,16 @@ const EditChefForm = () => {
   const [cuisineId, setCuisineId] = useState("");
   console.log("cuisineId--->", cuisineId);
 
-  const [suggestedDonation, setSuggestedDonation] = useState(null);
+  const [suggestedDonation, setSuggestedDonation] = useState("");
   console.log("suggestedDonation--->", suggestedDonation);
 
   const [startValue, setStartValue] = useState(dayjs());
-  console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
+  // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
 
   const [endValue, setEndValue] = useState(dayjs());
-  console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
+  // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
 
-  const [max, setMax] = useState(null);
+  const [max, setMax] = useState("");
   console.log("max--->", max);
 
   const [openSeats, setOpenSeats] = useState("");
@@ -148,25 +148,47 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   console.log("zip--->", zip);
 
-
-  // // the different states from the selectSingleChef State
-  // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-
-
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleChefBooking(userId));
   }, []);
 
+  const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
+  console.log("singleBooking--->", singleBooking);
+  
   useEffect(() => {
     console.log("<<< ChefBookings CHANGED >>>")
 
-    const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
-    console.log("singleBooking--->", singleBooking);
+
 
     if(singleBooking) {
       console.log("singleBooking.title--->", singleBooking.title);
+      console.log("singleBooking.cuisineId--->", singleBooking.cuisineId);
+      console.log("singleBooking.suggestedDonation--->", singleBooking.suggestedDonation);
+      console.log("singleBooking.menu--->", singleBooking.menu);
+      console.log("singleBooking.startDateTime--->", singleBooking.startDateTime);
+      console.log("singleBooking.endDateTime--->", singleBooking.endDateTime);
+      console.log("singleBooking.max--->", singleBooking.maxSeats);
+      console.log("singleBooking.openSeats--->", singleBooking.openSeats);
+      console.log("singleBooking.address1--->", singleBooking.address1);
+      console.log("singleBooking.address2--->", singleBooking.address2);
+      console.log("singleBooking.city--->", singleBooking.city);
+      console.log("singleBooking.state--->", singleBooking.state);
+      console.log("singleBooking.zip--->", singleBooking.zipCode);
+      
       setTitle(singleBooking.title);
+      setCuisineId(singleBooking.cuisineId);
+      setSuggestedDonation(singleBooking.suggestedDonation || "")
+      setMenu(singleBooking.menu);
+      setStartValue(dayjs(`${singleBooking.startDateTime}`, "MM/DD/YYYY h:mmA"))
+      setEndValue(dayjs(`${singleBooking.endDateTime}`, "MM/DD/YYYY h:mmA"))
+      setMax(singleBooking.maxSeats);
+      setOpenSeats(singleBooking.openSeats);
+      setAddress1(singleBooking.address1);
+      setAddress2(singleBooking.address2 || "");
+      setCity(singleBooking.city);
+      setState(singleBooking.state);
+      setZip(singleBooking.zipCode);
     } 
     
   }, [chefBookings]);
@@ -269,7 +291,7 @@ const EditChefForm = () => {
                         <InputAdornment position="start">$</InputAdornment>
                       }
                       label="Donation"
-                      placeholder="Per member donation"
+                      value={suggestedDonation}
                       onChange={(e) => setSuggestedDonation(e.target.value)}
                     />
                   </FormControl>
@@ -291,7 +313,7 @@ const EditChefForm = () => {
                   label="Menu"
                   multiline
                   rows={20}
-                  placeholder="Type your menu here"
+                  value={menu}
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
@@ -305,6 +327,7 @@ const EditChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
+                      console.log("newValue-->", newValue)
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
@@ -331,7 +354,7 @@ const EditChefForm = () => {
                     label="Open Seats"
                     onChange={(e) => setOpenSeats(e.target.value)}
                     type="number"
-                    placeholder="Open seats"
+                    value={openSeats}
                     InputProps={{
                       inputProps: { min: 0 },
                     }}
@@ -342,7 +365,7 @@ const EditChefForm = () => {
                     label="Max Seats"
                     onChange={(e) => setMax(e.target.value)}
                     type="number"
-                    placeholder="Max seats"
+                    value={max}
                     InputProps={{
                       inputProps: { min: 0 },
                     }}
@@ -354,7 +377,7 @@ const EditChefForm = () => {
                   <TextField
                     onChange={(e) => setAddress1(e.target.value)}
                     type="text"
-                    placeholder="Address 1"
+                    value={address1}
                     label="Address 1"
                     fullWidth
                   />
@@ -363,7 +386,7 @@ const EditChefForm = () => {
                   <TextField
                     onChange={(e) => setAddress2(e.target.value)}
                     type="text"
-                    placeholder="Address 2 (optional)"
+                    value={address2}
                     label="Address 2"
                     fullWidth
                   />
@@ -372,7 +395,7 @@ const EditChefForm = () => {
                   <TextField
                     onChange={(e) => setCity(e.target.value)}
                     type="text"
-                    placeholder="City"
+                    value={city}
                     label="City"
                     fullWidth
                   />
@@ -398,7 +421,7 @@ const EditChefForm = () => {
                     <TextField
                       onChange={(e) => setZip(e.target.value)}
                       type="text"
-                      placeholder="Zip Code"
+                      value={zip}
                       label="Zip Code"
                     />
                   </div>

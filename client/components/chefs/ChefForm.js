@@ -282,6 +282,7 @@ const ChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
+                      console.log("newValue from start date and time picker--> ", newValue)
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
