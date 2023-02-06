@@ -357,9 +357,9 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 
 
 
-.authForm {
+/* .authForm {
   border: 1px solid purple;
-}
+} */
 
 
 
@@ -374,7 +374,7 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 } */
 
 
-.form-control > * {
+/* .form-control > * {
   margin: 3em;
 }
 
@@ -384,9 +384,4 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 
 .authForm {
   border: 1px solid green;
-}
-
-
-
-
-
+} */

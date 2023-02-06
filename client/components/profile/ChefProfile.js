@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button, LinearProgress } from "@mui/material";
 import { PageNotFound } from "../index";
 import "./profile.css";
+import EditIcon from '@mui/icons-material/Edit';
 import { Card } from "./card/Card";
 
 const ChefProfile = () => {
@@ -67,6 +68,12 @@ const ChefProfile = () => {
             ? currentChef.chefBooking.map((booking) => (<Card booking={booking} />))
             : "No Events"}
         </div>
+            <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+            >
+                Edit Event
+            </Button>
       </div>
     </>
   );

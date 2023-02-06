@@ -31,7 +31,7 @@ const Navbar = () => {
     if (modalScreen === "login") {
       return <Login handleOpen={handleOpen} />;
     }
-    return <p>default</p>;
+
   };
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
