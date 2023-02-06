@@ -13,51 +13,24 @@ export const fetchSingleBookingAsync = createAsyncThunk(
   }
 );
 
-// create thunk to edit chef bookings
-export const editSingleBooking = createAsyncThunk(
-  "edit/singleBooking",
-  async ({id,
-    title,
-    menu,
-    cuisineId,
-    suggestedDonation,
-    startValue,
-    endValue,
-    max,
-    openSeats,
-    address1,
-    address2,
-    city,
-    state,
-    zip,
-    latitude,
-    longitude,
-    bookingsId
-  }) => {
+export const addMemberBookings = createAsyncThunk(
+  "add/memberBooking",
+  async ({ ...booking }) => {
+    const { id, userId, newAmountOfOpenSeats } = booking
     try {
-      const { data } = await axios.put(`/api/users/chefs/${id}/bookings/${bookingsId}`, {
-        title,
-        menu,
-        cuisineId,
-        suggestedDonation,
-        startDateTime: startValue,
-        endDateTime: endValue,
-        maxSeats: max,
-        openSeats,
-        address1,
-        address2,
-        city,
-        state,
-        zipCode: zip,
-        latitude,
-        longitude,
-        chefId: id,
+      console.log("BOOKING", booking);
+      console.log("NEW AMT OF OPEN SEATS --->", newAmountOfOpenSeats)
+      const { data } = await axios.put(`/api/bookings/${id}/user/${userId}`, {
+        id,
+        openSeats: newAmountOfOpenSeats,
       });
-      return data;
+      console.log("DATA FROM BOOKINGS ---->", data);
+      return data
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
-});
+  }
+);
 
 const singleBookingSlice = createSlice({
   name: "singleBooking",
@@ -80,7 +53,7 @@ const singleBookingSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message
     })
-    builder.addCase(editSingleBooking.fulfilled, (state, action) => {
+    builder.addCase(addMemberBookings.fulfilled, (state, action) => {
       state.booking = action.payload
     })
   },

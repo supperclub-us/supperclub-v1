@@ -14,39 +14,40 @@ export const fetchSingleMember = createAsyncThunk(
   }
 );
 
-export const addMemberBookings = createAsyncThunk(
-  "add/memberBooking",
-  async ({ ...booking }) => {
-    const { id, title, menu, suggestedDonation, startDateTime, endDateTime, maxSeats, openSeats, address1, address2, city, state, zipCode, latitude, longitude, chefId, cuisineId, userId  } = booking
-    try {
-      console.log("BOOKING", booking);
-      console.log(id, title, menu)
-      const response = await axios.post(`/api/users/members/${userId}/bookings`, {
-        id,
-        // title,
-        // menu,
-        // suggestedDonation,
-        // startDateTime,
-        // endDateTime,
-        // maxSeats,
-        // openSeats,
-        // address1,
-        // address2,
-        // city,
-        // state,
-        // zipCode,
-        // latitude,
-        // longitude,
-        // chefId,
-        // cuisineId,
-      });
-      console.log("DATA FROM BOOKINGS ---->", response);
-      return response.data
-    } catch (err) {
-      console.error(err);
-    }
-  }
-);
+// export const addMemberBookings = createAsyncThunk(
+//   "add/memberBooking",
+//   async ({ ...booking }) => {
+//     const { id, title, menu, suggestedDonation, startDateTime, endDateTime, maxSeats, openSeats, address1, address2, city, state, zipCode, latitude, longitude, chefId, cuisineId, userId  } = booking
+//     try {
+//       console.log("BOOKING", booking);
+//       console.log(id, title, menu)
+//       const { data } = await axios.post(`/api/bookings/${id}`)
+//       // const response = await axios.post(`/api/users/members/${userId}/bookings`, {
+//       //   id,
+//       //   // title,
+//       //   // menu,
+//       //   // suggestedDonation,
+//       //   // startDateTime,
+//       //   // endDateTime,
+//       //   // maxSeats,
+//       //   // openSeats,
+//       //   // address1,
+//       //   // address2,
+//       //   // city,
+//       //   // state,
+//       //   // zipCode,
+//       //   // latitude,
+//       //   // longitude,
+//       //   // chefId,
+//       //   // cuisineId,
+//       // });
+//       console.log("DATA FROM BOOKINGS ---->", data);
+//       return data
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   }
+// );
 
 const initialState = {
   currentMember: {},
@@ -71,11 +72,6 @@ const singleMemberSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
-    builder.addCase(addMemberBookings.fulfilled, (state, action)=>{
-        state.isLoading = false;
-        console.log("THIS IS THE ACTION PAYLOAD: ", action.payload)
-        state.currentMember?.memberBooking.push(action.payload)
-    })
   },
 });
 
