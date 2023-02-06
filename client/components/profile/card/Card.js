@@ -9,7 +9,7 @@ export const Card = ({booking}) => {
     console.log("adios", booking.id)
 
     const navigate = useNavigate();
-    
+    // http://localhost:8080/users/chefs/7/bookings/9
     return (
         <div key={booking.id} className="cards">
             <h5>{booking.title}</h5>
@@ -18,7 +18,7 @@ export const Card = ({booking}) => {
             <Button
                 variant="contained"
                 startIcon={<EditIcon />}
-                onClick={ () => {console.log("you clicked the edit event button!")}}
+                onClick={ () => { navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`)}}
             >
                 Edit Event
             </Button>
