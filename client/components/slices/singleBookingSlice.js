@@ -59,7 +59,7 @@ const singleBookingSlice = createSlice({
   },
 });
 
-export const selectSingleChefBookings = (state) => {
+export const selectSingleBooking = (state) => {
   return state.singleBooking;
 };
 

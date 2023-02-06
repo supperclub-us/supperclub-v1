@@ -67,13 +67,8 @@ const ChefProfile = () => {
           {currentChef && currentChef.chefBooking?.length
             ? currentChef.chefBooking.map((booking) => (<Card key={booking.id} booking={booking} />))
             : "No Events"}
+
         </div>
-            <Button
-                variant="contained"
-                startIcon={<EditIcon />}
-            >
-                Edit Event
-            </Button>
       </div>
     </>
   );
