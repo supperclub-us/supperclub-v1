@@ -22,10 +22,11 @@ import {
 //css
 import "./memberBooking.css";
 import {
-  addMemberBookings,
   fetchSingleMember,
   selectSingleMember,
 } from "../slices/singleMemberSlice";
+import { addMemberBookings } from "../slices/singleBookingSlice";
+
 
 const MemberBooking = ({ user }) => {
 
@@ -59,9 +60,14 @@ const MemberBooking = ({ user }) => {
       setLoginSignup(true);
     }
     if (userId) {
+      // find guest amount selected:
+      const numGuests = guests
+      const bookingAmtOfGuests = booking.openSeats
+      const newAmountOfOpenSeats = bookingAmtOfGuests - numGuests
+      console.log({numGuests, bookingAmtOfGuests, newAmountOfOpenSeats})
       setLoginSignup(!loginSignUp);
       console.log("BOOKING ---><>",  {...booking}, "USER ID", userId );
-      dispatch(addMemberBookings({...booking, userId,}));
+      dispatch(addMemberBookings({...booking, userId, newAmountOfOpenSeats}));
       navigate("/");
     }
   };
