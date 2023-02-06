@@ -64,7 +64,7 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Route path="/users/profile" element={<Profile />} />
       ) : null} */}
-      <Route path="*" element={<PageNotFound />} />
+      {/* <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   );
 };

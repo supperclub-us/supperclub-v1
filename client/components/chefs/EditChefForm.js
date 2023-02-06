@@ -94,7 +94,22 @@ const EditChefForm = () => {
   const userId = useSelector((state) => state.auth.me.id);
   // console.log("userId--->", userId);
 
-  const [title, setTitle] = useState("");
+  const dispatch = useDispatch();
+  
+  const { chefId, bookingsId } = useParams();
+  console.log("CHEF from EditChefForm.js -----------> ", chefId);
+  console.log("BOOKINGS from EditChefForm.js -----------> ", bookingsId);
+
+  const chefBookings = useSelector(selectSingleChefBookings);
+  console.log("chefBooking--->", chefBookings)
+
+  // filter on chefBookings to get the single booking
+  // const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
+  // console.log("singleBooking--->", singleBooking);
+
+  // useSelector(selectSingleChef);
+
+  const [title, setTitle] = useState('');
   console.log("title--->", title);
 
   const [menu, setMenu] = useState("");
@@ -133,28 +148,28 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   console.log("zip--->", zip);
 
-  const { chefId, bookingsId } = useParams();
-  console.log("CHEF from EditChefForm.js -----------> ", chefId);
-  console.log("BOOKINGS from EditChefForm.js -----------> ", bookingsId);
 
   // // the different states from the selectSingleChef State
   // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
 
-  const dispatch = useDispatch();
-
-  const chefBookings = useSelector(selectSingleChefBookings);
-  console.log("chefBooking--->", chefBookings)
-
-  // filter on chefBookings to get the single booking
-  const singleBooking = chefBookings.filter((booking) => booking.id === Number(bookingsId));
-  console.log("singleBooking--->", singleBooking);
-
-  useSelector(selectSingleChef);
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleChefBooking(userId));
   }, []);
+
+  useEffect(() => {
+    console.log("<<< ChefBookings CHANGED >>>")
+
+    const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
+    console.log("singleBooking--->", singleBooking);
+
+    if(singleBooking) {
+      console.log("singleBooking.title--->", singleBooking.title);
+      setTitle(singleBooking.title);
+    } 
+    
+  }, [chefBookings]);
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
@@ -218,7 +233,7 @@ const EditChefForm = () => {
                   label="Title of Event"
                   onChange={(e) => setTitle(e.target.value)}
                   type="text"
-                  defaultValue={ singleBooking && singleBooking.length ? singleBooking[0].title : '' }
+                  value={title}
                   fullWidth
                 />
               </div>
