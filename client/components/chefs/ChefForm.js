@@ -30,19 +30,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL - Alabama",
-  "AK - Alaska",
-  "AZ - Arizona",
-  "AR - Arkansas",
-  "AS - American Samoa",
-  "CA - California",
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "AS",
+  "CA",
   "CO",
   "CT",
   "DE",
   "DC",
   "FL",
   "GA",
-  "GU - Guam",
+  "GU",
   "HI",
   "ID",
   "IL",
@@ -94,43 +94,43 @@ const ChefForm = () => {
   // console.log("userId--->", userId);
 
   const [title, setTitle] = useState("");
-  console.log("title--->", title);
+  // console.log("title--->", title);
 
   const [menu, setMenu] = useState("");
-  console.log("menu--->", menu);
+  // console.log("menu--->", menu);
 
   const [cuisineId, setCuisineId] = useState("");
-  console.log("cuisineId--->", cuisineId);
+  // console.log("cuisineId--->", cuisineId);
 
   const [suggestedDonation, setSuggestedDonation] = useState(null);
-  console.log("suggestedDonation--->", suggestedDonation);
+  // console.log("suggestedDonation--->", suggestedDonation);
 
   const [startValue, setStartValue] = useState(dayjs());
-  console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
+  // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
 
   const [endValue, setEndValue] = useState(dayjs());
-  console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
+  // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
 
   const [max, setMax] = useState(null);
-  console.log("max--->", max);
+  // console.log("max--->", max);
 
   const [openSeats, setOpenSeats] = useState("");
-  console.log("openSeats--->", openSeats);
+  // console.log("openSeats--->", openSeats);
 
   const [address1, setAddress1] = useState("");
-  console.log("address1--->", address1);
+  // console.log("address1--->", address1);
 
   const [address2, setAddress2] = useState("");
-  console.log("address2--->", address2);
+  // console.log("address2--->", address2);
 
   const [city, setCity] = useState("");
-  console.log("city--->", city);
+  // console.log("city--->", city);
 
   const [state, setState] = useState("");
-  console.log("state--->", state);
+  // console.log("state--->", state);
 
   const [zip, setZip] = useState("");
-  console.log("zip--->", zip);
+  // console.log("zip--->", zip);
 
   const { chefId } = useParams();
   // console.log("CHEF -----------> ", chefId);
@@ -202,7 +202,7 @@ const ChefForm = () => {
             <Typography variant="h5">Create Your Supper Club Event!</Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className="chefEvent-form"
             >
               <div className="chefForm-title-of-event">
@@ -282,7 +282,6 @@ const ChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
-                      console.log("newValue from start date and time picker--> ", newValue)
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"

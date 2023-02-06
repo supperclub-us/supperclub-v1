@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Form, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
-  editSingleChefBooking,
-  fetchSingleChefBooking,
-  selectSingleChefBookings,
+  fetchSingleChefBooking
 } from "../slices/singleChefBookingsSlice";
+import { editSingleBooking, fetchSingleBookingAsync, selectSingleBooking } from "../slices/singleBookingSlice"
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home } from "../index";
 import MapBoxAccessToken from "../../env";
@@ -100,26 +99,26 @@ const EditChefForm = () => {
   console.log("CHEF from EditChefForm.js -----------> ", chefId);
   console.log("BOOKINGS from EditChefForm.js -----------> ", bookingsId);
 
-  const chefBookings = useSelector(selectSingleChefBookings);
-  console.log("chefBooking--->", chefBookings)
+  const { booking } = useSelector(selectSingleBooking);
+  console.log(">>>>>booking--->", booking)
 
-  // filter on chefBookings to get the single booking
-  // const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
-  // console.log("singleBooking--->", singleBooking);
+  // filter on booking to get the single booking
+  // const booking = booking.find((booking) => booking.id === Number(bookingsId));
+  // console.log("booking--->", booking);
 
   // useSelector(selectSingleChef);
 
   const [title, setTitle] = useState('');
-  console.log("title--->", title);
+  // console.log("title--->", title);
 
   const [menu, setMenu] = useState("");
-  console.log("menu--->", menu);
+  // console.log("menu--->", menu);
 
   const [cuisineId, setCuisineId] = useState("");
-  console.log("cuisineId--->", cuisineId);
+  // console.log("cuisineId--->", cuisineId);
 
   const [suggestedDonation, setSuggestedDonation] = useState("");
-  console.log("suggestedDonation--->", suggestedDonation);
+  // console.log("suggestedDonation--->", suggestedDonation);
 
   const [startValue, setStartValue] = useState(dayjs());
   // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
@@ -128,76 +127,74 @@ const EditChefForm = () => {
   // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
 
   const [max, setMax] = useState("");
-  console.log("max--->", max);
+  // console.log("max--->", max);
 
   const [openSeats, setOpenSeats] = useState("");
-  console.log("openSeats--->", openSeats);
+  // console.log("openSeats--->", openSeats);
 
   const [address1, setAddress1] = useState("");
-  console.log("address1--->", address1);
+  // console.log("address1--->", address1);
 
   const [address2, setAddress2] = useState("");
-  console.log("address2--->", address2);
+  // console.log("address2--->", address2);
 
   const [city, setCity] = useState("");
-  console.log("city--->", city);
+  // console.log("city--->", city);
 
   const [state, setState] = useState("");
-  console.log("state--->", state);
+  // console.log("state--->", state);
 
   const [zip, setZip] = useState("");
-  console.log("zip--->", zip);
+  // console.log("zip--->", zip);
 
   useEffect(() => {
-    dispatch(fetchSingleChef(userId));
-    dispatch(fetchSingleChefBooking(userId));
+    // dispatch(fetchSingleChef(userId));
+    dispatch(fetchSingleBookingAsync(bookingsId));
   }, []);
 
-  const singleBooking = chefBookings.find((booking) => booking.id === Number(bookingsId));
-  console.log("singleBooking--->", singleBooking);
+  // const booking = booking && booking.find((booking) => booking.id === Number(bookingsId));
+  // console.log("booking--->", booking);
   
   useEffect(() => {
-    console.log("<<< ChefBookings CHANGED >>>")
+    // console.log("<<< booking CHANGED >>>")
 
-
-
-    if(singleBooking) {
-      console.log("singleBooking.title--->", singleBooking.title);
-      console.log("singleBooking.cuisineId--->", singleBooking.cuisineId);
-      console.log("singleBooking.suggestedDonation--->", singleBooking.suggestedDonation);
-      console.log("singleBooking.menu--->", singleBooking.menu);
-      console.log("singleBooking.startDateTime--->", singleBooking.startDateTime);
-      console.log("singleBooking.endDateTime--->", singleBooking.endDateTime);
-      console.log("singleBooking.max--->", singleBooking.maxSeats);
-      console.log("singleBooking.openSeats--->", singleBooking.openSeats);
-      console.log("singleBooking.address1--->", singleBooking.address1);
-      console.log("singleBooking.address2--->", singleBooking.address2);
-      console.log("singleBooking.city--->", singleBooking.city);
-      console.log("singleBooking.state--->", singleBooking.state);
-      console.log("singleBooking.zip--->", singleBooking.zipCode);
+    if(booking) {
+      // console.log("booking.title--->", booking.title);
+      // console.log("booking.cuisineId--->", booking.cuisineId);
+      // console.log("booking.suggestedDonation--->", booking.suggestedDonation);
+      // console.log("booking.menu--->", booking.menu);
+      // console.log("booking.startDateTime--->", booking.startDateTime);
+      // console.log("booking.endDateTime--->", booking.endDateTime);
+      // console.log("booking.max--->", booking.maxSeats);
+      // console.log("booking.openSeats--->", booking.openSeats);
+      // console.log("booking.address1--->", booking.address1);
+      // console.log("booking.address2--->", booking.address2);
+      // console.log("booking.city--->", booking.city);
+      // console.log("booking.state--->", booking.state);
+      // console.log("booking.zip--->", booking.zipCode);
       
-      setTitle(singleBooking.title);
-      setCuisineId(singleBooking.cuisineId);
-      setSuggestedDonation(singleBooking.suggestedDonation || "")
-      setMenu(singleBooking.menu);
-      setStartValue(dayjs(`${singleBooking.startDateTime}`, "MM/DD/YYYY h:mmA"))
-      setEndValue(dayjs(`${singleBooking.endDateTime}`, "MM/DD/YYYY h:mmA"))
-      setMax(singleBooking.maxSeats);
-      setOpenSeats(singleBooking.openSeats);
-      setAddress1(singleBooking.address1);
-      setAddress2(singleBooking.address2 || "");
-      setCity(singleBooking.city);
-      setState(singleBooking.state);
-      setZip(singleBooking.zipCode);
+      setTitle(booking.title);
+      setCuisineId(booking.cuisineId);
+      setSuggestedDonation(booking.suggestedDonation || ""); // Default is null
+      setMenu(booking.menu);
+      setStartValue(dayjs(`${booking.startDateTime}`, "MM/DD/YYYY h:mmA"))
+      setEndValue(dayjs(`${booking.endDateTime}`, "MM/DD/YYYY h:mmA"))
+      setMax(booking.maxSeats);
+      setOpenSeats(booking.openSeats);
+      setAddress1(booking.address1);
+      setAddress2(booking.address2 || ""); // Default is null
+      setCity(booking.city);
+      setState(booking.state);
+      setZip(booking.zipCode);
     } 
     
-  }, [chefBookings]);
+  }, [booking]);
 
   // handle submit for chef form
-  const handleSubmit = async (e) => {
-    console.log("handleSubmit clicked!");
-    // e.preventDefault();
+  const handleSubmit = async()=>{
+    console.log("handleSubmit clicked! in EditChefForm.js!");
     try {
+      // e.preventDefault();
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
 
@@ -212,7 +209,7 @@ const EditChefForm = () => {
         dispatch(
           // will need to check on this CHEF ID and auth because as of right now anyone who<TextFields an id into the url that is a chef
           // is allowed to<TextField data for THAT chef that isn't them. Will need to make it so it is only the userId who is logged in at the moment!
-          editSingleChefBooking({
+          editSingleBooking({
             id: userId,
             title,
             cuisineId,
@@ -229,13 +226,15 @@ const EditChefForm = () => {
             zip,
             latitude: location[1], // the location variable sends back an array of [long, lat]
             longitude: location[0], // the location variable sends back an array of [long, lat]
+            bookingsId,
+            // bookingsId: bookingsId
           })
         );
       }
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   return (
     <>
@@ -247,7 +246,7 @@ const EditChefForm = () => {
             <Typography variant="h5">Edit Your Supper Club Event!</Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className="chefEvent-form"
             >
               <div className="chefForm-title-of-event">
