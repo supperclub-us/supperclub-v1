@@ -56,13 +56,13 @@ const MemberBooking = ({ user }) => {
     if (!userId) {
       setLoginSignup(true);
     }
-    if (userId) {
+    if (userId || currentMember) {
       // find guest amount selected:
       const numGuests = guests;
       const bookingAmtOfGuests = booking.openSeats;
       const newAmountOfOpenSeats = bookingAmtOfGuests - numGuests;
       console.log({ numGuests, bookingAmtOfGuests, newAmountOfOpenSeats });
-      setLoginSignup(!loginSignUp);
+      setLoginSignup(false);
       console.log("BOOKING ---><>", { ...booking }, "USER ID", userId);
       dispatch(addMemberBookings({ ...booking, userId, newAmountOfOpenSeats }));
       navigate("/");
@@ -168,7 +168,7 @@ const MemberBooking = ({ user }) => {
               {`$${booking?.suggestedDonation}`}
             </Box>
           </Box>
-          {!guests ? (
+          {booking?.openSeats < 0 ? (
             <Button
               variant="contained"
               sx={{

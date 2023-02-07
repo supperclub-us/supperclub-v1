@@ -53,6 +53,7 @@ router.get("/:id", async (req, res, next) => {
   }
 })
 
+
 // BOOKINGS PUT /api/bookings/:bookingId/user/:userId
 router.put("/:bookingId/user/:userId", async (req, res, next) => {
   try {
@@ -75,8 +76,10 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
     if (!booking) {
       res.status(401).send("no booking available")
     }
+    // req.body will need to take in the updated seats and reserved booking
     await booking.update(req.body)
-    res.status(201).json(await booking.addMemberBooking(user))
+    // update the UsersBookings as well with second parameter
+    res.status(201).json(await booking.addMemberBooking(user)) //(user, {reservedBookings: reservedBooking})
   }
   catch(err){
     next(err)
