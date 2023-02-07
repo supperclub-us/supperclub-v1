@@ -82,13 +82,11 @@ const SignUp = ({handleOpen}) => {
         <hr />
 
         <div className="navbar-role-selection">
-          <Typography variant="p" id="modal-modal-description" sx={{ mt: 2 }}>
-            I would like to be a:
-          </Typography>
+          
           <br />
 
           <div className="navbar-role-selection">
-             <FormControl style={{ width: 197, mt: 20 }} fullWidth>
+             <FormControl style={{ width: 197, mt: 10 }} fullWidth>
               <InputLabel>Role </InputLabel>
               <Select
                 onChange={(e) => setRole(e.target.value)}
@@ -104,6 +102,7 @@ const SignUp = ({handleOpen}) => {
 
         <div>
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setFirstName(e.target.value)}
             name="firstName"
             value={firstName}
@@ -114,6 +113,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setLastName(e.target.value)}
             name="lastName"
             value={lastName}
@@ -124,6 +124,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setBio(e.target.value)}
             name="bio"
             value={bio}
@@ -133,6 +134,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setMobileNumber(e.target.value)}
             name="mobileNumber"
             value={mobileNumber}
@@ -142,7 +144,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
-            className="info" style={{ marginTop: '20px' }}
+            className="info" style={{ marginTop: '30px' }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
@@ -150,8 +152,8 @@ const SignUp = ({handleOpen}) => {
             label="Email"
           />
 
-          <TextField
-          className="in"
+          <TextField 
+          className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
