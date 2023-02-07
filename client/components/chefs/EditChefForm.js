@@ -241,14 +241,22 @@ const EditChefForm = () => {
     }
   }
 
-    const handleDelete = async(bookingsId)=> {
-      console.log("REMOVE BUTTON CLICKED")
-      try{
-        await dispatch(deleteSingleBooking(bookingsId))
-      } catch (err) {
-        console.log(err)
-      }
+  // chefId, bookingsId from useParams
+  const handleDelete = async ()=> {
+    console.log("REMOVE BUTTON CLICKED")
+    
+    console.log("chefId--->", chefId)
+
+    console.log("bookingsId--->", bookingsId)
+    try{
+      await dispatch(deleteSingleBooking({
+        chefId: chefId, 
+        bookingsId: bookingsId,
+      }))
+    } catch (err) {
+      console.log(err)
     }
+  }
 
   return (
     <>
@@ -453,12 +461,12 @@ const EditChefForm = () => {
                   color: "whitesmoke",
                 }}
               >
-                Edit Event
+                Edit
               </Button>
               
               <Button
                 className="chefForm-button-remove"
-                onClick={() => handleDelete(bookingsId)}
+                onClick={handleDelete}
                 variant="contained"
                 sx={{
                   "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
@@ -466,7 +474,7 @@ const EditChefForm = () => {
                   color: "whitesmoke",
                 }}
               >
-                Remove Event 
+                Delete 
               </Button>
               </div>   
           </div>
