@@ -11,8 +11,17 @@ import { SignUp, Login } from "../index";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
-  
 
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  
+  const user = useSelector((state) => state.auth.me);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
+
+  
   const handleOpen = (str) => {
     setModalScreen(str);
     setOpen(true);
@@ -21,6 +30,7 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
     setModalScreen("");
+    navigate(`/users/chefprofile/${user.id}`)
   };
 
   const renderModalScreen = () => {
@@ -34,23 +44,15 @@ const Navbar = () => {
 
   };
 
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  
-  const user = useSelector((state) => state.auth.me);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  console.log("USER", user)
-  console.log("USER.id", user.id) 
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      setTimeout(() => {
-        setOpen(false);
-        navigate(`/users/chefprofile/${user.id}`)
-      }, 600);
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setTimeout(() => {
+  //       setOpen(false);
+  //     }, 500);
+  //   }
+  // }, [isLoggedIn]);
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());

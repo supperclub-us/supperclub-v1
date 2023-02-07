@@ -12,10 +12,9 @@ const SignIn = ({handleOpen}) => {
 
   const [open, setOpen] = useState(false);
 
+  const user = useSelector((state) => state.auth.me);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-
-
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -25,7 +24,6 @@ const SignIn = ({handleOpen}) => {
 
     dispatch(authenticate({ email, password, method: 'login' }));
   }
-//     navigate(`/users/chefprofile/${user.id}`)
   
 
   const handleSnackClose = (event, reason) => {
