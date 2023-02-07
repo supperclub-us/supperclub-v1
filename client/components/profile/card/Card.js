@@ -9,7 +9,6 @@ export const Card = ({booking}) => {
     console.log("adios", booking.id)
 
     const navigate = useNavigate();
-    // http://localhost:8080/users/chefs/7/bookings/9
     return (
         <div key={booking.id} className="cards">
             <h5>{booking.title}</h5>
@@ -32,7 +31,7 @@ export const ModalCard = ({booking}) => {
     return (
         <div key={booking.id} className="modal-cards">
             <h5>{booking.title}</h5>
-            <p2>{booking.menu}</p2>
+            <p>{booking.menu}</p>
             <p style={{padding: "10px"}}> Donation ${booking.suggestedDonation}</p>
             <img className="modalCards" src={booking.imageUrl} />
             <p>Date of Event: {booking.startDateTime} </p>

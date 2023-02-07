@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
@@ -135,17 +135,14 @@ const ChefForm = () => {
   const { chefId } = useParams();
   // console.log("CHEF -----------> ", chefId);
 
-  // // the different states from the selectSingleChef State
-  // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-
   const dispatch = useDispatch();
 
-  useSelector(selectSingleChefBookings);
-  useSelector(selectSingleChef);
+  // useSelector(selectSingleChefBookings);
+  const {currentChef, isLoading, error} = useSelector(selectSingleChef);
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
-    dispatch(fetchSingleChefBooking(userId));
+    // dispatch(fetchSingleChefBooking(userId));
   }, []);
 
   // handle submit for chef form
@@ -191,6 +188,11 @@ const ChefForm = () => {
       console.log(err);
     }
   };
+
+
+  if (isLoading || !currentChef){
+    return <div> LOADING ...</div>
+  }
 
   return (
     <>
