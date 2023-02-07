@@ -235,6 +235,12 @@ const EditChefForm = () => {
     }
   }
 
+    // const handleDelete = async()=> {
+    //   try{} catch (err) {
+    //     console.log(err)
+    //   }
+    // }
+
   return (
     <>
       {userId !== parseInt(chefId) ? (
@@ -426,19 +432,21 @@ const EditChefForm = () => {
                 </div>
               </div>
             </Box>
-
-            <Button
-              className="chefForm-button"
-              onClick={() => handleSubmit()}
-              variant="contained"
-              sx={{
-                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-                backgroundColor: "#EB5757",
-                color: "whitesmoke",
-              }}
-            >
-              Edit Event
-            </Button>
+                      
+              <Button
+                className="chefForm-button-Edit"
+                onClick={() => handleSubmit()}
+                variant="contained"
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
+              >
+                Edit Event
+              </Button>
+              
+            
           </div>
         </>
       )}

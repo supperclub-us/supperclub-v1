@@ -2,11 +2,20 @@ import React from "react"
 import { Button } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 export const Card = ({booking}) => {
-    console.log("holaaaa", booking)
-    console.log("adios", booking.id)
+    const user = useSelector((state) => state.auth.me);
+    console.log("USER", user)
+    console.log("USER.id", user.id) 
+
+    // console.log("holaaaa", booking)
+    // console.log("adios", booking.id)
+    const handleClick = () => {
+        console.log("chefs booking clicked!!!")
+        navigate(`/bookings/${booking.id}`)
+      }
 
     const navigate = useNavigate();
     // http://localhost:8080/users/chefs/7/bookings/9
@@ -15,13 +24,21 @@ export const Card = ({booking}) => {
             <h5>{booking.title}</h5>
             <p className="bookingMenu">{booking.menu}</p>
             <img className="food-image" src={booking.imageUrl} />
-            <Button
-                variant="contained"
-                startIcon={<EditIcon />}
-                onClick={ () => { navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`)}}
-            >
-                Edit Event
-            </Button>
+            {user.role === "CHEF" && (
+                <Button
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    onClick={ () => { navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`)}}
+                >
+                    Edit Event
+                </Button>
+            )}
+            
+            {user.role === "MEMBER" && (
+                <Button onClick={handleClick} variant="contained">View Details</Button>
+
+            )}
+
         </div>
     )
 }
