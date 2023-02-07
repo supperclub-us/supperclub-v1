@@ -69,6 +69,13 @@ const MemberBooking = ({ user }) => {
     }
   };
 
+  const memberBookings = currentMember?.memberBooking
+  console.log("MEMBER BOOKINGS >>>>", memberBookings)
+  const memberBooking = memberBookings?.find(booking => booking.id == bookingId)
+  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking)
+  const reservedSeats = memberBooking?.users_bookings.reservedSeats
+  console.log("RESERVED SEATS>>>>", reservedSeats)
+
   const openSeatsArray = [];
   // openSeats
   for (let i = 1; i <= booking?.openSeats; i++) {
@@ -137,6 +144,9 @@ const MemberBooking = ({ user }) => {
           <div className="memberBooking-experience-menu">
             Menu: {booking.menu}
           </div>
+        </div>
+        <div className="reservedSeats">
+          {`You have reserved ${reservedSeats} seats for this booking`}
         </div>
       </div>
       <Box className="memberBooking-form-container">
