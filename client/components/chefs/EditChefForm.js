@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
-  fetchSingleChefBooking
+  fetchSingleChefBooking,
+ 
 } from "../slices/singleChefBookingsSlice";
-import { editSingleBooking, fetchSingleBookingAsync, selectSingleBooking } from "../slices/singleBookingSlice"
+import { 
+  editSingleBooking, 
+  fetchSingleBookingAsync,
+  selectSingleBooking,
+  deleteSingleBooking 
+} from "../slices/singleBookingSlice"
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home } from "../index";
 import MapBoxAccessToken from "../../env";
@@ -147,6 +153,8 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   // console.log("zip--->", zip);
 
+
+
   useEffect(() => {
     // dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleBookingAsync(bookingsId));
@@ -190,6 +198,8 @@ const EditChefForm = () => {
     
   }, [booking]);
 
+  const navigate = useNavigate();
+  
   // handle submit for chef form
   const handleSubmit = async()=>{
     console.log("handleSubmit clicked! in EditChefForm.js!");
@@ -232,6 +242,28 @@ const EditChefForm = () => {
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  // chefId, bookingsId from useParams
+  const handleDelete = async ()=> {
+    console.log("REMOVE BUTTON CLICKED")
+    
+    console.log("chefId--->", chefId)
+
+    console.log("bookingsId--->", bookingsId)
+    
+    try{
+      await dispatch(deleteSingleBooking({
+        chefId: chefId, 
+        bookingsId: bookingsId,
+      }))
+
+
+      navigate(`/users/chefprofile/${chefId}`)
+
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -426,19 +458,34 @@ const EditChefForm = () => {
                 </div>
               </div>
             </Box>
-
-            <Button
-              className="chefForm-button"
-              onClick={() => handleSubmit()}
-              variant="contained"
-              sx={{
-                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-                backgroundColor: "#EB5757",
-                color: "whitesmoke",
-              }}
-            >
-              Edit Event
-            </Button>
+                
+             <div>         
+              <Button
+                className="chefForm-button-Edit"
+                onClick={() => handleSubmit()}
+                variant="contained"
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
+              >
+                Edit
+              </Button>
+              
+              <Button
+                className="chefForm-button-remove"
+                onClick={handleDelete}
+                variant="contained"
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
+              >
+                Delete 
+              </Button>
+              </div>   
           </div>
         </>
       )}

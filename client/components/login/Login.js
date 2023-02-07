@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, TextField, Typography, Snackbar, Alert } from '@mui/material';
 import { authenticate } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -12,7 +13,7 @@ const SignIn = ({handleOpen}) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
- 
+
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log("button clicked!")
@@ -29,7 +30,7 @@ const SignIn = ({handleOpen}) => {
     }
 
     setOpen(false);
-};
+  };
 
   return (
     <div>
@@ -68,7 +69,7 @@ const SignIn = ({handleOpen}) => {
 
           </div>
         </div>
-        <Snackbar open={open} autoHideDuration={10000} onClose={handleSnackClose}>
+        <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
           <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
             You successfully logged in! 
           </Alert>

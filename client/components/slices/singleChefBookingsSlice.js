@@ -60,18 +60,20 @@ export const addSingleChefBooking = createAsyncThunk(
   }
 );
 
-
 const singleChefBookingsSlice = createSlice({
   name: "singleChefBookings",
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
+    
     builder.addCase(fetchSingleChefBooking.fulfilled, (state, action) => {
       return action.payload;
     });
+    
     builder.addCase(addSingleChefBooking.fulfilled, (state, action) => {
       state.push(action.payload);
     });
+    
   },
 });
 
