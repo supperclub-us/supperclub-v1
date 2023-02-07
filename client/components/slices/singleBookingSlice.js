@@ -130,9 +130,11 @@ const singleBookingSlice = createSlice({
     builder.addCase(deleteSingleBooking.fulfilled, (state, action) => {
       // console.log("STATE.BOOKING ////:", state.booking)
       // console.log("ACTION.PAYLOAD ////:", action.payload)
-      return state.filter(booking => {
-        booking.id !==  action.payload.id
-      })
+      // return state.filter(booking => {
+      //   booking.id !==  action.payload.id
+      // })
+      state.booking = {}
+      
       
     });
     

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
@@ -153,6 +153,8 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   // console.log("zip--->", zip);
 
+
+
   useEffect(() => {
     // dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleBookingAsync(bookingsId));
@@ -196,6 +198,8 @@ const EditChefForm = () => {
     
   }, [booking]);
 
+  const navigate = useNavigate();
+  
   // handle submit for chef form
   const handleSubmit = async()=>{
     console.log("handleSubmit clicked! in EditChefForm.js!");
@@ -248,11 +252,16 @@ const EditChefForm = () => {
     console.log("chefId--->", chefId)
 
     console.log("bookingsId--->", bookingsId)
+    
     try{
       await dispatch(deleteSingleBooking({
         chefId: chefId, 
         bookingsId: bookingsId,
       }))
+
+
+      navigate(`/users/chefprofile/${chefId}`)
+
     } catch (err) {
       console.log(err)
     }
