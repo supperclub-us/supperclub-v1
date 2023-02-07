@@ -40,11 +40,15 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
+
   useEffect(() => {
     if (isLoggedIn) {
       setTimeout(() => {
         setOpen(false);
-      }, 500);
+        navigate(`/users/chefprofile/${user.id}`)
+      }, 600);
     }
   }, [isLoggedIn]);
 
