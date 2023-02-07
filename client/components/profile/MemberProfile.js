@@ -46,7 +46,7 @@ const MemberProfile = ({ user }) => {
                 <h3>YOUR UPCOMING SUPPERS</h3>
                 <div className="profileContainer">
                     {currentMember && currentMember.memberBooking?.length
-                        ? currentMember.memberBooking.map((booking) => (<Card key ={booking.id} booking={booking} />))
+                        ? currentMember.memberBooking.map((booking) => (<Card key ={booking.id} booking={booking} currentMember={currentMember} />))
                         : "No Events"}
                 </div>
             </div>

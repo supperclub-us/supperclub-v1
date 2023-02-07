@@ -4,7 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   fetchSingleBookingAsync,
   selectSingleBooking,
+  editMemberBooking,
+  addMemberBookings
 } from "../slices/singleBookingSlice";
+import {
+  fetchSingleMember,
+  selectSingleMember,
+} from "../slices/singleMemberSlice";
 import {
   Box,
   Button,
@@ -21,11 +27,6 @@ import {
 
 //css
 import "./memberBooking.css";
-import {
-  fetchSingleMember,
-  selectSingleMember,
-} from "../slices/singleMemberSlice";
-import { addMemberBookings } from "../slices/singleBookingSlice";
 
 const MemberBooking = ({ user }) => {
   console.log("----USER--->", user, "<---USE----");
@@ -34,8 +35,10 @@ const MemberBooking = ({ user }) => {
   const { id } = user;
   const userId = id;
   const [guests, setGuests] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
@@ -56,23 +59,62 @@ const MemberBooking = ({ user }) => {
     if (!userId) {
       setLoginSignup(true);
     }
-    if (userId) {
-      // find guest amount selected:
-      const numGuests = guests;
+
+    if (e.target.name === "editBtn") {
+
+      const newReservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
-      const newAmountOfOpenSeats = bookingAmtOfGuests - numGuests;
-      console.log({ numGuests, bookingAmtOfGuests, newAmountOfOpenSeats });
-      setLoginSignup(!loginSignUp);
+      const differenceInSeats = reservedSeats - newReservedSeats
+      const newAmountOfOpenSeats = bookingAmtOfGuests + differenceInSeats;
+      // logic to add seats to booking.openSeats
+      // if num of guests, that you want to edit, is less than the current reserved amt then add that difference to the booking... booking.openSeats..
+      console.log({ newReservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats, reservedSeats });
+      // on click want to dispatch an editMemberBooking
+      dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats}))
+    }
+
+    else if (e.target.name === "bookBtn") {
+      // find guest amount selected:
+      const reservedSeats = guests;
+      const bookingAmtOfGuests = booking.openSeats;
+      const newAmountOfOpenSeats = bookingAmtOfGuests - reservedSeats;
+
+      console.log({ reservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats });
+      setLoginSignup(false);
       console.log("BOOKING ---><>", { ...booking }, "USER ID", userId);
-      dispatch(addMemberBookings({ ...booking, userId, newAmountOfOpenSeats }));
+      dispatch(
+        addMemberBookings({
+          ...booking,
+          userId,
+          newAmountOfOpenSeats,
+          reservedSeats,
+        })
+      );
       navigate("/");
     }
   };
 
+
+  const memberBookings = currentMember?.memberBooking;
+  console.log("MEMBER BOOKINGS >>>>", memberBookings);
+  const memberBooking = memberBookings?.find(
+    (booking) => booking.id == bookingId
+  );
+  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
+  const reservedSeats = memberBooking?.users_bookings.reservedSeats;
+  console.log("RESERVED SEATS>>>>", reservedSeats);
+
   const openSeatsArray = [];
   // openSeats
-  for (let i = 1; i <= booking?.openSeats; i++) {
+  for (let i = 0; i <= booking?.openSeats; i++) {
     openSeatsArray.push(i);
+  }
+
+  const availableSeatsArray = [];
+  const availableSeats = reservedSeats + booking?.openSeats;
+  // reserved seats
+  for (let i = 0; i < availableSeats+1; i++) {
+    availableSeatsArray.push(i);
   }
 
   if (isLoading) {
@@ -140,55 +182,88 @@ const MemberBooking = ({ user }) => {
         </div>
       </div>
       <Box className="memberBooking-form-container">
-        <Box className="memberBooking-form" component="form">
-          <FormControl fullWidth>
-            <InputLabel id="guests">Guests</InputLabel>
-            <Select
-              value={guests}
-              label="guests"
-              onChange={(e) => {
-                console.log(e.target.value), setGuests(e.target.value);
-              }}
-            >
-              {openSeatsArray?.map((guest) => (
-                <MenuItem key={guest} value={guest}>
-                  {guest} {guest === 1 ? "guest" : "guests"}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <Box className="memberBooking-form-donation" fullwidth="true">
-            <Box
-              id="outlined-adornment-amount"
-              label="Donation Amount"
-              defaultValue={`${booking?.suggestedDonation}`}
-            >
-              {" "}
-              {`$${booking?.suggestedDonation}`}
+        {reservedSeats ? (
+          <Box className="memberBooking-form" component="form">
+            <div className="reservedSeats">
+              {currentMember &&
+                `You have reserved ${reservedSeats} seats for this booking`}
+            </div>
+            <Box sx={{ width: "200px" }}>
+              <FormControl fullWidth>
+                <InputLabel id="guests">Change Seat Amount</InputLabel>
+                <Select
+                  value={guests}
+                  label="guests"
+                  onChange={(e) => {
+                    console.log(e.target.value), setGuests(e.target.value);
+                  }}
+                >
+                  {availableSeatsArray?.map((guest) => (
+                    <MenuItem key={guest} value={guest}>
+                      {guest} {guest === 1 ? "guest" : "guests"}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
+            <Button variant="contained" onClick={handleClick} name="editBtn"> Edit Seats </Button>
           </Box>
-          {!guests ? (
-            <Button
-              variant="contained"
-              sx={{
-                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-                backgroundColor: "#EB5757",
-                color: "whitesmoke",
-              }}
-            >
-              {" "}
-              Sold Out{" "}
-            </Button>
-          ) : (
-            <Button variant="contained" onClick={handleClick}>
-              Book
-            </Button>
-          )}
-        </Box>
-        <Box className="memberBooking-login-signup">
-          {loginSignUp ? "PLEASE LOGIN OR SIGNUP TO BOOK EVENT" : null}{" "}
-        </Box>
+        ) : (
+          <>
+            <Box className="memberBooking-form" component="form">
+              <FormControl fullWidth>
+                <InputLabel id="guests">Guests</InputLabel>
+                <Select
+                  value={guests}
+                  label="guests"
+                  onChange={(e) => {
+                    console.log(e.target.value), setGuests(e.target.value);
+                  }}
+                >
+                  {openSeatsArray?.map((guest) => (
+                    <MenuItem key={guest} value={guest}>
+                      {guest} {guest === 1 ? "guest" : "guests"}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <Box className="memberBooking-form-donation" fullwidth="true">
+                <Box
+                  id="outlined-adornment-amount"
+                  label="Donation Amount"
+                  defaultValue={`${booking?.suggestedDonation}`}
+                >
+                  {" "}
+                  {`$${booking?.suggestedDonation}`}
+                </Box>
+              </Box>
+              {booking?.openSeats <= 0 ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#EB5757",
+                      color: "whitesmoke",
+                    },
+                    backgroundColor: "#EB5757",
+                    color: "whitesmoke",
+                  }}
+                >
+                  {" "}
+                  Sold Out{" "}
+                </Button>
+              ) : (
+                <Button variant="contained" onClick={handleClick} name="bookBtn">
+                  Book
+                </Button>
+              )}
+            </Box>
+            <Box className="memberBooking-login-signup">
+              {loginSignUp ? "PLEASE LOGIN OR SIGNUP TO BOOK EVENT" : null}{" "}
+            </Box>
+          </>
+        )}
       </Box>
     </div>
   );

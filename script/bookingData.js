@@ -9,7 +9,7 @@ const bookingData = [
     suggestedDonation: 75,
     startDateTime: "01/01/2023 5:30PM",
     endDateTime: "01/01/2023 7:30PM",
-    maxSeats: 5,
+    maxSeats: 6,
     openSeats: 3,
     address1: "39 South Russell",
     city: "Boston",
