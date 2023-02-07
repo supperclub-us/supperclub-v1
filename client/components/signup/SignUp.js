@@ -61,7 +61,7 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
-      handleOpen();
+      // handleOpen();
   };
 
   const handleClose = (event, reason) => {

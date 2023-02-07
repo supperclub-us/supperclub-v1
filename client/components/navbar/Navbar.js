@@ -30,7 +30,9 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
     setModalScreen("");
-    navigate(`/users/chefprofile/${user.id}`)
+
+    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
+    user.role === "MEMBER" ? navigate(`/users/memberprofile/${user.id}`) : null
   };
 
   const renderModalScreen = () => {
@@ -144,14 +146,12 @@ const Navbar = () => {
           <Button 
             onClick={handleClose}
             startIcon={<ClearIcon />}
-            
             style={{
               position: 'absolute',
               top: '10px',
               right: '10px',
             }}>
-              
-              </Button> 
+          </Button> 
           </Box>
         </Modal>
       </div>
