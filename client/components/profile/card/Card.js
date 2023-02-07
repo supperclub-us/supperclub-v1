@@ -1,16 +1,27 @@
 import React from "react"
 import { Button } from "@mui/material"
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
 
 
 export const Card = ({booking}) => {
     console.log("holaaaa", booking)
     console.log("adios", booking.id)
-    
+
+    const navigate = useNavigate();
+    // http://localhost:8080/users/chefs/7/bookings/9
     return (
         <div key={booking.id} className="cards">
             <h5>{booking.title}</h5>
             <p className="bookingMenu">{booking.menu}</p>
             <img className="food-image" src={booking.imageUrl} />
+            <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+                onClick={ () => { navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`)}}
+            >
+                Edit Event
+            </Button>
         </div>
     )
 }
