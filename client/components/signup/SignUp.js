@@ -13,6 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
+import { margin } from "@mui/system";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
@@ -80,14 +81,14 @@ const SignUp = ({handleOpen}) => {
 
         <hr />
 
-        <div className="navbar-select-role-container">
+        <div className="navbar-role-selection">
           <Typography variant="p" id="modal-modal-description" sx={{ mt: 2 }}>
             I would like to be a:
           </Typography>
           <br />
 
           <div className="navbar-role-selection">
-            <FormControl fullWidth >
+             <FormControl style={{ width: 197, mt: 20 }} fullWidth>
               <InputLabel>Role </InputLabel>
               <Select
                 onChange={(e) => setRole(e.target.value)}
@@ -141,6 +142,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="info" style={{ marginTop: '20px' }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
@@ -149,6 +151,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+          className="in"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
