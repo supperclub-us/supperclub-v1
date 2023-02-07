@@ -14,7 +14,7 @@ const states = [
   "DC",
   "FL",
   "GA",
-  "GU",
+  "GU - Guam",
   "HI",
   "ID",
   "IL",
@@ -50,7 +50,7 @@ const states = [
   "SD",
   "TN",
   "TX",
-  "TT",
+  "TT - Trust Territory",
   "UT",
   "VT",
   "VA",
@@ -109,6 +109,8 @@ const Booking = db.define("booking", {
   },
   address2: {
     type: Sequelize.STRING,
+    allowNull: true,
+    defaultValue: ""
   },
   city: {
     type: Sequelize.STRING,

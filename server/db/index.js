@@ -5,6 +5,7 @@ const db = require("./db");
 const User = require("./models/User");
 const Booking = require("./models/Booking");
 const Cuisine = require("./models/Cuisine");
+const UsersBookings = require("./models/UsersBookings")
 
 //associations could go here!
 
@@ -13,13 +14,13 @@ const Cuisine = require("./models/Cuisine");
 // ?Need alias for "member"?
 User.belongsToMany(Booking, {
   as: "memberBooking",
-  through: "users_bookings",
+  through: UsersBookings,
   foreignKey: "memberId",
   otherKey: "bookingId",
 });
 Booking.belongsToMany(User, {
   as: "memberBooking",
-  through: "users_bookings",
+  through: UsersBookings,
   foreignKey: "bookingId",
   otherKey: "memberId",
 });
@@ -70,5 +71,6 @@ module.exports = {
     User,
     Booking,
     Cuisine,
+    UsersBookings
   },
 };
