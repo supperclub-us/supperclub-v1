@@ -13,6 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
+import { margin } from "@mui/system";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
@@ -60,7 +61,7 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
-      handleOpen();
+      // handleOpen();
   };
 
   const handleClose = (event, reason) => {
@@ -80,14 +81,12 @@ const SignUp = ({handleOpen}) => {
 
         <hr />
 
-        <div className="navbar-select-role-container">
-          <Typography variant="p" id="modal-modal-description" sx={{ mt: 2 }}>
-            I would like to be a:
-          </Typography>
+        <div className="navbar-role-selection">
+          
           <br />
 
           <div className="navbar-role-selection">
-            <FormControl fullWidth >
+             <FormControl style={{ width: 197, mt: 10 }} fullWidth>
               <InputLabel>Role </InputLabel>
               <Select
                 onChange={(e) => setRole(e.target.value)}
@@ -103,6 +102,7 @@ const SignUp = ({handleOpen}) => {
 
         <div>
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setFirstName(e.target.value)}
             name="firstName"
             value={firstName}
@@ -113,6 +113,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setLastName(e.target.value)}
             name="lastName"
             value={lastName}
@@ -123,6 +124,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setBio(e.target.value)}
             name="bio"
             value={bio}
@@ -132,6 +134,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setMobileNumber(e.target.value)}
             name="mobileNumber"
             value={mobileNumber}
@@ -141,6 +144,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
+            className="info" style={{ marginTop: '30px' }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
@@ -148,7 +152,8 @@ const SignUp = ({handleOpen}) => {
             label="Email"
           />
 
-          <TextField
+          <TextField 
+          className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"

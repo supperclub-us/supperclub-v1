@@ -1,18 +1,16 @@
-.signup-form-container {
+/* .signup-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    border: 1px solid pink;
+    width: 400px;
+    height: 620px;
+    
 }
+ */
 
-#signup-signup-form {
-    border: 1px solid blue;
-}
 
-.navbar-select-role-container {
+/* .navbar-select-role-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -20,4 +18,68 @@
     width: 100%;
     height: 100%;
     border: 1px solid green;
+} */
+
+
+
+
+
+.signup-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 600px;
+    padding: 2rem;
+    box-sizing: border-box;
+   
+    border-radius: 5px; 
+   
 }
+
+#signup-form {
+    width: 500px;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-select-role-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.info{
+  bottom: 10%;
+}
+
+
+
+.navbar-role-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .navbar-role-selection > Typography {
+    margin-bottom: 5px;
+    margin: auto;
+  }
+  
+  .navbar-role-selection > FormControl {
+    width: 197x;
+    margin-top: 8px;
+  }
+

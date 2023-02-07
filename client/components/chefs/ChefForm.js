@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
@@ -22,6 +22,8 @@ import {
   OutlinedInput,
   InputAdornment,
   Typography,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import dayjs from "dayjs";
@@ -139,16 +141,42 @@ const ChefForm = () => {
 
   // useSelector(selectSingleChefBookings);
   const {currentChef, isLoading, error} = useSelector(selectSingleChef);
+  // set state to open for snack bar
+  const [open, setOpen] = useState(false);
+
+  // // the different states from the selectSingleChef State
+  // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
+
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.me);
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
+  
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
-    // dispatch(fetchSingleChefBooking(userId));
+    dispatch(fetchSingleChefBooking(userId));
   }, []);
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
-    console.log("handleSubmit clicked!");
+    console.log("handleSubmit clicked! from ChefForm.js");
     // e.preventDefault();
+    setOpen(true)
+    
+      setTimeout(() => {
+        setOpen(false);
+        navigate(`/users/chefprofile/${user.id}`)
+      }, 5000);
+
     try {
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
@@ -397,6 +425,12 @@ const ChefForm = () => {
             >
               Create Event
             </Button>
+
+            <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
+              <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
+                You successfully logged in! 
+              </Alert>
+            </Snackbar>
           </div>
         </>
       )}

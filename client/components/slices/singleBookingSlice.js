@@ -101,6 +101,22 @@ export const editSingleBooking = createAsyncThunk(
   }
 );
 
+
+// create thunk to delete chef bookings
+// delete booking from form
+// chefId, bookingsId dispatched from EditChefForm handleDelete
+export const deleteSingleBooking = createAsyncThunk("delete/singleBooking", async ( {chefId, bookingsId}) => {
+
+
+  try {
+    const { data } = await axios.delete(`/api/users/chefs/${chefId}/bookings/${bookingsId}`);
+    return data;
+    
+  } catch (err) {
+    console.log(err);
+  }
+})
+
 const singleBookingSlice = createSlice({
   name: "singleBooking",
   initialState: {
@@ -128,6 +144,18 @@ const singleBookingSlice = createSlice({
     builder.addCase(editSingleBooking.fulfilled, (state, action) => {
       state.booking = action.payload;
     });
+    
+    builder.addCase(deleteSingleBooking.fulfilled, (state, action) => {
+      // console.log("STATE.BOOKING ////:", state.booking)
+      // console.log("ACTION.PAYLOAD ////:", action.payload)
+      // return state.filter(booking => {
+      //   booking.id !==  action.payload.id
+      // })
+      state.booking = {}
+      
+      
+    });
+    
   },
 });
 
