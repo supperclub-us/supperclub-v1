@@ -10,7 +10,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 
 const Chefs = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch();
   const chefs = useSelector(selectAllChefs);
 
@@ -22,7 +21,6 @@ const Chefs = () => {
 
   const handleClick = (bookingId) => {
     console.log("chefs booking clicked!!!")
-    // navigate(`/bookings/${bookingId}`)
   }
 
   const [open, setOpen] = useState(false);

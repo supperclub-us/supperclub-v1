@@ -27,8 +27,13 @@ export const Card = ({booking}) => {
 }
 
 export const ModalCard = ({booking}) => {
-    
-    
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        console.log("chefs booking clicked!!!")
+        navigate(`/bookings/${booking.id}`)
+      }
+
     return (
         <div key={booking.id} className="modal-cards">
             <h5>{booking.title}</h5>
@@ -38,7 +43,7 @@ export const ModalCard = ({booking}) => {
             <p>Date of Event: {booking.startDateTime} </p>
             <p style={{padding: "10px"}}>End of Event Time: {booking.endDateTime} </p>
             <p style={{padding: "10px"}}>{booking.openSeats} Seats Left </p>
-            <Button variant="contained">Book Now</Button>
+            <Button onClick={handleClick} variant="contained">View Details</Button>
         </div>
     )
 }
