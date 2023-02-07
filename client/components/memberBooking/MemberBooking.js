@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   fetchSingleBookingAsync,
-  selectSingleChefBookings,
+  selectSingleBooking,
 } from "../slices/singleBookingSlice";
 import {
   Box,
@@ -22,36 +22,34 @@ import {
 //css
 import "./memberBooking.css";
 import {
-  addMemberBookings,
   fetchSingleMember,
   selectSingleMember,
 } from "../slices/singleMemberSlice";
+import { addMemberBookings } from "../slices/singleBookingSlice";
 
 const MemberBooking = ({ user }) => {
-
   console.log("----USER--->", user, "<---USE----");
 
   const { bookingId } = useParams();
-  const { id } = user
-  const userId = id
-  const [guests, setGuests] = useState(1);
+  const { id } = user;
+  const userId = id;
+  const [guests, setGuests] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("booking id and user id", {bookingId, userId})
-    dispatch(fetchSingleBookingAsync(bookingId))
-    dispatch(fetchSingleMember(userId))
+    console.log("booking id and user id", { bookingId, userId });
+    dispatch(fetchSingleBookingAsync(bookingId));
+    dispatch(fetchSingleMember(userId));
   }, [dispatch, user, bookingId]);
-  
-  const { booking, error, isLoading } = useSelector(selectSingleChefBookings);
+
+  const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
 
   const [loginSignUp, setLoginSignup] = useState(false);
   console.log("loginSignup ---->", loginSignUp);
 
   const { currentMember } = useSelector(selectSingleMember);
-  console.log("current member, ", currentMember)
-
+  console.log("current member, ", currentMember);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -59,9 +57,14 @@ const MemberBooking = ({ user }) => {
       setLoginSignup(true);
     }
     if (userId) {
+      // find guest amount selected:
+      const numGuests = guests;
+      const bookingAmtOfGuests = booking.openSeats;
+      const newAmountOfOpenSeats = bookingAmtOfGuests - numGuests;
+      console.log({ numGuests, bookingAmtOfGuests, newAmountOfOpenSeats });
       setLoginSignup(!loginSignUp);
-      console.log("BOOKING ---><>",  {...booking}, "USER ID", userId );
-      dispatch(addMemberBookings({...booking, userId,}));
+      console.log("BOOKING ---><>", { ...booking }, "USER ID", userId);
+      dispatch(addMemberBookings({ ...booking, userId, newAmountOfOpenSeats }));
       navigate("/");
     }
   };
@@ -154,6 +157,7 @@ const MemberBooking = ({ user }) => {
               ))}
             </Select>
           </FormControl>
+
           <Box className="memberBooking-form-donation" fullwidth="true">
             <Box
               id="outlined-adornment-amount"
@@ -164,9 +168,23 @@ const MemberBooking = ({ user }) => {
               {`$${booking?.suggestedDonation}`}
             </Box>
           </Box>
-          <Button variant="contained" onClick={handleClick}>
-            Book
-          </Button>
+          {!guests ? (
+            <Button
+              variant="contained"
+              sx={{
+                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                backgroundColor: "#EB5757",
+                color: "whitesmoke",
+              }}
+            >
+              {" "}
+              Sold Out{" "}
+            </Button>
+          ) : (
+            <Button variant="contained" onClick={handleClick}>
+              Book
+            </Button>
+          )}
         </Box>
         <Box className="memberBooking-login-signup">
           {loginSignUp ? "PLEASE LOGIN OR SIGNUP TO BOOK EVENT" : null}{" "}

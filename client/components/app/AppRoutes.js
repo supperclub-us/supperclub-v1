@@ -15,6 +15,7 @@ import {
 } from "../index";
 import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
+import EditChefForm from "../chefs/EditChefForm";
 
 /**
  * COMPONENT
@@ -34,6 +35,7 @@ const AppRoutes = () => {
 
   console.log("HELLO USER!", user)
 
+  // users/chefs/7/bookings/1
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -43,15 +45,17 @@ const AppRoutes = () => {
       <Route path="/cuisines" element={<Cuisines />} />
       <Route path="/bookings/:bookingId" element={<MemberBooking user={user}/>} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/users/chefprofile/:id" element={<ChefProfile user={user} />} />
+      <Route path="/users/chefprofile/:id" element={<ChefProfile user={user} />} />
         {user.role === "CHEF" && (
-          <Route path="/chefs/:chefId/event" element={<ChefForm />} />
+          <>
+            <Route path="/chefs/:chefId/event" element={<ChefForm />} />
+            <Route path="/users/chefs/:chefId/bookings/:bookingsId" element={<EditChefForm user={user} />} />
+          </>
         )}
         {user.role === "MEMBER" && (
           <Route path="/users/memberprofile/:id" element={<MemberProfile user={user} />} />
         )}
-      </Route>
-
+    </Route>
 
 
       {/* {isLoggedIn && user.role === "CHEF" ? (
@@ -60,7 +64,7 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Route path="/users/profile" element={<Profile />} />
       ) : null} */}
-      <Route path="*" element={<PageNotFound />} />
+      {/* <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   );
 };
