@@ -206,3 +206,28 @@ router.put("/chefs/:id/bookings/:bookingId", async (req, res, next) => {
     next(err);
   }
 })
+
+// CHEFS BOOKINGS DELETE /api/users/chefs/:id/bookings/:bookingId
+router.delete("/chefs/:id/bookings/:bookingId", async (req, res, next) => {
+  try {
+    const chef = await User.findByPk(req.params.id, {
+      where: {
+        role: "CHEF",
+      },
+      include: [
+        {
+          model: Booking,
+          as: "chefBooking",
+        },
+      ],
+    });
+    if (chef.role === "CHEF") {
+      const booking = await Booking.findByPk(req.params.bookingId);
+      res.json(await booking.destroy());
+    } else {
+      throw new Error("Not Authenticated");
+    }
+  } catch (err) {
+    next(err);
+  }
+})

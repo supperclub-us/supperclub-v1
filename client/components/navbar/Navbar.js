@@ -11,7 +11,15 @@ import { SignUp, Login } from "../index";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
+
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   
+  const user = useSelector((state) => state.auth.me);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
 
   const handleOpen = (str) => {
     setModalScreen(str);
@@ -21,6 +29,9 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
     setModalScreen("");
+
+    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
+    user.role === "MEMBER" ? navigate(`/users/memberprofile/${user.id}`) : null
   };
 
   const renderModalScreen = () => {
@@ -34,19 +45,13 @@ const Navbar = () => {
 
   };
 
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  
-  const user = useSelector((state) => state.auth.me);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      setTimeout(() => {
-        setOpen(false);
-      }, 500);
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setTimeout(() => {
+  //       setOpen(false);
+  //     }, 500);
+  //   }
+  // }, [isLoggedIn]);
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -138,14 +143,12 @@ const Navbar = () => {
           <Button 
             onClick={handleClose}
             startIcon={<ClearIcon />}
-            
             style={{
               position: 'absolute',
               top: '10px',
               right: '10px',
             }}>
-              
-              </Button> 
+          </Button> 
           </Box>
         </Modal>
       </div>
