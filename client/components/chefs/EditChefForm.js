@@ -3,9 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Form, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
-  fetchSingleChefBooking
+  fetchSingleChefBooking,
+ 
 } from "../slices/singleChefBookingsSlice";
-import { editSingleBooking, fetchSingleBookingAsync, selectSingleBooking } from "../slices/singleBookingSlice"
+import { 
+  editSingleBooking, 
+  fetchSingleBookingAsync,
+  selectSingleBooking,
+  deleteSingleBooking 
+} from "../slices/singleBookingSlice"
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home } from "../index";
 import MapBoxAccessToken from "../../env";
@@ -235,11 +241,14 @@ const EditChefForm = () => {
     }
   }
 
-    // const handleDelete = async()=> {
-    //   try{} catch (err) {
-    //     console.log(err)
-    //   }
-    // }
+    const handleDelete = async(bookingsId)=> {
+      console.log("REMOVE BUTTON CLICKED")
+      try{
+        await dispatch(deleteSingleBooking(bookingsId))
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
   return (
     <>
@@ -432,7 +441,8 @@ const EditChefForm = () => {
                 </div>
               </div>
             </Box>
-                      
+                
+             <div>         
               <Button
                 className="chefForm-button-Edit"
                 onClick={() => handleSubmit()}
@@ -446,7 +456,19 @@ const EditChefForm = () => {
                 Edit Event
               </Button>
               
-            
+              <Button
+                className="chefForm-button-remove"
+                onClick={() => handleDelete(bookingsId)}
+                variant="contained"
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
+              >
+                Remove Event 
+              </Button>
+              </div>   
           </div>
         </>
       )}

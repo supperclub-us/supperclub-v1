@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 
 export const Card = ({booking}) => {
+    const navigate = useNavigate();
+
     const user = useSelector((state) => state.auth.me);
     console.log("USER", user)
     console.log("USER.id", user.id) 
@@ -17,7 +19,6 @@ export const Card = ({booking}) => {
         navigate(`/bookings/${booking.id}`)
       }
 
-    const navigate = useNavigate();
     // http://localhost:8080/users/chefs/7/bookings/9
     return (
         <div key={booking.id} className="cards">
