@@ -146,7 +146,7 @@ const MemberBooking = ({ user }) => {
           </div>
         </div>
         <div className="reservedSeats">
-          {`You have reserved ${reservedSeats} seats for this booking`}
+          {currentMember && `You have reserved ${reservedSeats || 'no' } seats for this booking`}
         </div>
       </div>
       <Box className="memberBooking-form-container">
@@ -178,7 +178,7 @@ const MemberBooking = ({ user }) => {
               {`$${booking?.suggestedDonation}`}
             </Box>
           </Box>
-          {booking?.openSeats < 0 ? (
+          {booking?.openSeats <= 0 ? (
             <Button
               variant="contained"
               sx={{
