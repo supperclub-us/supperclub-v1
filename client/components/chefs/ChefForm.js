@@ -32,14 +32,14 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL - Alabama", "AK - Alaska", "AZ - Arizona", "AR - Arkansas", "AS - American Samoa", "CA - California", "CO - Colorado", "CT - Connecticut", "DE - Delaware", "DC - District of Columbia",
-  "FL - Florida", "GA - Georgia", "GU - Guam", "HI - Hawaii", "ID - Idaho", "IL - Illinois", "IN - Indiana", "IA - Iowa",
-  "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "ME - Maine", "MD - Maryland", "MA - Massachusetts", "MI - Michigan", "MN - Minnesota",
-  "MS - Mississippi", "MO - Missouri", "MT - Montana", "NE - Nebraska", "NV - Nevada", "NH - New Hampshire", "NJ - New Jersey",
-  "NM - New Mexico", "NY - New York", "NC - North Carolina", "ND - North Dakota", "CM - Northern Mariana Islands", "OH - Ohio",
-  "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "PR - Puerto Rico", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota",
-  "TN - Tennessee", "TX - Texas", "TT - Trust Territories of the Pacific Islands", "UT - Utah", "VT - Vermont", "VA - Virginia", "VI - Virgin Islands",
-  "WA - Washington", "WV - West Virginia", "WI - Wisconsin", "WY - Wyoming",
+  "AL", "AK", "AZ", "AR", "AS", "CA", "CO", "CT", "DE", "DC",
+  "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA",
+  "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
+  "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+  "NM", "NY", "NC", "ND", "CM", "OH",
+  "OK", "OR", "PA", "PR", "RI", "SC", "SD",
+  "TN", "TX", "TT", "UT", "VT", "VA", "VI",
+  "WA", "WV", "WI", "WY",
 ];
 
 const ChefForm = () => {
