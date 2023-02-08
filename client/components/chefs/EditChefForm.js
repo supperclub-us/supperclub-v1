@@ -4,14 +4,13 @@ import { Form, useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
- 
 } from "../slices/singleChefBookingsSlice";
-import { 
-  editSingleBooking, 
+import {
+  editSingleBooking,
   fetchSingleBookingAsync,
   selectSingleBooking,
-  deleteSingleBooking 
-} from "../slices/singleBookingSlice"
+  deleteSingleBooking,
+} from "../slices/singleBookingSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home } from "../index";
 import MapBoxAccessToken from "../../env";
@@ -39,162 +38,51 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL",
-  "AK",
-  "AZ",
-  "AR",
-  "AS",
-  "CA",
-  "CO",
-  "CT",
-  "DE",
-  "DC",
-  "FL",
-  "GA",
-  "GU - Guam",
-  "HI",
-  "ID",
-  "IL",
-  "IN",
-  "IA",
-  "KS",
-  "KY",
-  "LA",
-  "ME",
-  "MD",
-  "MA",
-  "MI",
-  "MN",
-  "MS",
-  "MO",
-  "MT",
-  "NE",
-  "NV",
-  "NH",
-  "NJ",
-  "NM",
-  "NY",
-  "NC",
-  "ND",
-  "CM",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "PR",
-  "RI",
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "TT - Trust Territory",
-  "UT",
-  "VT",
-  "VA",
-  "VI",
-  "WA",
-  "WV",
-  "WI",
-  "WY",
+  "AL - Alabama", "AK - Alaska", "AZ - Arizona", "AR - Arkansas", "AS - American Samoa", "CA - California", "CO - Colorado", "CT - Connecticut", "DE - Delaware", "DC - District of Columbia",
+  "FL - Florida", "GA - Georgia", "GU - Guam", "HI - Hawaii", "ID - Idaho", "IL - Illinois", "IN - Indiana", "IA - Iowa",
+  "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "ME - Maine", "MD - Maryland", "MA - Massachusetts", "MI - Michigan", "MN - Minnesota",
+  "MS - Mississippi", "MO - Missouri", "MT - Montana", "NE - Nebraska", "NV - Nevada", "NH - New Hampshire", "NJ - New Jersey",
+  "NM - New Mexico", "NY - New York", "NC - North Carolina", "ND - North Dakota", "CM - Northern Mariana Islands", "OH - Ohio",
+  "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "PR - Puerto Rico", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota",
+  "TN - Tennessee", "TX - Texas", "TT - Trust Territories of the Pacific Islands", "UT - Utah", "VT - Vermont", "VA - Virginia", "VI - Virgin Islands",
+  "WA - Washington", "WV - West Virginia", "WI - Wisconsin", "WY - Wyoming",
 ];
 
 const EditChefForm = () => {
   const userId = useSelector((state) => state.auth.me.id);
-  // console.log("userId--->", userId);
-
   const dispatch = useDispatch();
-  
   const { chefId, bookingsId } = useParams();
-  console.log("CHEF from EditChefForm.js -----------> ", chefId);
-  console.log("BOOKINGS from EditChefForm.js -----------> ", bookingsId);
-
   const { booking } = useSelector(selectSingleBooking);
-  console.log(">>>>>booking--->", booking)
 
-  // filter on booking to get the single booking
-  // const booking = booking.find((booking) => booking.id === Number(bookingsId));
-  // console.log("booking--->", booking);
-
-  // useSelector(selectSingleChef);
-
-  const [title, setTitle] = useState('');
-  // console.log("title--->", title);
-
+  const [title, setTitle] = useState("");
   const [menu, setMenu] = useState("");
-  // console.log("menu--->", menu);
-
   const [cuisineId, setCuisineId] = useState("");
-  // console.log("cuisineId--->", cuisineId);
-
   const [suggestedDonation, setSuggestedDonation] = useState("");
-  // console.log("suggestedDonation--->", suggestedDonation);
-
   const [startValue, setStartValue] = useState(dayjs());
-  // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
-
   const [endValue, setEndValue] = useState(dayjs());
-  // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
-
   const [max, setMax] = useState("");
-  // console.log("max--->", max);
-
   const [openSeats, setOpenSeats] = useState("");
-  // console.log("openSeats--->", openSeats);
-
   const [address1, setAddress1] = useState("");
-  // console.log("address1--->", address1);
-
   const [address2, setAddress2] = useState("");
-  // console.log("address2--->", address2);
-
   const [city, setCity] = useState("");
-  // console.log("city--->", city);
-
   const [state, setState] = useState("");
-  // console.log("state--->", state);
-
   const [zip, setZip] = useState("");
-  // console.log("zip--->", zip);
-
-  // set state to open for snack bar
   const [openEditConfirm, setOpenEditConfirm] = useState(false);
-  
-  // set state to open for snack bar
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
 
-
   useEffect(() => {
-    // dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleBookingAsync(bookingsId));
   }, []);
 
-  // const booking = booking && booking.find((booking) => booking.id === Number(bookingsId));
-  // console.log("booking--->", booking);
-  
+  // useEffect ------------------------------------------------------
   useEffect(() => {
-    // console.log("<<< booking CHANGED >>>")
-
-    if(booking) {
-      // console.log("booking.title--->", booking.title);
-      // console.log("booking.cuisineId--->", booking.cuisineId);
-      // console.log("booking.suggestedDonation--->", booking.suggestedDonation);
-      // console.log("booking.menu--->", booking.menu);
-      // console.log("booking.startDateTime--->", booking.startDateTime);
-      // console.log("booking.endDateTime--->", booking.endDateTime);
-      // console.log("booking.max--->", booking.maxSeats);
-      // console.log("booking.openSeats--->", booking.openSeats);
-      // console.log("booking.address1--->", booking.address1);
-      // console.log("booking.address2--->", booking.address2);
-      // console.log("booking.city--->", booking.city);
-      // console.log("booking.state--->", booking.state);
-      // console.log("booking.zip--->", booking.zipCode);
-      
+    if (booking) {
       setTitle(booking.title);
       setCuisineId(booking.cuisineId);
       setSuggestedDonation(booking.suggestedDonation || ""); // Default is null
       setMenu(booking.menu);
-      setStartValue(dayjs(`${booking.startDateTime}`, "MM/DD/YYYY h:mmA"))
-      setEndValue(dayjs(`${booking.endDateTime}`, "MM/DD/YYYY h:mmA"))
+      setStartValue(dayjs(`${booking.startDateTime}`, "MM/DD/YYYY h:mmA"));
+      setEndValue(dayjs(`${booking.endDateTime}`, "MM/DD/YYYY h:mmA"));
       setMax(booking.maxSeats);
       setOpenSeats(booking.openSeats);
       setAddress1(booking.address1);
@@ -202,43 +90,39 @@ const EditChefForm = () => {
       setCity(booking.city);
       setState(booking.state);
       setZip(booking.zipCode);
-    } 
-    
+    }
   }, [booking]);
 
   const handleSnackCloseEdit = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
-
     setOpenEditConfirm(false);
   };
-  
+
   const handleSnackCloseWarning = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
-
     setOpenWarningConfirm(false);
   };
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
-  console.log("USER", user)
-  console.log("USER.id", user.id) 
-  
+  // console.log("USER", user);
+  // console.log("USER.id", user.id);
+
   // handle submit for chef form
-  const handleSubmit = async()=>{
-    console.log("handleSubmit clicked! in EditChefForm.js!");
-    setOpenEditConfirm(true)
-        
+  const handleSubmit = async () => {
+    // console.log("handleSubmit clicked! in EditChefForm.js!");
+    setOpenEditConfirm(true);
+
     setTimeout(() => {
       setOpenEditConfirm(false);
-      navigate(`/users/chefprofile/${user.id}`)
+      navigate(`/users/chefprofile/${user.id}`);
     }, 1500);
-    
+
     try {
-      // e.preventDefault();
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
 
@@ -277,31 +161,30 @@ const EditChefForm = () => {
     } catch (err) {
       console.log(err);
     }
-  }
-  
+  };
+// useEffect ---------------------------------------------------------
+
   // Warning Click handle button
-  const handleWarning = async ()=> {
-    console.log("Initial Warning Coming")
-    
-    setOpenWarningConfirm(true)
-  }
+  const handleWarning = async () => {
+    // console.log("Initial Warning Coming");
+    setOpenWarningConfirm(true);
+  };
 
   // chefId, bookingsId from useParams
-  const handleDelete = async ()=> {
-    console.log("REMOVE BUTTON CLICKED")
-    
-    try{
-      await dispatch(deleteSingleBooking({
-        chefId: chefId, 
-        bookingsId: bookingsId,
-      }))
-
-      navigate(`/users/chefprofile/${chefId}`)
-
+  const handleDelete = async () => {
+    // console.log("REMOVE BUTTON CLICKED");
+    try {
+      await dispatch(
+        deleteSingleBooking({
+          chefId: chefId,
+          bookingsId: bookingsId,
+        })
+      );
+      navigate(`/users/chefprofile/${chefId}`);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -311,11 +194,7 @@ const EditChefForm = () => {
         <>
           <div className="chefEvent-container">
             <Typography variant="h5">Edit Your Supper Club Event!</Typography>
-            <Box
-              component="form"
-              // onSubmit={handleSubmit}
-              className="chefEvent-form"
-            >
+            <Box component="form" className="chefEvent-form">
               <div className="chefForm-title-of-event">
                 <TextField
                   label="Title of Event"
@@ -328,7 +207,9 @@ const EditChefForm = () => {
               <div className="cuisineCategory-and-donation">
                 <div className="chefEvent-cuisineCategory">
                   <FormControl>
-                    <InputLabel id="demo-simple-select-label">Cuisine</InputLabel>
+                    <InputLabel id="demo-simple-select-label">
+                      Cuisine
+                    </InputLabel>
                     <Select
                       onChange={(e) => setCuisineId(Number(e.target.value))}
                       value={cuisineId}
@@ -364,7 +245,6 @@ const EditChefForm = () => {
                 </div>
               </div>
 
-              
               <Box
                 className="chefForm-menu-and-description"
                 component="div"
@@ -384,8 +264,6 @@ const EditChefForm = () => {
                 />
               </Box>
 
-              
-
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateTimePicker
@@ -393,7 +271,7 @@ const EditChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
-                      console.log("newValue-->", newValue)
+                      // console.log("newValue-->", newValue);
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
@@ -494,57 +372,86 @@ const EditChefForm = () => {
                 </div>
               </div>
             </Box>
-                
-             <div>         
+
+            <div>
               <Button
                 className="chefForm-button-Edit"
                 onClick={() => handleSubmit()}
                 variant="contained"
                 sx={{
-                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  "&:hover": {
+                    backgroundColor: "#EB5757",
+                    color: "whitesmoke",
+                  },
                   backgroundColor: "#EB5757",
                   color: "whitesmoke",
                 }}
               >
                 Edit
               </Button>
-              
+
               <Button
                 className="chefForm-button-remove"
                 onClick={handleWarning}
                 variant="contained"
                 sx={{
-                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  "&:hover": {
+                    backgroundColor: "#EB5757",
+                    color: "whitesmoke",
+                  },
                   backgroundColor: "#EB5757",
                   color: "whitesmoke",
                 }}
               >
-                Delete 
+                Delete
               </Button>
 
-              <Snackbar open={openEditConfirm} autoHideDuration={10000} onClose={handleSnackCloseEdit}>
-                <Alert onClose={handleSnackCloseEdit} severity="success" sx={{ width: '100%' }}>
-                  You successfully edited an event! 
+              <Snackbar
+                open={openEditConfirm}
+                autoHideDuration={10000}
+                onClose={handleSnackCloseEdit}
+              >
+                <Alert
+                  onClose={handleSnackCloseEdit}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  You successfully edited an event!
                 </Alert>
               </Snackbar>
-              
-              
-              <Snackbar open={openWarningConfirm} autoHideDuration={10000} onClose={handleSnackCloseWarning}>
-                <Alert onClose={handleSnackCloseWarning} severity="warning" sx={{ width: '100%' }} action={
-                  <div>
-                  <Button color="inherit" size="small" onClick={handleDelete}>
-                  DELETE
-                </Button>
-                <Button color="inherit" size="small" onClick={handleSnackCloseWarning}>
-                  CANCEL
-                </Button>
-                </div>
-                }>
-                Are you sure you want to delete this event? 
+
+              <Snackbar
+                open={openWarningConfirm}
+                autoHideDuration={10000}
+                onClose={handleSnackCloseWarning}
+              >
+                <Alert
+                  onClose={handleSnackCloseWarning}
+                  severity="warning"
+                  sx={{ width: "100%" }}
+                  action={
+                    <div>
+                      <Button
+                        color="inherit"
+                        size="small"
+                        onClick={handleDelete}
+                      >
+                        DELETE
+                      </Button>
+                      <Button
+                        color="inherit"
+                        size="small"
+                        onClick={handleSnackCloseWarning}
+                      >
+                        CANCEL
+                      </Button>
+                    </div>
+                  }
+                >
+                  Are you sure you want to delete this event?
                 </Alert>
               </Snackbar>
-              
-              </div>   
+            </div>
           </div>
         </>
       )}

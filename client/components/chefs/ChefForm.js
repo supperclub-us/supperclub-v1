@@ -32,120 +32,38 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL",
-  "AK",
-  "AZ",
-  "AR",
-  "AS",
-  "CA",
-  "CO",
-  "CT",
-  "DE",
-  "DC",
-  "FL",
-  "GA",
-  "GU",
-  "HI",
-  "ID",
-  "IL",
-  "IN",
-  "IA",
-  "KS",
-  "KY",
-  "LA",
-  "ME",
-  "MD",
-  "MA",
-  "MI",
-  "MN",
-  "MS",
-  "MO",
-  "MT",
-  "NE",
-  "NV",
-  "NH",
-  "NJ",
-  "NM",
-  "NY",
-  "NC",
-  "ND",
-  "CM",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "PR",
-  "RI",
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "TT",
-  "UT",
-  "VT",
-  "VA",
-  "VI",
-  "WA",
-  "WV",
-  "WI",
-  "WY",
+  "AL - Alabama", "AK - Alaska", "AZ - Arizona", "AR - Arkansas", "AS - American Samoa", "CA - California", "CO - Colorado", "CT - Connecticut", "DE - Delaware", "DC - District of Columbia",
+  "FL - Florida", "GA - Georgia", "GU - Guam", "HI - Hawaii", "ID - Idaho", "IL - Illinois", "IN - Indiana", "IA - Iowa",
+  "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "ME - Maine", "MD - Maryland", "MA - Massachusetts", "MI - Michigan", "MN - Minnesota",
+  "MS - Mississippi", "MO - Missouri", "MT - Montana", "NE - Nebraska", "NV - Nevada", "NH - New Hampshire", "NJ - New Jersey",
+  "NM - New Mexico", "NY - New York", "NC - North Carolina", "ND - North Dakota", "CM - Northern Mariana Islands", "OH - Ohio",
+  "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "PR - Puerto Rico", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota",
+  "TN - Tennessee", "TX - Texas", "TT - Trust Territories of the Pacific Islands", "UT - Utah", "VT - Vermont", "VA - Virginia", "VI - Virgin Islands",
+  "WA - Washington", "WV - West Virginia", "WI - Wisconsin", "WY - Wyoming",
 ];
 
 const ChefForm = () => {
-  const userId = useSelector((state) => state.auth.me.id);
-  // console.log("userId--->", userId);
-
+  const userId = useSelector((state) => state.auth.me.id)
   const [title, setTitle] = useState("");
-  // console.log("title--->", title);
-
   const [menu, setMenu] = useState("");
-  // console.log("menu--->", menu);
-
   const [cuisineId, setCuisineId] = useState("");
-  // console.log("cuisineId--->", cuisineId);
-
   const [suggestedDonation, setSuggestedDonation] = useState(null);
-  // console.log("suggestedDonation--->", suggestedDonation);
-
   const [startValue, setStartValue] = useState(dayjs());
-  // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
-
   const [endValue, setEndValue] = useState(dayjs());
-  // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
-
   const [max, setMax] = useState(null);
-  // console.log("max--->", max);
-
   const [openSeats, setOpenSeats] = useState("");
-  // console.log("openSeats--->", openSeats);
-
   const [address1, setAddress1] = useState("");
-  // console.log("address1--->", address1);
-
   const [address2, setAddress2] = useState("");
-  // console.log("address2--->", address2);
-
   const [city, setCity] = useState("");
-  // console.log("city--->", city);
-
   const [state, setState] = useState("");
-  // console.log("state--->", state);
-
   const [zip, setZip] = useState("");
-  // console.log("zip--->", zip);
 
   const { chefId } = useParams();
-  // console.log("CHEF -----------> ", chefId);
-
   const dispatch = useDispatch();
 
-  // useSelector(selectSingleChefBookings);
   const {currentChef, isLoading, error} = useSelector(selectSingleChef);
   // set state to open for snack bar
   const [open, setOpen] = useState(false);
-
-  // // the different states from the selectSingleChef State
-  // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
@@ -167,9 +85,9 @@ const ChefForm = () => {
   };
 
   // handle submit for chef form
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     console.log("handleSubmit clicked! from ChefForm.js");
-    // e.preventDefault();
+
     setOpen(true)
     
       setTimeout(() => {
@@ -232,7 +150,6 @@ const ChefForm = () => {
             <Typography variant="h5">Create Your Supper Club Event!</Typography>
             <Box
               component="form"
-              // onSubmit={handleSubmit}
               className="chefEvent-form"
             >
               <div className="chefForm-title-of-event">
@@ -302,8 +219,6 @@ const ChefForm = () => {
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
-
-              
 
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
