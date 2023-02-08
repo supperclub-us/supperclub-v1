@@ -53,6 +53,18 @@ const MemberBooking = ({ user }) => {
   const { currentMember } = useSelector(selectSingleMember);
   console.log("current member, ", currentMember);
 
+
+
+  const memberBookings = booking?.memberBooking;
+  console.log("MEMBER BOOKINGS >>>>", memberBookings);
+  const memberBooking = memberBookings?.find(
+    (member) => member.id == userId
+  );
+  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
+  const reservedSeats = memberBooking?.users_bookings.reservedSeats;
+  console.log("RESERVED SEATS>>>>", reservedSeats);
+
+
   const handleClick = (e) => {
     e.preventDefault();
     if (!userId) {
@@ -61,10 +73,18 @@ const MemberBooking = ({ user }) => {
 
     if (e.target.name === "deleteBtn") {
       console.log("DELETE EVENT HERE")
-      const newReservedSeats = guests;
-      const bookingAmtOfGuests = booking.openSeats;
-      const differenceInSeats = reservedSeats - newReservedSeats
-      const newAmountOfOpenSeats = bookingAmtOfGuests + differenceInSeats;
+      // const newReservedSeats = guests;
+      // const bookingAmtOfGuests = booking.openSeats;
+      // const differenceInSeats = reservedSeats - newReservedSeats
+      // const newAmountOfOpenSeats = bookingAmtOfGuests + differenceInSeats;
+      // console.log("DELETE NEW RESERVED SEATS", newReservedSeats)
+      // console.log("DELETE BOOKING AMT OF GUESTS", bookingAmtOfGuests)
+      // console.log("DELETE DIFFERENCE", differenceInSeats)
+      // console.log("DELETE NEW AMT OF OPEN SEATS", newAmountOfOpenSeats)
+      const oldAmtOfOpenSeats = booking.openSeats;
+      const newAmountOfOpenSeats = oldAmtOfOpenSeats + reservedSeats
+      console.log("OLD AMT OF OPEN SEATS", oldAmtOfOpenSeats);
+      console.log("NEW AMT OF OPEN SEATS", newAmountOfOpenSeats)
       dispatch(deleteMemberBooking({ ...booking, userId, newAmountOfOpenSeats }))
     }
     else if (e.target.name === "editBtn") {
@@ -87,11 +107,11 @@ const MemberBooking = ({ user }) => {
 
     else if (e.target.name === "bookBtn") {
       // find guest amount selected:
-      const reservedSeats = guests;
+      // const reservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
-      const newAmountOfOpenSeats = bookingAmtOfGuests - reservedSeats;
+      const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
 
-      console.log({ reservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats });
+      console.log({ guests, bookingAmtOfGuests, newAmountOfOpenSeats });
       setLoginSignup(false);
       console.log("BOOKING ---><>", { ...booking }, "USER ID", userId);
       dispatch(
@@ -99,22 +119,13 @@ const MemberBooking = ({ user }) => {
           ...booking,
           userId,
           newAmountOfOpenSeats,
-          reservedSeats,
+          guests,
         })
       );
       // navigate("/");
     }
   };
 
-
-  const memberBookings = booking?.memberBooking;
-  console.log("MEMBER BOOKINGS >>>>", memberBookings);
-  const memberBooking = memberBookings?.find(
-    (member) => member.id == userId
-  );
-  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
-  const reservedSeats = memberBooking?.users_bookings.reservedSeats;
-  console.log("RESERVED SEATS>>>>", reservedSeats);
 
   const openSeatsArray = [];
   // openSeats
@@ -174,7 +185,7 @@ const MemberBooking = ({ user }) => {
               Cuisine: {booking?.cuisine?.category}
             </div>
             <div className="memberBooking-experience-guests">
-              {booking.openSeats} seats left
+              {booking.openSeats === 1 ?  `${booking.openSeats} seat left` : `${booking.openSeats} seats left`}
             </div>
             <div className="memberBooking-experience-guests">
               {booking.maxSeats} guests maximum
@@ -219,7 +230,9 @@ const MemberBooking = ({ user }) => {
                 </Select>
               </FormControl>
             </Box>
-            <br />
+              ${booking?.suggestedDonation} per person
+              <br />
+              Total: ${booking?.suggestedDonation * reservedSeats}
             <Button variant="contained" onClick={handleClick} name="editBtn"> Edit Seats </Button>
             <Button variant="contained" onClick={handleClick} name="deleteBtn"> Cancel Booking </Button>
           </Box>
@@ -250,7 +263,7 @@ const MemberBooking = ({ user }) => {
                   defaultValue={`${booking?.suggestedDonation}`}
                 >
                   {" "}
-                  {`$${booking?.suggestedDonation}`}
+                ${booking?.suggestedDonation} per person
                 </Box>
               </Box>
               {booking?.openSeats <= 0 ? (

@@ -16,14 +16,14 @@ export const fetchSingleBookingAsync = createAsyncThunk(
 export const addMemberBookings = createAsyncThunk(
   "add/memberBooking",
   async ({ ...booking }) => {
-    const { id, userId, newAmountOfOpenSeats, reservedSeats } = booking;
+    const { id, userId, newAmountOfOpenSeats, guests } = booking;
     try {
       console.log("BOOKING", booking);
       console.log("NEW AMT OF OPEN SEATS --->", newAmountOfOpenSeats);
       const { data } = await axios.put(`/api/bookings/${id}/user/${userId}`, {
         id,
         openSeats: newAmountOfOpenSeats,
-        reservedSeats: reservedSeats
+        reservedSeats: guests
       });
       console.log("DATA FROM BOOKINGS ---->", data);
       return data;
