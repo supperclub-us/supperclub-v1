@@ -7,7 +7,7 @@ import {
   selectSingleChefBookings,
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
-import { Home } from "../index";
+import { Home, Upload } from "../index";
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
@@ -219,6 +219,12 @@ const ChefForm = () => {
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
+              
+              <div>
+                {/* UPLOAD COMPONENT HERE */}
+                <Upload />
+                {/* UPLOAD COMPONENT HERE */}
+              </div>
 
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
