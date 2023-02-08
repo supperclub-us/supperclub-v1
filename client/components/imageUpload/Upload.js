@@ -66,6 +66,12 @@ const Upload = () => {
       onChange={(event) => setSelectedImage(event.target.files[0])} 
       />
       <button onClick={handleUpload}> Upload </button>
+      
+      <Image 
+      cloudName="dm8eizfpl"
+      // publicId={}
+      />
+      
     </div>
   )
 }
