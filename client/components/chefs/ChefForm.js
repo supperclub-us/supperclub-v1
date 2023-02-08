@@ -175,7 +175,7 @@ const ChefForm = () => {
       setTimeout(() => {
         setOpen(false);
         navigate(`/users/chefprofile/${user.id}`)
-      }, 5000);
+      }, 1500);
 
     try {
       // grabbing full address from the useState
@@ -426,7 +426,7 @@ const ChefForm = () => {
               Create Event
             </Button>
 
-            <Snackbar open={open} autoHideDuration={20000} onClose={handleSnackClose}>
+            <Snackbar open={open} autoHideDuration={10000} onClose={handleSnackClose}>
               <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
                 You successfully created an event! 
               </Alert>

@@ -30,6 +30,7 @@ import {
   Typography,
   Snackbar,
   Alert,
+  Stack,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import dayjs from "dayjs";
@@ -156,7 +157,10 @@ const EditChefForm = () => {
   // console.log("zip--->", zip);
 
   // set state to open for snack bar
-  const [open, setOpen] = useState(false);
+  const [openEditConfirm, setOpenEditConfirm] = useState(false);
+  
+  // set state to open for snack bar
+  const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
 
 
   useEffect(() => {
@@ -202,12 +206,20 @@ const EditChefForm = () => {
     
   }, [booking]);
 
-  const handleSnackClose = (event, reason) => {
+  const handleSnackCloseEdit = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    setOpenEditConfirm(false);
+  };
+  
+  const handleSnackCloseWarning = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenWarningConfirm(false);
   };
 
   const navigate = useNavigate();
@@ -218,12 +230,12 @@ const EditChefForm = () => {
   // handle submit for chef form
   const handleSubmit = async()=>{
     console.log("handleSubmit clicked! in EditChefForm.js!");
-    setOpen(true)
+    setOpenEditConfirm(true)
         
     setTimeout(() => {
-      setOpen(false);
+      setOpenEditConfirm(false);
       navigate(`/users/chefprofile/${user.id}`)
-    }, 5000);
+    }, 1500);
     
     try {
       // e.preventDefault();
@@ -266,21 +278,23 @@ const EditChefForm = () => {
       console.log(err);
     }
   }
+  
+  // Warning Click handle button
+  const handleWarning = async ()=> {
+    console.log("Initial Warning Coming")
+    
+    setOpenWarningConfirm(true)
+  }
 
   // chefId, bookingsId from useParams
   const handleDelete = async ()=> {
     console.log("REMOVE BUTTON CLICKED")
-    
-    console.log("chefId--->", chefId)
-
-    console.log("bookingsId--->", bookingsId)
     
     try{
       await dispatch(deleteSingleBooking({
         chefId: chefId, 
         bookingsId: bookingsId,
       }))
-
 
       navigate(`/users/chefprofile/${chefId}`)
 
@@ -497,7 +511,7 @@ const EditChefForm = () => {
               
               <Button
                 className="chefForm-button-remove"
-                onClick={handleDelete}
+                onClick={handleWarning}
                 variant="contained"
                 sx={{
                   "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
@@ -508,11 +522,28 @@ const EditChefForm = () => {
                 Delete 
               </Button>
 
-              <Snackbar open={open} autoHideDuration={20000} onClose={handleSnackClose}>
-                <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
+              <Snackbar open={openEditConfirm} autoHideDuration={10000} onClose={handleSnackCloseEdit}>
+                <Alert onClose={handleSnackCloseEdit} severity="success" sx={{ width: '100%' }}>
                   You successfully edited an event! 
                 </Alert>
               </Snackbar>
+              
+              
+              <Snackbar open={openWarningConfirm} autoHideDuration={10000} onClose={handleSnackCloseWarning}>
+                <Alert onClose={handleSnackCloseWarning} severity="warning" sx={{ width: '100%' }} action={
+                  <div>
+                  <Button color="inherit" size="small" onClick={handleDelete}>
+                  DELETE
+                </Button>
+                <Button color="inherit" size="small" onClick={handleSnackCloseWarning}>
+                  CANCEL
+                </Button>
+                </div>
+                }>
+                Are you sure you want to delete this event? 
+                </Alert>
+              </Snackbar>
+              
               </div>   
           </div>
         </>
