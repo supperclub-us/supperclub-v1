@@ -91,14 +91,6 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
     await booking.addMemberBooking(user, {
       through: { reservedSeats: reservedSeats },
     });
-    const userBooking = await UsersBookings.findOne({
-      where: {
-        bookingId: req.params.bookingId,
-        memberId: req.params.userId
-      }
-    })
-    userBooking.reservedSeats = reservedSeats
-    await userBooking.save()
     res.status(201).json(await booking.reload()); //(user, {reservedBookings: reservedBooking})
   } catch (err) {
     next(err);

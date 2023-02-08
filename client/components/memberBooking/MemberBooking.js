@@ -42,9 +42,7 @@ const MemberBooking = ({ user }) => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(userId));
-  }, [ 
-    dispatch, user, bookingId, guests, reservedSeats, memberBookings
-  ]);
+  }, [ dispatch, user ]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);

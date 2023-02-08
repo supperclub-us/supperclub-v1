@@ -14,40 +14,7 @@ export const fetchSingleMember = createAsyncThunk(
   }
 );
 
-// export const addMemberBookings = createAsyncThunk(
-//   "add/memberBooking",
-//   async ({ ...booking }) => {
-//     const { id, title, menu, suggestedDonation, startDateTime, endDateTime, maxSeats, openSeats, address1, address2, city, state, zipCode, latitude, longitude, chefId, cuisineId, userId  } = booking
-//     try {
-//       console.log("BOOKING", booking);
-//       console.log(id, title, menu)
-//       const { data } = await axios.post(`/api/bookings/${id}`)
-//       // const response = await axios.post(`/api/users/members/${userId}/bookings`, {
-//       //   id,
-//       //   // title,
-//       //   // menu,
-//       //   // suggestedDonation,
-//       //   // startDateTime,
-//       //   // endDateTime,
-//       //   // maxSeats,
-//       //   // openSeats,
-//       //   // address1,
-//       //   // address2,
-//       //   // city,
-//       //   // state,
-//       //   // zipCode,
-//       //   // latitude,
-//       //   // longitude,
-//       //   // chefId,
-//       //   // cuisineId,
-//       // });
-//       console.log("DATA FROM BOOKINGS ---->", data);
-//       return data
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   }
-// );
+
 
 const initialState = {
   currentMember: {},
