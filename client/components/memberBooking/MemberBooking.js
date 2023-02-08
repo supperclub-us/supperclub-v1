@@ -42,7 +42,9 @@ const MemberBooking = ({ user }) => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(userId));
-  }, [dispatch, user, bookingId, guests]);
+  }, [ 
+    dispatch, user, bookingId, guests, reservedSeats, memberBookings
+  ]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
@@ -59,8 +61,11 @@ const MemberBooking = ({ user }) => {
       setLoginSignup(true);
     }
 
-    if (e.target.name === "editBtn") {
-
+    if (e.target.name === "deleteBtn"){
+      console.log("DELETE EVENT HERE")
+    }
+    else if (e.target.name === "editBtn") {
+      console.log("EDITING EVENT")
       const newReservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
       const differenceInSeats = reservedSeats - newReservedSeats
@@ -68,11 +73,11 @@ const MemberBooking = ({ user }) => {
       // logic to add seats to booking.openSeats
       // if num of guests, that you want to edit, is less than the current reserved amt then add that difference to the booking... booking.openSeats..
       console.log({ newReservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats, reservedSeats });
-      if (newReservedSeats === 0) {
-        // dispatch a deleteMemberBooking if you set num guests to 0
-        dispatch(deleteMemberBooking({...booking, userId, newAmountOfOpenSeats}))
-        setGuests('')
-      } else
+      // if (newReservedSeats === 0) {
+      //   // dispatch a deleteMemberBooking if you set num guests to 0
+      //   dispatch(deleteMemberBooking({...booking, userId, newAmountOfOpenSeats}))
+      //   setGuests('')
+      // } else
       // if newReserved seats is not 0, just edit the booking
       dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats}))
     }
@@ -99,10 +104,10 @@ const MemberBooking = ({ user }) => {
   };
 
 
-  const memberBookings = currentMember?.memberBooking;
+  const memberBookings = booking?.memberBooking;
   console.log("MEMBER BOOKINGS >>>>", memberBookings);
   const memberBooking = memberBookings?.find(
-    (booking) => booking.id == bookingId
+    (member) => member.id == userId
   );
   console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
@@ -110,14 +115,14 @@ const MemberBooking = ({ user }) => {
 
   const openSeatsArray = [];
   // openSeats
-  for (let i = 0; i <= booking?.openSeats; i++) {
+  for (let i = 1; i <= booking?.openSeats; i++) {
     openSeatsArray.push(i);
   }
 
   const availableSeatsArray = [];
   const availableSeats = reservedSeats + booking?.openSeats;
   // reserved seats
-  for (let i = 0; i < availableSeats+1; i++) {
+  for (let i = 1; i <= availableSeats; i++) {
     availableSeatsArray.push(i);
   }
 
@@ -213,6 +218,7 @@ const MemberBooking = ({ user }) => {
             </Box>
             <br />
             <Button variant="contained" onClick={handleClick} name="editBtn"> Edit Seats </Button>
+            <Button variant="contained" onClick={handleClick} name="deleteBtn"> Cancel Booking </Button>
           </Box>
         ) : (
           <>

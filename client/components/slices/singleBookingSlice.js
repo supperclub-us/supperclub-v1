@@ -153,6 +153,9 @@ const singleBookingSlice = createSlice({
     builder.addCase(addMemberBookings.fulfilled, (state, action) => {
       state.booking = action.payload;
     });
+    builder.addCase(editMemberBooking.fulfilled, (state, action)=> {
+      state.booking = action.payload
+    })
     builder.addCase(editSingleBooking.fulfilled, (state, action) => {
       state.booking = action.payload;
     });
