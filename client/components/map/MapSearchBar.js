@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { GeolocateControl } from "react-map-gl";
-import { Box, FormGroup, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import MapboxAccessToken from "../../env";
 import axios from "axios";
 import "../searchBar/searchBar.css";
@@ -13,8 +13,7 @@ import {
   setReduxEndDate,
   setReduxNumGuests,
 } from "../slices/searchBarFilterSlice";
-import { useDispatch, useSelector } from "react-redux";
-import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 
 const MapSearchBar = ({
@@ -41,20 +40,18 @@ const MapSearchBar = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setReduxViewport(viewport));
     dispatch(setReduxNumGuests(numGuests));
     dispatch(setReduxStartDate(newIntStartDate));
     dispatch(setReduxEndDate(newIntEndDate));
-  }, [value, viewport, numGuests, startDate, endDate, dispatch]);
+  }, [ numGuests, startDate, endDate ]);
 
   // formatting of start and end date to array of integers
   const newStartDate = startDate.format("MM DD YYYY").split(" ");
   const newEndDate = endDate.format("MM DD YYYY").split(" ");
+
   //change array elements to integers
   const newIntStartDate = newStartDate.map((element) => parseInt(element));
-  console.log("newIntStartDate", newIntStartDate);
   const newIntEndDate = newEndDate.map((element) => parseInt(element));
-  console.log("newIntEndDate", newIntEndDate);
 
   const handleStartDate = (newValue) => {
     setStartDate(newValue);
@@ -96,14 +93,6 @@ const MapSearchBar = ({
     e.preventDefault();
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
-    // setFilterNumGuests(true);
-    // dispatch(setReduxNumGuests(numGuests));
-
-    // BOOLEAN Logic for handling the filter function in the map search bar - need conditional logic
-
-    // if(filterStartDate && filterEndDate) {
-
-    // }
   };
 
   async function getCoordinates(address) {
@@ -112,12 +101,10 @@ const MapSearchBar = ({
         const { data } = await axios.get(
           `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
         );
-        console.log("THIS IS DATA RETURNED!!!!!!", data);
+
         const [lng, lat] = data.features[0].geometry.coordinates;
-        console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+
         setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11 });
-        setLatitude(lat);
-        setLongitude(lng);
         return {
           ...viewport,
           latitude: lat,

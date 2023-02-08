@@ -17,12 +17,10 @@ import {
   FormControl,
   ImageList,
   ImageListItem,
-  InputAdornment,
   InputLabel,
   LinearProgress,
   MenuItem,
-  OutlinedInput,
-  Select,
+  Select
 } from "@mui/material";
 
 //css
@@ -119,8 +117,8 @@ const MemberBooking = ({ user }) => {
 
   if (isLoading) {
     return <LinearProgress />;
-  }
-
+  } 
+  
   if (error) {
     return <div>{error}</div>;
   }
@@ -186,8 +184,9 @@ const MemberBooking = ({ user }) => {
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
               {currentMember &&
-                `You have reserved ${reservedSeats} seats for this booking`}
+                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats" } for this booking`}
             </div>
+            <br />
             <Box sx={{ width: "200px" }}>
               <FormControl fullWidth>
                 <InputLabel id="guests">Change Seat Amount</InputLabel>
@@ -200,12 +199,13 @@ const MemberBooking = ({ user }) => {
                 >
                   {availableSeatsArray?.map((guest) => (
                     <MenuItem key={guest} value={guest}>
-                      {guest} {guest === 1 ? "guest" : "guests"}
+                      {guest} {guest <= 1 ? "guest" : "guests"}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Box>
+            <br />
             <Button variant="contained" onClick={handleClick} name="editBtn"> Edit Seats </Button>
           </Box>
         ) : (
@@ -222,7 +222,7 @@ const MemberBooking = ({ user }) => {
                 >
                   {openSeatsArray?.map((guest) => (
                     <MenuItem key={guest} value={guest}>
-                      {guest} {guest === 1 ? "guest" : "guests"}
+                      {guest} {guest <= 1 ? "guest" : "guests"}
                     </MenuItem>
                   ))}
                 </Select>
