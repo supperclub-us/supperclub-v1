@@ -42,7 +42,7 @@ const MemberBooking = ({ user }) => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(userId));
-  }, [ dispatch, user ]);
+  }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
@@ -59,8 +59,13 @@ const MemberBooking = ({ user }) => {
       setLoginSignup(true);
     }
 
-    if (e.target.name === "deleteBtn"){
+    if (e.target.name === "deleteBtn") {
       console.log("DELETE EVENT HERE")
+      const newReservedSeats = guests;
+      const bookingAmtOfGuests = booking.openSeats;
+      const differenceInSeats = reservedSeats - newReservedSeats
+      const newAmountOfOpenSeats = bookingAmtOfGuests + differenceInSeats;
+      dispatch(deleteMemberBooking({ ...booking, userId, newAmountOfOpenSeats }))
     }
     else if (e.target.name === "editBtn") {
       console.log("EDITING EVENT")
@@ -77,7 +82,7 @@ const MemberBooking = ({ user }) => {
       //   setGuests('')
       // } else
       // if newReserved seats is not 0, just edit the booking
-      dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats}))
+      dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats }))
     }
 
     else if (e.target.name === "bookBtn") {
@@ -193,7 +198,7 @@ const MemberBooking = ({ user }) => {
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
               {currentMember ?
-                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats" } for this booking` : ""}
+                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats"} for this booking` : ""}
             </div>
             <br />
             <Box sx={{ width: "200px" }}>
