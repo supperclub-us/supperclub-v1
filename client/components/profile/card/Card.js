@@ -1,6 +1,6 @@
-import React from "react"
-import { Button } from "@mui/material"
-import EditIcon from '@mui/icons-material/Edit';
+import React from "react";
+import { Button } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -55,7 +55,7 @@ export const ModalCard = ({booking}) => {
     return (
         <div key={booking.id} className="modal-cards">
             <h5>{booking.title}</h5>
-            <p2>{booking.menu}</p2>
+            <p>{booking.menu}</p>
             <p style={{padding: "10px"}}> Donation ${booking.suggestedDonation}</p>
             <img className="modalCards" src={booking.imageUrl} />
             <p>Date of Event: {booking.startDateTime} </p>

@@ -53,12 +53,13 @@ router.get("/:id", async (req, res, next) => {
   }
 })
 
+
 // BOOKINGS PUT /api/bookings/:bookingId/user/:userId
 router.put("/:bookingId/user/:userId", async (req, res, next) => {
   try {
     const booking = await Booking.findByPk(req.params.bookingId, {
       include: [
-        { 
+        {
           model: User,
           as: "chefBooking",
         },
@@ -75,11 +76,19 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
     if (!booking) {
       res.status(401).send("no booking available")
     }
-    await booking.update(req.body)
-    res.status(201).json(await booking.addMemberBooking(user))
+    const { openSeats, reservedSeats } = req.body;
+    console.log("API OPENSEATS", openSeats)
+    console.log("API RESERVEDSEATS", reservedSeats)
+    // req.body will need to take in the updated seats and reserved booking
+    await booking.update({ openSeats })
+    // update the UsersBookings as well with second parameter
+    await booking.addMemberBooking(user,
+      { through:
+        { reservedSeats: reservedSeats } });
+    // memberBooking.add(reservedSeats)
+    res.status(201).json(await booking.reload()) //(user, {reservedBookings: reservedBooking})
   }
   catch(err){
     next(err)
   }
 })
-

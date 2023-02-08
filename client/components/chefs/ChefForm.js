@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
@@ -137,20 +137,21 @@ const ChefForm = () => {
   const { chefId } = useParams();
   // console.log("CHEF -----------> ", chefId);
 
+  const dispatch = useDispatch();
+
+  // useSelector(selectSingleChefBookings);
+  const {currentChef, isLoading, error} = useSelector(selectSingleChef);
   // set state to open for snack bar
   const [open, setOpen] = useState(false);
 
   // // the different states from the selectSingleChef State
   // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
   console.log("USER", user)
   console.log("USER.id", user.id) 
   
-  useSelector(selectSingleChefBookings);
-  useSelector(selectSingleChef);
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
@@ -215,6 +216,11 @@ const ChefForm = () => {
       console.log(err);
     }
   };
+
+
+  if (isLoading || !currentChef){
+    return <div> LOADING ...</div>
+  }
 
   return (
     <>
