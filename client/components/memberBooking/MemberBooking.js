@@ -5,7 +5,8 @@ import {
   fetchSingleBookingAsync,
   selectSingleBooking,
   editMemberBooking,
-  addMemberBookings
+  addMemberBookings,
+  deleteMemberBooking
 } from "../slices/singleBookingSlice";
 import {
   fetchSingleMember,
@@ -41,7 +42,7 @@ const MemberBooking = ({ user }) => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(userId));
-  }, [dispatch, user, bookingId]);
+  }, [dispatch, user, bookingId, guests]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
@@ -67,7 +68,12 @@ const MemberBooking = ({ user }) => {
       // logic to add seats to booking.openSeats
       // if num of guests, that you want to edit, is less than the current reserved amt then add that difference to the booking... booking.openSeats..
       console.log({ newReservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats, reservedSeats });
-      // on click want to dispatch an editMemberBooking
+      if (newReservedSeats === 0) {
+        // dispatch a deleteMemberBooking if you set num guests to 0
+        dispatch(deleteMemberBooking({...booking, userId, newAmountOfOpenSeats}))
+        setGuests('')
+      } else
+      // if newReserved seats is not 0, just edit the booking
       dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats}))
     }
 
@@ -88,7 +94,7 @@ const MemberBooking = ({ user }) => {
           reservedSeats,
         })
       );
-      navigate("/");
+      // navigate("/");
     }
   };
 
@@ -117,8 +123,8 @@ const MemberBooking = ({ user }) => {
 
   if (isLoading) {
     return <LinearProgress />;
-  } 
-  
+  }
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -183,8 +189,8 @@ const MemberBooking = ({ user }) => {
         {reservedSeats ? (
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
-              {currentMember &&
-                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats" } for this booking`}
+              {currentMember ?
+                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats" } for this booking` : ""}
             </div>
             <br />
             <Box sx={{ width: "200px" }}>

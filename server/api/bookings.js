@@ -92,3 +92,36 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
     next(err)
   }
 })
+
+// MEMBER BOOKINGS DELETE /api/bookings/:bookingId/user/delete/:userId
+router.put("/:bookingId/user/delete/:userId", async (req, res, next) => {
+  try {
+    const booking = await Booking.findByPk(req.params.bookingId, {
+      include: [
+        {
+          model: User,
+          as: "chefBooking",
+        },
+        {
+          model: User,
+          as: "memberBooking",
+        },
+        {
+          model: Cuisine
+        }
+      ]
+    })
+    const user = await User.findByPk(req.params.userId)
+    if (!booking) {
+      res.status(401).send("no booking available")
+    }
+    const { openSeats } = req.body;
+    await booking.update({ openSeats })
+    await booking.removeMemberBooking(user)
+    console.log("API NEW BOOKING", booking)
+    res.status(201).json(await booking.reload())
+  }
+  catch(err){
+    next(err)
+  }
+})

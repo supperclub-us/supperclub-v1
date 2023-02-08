@@ -50,6 +50,21 @@ export const editMemberBooking = createAsyncThunk("edit/memberBooking",   async 
   }
 })
 
+export const deleteMemberBooking = createAsyncThunk("delete/memberBooking",   async ({ ...booking }) => {
+  const { id, userId, newAmountOfOpenSeats } = booking;
+  try {
+    console.log("SLICE ID", id);
+    console.log("SLICE userId", userId);
+    const { data } = await axios.put(`/api/bookings/${id}/user/delete/${userId}`, {
+      openSeats: newAmountOfOpenSeats
+    });
+    console.log("DATA FROM DELETE/PUT ---->", data);
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+})
+
 // create thunk to edit chef bookings
 export const editSingleBooking = createAsyncThunk(
   "edit/singleBooking",
@@ -106,12 +121,9 @@ export const editSingleBooking = createAsyncThunk(
 // delete booking from form
 // chefId, bookingsId dispatched from EditChefForm handleDelete
 export const deleteSingleBooking = createAsyncThunk("delete/singleBooking", async ( {chefId, bookingsId}) => {
-
-
   try {
     const { data } = await axios.delete(`/api/users/chefs/${chefId}/bookings/${bookingsId}`);
     return data;
-    
   } catch (err) {
     console.log(err);
   }
@@ -144,18 +156,12 @@ const singleBookingSlice = createSlice({
     builder.addCase(editSingleBooking.fulfilled, (state, action) => {
       state.booking = action.payload;
     });
-    
     builder.addCase(deleteSingleBooking.fulfilled, (state, action) => {
-      // console.log("STATE.BOOKING ////:", state.booking)
-      // console.log("ACTION.PAYLOAD ////:", action.payload)
-      // return state.filter(booking => {
-      //   booking.id !==  action.payload.id
-      // })
       state.booking = {}
-      
-      
     });
-    
+    builder.addCase(deleteMemberBooking.fulfilled, (state, action) => {
+      state.booking = action.payload
+    });
   },
 });
 
