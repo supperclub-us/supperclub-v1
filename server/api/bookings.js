@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const {
-  models: { User, Booking, Cuisine },
+  models: { User, Booking, Cuisine, UsersBookings },
 } = require("../db");
 module.exports = router;
-
 
 // BOOKINGS GET /api/bookings
 router.get("/", async (req, res, next) => {
@@ -19,8 +18,8 @@ router.get("/", async (req, res, next) => {
           as: "memberBooking",
         },
         {
-          model: Cuisine
-        }
+          model: Cuisine,
+        },
       ],
     });
     res.json(bookings);
@@ -43,16 +42,15 @@ router.get("/:id", async (req, res, next) => {
           as: "memberBooking",
         },
         {
-          model: Cuisine
-        }
+          model: Cuisine,
+        },
       ],
     });
-    res.json(booking)
+    res.json(booking);
   } catch (err) {
-    next (err);
+    next(err);
   }
-})
-
+});
 
 // BOOKINGS PUT /api/bookings/:bookingId/user/:userId
 router.put("/:bookingId/user/:userId", async (req, res, next) => {
@@ -68,27 +66,65 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
           as: "memberBooking",
         },
         {
-          model: Cuisine
+          model: Cuisine,
+        },
+      ],
+    });
+    const user = await User.findByPk(req.params.userId, {
+      include: [
+        {
+          model: Booking,
+          as: "memberBooking"
         }
       ]
-    })
-    const user = await User.findByPk(req.params.userId)
+    });
     if (!booking) {
-      res.status(401).send("no booking available")
+      res.status(401).send("no booking available");
     }
     const { openSeats, reservedSeats } = req.body;
-    console.log("API OPENSEATS", openSeats)
-    console.log("API RESERVEDSEATS", reservedSeats)
+    console.log("API OPENSEATS", openSeats);
+    console.log("API RESERVEDSEATS", reservedSeats);
     // req.body will need to take in the updated seats and reserved booking
-    await booking.update({ openSeats })
+    await booking.update({ openSeats });
+    console.log("USER BACKEND", user)
     // update the UsersBookings as well with second parameter
-    await booking.addMemberBooking(user,
-      { through:
-        { reservedSeats: reservedSeats } });
-    // memberBooking.add(reservedSeats)
-    res.status(201).json(await booking.reload()) //(user, {reservedBookings: reservedBooking})
+    await booking.addMemberBooking(user, {
+      through: { reservedSeats: reservedSeats },
+    });
+    res.status(201).json(await booking.reload()); //(user, {reservedBookings: reservedBooking})
+  } catch (err) {
+    next(err);
   }
-  catch(err){
-    next(err)
+});
+
+// MEMBER BOOKINGS DELETE /api/bookings/:bookingId/user/delete/:userId
+router.put("/:bookingId/user/delete/:userId", async (req, res, next) => {
+  try {
+    const booking = await Booking.findByPk(req.params.bookingId, {
+      include: [
+        {
+          model: User,
+          as: "chefBooking",
+        },
+        {
+          model: User,
+          as: "memberBooking",
+        },
+        {
+          model: Cuisine,
+        },
+      ],
+    });
+    const user = await User.findByPk(req.params.userId);
+    if (!booking) {
+      res.status(401).send("no booking available");
+    }
+    const { openSeats } = req.body;
+    await booking.update({ openSeats });
+    await booking.removeMemberBooking(user);
+    console.log("API NEW BOOKING", booking);
+    res.status(201).json(await booking.reload());
+  } catch (err) {
+    next(err);
   }
-})
+});

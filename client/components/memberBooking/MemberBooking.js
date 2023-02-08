@@ -5,7 +5,8 @@ import {
   fetchSingleBookingAsync,
   selectSingleBooking,
   editMemberBooking,
-  addMemberBookings
+  addMemberBookings,
+  deleteMemberBooking
 } from "../slices/singleBookingSlice";
 import {
   fetchSingleMember,
@@ -17,12 +18,10 @@ import {
   FormControl,
   ImageList,
   ImageListItem,
-  InputAdornment,
   InputLabel,
   LinearProgress,
   MenuItem,
-  OutlinedInput,
-  Select,
+  Select
 } from "@mui/material";
 
 //css
@@ -43,7 +42,7 @@ const MemberBooking = ({ user }) => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(userId));
-  }, [dispatch, user, bookingId]);
+  }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   console.log("booking ---<>>>", booking);
@@ -54,14 +53,42 @@ const MemberBooking = ({ user }) => {
   const { currentMember } = useSelector(selectSingleMember);
   console.log("current member, ", currentMember);
 
+
+
+  const memberBookings = booking?.memberBooking;
+  console.log("MEMBER BOOKINGS >>>>", memberBookings);
+  const memberBooking = memberBookings?.find(
+    (member) => member.id == userId
+  );
+  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
+  const reservedSeats = memberBooking?.users_bookings.reservedSeats;
+  console.log("RESERVED SEATS>>>>", reservedSeats);
+
+
   const handleClick = (e) => {
     e.preventDefault();
     if (!userId) {
       setLoginSignup(true);
     }
 
-    if (e.target.name === "editBtn") {
-
+    if (e.target.name === "deleteBtn") {
+      console.log("DELETE EVENT HERE")
+      // const newReservedSeats = guests;
+      // const bookingAmtOfGuests = booking.openSeats;
+      // const differenceInSeats = reservedSeats - newReservedSeats
+      // const newAmountOfOpenSeats = bookingAmtOfGuests + differenceInSeats;
+      // console.log("DELETE NEW RESERVED SEATS", newReservedSeats)
+      // console.log("DELETE BOOKING AMT OF GUESTS", bookingAmtOfGuests)
+      // console.log("DELETE DIFFERENCE", differenceInSeats)
+      // console.log("DELETE NEW AMT OF OPEN SEATS", newAmountOfOpenSeats)
+      const oldAmtOfOpenSeats = booking.openSeats;
+      const newAmountOfOpenSeats = oldAmtOfOpenSeats + reservedSeats
+      console.log("OLD AMT OF OPEN SEATS", oldAmtOfOpenSeats);
+      console.log("NEW AMT OF OPEN SEATS", newAmountOfOpenSeats)
+      dispatch(deleteMemberBooking({ ...booking, userId, newAmountOfOpenSeats }))
+    }
+    else if (e.target.name === "editBtn") {
+      console.log("EDITING EVENT")
       const newReservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
       const differenceInSeats = reservedSeats - newReservedSeats
@@ -69,17 +96,22 @@ const MemberBooking = ({ user }) => {
       // logic to add seats to booking.openSeats
       // if num of guests, that you want to edit, is less than the current reserved amt then add that difference to the booking... booking.openSeats..
       console.log({ newReservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats, reservedSeats });
-      // on click want to dispatch an editMemberBooking
-      dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats}))
+      // if (newReservedSeats === 0) {
+      //   // dispatch a deleteMemberBooking if you set num guests to 0
+      //   dispatch(deleteMemberBooking({...booking, userId, newAmountOfOpenSeats}))
+      //   setGuests('')
+      // } else
+      // if newReserved seats is not 0, just edit the booking
+      dispatch(editMemberBooking({ ...booking, userId, newAmountOfOpenSeats, newReservedSeats }))
     }
 
     else if (e.target.name === "bookBtn") {
       // find guest amount selected:
-      const reservedSeats = guests;
+      // const reservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
-      const newAmountOfOpenSeats = bookingAmtOfGuests - reservedSeats;
+      const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
 
-      console.log({ reservedSeats, bookingAmtOfGuests, newAmountOfOpenSeats });
+      console.log({ guests, bookingAmtOfGuests, newAmountOfOpenSeats });
       setLoginSignup(false);
       console.log("BOOKING ---><>", { ...booking }, "USER ID", userId);
       dispatch(
@@ -87,33 +119,24 @@ const MemberBooking = ({ user }) => {
           ...booking,
           userId,
           newAmountOfOpenSeats,
-          reservedSeats,
+          guests,
         })
       );
-      navigate("/");
+      // navigate("/");
     }
   };
 
 
-  const memberBookings = currentMember?.memberBooking;
-  console.log("MEMBER BOOKINGS >>>>", memberBookings);
-  const memberBooking = memberBookings?.find(
-    (booking) => booking.id == bookingId
-  );
-  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
-  const reservedSeats = memberBooking?.users_bookings.reservedSeats;
-  console.log("RESERVED SEATS>>>>", reservedSeats);
-
   const openSeatsArray = [];
   // openSeats
-  for (let i = 0; i <= booking?.openSeats; i++) {
+  for (let i = 1; i <= booking?.openSeats; i++) {
     openSeatsArray.push(i);
   }
 
   const availableSeatsArray = [];
   const availableSeats = reservedSeats + booking?.openSeats;
   // reserved seats
-  for (let i = 0; i < availableSeats+1; i++) {
+  for (let i = 1; i <= availableSeats; i++) {
     availableSeatsArray.push(i);
   }
 
@@ -162,7 +185,7 @@ const MemberBooking = ({ user }) => {
               Cuisine: {booking?.cuisine?.category}
             </div>
             <div className="memberBooking-experience-guests">
-              {booking.openSeats} seats left
+              {booking.openSeats === 1 ?  `${booking.openSeats} seat left` : `${booking.openSeats} seats left`}
             </div>
             <div className="memberBooking-experience-guests">
               {booking.maxSeats} guests maximum
@@ -185,9 +208,10 @@ const MemberBooking = ({ user }) => {
         {reservedSeats ? (
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
-              {currentMember &&
-                `You have reserved ${reservedSeats} seats for this booking`}
+              {currentMember ?
+                `You have reserved ${reservedSeats} ${reservedSeats === 1 ? "seat" : "seats"} for this booking` : ""}
             </div>
+            <br />
             <Box sx={{ width: "200px" }}>
               <FormControl fullWidth>
                 <InputLabel id="guests">Change Seat Amount</InputLabel>
@@ -200,13 +224,17 @@ const MemberBooking = ({ user }) => {
                 >
                   {availableSeatsArray?.map((guest) => (
                     <MenuItem key={guest} value={guest}>
-                      {guest} {guest === 1 ? "guest" : "guests"}
+                      {guest} {guest <= 1 ? "guest" : "guests"}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Box>
+              ${booking?.suggestedDonation} per person
+              <br />
+              Total: ${booking?.suggestedDonation * reservedSeats}
             <Button variant="contained" onClick={handleClick} name="editBtn"> Edit Seats </Button>
+            <Button variant="contained" onClick={handleClick} name="deleteBtn"> Cancel Booking </Button>
           </Box>
         ) : (
           <>
@@ -222,7 +250,7 @@ const MemberBooking = ({ user }) => {
                 >
                   {openSeatsArray?.map((guest) => (
                     <MenuItem key={guest} value={guest}>
-                      {guest} {guest === 1 ? "guest" : "guests"}
+                      {guest} {guest <= 1 ? "guest" : "guests"}
                     </MenuItem>
                   ))}
                 </Select>
@@ -235,7 +263,7 @@ const MemberBooking = ({ user }) => {
                   defaultValue={`${booking?.suggestedDonation}`}
                 >
                   {" "}
-                  {`$${booking?.suggestedDonation}`}
+                ${booking?.suggestedDonation} per person
                 </Box>
               </Box>
               {booking?.openSeats <= 0 ? (
