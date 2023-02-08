@@ -426,9 +426,9 @@ const ChefForm = () => {
               Create Event
             </Button>
 
-            <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
+            <Snackbar open={open} autoHideDuration={20000} onClose={handleSnackClose}>
               <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
-                You successfully logged in! 
+                You successfully created an event! 
               </Alert>
             </Snackbar>
           </div>

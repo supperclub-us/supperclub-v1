@@ -28,6 +28,8 @@ import {
   OutlinedInput,
   InputAdornment,
   Typography,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import dayjs from "dayjs";
@@ -153,6 +155,8 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   // console.log("zip--->", zip);
 
+  // set state to open for snack bar
+  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {
@@ -198,11 +202,29 @@ const EditChefForm = () => {
     
   }, [booking]);
 
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.me);
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
   
   // handle submit for chef form
   const handleSubmit = async()=>{
     console.log("handleSubmit clicked! in EditChefForm.js!");
+    setOpen(true)
+        
+    setTimeout(() => {
+      setOpen(false);
+      navigate(`/users/chefprofile/${user.id}`)
+    }, 5000);
+    
     try {
       // e.preventDefault();
       // grabbing full address from the useState
@@ -485,6 +507,12 @@ const EditChefForm = () => {
               >
                 Delete 
               </Button>
+
+              <Snackbar open={open} autoHideDuration={20000} onClose={handleSnackClose}>
+                <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
+                  You successfully edited an event! 
+                </Alert>
+              </Snackbar>
               </div>   
           </div>
         </>
