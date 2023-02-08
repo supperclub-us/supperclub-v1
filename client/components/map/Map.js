@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, {
   GeolocateControl,
   NavigationControl,
@@ -8,14 +8,11 @@ import ReactMapGL, {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
 import MapboxAccessToken, { MapBoxStyle } from "../../env";
-import "mapbox-gl/dist/mapbox-gl.css";
-import "./map.css";
 import { MapSearchBar, SidebarList } from "../index";
-// import { setReduxViewport } from "../slices/viewportSlice";
-// import { setReduxStartDate, setReduxEndDate, setReduxNumGuests } from "../slices/searchBarFilterSlice";
-import mapboxgl from '!mapbox-gl';
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import "mapbox-gl/dist/mapbox-gl.css";
+import "./map.css";
 
 
 const Map = () => {
@@ -41,11 +38,6 @@ const Map = () => {
   const [filterStartDate, setFilterStartDate] = useState(false);
   const [filterEndDate, setFilterEndDate] = useState(false);
 
-  // LOGS FOR FILTERS
-  console.log("FILTERING NUMBER OF GUESTS BOOLEAN --->", filterNumGuests)
-  console.log("FILTERING START DATE BOOLEAN --->", filterStartDate)
-  console.log("FILTERING END DATE BOOLEAN --->", filterEndDate)
-  //-------------------------
 
   // useState for the bounds which will be how we filter out what is rendered in the sidebar
   const [bounds, setBounds] = useState({
@@ -56,12 +48,12 @@ const Map = () => {
   const [viewport, setViewport] = useState(reduxViewport);
 
   const rawDate = dayjs().format('MM/DD/YYYY hh:mmA')
-  console.log("RAW DATE", rawDate)
+
   const currentDateTime = rawDate.split(' ');
   const currentDate = currentDateTime[0].split('/');
-  // console.log("BOOKING DATE", bookingDate)
+
   const intCurrentDate = currentDate.map((element) => parseInt(element));
-  console.log(" FINAL DATE", intCurrentDate)
+
 
   //FILTER LOGIC
   // selecting all bookings that have been created
@@ -71,21 +63,16 @@ const Map = () => {
 
   const filteredBookings = bookings.filter((booking) => {
     const bookingBooking = booking.startDateTime;
-    console.log("BOOKING DATEZ", bookingBooking)
-    console.log("DAYJS", dayjs())
+
     const bookingDateTime = booking.startDateTime.split(' ');
     const bookingDate = bookingDateTime[0].split('/');
-    // console.log("BOOKING DATE", bookingDate)
+
     const intBookingDate = bookingDate.map((element) => parseInt(element));
 
-    console.log("DATES PAST AND FUTURE--->", {currYear: intCurrentDate[2], bookingYr: intBookingDate[2], currMonth: intCurrentDate[0], bookingMonth: intBookingDate[0], currDay: intCurrentDate[1], bookingDay: intBookingDate[1]})
-    // console.log(" INTBOOKING DATE", intBookingDate)
-    console.log("DAY IS BEFORE TODAY? ----->", dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`)))
     
 
     // filter from current date onward
     // return currentDate and onwards
-    // *********  2 PAST BOOKINGS NOT SHOWING ********************************************
     if (dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))) {
       // logic to filter map bounds on start/end dates
       if (filterNumGuests && filterStartDate && filterEndDate) {
@@ -106,8 +93,7 @@ const Map = () => {
           reduxEndDate[1] >= intBookingDate[1] &&
 
           booking.openSeats >= reduxNumGuests
-          // console.log("BOOKING OPENSEATS", booking.openSeats);
-          // console.log("REDUX NUMGUESTS", reduxNumGuests)
+
         )
       }
 
