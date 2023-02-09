@@ -15,20 +15,36 @@ const MemberProfile = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // const [pastEvents, setPastEvents] = useState(false)
+  const [futureEvents, setFutureEvents] = useState(true)
+
   const { currentMember, isLoading } = useSelector(selectSingleMember);
   const memberBookings = currentMember?.memberBooking
   console.log("MBR BOOKINGS", memberBookings)
   const now = dayjs();
   console.log("NOW", now)
 
-  const filteredMemberBookings = memberBookings?.filter((booking) => {
+  const futureMemberBookings = memberBookings?.filter((booking) => {
 
     const bookingDateTime = booking.startDateTime.split(' ');
     const bookingDate = bookingDateTime[0].split('/');
     const intBookingDate = bookingDate.map((element) => parseInt(element));
     console.log("INT BOOKING DATE", intBookingDate)
     return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  });
+
+  const pastMemberBookings = memberBookings?.filter((booking) => {
+
+    const bookingDateTime = booking.startDateTime.split(' ');
+    const bookingDate = bookingDateTime[0].split('/');
+    const intBookingDate = bookingDate.map((element) => parseInt(element));
+    console.log("INT BOOKING DATE", intBookingDate)
+    return dayjs().isAfter(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
   })
+
+  const handleClick = () => {
+      setFutureEvents(!futureEvents);
+  }
 
   useEffect(() => {
     dispatch(fetchSingleMember(user.id));
@@ -56,17 +72,25 @@ const MemberProfile = ({ user }) => {
       <h1>{`Welcome, ${currentMember.firstName}!`}</h1>
       <h3> Your Dashboard</h3>
       <hr />
-      <h3>YOUR UPCOMING SUPPERS</h3>
+      <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} SUPPERS </h2>
+      <Button variant="contained" size="small" onClick={handleClick}> View {futureEvents ? 'Previous': 'Upcoming'} Suppers </Button>
       <div className="profileContainer">
-        {currentMember && currentMember.memberBooking?.length
-          ? filteredMemberBookings?.map((booking) => (
+        {futureEvents ? futureMemberBookings && futureMemberBookings.length ? futureMemberBookings?.map((booking) => (
             <Card
               key={booking.id}
               booking={booking}
               currentMember={currentMember}
             />
-          ))
-          : "No Events"}
+          )) : "No bookings to show"
+          :
+          pastMemberBookings && pastMemberBookings.length ? pastMemberBookings.map((booking) => (
+            <Card
+              key={booking.id}
+              booking={booking}
+              currentMember={currentMember}
+            />
+          )) : "No previous bookings"
+          }
       </div>
     </div>
   );
