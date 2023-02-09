@@ -9,12 +9,12 @@ console.log("PROCESS API STUFF, ", process.env, "<<<<<<<")
 app.post("/payment", async (req, res) => {
     try {
         console.log("REQ BODY:", req.body);
+        
+        const { suggestedDonation, reservedSeats: reservedSeats } = req.body;
         console.log("SPREAD BOOKING,", {...req.body, reservedSeats})
 
-      const { suggestedDonation, reservedSeats: reservedSeats } = req.body;
-
       console.log("suggestedDonation and reservedSeats", {suggestedDonation, reservedSeats})
-      
+
       // Create a PaymentIntent with the order amount and currency
       const paymentIntent = await stripe.paymentIntents.create({
         amount: suggestedDonation * 100,
