@@ -8,16 +8,37 @@ import { PageNotFound } from "../index";
 import "./profile.css";
 import EditIcon from "@mui/icons-material/Edit";
 import { Card } from "./card/Card";
+import dayjs from "dayjs";
 
 const ChefProfile = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.auth.me);
+  const [futureEvents, setFutureEvents] = useState(true)
 
   // the different states from the selectSingleChef State
   const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-  console.log("DAVID", currentChef);
+  const chefBookings = currentChef?.chefBooking
 
-  const dispatch = useDispatch();
+  const futureChefBookings = chefBookings?.filter((booking) => {
+
+    const bookingDateTime = booking.startDateTime.split(' ');
+    const bookingDate = bookingDateTime[0].split('/');
+    const intBookingDate = bookingDate.map((element) => parseInt(element));
+    return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  });
+
+  const pastChefBookings = chefBookings?.filter((booking) => {
+
+    const bookingDateTime = booking.startDateTime.split(' ');
+    const bookingDate = bookingDateTime[0].split('/');
+    const intBookingDate = bookingDate.map((element) => parseInt(element));
+    return dayjs().isAfter(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  })
+
+  const handleClick = () => {
+    setFutureEvents(!futureEvents);
+}
 
   useEffect(() => {
     dispatch(fetchSingleChef(id));
@@ -66,13 +87,21 @@ const ChefProfile = () => {
         >
           Create Event
         </Button>
-        <h3>YOUR EVENTS</h3>
+        <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} EVENTS</h2>
+        <Button variant="contained" size="small" onClick={handleClick}> View {futureEvents ? 'Previous': 'Upcoming'} Events </Button>
         <div className="profileContainer">
-          {currentChef && currentChef.chefBooking?.length
-            ? currentChef.chefBooking.map((booking) => (
-                <Card key={booking.id} booking={booking} />
-              ))
-            : "No Events"}
+          {futureEvents ? futureChefBookings && futureChefBookings.length ?
+          futureChefBookings.map((booking) => (
+              <Card key={booking.id} booking={booking} />
+            ))
+            : "No Events"
+          :
+          pastChefBookings && pastChefBookings.length ?
+          pastChefBookings.map((booking) => (
+              <Card key={booking.id} booking={booking} />
+            ))
+            : "No Events"
+          }
         </div>
       </div>
       {error && error.message}

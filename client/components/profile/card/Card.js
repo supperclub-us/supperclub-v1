@@ -9,11 +9,7 @@ export const Card = ({booking}) => {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.auth.me);
-    console.log("USER", user)
-    console.log("USER.id", user.id) 
-
-    // console.log("holaaaa", booking)
-    // console.log("adios", booking.id)
+ 
     const handleClick = () => {
         console.log("chefs booking clicked!!!")
         navigate(`/bookings/${booking.id}`)
@@ -34,7 +30,7 @@ export const Card = ({booking}) => {
                     Edit Event
                 </Button>
             )}
-            
+
             {user.role === "MEMBER" && (
                 <Button onClick={handleClick} variant="contained">View Details</Button>
 
