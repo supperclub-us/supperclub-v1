@@ -39,14 +39,14 @@ const Upload = ({setImageUrl}) => {
       />
       <Button variant="outlined" onClick={handleUpload}> Upload </Button>
 
-      <Image
+      {/* <Image
         cloudName="dm8eizfpl"
         publicId={selectedPublicId}
         // width="320px"
         height="213px"
         // borderRadius="0.6rem 0.6rem .6rem"
         // objectFit="cover"
-      />
+      /> */}
 
     </div>
   )

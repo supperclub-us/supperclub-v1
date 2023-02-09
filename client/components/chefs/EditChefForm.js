@@ -131,6 +131,7 @@ const EditChefForm = () => {
       setCuisineId(booking.cuisineId);
       setSuggestedDonation(booking.suggestedDonation || ""); // Default is null
       setMenu(booking.menu);
+      setImageUrl(booking.imageUrl)
       setStartValue(dayjs(`${booking.startDateTime}`, "MM/DD/YYYY h:mmA"));
       setEndValue(dayjs(`${booking.endDateTime}`, "MM/DD/YYYY h:mmA"));
       setMax(booking.maxSeats);
@@ -310,6 +311,12 @@ const EditChefForm = () => {
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
+
+                <div>
+                  <img src={imageUrl} style={{
+                    height: "213px",
+                  }}/>
+                </div>
 
               <div>
                 <Upload setImageUrl={setImageUrl} />
