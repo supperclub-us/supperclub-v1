@@ -136,6 +136,9 @@ async function seed() {
     Cuisine.create({
       category: "italian",
     }),
+    Cuisine.create({
+      category: "fusion",
+    }),
   ]);
 
   const bookings = await Promise.all(bookingData.map(booking=>Booking.create(booking)))

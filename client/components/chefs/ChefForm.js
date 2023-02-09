@@ -68,8 +68,8 @@ const ChefForm = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
   console.log("USER", user)
-  console.log("USER.id", user.id) 
-  
+  console.log("USER.id", user.id)
+
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
@@ -89,7 +89,7 @@ const ChefForm = () => {
     console.log("handleSubmit clicked! from ChefForm.js");
 
     setOpen(true)
-    
+
       setTimeout(() => {
         setOpen(false);
         navigate(`/users/chefprofile/${user.id}`)
@@ -179,6 +179,7 @@ const ChefForm = () => {
                       <MenuItem value="7">Brazilian</MenuItem>
                       <MenuItem value="8">Mexican</MenuItem>
                       <MenuItem value="9">Italian</MenuItem>
+                      <MenuItem value="10">Fusion</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -200,7 +201,7 @@ const ChefForm = () => {
                 </div>
               </div>
 
-              
+
               <Box
                 className="chefForm-menu-and-description"
                 component="div"
@@ -219,7 +220,7 @@ const ChefForm = () => {
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
-              
+
               <div>
                 {/* UPLOAD COMPONENT HERE */}
                 <Upload />
@@ -349,7 +350,7 @@ const ChefForm = () => {
 
             <Snackbar open={open} autoHideDuration={10000} onClose={handleSnackClose}>
               <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
-                You successfully created an event! 
+                You successfully created an event!
               </Alert>
             </Snackbar>
           </div>

@@ -224,6 +224,7 @@ const EditChefForm = () => {
                       <MenuItem value="7">Brazilian</MenuItem>
                       <MenuItem value="8">Mexican</MenuItem>
                       <MenuItem value="9">Italian</MenuItem>
+                      <MenuItem value="10">Fusion</MenuItem>
                     </Select>
                   </FormControl>
                 </div>

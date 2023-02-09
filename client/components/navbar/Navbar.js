@@ -13,13 +13,13 @@ const Navbar = () => {
   const [modalScreen, setModalScreen] = useState("");
 
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  
+
   const user = useSelector((state) => state.auth.me);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   console.log("USER", user)
-  console.log("USER.id", user.id) 
+  console.log("USER.id", user.id)
 
   const handleOpen = (str) => {
     setModalScreen(str);
@@ -87,26 +87,23 @@ const Navbar = () => {
         <Link className="navbar-link-spacing" to="/chefs">
           Chefs
         </Link>
-        <Link className="navbar-link-spacing" to="/cuisines">
-          Cuisines
-        </Link>
 
         {isLoggedIn ? (
-          <> 
-            {user.role === "CHEF" ? ( 
+          <>
+            {user.role === "CHEF" ? (
               <Link
               className="navbar-link-spacing"
               to={`/users/chefprofile/${user.id}`}
             >
               Profile
-            </Link> ) : ( 
+            </Link> ) : (
               <Link
               className="navbar-link-spacing"
               to={`/users/memberprofile/${user.id}`}
             >
               Profile
             </Link> )}
-            
+
             <Button type="button" onClick={logoutAndRedirectHome} sx={{ marginRight: "25px", color: "whitesmoke" }}>
               Log out
             </Button>
@@ -140,7 +137,7 @@ const Navbar = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>{renderModalScreen()}
-          <Button 
+          <Button
             onClick={handleClose}
             startIcon={<ClearIcon />}
             style={{
@@ -148,7 +145,7 @@ const Navbar = () => {
               top: '10px',
               right: '10px',
             }}>
-          </Button> 
+          </Button>
           </Box>
         </Modal>
       </div>
