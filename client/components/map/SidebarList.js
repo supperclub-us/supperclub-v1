@@ -45,6 +45,15 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
   let matches = getMatches(bookings, memberBookings);
   console.log("MATCHES", matches)
 
+  const getMatchesAndBookingMatches = (matches, booking) => {
+    for (let i = 0; i < matches.length; i++) {
+      if (matches[i].id == booking.id) {
+        return true
+      }
+    }
+  }
+
+  // let blargh = getMatchesAndBookingMatches(matches)
 
   // const bookingsOfMember = filteredBookings.filter((booking) => {
   //   return booking.memberBooking.some((member) => member.id == userId)
@@ -77,7 +86,7 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
                   </p> */}
 
 
-              {booking.id == matches[0].id ? <p>MATCH</p> : '' }
+              {getMatchesAndBookingMatches(matches, booking) ? <p>MATCH</p> : '' }
 
 
               <p>
