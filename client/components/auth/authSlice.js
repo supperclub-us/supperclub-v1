@@ -58,6 +58,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     me: {},
+    isLoading: false,
     error: null,
   },
   reducers: {
@@ -68,10 +69,14 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(me.pending, (state, action) => {
+      state.isLoading = true
+      state.error = null
+    })
     builder.addCase(me.fulfilled, (state, action) => {
       
       console.log("action.payload", action.payload)
-
+      state.isLoading = false
       state.me = action.payload;
     });
     builder.addCase(me.rejected, (state, action) => {
