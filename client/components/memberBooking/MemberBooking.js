@@ -77,8 +77,8 @@ const MemberBooking = ({ user }) => {
       dispatch(
         deleteMemberBooking({ ...booking, userId, newAmountOfOpenSeats })
       );
-     setGuests("")
-     setPayment(false)
+      setGuests("");
+      setPayment(false);
     } else if (e.target.name === "editBtn") {
       const newReservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
@@ -93,7 +93,9 @@ const MemberBooking = ({ user }) => {
         })
       );
     } else if (e.target.name === "bookBtn") {
-      if (guests){
+      if (guests && !user.id) {
+        setLoginSignup(true);
+      } else if (guests && user) {
         const bookingAmtOfGuests = booking.openSeats;
         const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
         setLoginSignup(false);
@@ -105,10 +107,10 @@ const MemberBooking = ({ user }) => {
             guests,
           })
         );
-        setPayment(true)
+        setPayment(true);
         // navigate("/");
       } else {
-        alert("please select number of guests/seats")
+        alert("please select number of guests/seats");
       }
     }
   };
@@ -297,7 +299,11 @@ const MemberBooking = ({ user }) => {
         )}
         {payment && (
           <Box>
-            <Payment reservedSeats={reservedSeats} booking={booking} />
+            <Payment
+              reservedSeats={reservedSeats}
+              booking={booking}
+              guests={guests}
+            />
           </Box>
         )}
       </Box>
