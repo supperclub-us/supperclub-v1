@@ -12,7 +12,7 @@ import {
   deleteSingleBooking,
 } from "../slices/singleBookingSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
-import { Home } from "../index";
+import { Home, Upload } from "../index";
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
@@ -38,14 +38,63 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL", "AK", "AZ", "AR", "AS", "CA", "CO", "CT", "DE", "DC",
-  "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA",
-  "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
-  "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-  "NM", "NY", "NC", "ND", "CM", "OH",
-  "OK", "OR", "PA", "PR", "RI", "SC", "SD",
-  "TN", "TX", "TT", "UT", "VT", "VA", "VI",
-  "WA", "WV", "WI", "WY",
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "AS",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "DC",
+  "FL",
+  "GA",
+  "GU",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "CM",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "PR",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "TT",
+  "UT",
+  "VT",
+  "VA",
+  "VI",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
 ];
 
 const EditChefForm = () => {
@@ -69,6 +118,7 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   const [openEditConfirm, setOpenEditConfirm] = useState(false);
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingsId));
@@ -81,6 +131,7 @@ const EditChefForm = () => {
       setCuisineId(booking.cuisineId);
       setSuggestedDonation(booking.suggestedDonation || ""); // Default is null
       setMenu(booking.menu);
+      setImageUrl(booking.imageUrl)
       setStartValue(dayjs(`${booking.startDateTime}`, "MM/DD/YYYY h:mmA"));
       setEndValue(dayjs(`${booking.endDateTime}`, "MM/DD/YYYY h:mmA"));
       setMax(booking.maxSeats);
@@ -142,6 +193,7 @@ const EditChefForm = () => {
             title,
             cuisineId,
             menu,
+            imageUrl: imageUrl,
             suggestedDonation,
             startValue: startValue.format("MM/DD/YYYY h:mmA"),
             endValue: endValue.format("MM/DD/YYYY h:mmA"),
@@ -158,21 +210,17 @@ const EditChefForm = () => {
           })
         );
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
-// useEffect ---------------------------------------------------------
+  // useEffect ---------------------------------------------------------
 
   // Warning Click handle button
   const handleWarning = async () => {
-    // console.log("Initial Warning Coming");
     setOpenWarningConfirm(true);
   };
 
   // chefId, bookingsId from useParams
   const handleDelete = async () => {
-    // console.log("REMOVE BUTTON CLICKED");
     try {
       await dispatch(
         deleteSingleBooking({
@@ -264,6 +312,16 @@ const EditChefForm = () => {
                 />
               </Box>
 
+                <div>
+                  <img src={imageUrl} style={{
+                    height: "213px",
+                  }}/>
+                </div>
+
+              <div>
+                <Upload setImageUrl={setImageUrl} />
+              </div>
+
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateTimePicker
@@ -271,7 +329,6 @@ const EditChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
-                      // console.log("newValue-->", newValue);
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
