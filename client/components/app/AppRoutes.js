@@ -12,6 +12,8 @@ import {
   MemberProfile,
   PageNotFound,
   MemberBooking,
+  Payment,
+  Confirmation
 } from "../index";
 import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
@@ -76,6 +78,8 @@ const AppRoutes = () => {
           )}
         </Route>
       )}
+      <Route path="/checkout" element={<Payment/>} />
+      <Route path="/confirmation" element={<Confirmation/>}/>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

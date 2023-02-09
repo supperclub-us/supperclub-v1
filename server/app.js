@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+// require("dotenv").config();
 module.exports = app
 
 // logging middleware
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended: true}))
 // auth and api routes
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
+app.use(require('./stripe.js'))
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '..', 'public/index.html')));
 

@@ -1,3 +1,5 @@
+const Dotenv = require('dotenv-webpack')
+
 module.exports = {
   entry: ["mapbox-gl/dist/mapbox-gl.css", './client/index.js'],
   output: {
@@ -6,6 +8,9 @@ module.exports = {
   },
   context: __dirname,
   devtool: 'source-map',
+  plugins: [ new Dotenv({
+    path: '.env', // or '.env.local', '.env.[mode]', etc.
+    }) ],
   module: {
     rules: [
       {
