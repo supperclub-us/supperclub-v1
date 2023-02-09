@@ -9,7 +9,7 @@ import {
   OutlinedInput
 } from "@mui/material";
 
-const Upload = (setImageUrl) => {
+const Upload = ({setImageUrl}) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedPublicId, setSelectedPublicId] = useState("")
 
@@ -18,10 +18,6 @@ const Upload = (setImageUrl) => {
     const formData = new FormData();
     formData.append("file", selectedImage)
     formData.append("upload_preset", "jeux3vde")
-
-    console.log("/////selectedImage/////:", selectedImage)
-    // console.log("/////formdata/////:", formData)
-    // console.log("/////formdata.append/////:", formData.get())
 
     Axios.post(
       "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
@@ -41,12 +37,11 @@ const Upload = (setImageUrl) => {
         type="file"
         onChange={(event) => setSelectedImage(event.target.files[0])}
       />
-      <Button varient="outlined" onClick={handleUpload}> Upload </Button>
+      <Button variant="outlined" onClick={handleUpload}> Upload </Button>
 
       <Image
         cloudName="dm8eizfpl"
         publicId={selectedPublicId}
-        objectFit="fill"
         // width="320px"
         height="213px"
         // borderRadius="0.6rem 0.6rem .6rem"

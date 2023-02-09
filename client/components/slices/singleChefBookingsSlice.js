@@ -20,6 +20,7 @@ export const addSingleChefBooking = createAsyncThunk(
     id,
     title,
     menu,
+    imageUrl,
     cuisineId,
     suggestedDonation,
     startValue,
@@ -35,9 +36,11 @@ export const addSingleChefBooking = createAsyncThunk(
     longitude
   }) => {
     try {
+      console.log("/////imageUrl////:", imageUrl)
       const { data } = await axios.post(`/api/users/chefs/${id}/bookings`, {
         title,
         menu,
+        imageUrl,
         cuisineId,
         suggestedDonation,
         startDateTime: startValue,
@@ -53,6 +56,7 @@ export const addSingleChefBooking = createAsyncThunk(
         longitude,
         chefId: id
       });
+     console.log("/////DATA////:", data)
       return data;
     } catch (err) {
       console.log(err);
@@ -65,15 +69,15 @@ const singleChefBookingsSlice = createSlice({
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
-    
+
     builder.addCase(fetchSingleChefBooking.fulfilled, (state, action) => {
       return action.payload;
     });
-    
+
     builder.addCase(addSingleChefBooking.fulfilled, (state, action) => {
       state.push(action.payload);
     });
-    
+
   },
 });
 
