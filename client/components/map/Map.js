@@ -15,7 +15,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
 
-const Map = () => {
+const Map = ({ user }) => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -69,7 +69,7 @@ const Map = () => {
 
     const intBookingDate = bookingDate.map((element) => parseInt(element));
 
-    
+
 
     // filter from current date onward
     // return currentDate and onwards
@@ -191,7 +191,7 @@ const Map = () => {
       <MapSearchBar viewport={viewport} setViewport={setViewport} numGuests={numGuests} setNumGuests={setNumGuests} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} setFilterStartDate={setFilterStartDate} setFilterEndDate={setFilterEndDate} setFilterNumGuests={setFilterNumGuests} filterStartDate={filterStartDate} filterEndDate={filterEndDate} />
 
       <div className="map-container">
-        <SidebarList bounds={bounds} selectedMarker={selectedMarker} filteredBookings={filteredBookings} />
+        <SidebarList user={user} bounds={bounds} selectedMarker={selectedMarker} filteredBookings={filteredBookings} />
 
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}
