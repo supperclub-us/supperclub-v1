@@ -21,7 +21,6 @@ const Navbar = () => {
   console.log("USER", user)
   console.log("USER.id", user.id) 
 
-  
   const handleOpen = (str) => {
     setModalScreen(str);
     setOpen(true);
@@ -32,7 +31,7 @@ const Navbar = () => {
     setModalScreen("");
 
     user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
-    user.role === "MEMBER" ? navigate(`/users/memberprofile/${user.id}`) : null
+    user.role === "MEMBER" ? navigate(`/map`) : null
   };
 
   const renderModalScreen = () => {
@@ -45,8 +44,6 @@ const Navbar = () => {
     }
 
   };
-
-
 
   // useEffect(() => {
   //   if (isLoggedIn) {

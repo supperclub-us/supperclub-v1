@@ -1,6 +1,6 @@
 const {
   db,
-  models: { User, Booking, Cuisine },
+  models: { User, Booking, Cuisine, UsersBookings },
 } = require("../server/db");
 
 const { bookingData } = require("./bookingData")
@@ -138,160 +138,142 @@ async function seed() {
     }),
   ]);
 
-  // Bookings of Chefs
-  // const booking1 = await Booking.create({
-  //   title: "Delicious Mexican cuisine!",
-  //   menu: "A nice blend of - maduros and delicious brazilian steak!",
-  //   startDateTime: "1/1/2023 5:30PM",
-  //   endDateTime: "1/1/2023 7:30PM",
-  //   maxSeats: 5,
-  //   openSeats: 3,
-  //   address1: "39 South Russell",
-  //   city: "Boston",
-  //   state: "MA",
-  //   zipCode: '02114',
-  //   latitude: 42.360060,
-  //   longitude: -71.066080,
-  //   chefId: 7,
-  //   cuisineId: 7,
-  // });
-  // const booking2 = await Booking.create({
-  //   title: "Great East Asian Cuisine!",
-  //   menu: "A nice blend of xyz",
-  //   startDateTime: "1/1/2023 5:30PM",
-  //   endDateTime: "1/1/2023 7:30PM",
-  //   maxSeats: 5,
-  //   openSeats: 3,
-  //   address1: "41 West 85th Street",
-  //   city: "New York",
-  //   state: "NY",
-  //   zipCode: '10024',
-  //   latitude: 40.785340,
-  //   longitude: -73.971100,
-  //   chefId: 8,
-  //   cuisineId: 5,
-  // });
-  // const booking3 = await Booking.create({
-  //   title: "Best Tacos in the Salt Lake City Area",
-  //   menu: "It comes with Peanut Butter",
-  //   startDateTime: "1/1/2023 5:30PM",
-  //   endDateTime: "1/1/2023 7:30PM",
-  //   maxSeats: 5,
-  //   openSeats: 3,
-  //   address1: "371 Herbert Ave S",
-  //   city: "Salt Lake",
-  //   state: "UT",
-  //   zipCode: '84111',
-  //   latitude: 40.746613,
-  //   longitude: -111.8805877,
-  //   chefId: 9,
-  //   cuisineId: 8,
-  // });
-
   const bookings = await Promise.all(bookingData.map(booking=>Booking.create(booking)))
   console.log("bookings!!!!!:LKSJD F:LKJSD:", bookings[0])
   // USERS BOOKINGS JOIN TABLE - magic methods
-  await richard.addMemberBooking(bookings[0], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await richard.addMemberBooking(bookings[3], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await richard.addMemberBooking(bookings[6], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await richard.addMemberBooking(bookings[18], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await roy.addMemberBooking(bookings[0], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await roy.addMemberBooking(bookings[8], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await roy.addMemberBooking(bookings[10], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await roy.addMemberBooking(bookings[19], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await sarah.addMemberBooking(bookings[0], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await sarah.addMemberBooking(bookings[1], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await sarah.addMemberBooking(bookings[6], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await sarah.addMemberBooking(bookings[17], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await sarah.addMemberBooking(bookings[20], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await robert.addMemberBooking(bookings[16], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await robert.addMemberBooking(bookings[14], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await robert.addMemberBooking(bookings[12], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await robert.addMemberBooking(bookings[21], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
 
-  await joe.addMemberBooking(bookings[2], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await joe.addMemberBooking(bookings[4], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await joe.addMemberBooking(bookings[6], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await joe.addMemberBooking(bookings[22], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await david.addMemberBooking(bookings[2], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await david.addMemberBooking(bookings[8], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await david.addMemberBooking(bookings[9], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
-  await david.addMemberBooking(bookings[22], {
-    as: "memberBooking",
-    through: "users_bookings",
-  });
+
+  // await richard.addMemberBooking(bookings[0], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await richard.addMemberBooking(bookings[3], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await richard.addMemberBooking(bookings[6], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await richard.addMemberBooking(bookings[18], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await roy.addMemberBooking(bookings[0], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await roy.addMemberBooking(bookings[8], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await roy.addMemberBooking(bookings[10], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await roy.addMemberBooking(bookings[19], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await sarah.addMemberBooking(bookings[0], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await sarah.addMemberBooking(bookings[1], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await sarah.addMemberBooking(bookings[6], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await sarah.addMemberBooking(bookings[17], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await sarah.addMemberBooking(bookings[20], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await robert.addMemberBooking(bookings[16], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await robert.addMemberBooking(bookings[14], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await robert.addMemberBooking(bookings[12], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await robert.addMemberBooking(bookings[21], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+
+  // await joe.addMemberBooking(bookings[2], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await joe.addMemberBooking(bookings[4], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await joe.addMemberBooking(bookings[6], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await joe.addMemberBooking(bookings[22], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await david.addMemberBooking(bookings[2], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await david.addMemberBooking(bookings[8], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await david.addMemberBooking(bookings[9], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+  // await david.addMemberBooking(bookings[22], {
+  //   as: "memberBooking",
+  //   through: "users_bookings",
+  // });
+
+  // BOOKING RESERVATIONS:
+  const usersBookings = [
+    {memberId: 3, bookingId: 1, reservedSeats: 1}, //
+    {memberId: 3, bookingId: 4, reservedSeats: 6}, //
+    {memberId: 3, bookingId: 7, reservedSeats: 3}, //
+    {memberId: 4, bookingId: 1, reservedSeats: 1}, //
+    {memberId: 4, bookingId: 9, reservedSeats: 1}, //
+    {memberId: 4, bookingId: 11, reservedSeats: 1}, //
+    {memberId: 4, bookingId: 20, reservedSeats: 3}, //
+    {memberId: 5, bookingId: 1, reservedSeats: 1}, //
+    {memberId: 5, bookingId: 2, reservedSeats: 2}, //
+    {memberId: 5, bookingId: 7, reservedSeats: 3}, //
+    {memberId: 5, bookingId: 18, reservedSeats: 2}, //
+    {memberId: 5, bookingId: 21, reservedSeats: 13}, //
+    {memberId: 6, bookingId: 17, reservedSeats: 7}, //
+    {memberId: 6, bookingId: 15, reservedSeats: 5}, //
+    {memberId: 6, bookingId: 13, reservedSeats: 2}, //
+    {memberId: 6, bookingId: 22, reservedSeats: 8}, //
+    {memberId: 1, bookingId: 3, reservedSeats: 1}, //
+    {memberId: 1, bookingId: 5, reservedSeats: 4}, //
+    {memberId: 1, bookingId: 7, reservedSeats: 2}, //
+    {memberId: 1, bookingId: 23, reservedSeats: 2}, //
+    {memberId: 2, bookingId: 3, reservedSeats: 1}, //
+    {memberId: 2, bookingId: 9, reservedSeats: 1}, //
+    {memberId: 2, bookingId: 10, reservedSeats: 6}, //
+    {memberId: 2, bookingId: 23, reservedSeats: 1} //
+  ]
+
+  await Promise.all(usersBookings.map(userBooking => UsersBookings.create(userBooking)))
 
   // CHEF CUISINES
   // 7, 8, 9

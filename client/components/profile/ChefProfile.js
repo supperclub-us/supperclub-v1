@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Link } from "react-router-dom";
-import { Button, LinearProgress } from "@mui/material";
+import { Button, Skeleton, Box } from "@mui/material";
 import { PageNotFound } from "../index";
 import "./profile.css";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import { Card } from "./card/Card";
 
 const ChefProfile = () => {
@@ -15,7 +15,7 @@ const ChefProfile = () => {
 
   // the different states from the selectSingleChef State
   const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-  console.log("DAVID", currentChef)
+  console.log("DAVID", currentChef);
 
   const dispatch = useDispatch();
 
@@ -24,21 +24,23 @@ const ChefProfile = () => {
   }, [dispatch, id]);
 
   // error handling client side.
-  if (error) {
-    return <PageNotFound />;
+  if (isLoading || !currentChef) {
+    return (
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignContent: "center" }}>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
   }
-
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  // if (!currentChef) {
-  //   return <PageNotFound />;
-  // }
 
   if (user.id !== Number(id)) {
     return <PageNotFound />;
   }
+
+  // if (error) {
+  //   return <PageNotFound />;
+  // }
 
   return (
     <>
@@ -51,25 +53,29 @@ const ChefProfile = () => {
         </h1>
         <h3> Your Dashboard</h3>
         <hr />
-        <Button 
-          variant="contained" 
-          onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}
+        <Button
+          variant="contained"
+          onClick={() => {
+            window.location.href = `/chefs/${currentChef.id}/event`;
+          }}
           sx={{
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
           }}
         >
-            Create Event
+          Create Event
         </Button>
         <h3>YOUR EVENTS</h3>
         <div className="profileContainer">
           {currentChef && currentChef.chefBooking?.length
-            ? currentChef.chefBooking.map((booking) => (<Card key={booking.id} booking={booking} />))
+            ? currentChef.chefBooking.map((booking) => (
+                <Card key={booking.id} booking={booking} />
+              ))
             : "No Events"}
-
         </div>
       </div>
+      {error && error.message}
     </>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Form, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
   selectSingleChefBookings,
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
-import { Home } from "../index";
+import { Home, Upload } from "../index";
 import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
@@ -22,6 +22,8 @@ import {
   OutlinedInput,
   InputAdornment,
   Typography,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import dayjs from "dayjs";
@@ -30,128 +32,69 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const states = [
-  "AL",
-  "AK",
-  "AZ",
-  "AR",
-  "AS",
-  "CA",
-  "CO",
-  "CT",
-  "DE",
-  "DC",
-  "FL",
-  "GA",
-  "GU",
-  "HI",
-  "ID",
-  "IL",
-  "IN",
-  "IA",
-  "KS",
-  "KY",
-  "LA",
-  "ME",
-  "MD",
-  "MA",
-  "MI",
-  "MN",
-  "MS",
-  "MO",
-  "MT",
-  "NE",
-  "NV",
-  "NH",
-  "NJ",
-  "NM",
-  "NY",
-  "NC",
-  "ND",
-  "CM",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "PR",
-  "RI",
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "TT",
-  "UT",
-  "VT",
-  "VA",
-  "VI",
-  "WA",
-  "WV",
-  "WI",
-  "WY",
+  "AL", "AK", "AZ", "AR", "AS", "CA", "CO", "CT", "DE", "DC",
+  "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA",
+  "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
+  "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+  "NM", "NY", "NC", "ND", "CM", "OH",
+  "OK", "OR", "PA", "PR", "RI", "SC", "SD",
+  "TN", "TX", "TT", "UT", "VT", "VA", "VI",
+  "WA", "WV", "WI", "WY",
 ];
 
 const ChefForm = () => {
-  const userId = useSelector((state) => state.auth.me.id);
-  // console.log("userId--->", userId);
-
+  const userId = useSelector((state) => state.auth.me.id)
   const [title, setTitle] = useState("");
-  // console.log("title--->", title);
-
   const [menu, setMenu] = useState("");
-  // console.log("menu--->", menu);
-
   const [cuisineId, setCuisineId] = useState("");
-  // console.log("cuisineId--->", cuisineId);
-
   const [suggestedDonation, setSuggestedDonation] = useState(null);
-  // console.log("suggestedDonation--->", suggestedDonation);
-
   const [startValue, setStartValue] = useState(dayjs());
-  // console.log("startValue--->", startValue.format("MM/DD/YYYY h:mmA"));
-
   const [endValue, setEndValue] = useState(dayjs());
-  // console.log("endValue--->", endValue.format("MM/DD/YYYY h:mmA"));
-
   const [max, setMax] = useState(null);
-  // console.log("max--->", max);
-
   const [openSeats, setOpenSeats] = useState("");
-  // console.log("openSeats--->", openSeats);
-
   const [address1, setAddress1] = useState("");
-  // console.log("address1--->", address1);
-
   const [address2, setAddress2] = useState("");
-  // console.log("address2--->", address2);
-
   const [city, setCity] = useState("");
-  // console.log("city--->", city);
-
   const [state, setState] = useState("");
-  // console.log("state--->", state);
-
   const [zip, setZip] = useState("");
-  // console.log("zip--->", zip);
 
   const { chefId } = useParams();
-  // console.log("CHEF -----------> ", chefId);
-
-  // // the different states from the selectSingleChef State
-  // const { currentChef, isLoading, error } = useSelector(selectSingleChef);
-
   const dispatch = useDispatch();
 
-  useSelector(selectSingleChefBookings);
-  useSelector(selectSingleChef);
+  const {currentChef, isLoading, error} = useSelector(selectSingleChef);
+  // set state to open for snack bar
+  const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.me);
+  console.log("USER", user)
+  console.log("USER.id", user.id) 
+  
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
     dispatch(fetchSingleChefBooking(userId));
   }, []);
 
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   // handle submit for chef form
-  const handleSubmit = async (e) => {
-    console.log("handleSubmit clicked!");
-    // e.preventDefault();
+  const handleSubmit = async () => {
+    console.log("handleSubmit clicked! from ChefForm.js");
+
+    setOpen(true)
+    
+      setTimeout(() => {
+        setOpen(false);
+        navigate(`/users/chefprofile/${user.id}`)
+      }, 1500);
+
     try {
       // grabbing full address from the useState
       const address = `${address1}, ${city}, ${state}, ${zip}`;
@@ -192,6 +135,11 @@ const ChefForm = () => {
     }
   };
 
+
+  if (isLoading || !currentChef){
+    return <div> LOADING ...</div>
+  }
+
   return (
     <>
       {userId !== parseInt(chefId) ? (
@@ -202,7 +150,6 @@ const ChefForm = () => {
             <Typography variant="h5">Create Your Supper Club Event!</Typography>
             <Box
               component="form"
-              // onSubmit={handleSubmit}
               className="chefEvent-form"
             >
               <div className="chefForm-title-of-event">
@@ -272,8 +219,12 @@ const ChefForm = () => {
                   onChange={(e) => setMenu(e.target.value)}
                 />
               </Box>
-
               
+              <div>
+                {/* UPLOAD COMPONENT HERE */}
+                <Upload />
+                {/* UPLOAD COMPONENT HERE */}
+              </div>
 
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -395,6 +346,12 @@ const ChefForm = () => {
             >
               Create Event
             </Button>
+
+            <Snackbar open={open} autoHideDuration={10000} onClose={handleSnackClose}>
+              <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
+                You successfully created an event! 
+              </Alert>
+            </Snackbar>
           </div>
         </>
       )}

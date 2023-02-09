@@ -1,70 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchSingleMember, selectSingleMember } from "../slices/singleMemberSlice"
-import { LinearProgress, Button } from "@mui/material";
-import { PageNotFound } from "../"
+import {
+  fetchSingleMember,
+  selectSingleMember,
+} from "../slices/singleMemberSlice";
+import { LinearProgress, Button, Skeleton, Box } from "@mui/material";
+import { PageNotFound } from "../";
 import { Card } from "./card/Card";
 
 const MemberProfile = ({ user }) => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const { currentMember, isLoading, error } = useSelector(selectSingleMember);
+  const { currentMember, isLoading } = useSelector(selectSingleMember);
 
-    useEffect(() => {
-        dispatch(fetchSingleMember(user.id));
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchSingleMember(user.id));
+  }, [dispatch, user]);
 
-    
-    if (isLoading) {
-        return <LinearProgress />;
-    }
-
-    if (error) {
-        return <PageNotFound />;
-    }
-
-    // if (!currentMember) {
-    //   return <PageNotFound />;
-    // }
-
-    if (user.id !== Number(id)) {
-        return <PageNotFound />;
-    }
-
+  if (isLoading || !currentMember) {
     return (
-        <>
-            <div className="links">
-                <h1>
-                    {`Welcome, ${currentMember.firstName}!`}
-                </h1>
-                <h3> Your Dashboard</h3>
-                <hr />
-                {/* <Button variant="outlined" onClick={() => { window.location.href = `/chefs/${currentChef.id}/event` }}>Create an Event</Button> */}
-                <h3>YOUR UPCOMING SUPPERS</h3>
-                <div className="profileContainer">
-                    {currentMember && currentMember.memberBooking?.length
-                        ? currentMember.memberBooking.map((booking) => (<Card key ={booking.id} booking={booking} />))
-                        : "No Events"}
-                </div>
-            </div>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
+  }
 
-            {/* <div>
-                <h1>
-                    Welcome {`${currentMember.firstName}`}
-                </h1>
-                <div>
-                    <h3>
-                        YOUR UPCOMING EVENTS
-                    </h3>
-                </div>
-            </div> */}
-        </>
-
-    )
-
-}
+  return (
+    <div className="links">
+      <h1>{`Welcome, ${currentMember.firstName}!`}</h1>
+      <h3> Your Dashboard</h3>
+      <hr />
+      <h3>YOUR UPCOMING SUPPERS</h3>
+      <div className="profileContainer">
+        {currentMember && currentMember.memberBooking?.length
+          ? currentMember.memberBooking.map((booking) => (
+              <Card
+                key={booking.id}
+                booking={booking}
+                currentMember={currentMember}
+              />
+            ))
+          : "No Events"}
+      </div>
+    </div>
+  );
+};
 
 export default MemberProfile;
