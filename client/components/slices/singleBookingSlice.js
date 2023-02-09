@@ -72,6 +72,7 @@ export const editSingleBooking = createAsyncThunk(
     id,
     title,
     menu,
+    imageUrl,
     cuisineId,
     suggestedDonation,
     startValue,
@@ -93,6 +94,7 @@ export const editSingleBooking = createAsyncThunk(
         {
           title,
           menu,
+          imageUrl,
           cuisineId,
           suggestedDonation,
           startDateTime: startValue,

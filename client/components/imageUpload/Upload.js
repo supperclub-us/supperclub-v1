@@ -22,9 +22,9 @@ const Upload = ({setImageUrl}) => {
     Axios.post(
       "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
     ).then(res => {
-      console.log("/////res.data/////:", res.data)
-       console.log("/////res.data.pulic_id/////:", res.data.public_id)
-       console.log("/////res.data.url/////:", res.data.url)
+      // console.log("/////res.data/////:", res.data)
+      //  console.log("/////res.data.pulic_id/////:", res.data.public_id)
+      //  console.log("/////res.data.url/////:", res.data.url)
       setSelectedPublicId(res.data.public_id)
       setImageUrl(res.data.url)
     })

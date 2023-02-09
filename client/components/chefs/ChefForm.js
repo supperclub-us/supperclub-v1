@@ -58,7 +58,6 @@ const ChefForm = () => {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
 
-  const [selectedImage, setSelectedImage] = useState("")
   const [imageUrl, setImageUrl ] = useState("")
 
   const { chefId } = useParams();
