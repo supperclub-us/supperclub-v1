@@ -9,7 +9,7 @@ import {
   OutlinedInput
 } from "@mui/material";
 
-const Upload = () => {
+const Upload = (setImageUrl) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedPublicId, setSelectedPublicId] = useState("")
 
@@ -26,8 +26,11 @@ const Upload = () => {
     Axios.post(
       "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
     ).then(res => {
-       console.log("/////RES/////:", res.data)
+      console.log("/////res.data/////:", res.data)
+       console.log("/////res.data.pulic_id/////:", res.data.public_id)
+       console.log("/////res.data.url/////:", res.data.url)
       setSelectedPublicId(res.data.public_id)
+      setImageUrl(res.data.url)
     })
 
   };

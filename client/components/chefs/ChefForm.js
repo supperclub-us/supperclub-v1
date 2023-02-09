@@ -57,7 +57,9 @@ const ChefForm = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
+  const [imageUrl, setImageUrl ] = useState("")
 
+  console.log("/////imageUrl/////", imageUrl)
 
   const { chefId } = useParams();
   const dispatch = useDispatch();
@@ -68,8 +70,8 @@ const ChefForm = () => {
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
-  console.log("USER", user)
-  console.log("USER.id", user.id)
+  // console.log("USER", user)
+  // console.log("USER.id", user.id)
 
 
   useEffect(() => {
@@ -116,6 +118,7 @@ const ChefForm = () => {
             title,
             cuisineId,
             menu,
+            imageUrl: imageUrl,
             suggestedDonation,
             startValue: startValue.format("MM/DD/YYYY h:mmA"),
             endValue: endValue.format("MM/DD/YYYY h:mmA"),
@@ -223,9 +226,10 @@ const ChefForm = () => {
 
               <div>
                 {/* UPLOAD COMPONENT HERE */}
-                <Upload />
+                <Upload setImageUrl={setImageUrl}/>
                 {/* UPLOAD COMPONENT HERE */}
               </div>
+
 
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>

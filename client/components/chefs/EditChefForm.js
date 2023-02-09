@@ -159,20 +159,20 @@ const EditChefForm = () => {
         );
       }
     } catch (err) {
-      console.log(err);
+
     }
   };
 // useEffect ---------------------------------------------------------
 
   // Warning Click handle button
   const handleWarning = async () => {
-    // console.log("Initial Warning Coming");
+
     setOpenWarningConfirm(true);
   };
 
   // chefId, bookingsId from useParams
   const handleDelete = async () => {
-    // console.log("REMOVE BUTTON CLICKED");
+
     try {
       await dispatch(
         deleteSingleBooking({
@@ -271,7 +271,7 @@ const EditChefForm = () => {
                     label="Start"
                     value={startValue}
                     onChange={(newValue) => {
-                      // console.log("newValue-->", newValue);
+
                       setStartValue(newValue);
                     }}
                     className="chefForm-event-start-date"
