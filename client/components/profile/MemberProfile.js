@@ -20,16 +20,13 @@ const MemberProfile = ({ user }) => {
 
   const { currentMember, isLoading } = useSelector(selectSingleMember);
   const memberBookings = currentMember?.memberBooking
-  console.log("MBR BOOKINGS", memberBookings)
   const now = dayjs();
-  console.log("NOW", now)
 
   const futureMemberBookings = memberBookings?.filter((booking) => {
 
     const bookingDateTime = booking.startDateTime.split(' ');
     const bookingDate = bookingDateTime[0].split('/');
     const intBookingDate = bookingDate.map((element) => parseInt(element));
-    console.log("INT BOOKING DATE", intBookingDate)
     return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
   });
 
@@ -38,7 +35,6 @@ const MemberProfile = ({ user }) => {
     const bookingDateTime = booking.startDateTime.split(' ');
     const bookingDate = bookingDateTime[0].split('/');
     const intBookingDate = bookingDate.map((element) => parseInt(element));
-    console.log("INT BOOKING DATE", intBookingDate)
     return dayjs().isAfter(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
   })
 
