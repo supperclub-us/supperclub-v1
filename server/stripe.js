@@ -12,6 +12,7 @@ app.post("/payment", async (req, res) => {
         
         const { suggestedDonation, reservedSeats: reservedSeats } = req.body;
         console.log("SPREAD BOOKING,", {...req.body, reservedSeats})
+        console.log("LOGGING")
 
       console.log("suggestedDonation and reservedSeats", {suggestedDonation, reservedSeats})
 
