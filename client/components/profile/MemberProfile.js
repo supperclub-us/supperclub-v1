@@ -8,6 +8,7 @@ import {
 import { LinearProgress, Button, Skeleton, Box } from "@mui/material";
 import { PageNotFound } from "../";
 import { Card } from "./card/Card";
+import dayjs from "dayjs";
 
 const MemberProfile = ({ user }) => {
   const { id } = useParams();
@@ -15,10 +16,23 @@ const MemberProfile = ({ user }) => {
   const dispatch = useDispatch();
 
   const { currentMember, isLoading } = useSelector(selectSingleMember);
+  const memberBookings = currentMember?.memberBooking
+  console.log("MBR BOOKINGS", memberBookings)
+  const now = dayjs();
+  console.log("NOW", now)
+
+  const filteredMemberBookings = memberBookings?.filter((booking) => {
+
+    const bookingDateTime = booking.startDateTime.split(' ');
+    const bookingDate = bookingDateTime[0].split('/');
+    const intBookingDate = bookingDate.map((element) => parseInt(element));
+    console.log("INT BOOKING DATE", intBookingDate)
+    return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  })
 
   useEffect(() => {
     dispatch(fetchSingleMember(user.id));
-  }, [dispatch, user]);
+  }, []);
 
   if (isLoading || !currentMember) {
     return (
@@ -45,13 +59,13 @@ const MemberProfile = ({ user }) => {
       <h3>YOUR UPCOMING SUPPERS</h3>
       <div className="profileContainer">
         {currentMember && currentMember.memberBooking?.length
-          ? currentMember.memberBooking.map((booking) => (
-              <Card
-                key={booking.id}
-                booking={booking}
-                currentMember={currentMember}
-              />
-            ))
+          ? filteredMemberBookings?.map((booking) => (
+            <Card
+              key={booking.id}
+              booking={booking}
+              currentMember={currentMember}
+            />
+          ))
           : "No Events"}
       </div>
     </div>
