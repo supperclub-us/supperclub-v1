@@ -181,6 +181,10 @@ const Map = ({ user }) => {
     });
   };
 
+  const handleGeo = (e) => {
+    console.log("GEO E", e)
+  }
+
   const handleClick = (markerId) => {
     navigate(`/bookings/${markerId}`)
   }
@@ -205,7 +209,7 @@ const Map = ({ user }) => {
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
-            <GeolocateControl />
+            <GeolocateControl onTrackUserLocationStart={handleGeo}/>
 
 
             {/* If there are bookings then we want to render the markers on the map */}
