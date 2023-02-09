@@ -58,6 +58,8 @@ const ChefForm = () => {
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
 
+  const [imageUrl, setImageUrl ] = useState("")
+
   const { chefId } = useParams();
   const dispatch = useDispatch();
 
@@ -67,8 +69,8 @@ const ChefForm = () => {
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
-  console.log("USER", user)
-  console.log("USER.id", user.id)
+  // console.log("USER", user)
+  // console.log("USER.id", user.id)
 
 
   useEffect(() => {
@@ -115,6 +117,7 @@ const ChefForm = () => {
             title,
             cuisineId,
             menu,
+            imageUrl: imageUrl,
             suggestedDonation,
             startValue: startValue.format("MM/DD/YYYY h:mmA"),
             endValue: endValue.format("MM/DD/YYYY h:mmA"),
@@ -135,10 +138,26 @@ const ChefForm = () => {
     }
   };
 
-
   if (isLoading || !currentChef){
     return <div> LOADING ...</div>
   }
+
+  // const handleUpload = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("file", selectedImage)
+  //   formData.append("upload_preset", "jeux3vde")
+
+  //   Axios.post(
+  //     "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
+  //   ).then(res => {
+  //     console.log("/////res.data/////:", res.data)
+  //      console.log("/////res.data.pulic_id/////:", res.data.public_id)
+  //      console.log("/////res.data.url/////:", res.data.url)
+  //     setSelectedPublicId(res.data.public_id)
+  //     setImageUrl(res.data.url)
+  //   })
+  // }
 
   return (
     <>
@@ -223,9 +242,13 @@ const ChefForm = () => {
 
               <div>
                 {/* UPLOAD COMPONENT HERE */}
-                <Upload />
+                <Upload
+                setImageUrl={setImageUrl}
+                // setSelectedImage={setSelectedImage}
+                />
                 {/* UPLOAD COMPONENT HERE */}
               </div>
+
 
               <div className="chefForm-event-date-and-time">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
