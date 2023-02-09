@@ -16,12 +16,14 @@ import {
 import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
 import EditChefForm from "../chefs/EditChefForm";
+import { LinearProgress } from "@mui/material";
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const user = useSelector((state) => state.auth.me);
 
@@ -35,6 +37,10 @@ const AppRoutes = () => {
 
   console.log("HELLO USER!", user);
 
+  if (isLoading)
+    return (
+      <LinearProgress/>
+    );
   // users/chefs/7/bookings/1
   return (
     <Routes>
@@ -47,27 +53,29 @@ const AppRoutes = () => {
         path="/bookings/:bookingId"
         element={<MemberBooking user={user} />}
       />
-      <Route element={<ProtectedRoute />}>
-        <Route
-          path="/users/chefprofile/:id"
-          element={<ChefProfile user={user} />}
-        />
-        {user.role === "CHEF" && (
-          <>
-            <Route path="/chefs/:chefId/event" element={<ChefForm />} />
-            <Route
-              path="/users/chefs/:chefId/bookings/:bookingsId"
-              element={<EditChefForm user={user} />}
-            />
-          </>
-        )}
-        {user.role === "MEMBER" && (
+      {isLoggedIn && (
+        <Route element={<ProtectedRoute />}>
           <Route
-            path="/users/memberprofile/:id"
-            element={<MemberProfile user={user} />}
+            path="/users/chefprofile/:id"
+            element={<ChefProfile user={user} />}
           />
-        )}
-      </Route>
+          {user.role === "CHEF" && (
+            <>
+              <Route path="/chefs/:chefId/event" element={<ChefForm />} />
+              <Route
+                path="/users/chefs/:chefId/bookings/:bookingsId"
+                element={<EditChefForm user={user} />}
+              />
+            </>
+          )}
+          {user.role === "MEMBER" && (
+            <Route
+              path="/users/memberprofile/:id"
+              element={<MemberProfile user={user} />}
+            />
+          )}
+        </Route>
+      )}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
