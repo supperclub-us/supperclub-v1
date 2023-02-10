@@ -10,6 +10,7 @@ import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
 import { MapSearchBar, SidebarList } from "../index";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { setReduxViewport } from "../slices/viewportSlice";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
@@ -180,8 +181,13 @@ const Map = ({ user }) => {
     });
   };
 
+
   const handleGeo = (e) => {
-    console.log("GEO E", e)
+    console.log("GEO E", e.coords.latitude)
+    const userLat = e.coords.latitude;
+    const userLng = e.coords.longitude;
+    dispatch(setReduxViewport({ ...reduxViewport, latitude: userLat, longitude: userLng }))
+    return [userLat, userLng]
   }
 
   const handleClick = (markerId) => {
@@ -208,7 +214,7 @@ const Map = ({ user }) => {
           >
             {/* navigation and geolocation control to get location, zoom, etc */}
             <NavigationControl />
-            <GeolocateControl onTrackUserLocationStart={handleGeo}/>
+            <GeolocateControl onGeolocate={handleGeo} />
 
 
             {/* If there are bookings then we want to render the markers on the map */}

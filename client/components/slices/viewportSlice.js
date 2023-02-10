@@ -7,8 +7,8 @@ const viewportSlice = createSlice({
     width: "50%",
     height: "50%",
     float: "right",
-    latitude: 42.251389,
-    longitude: -71.002342,
+    latitude: 40.7128,
+    longitude: -74.0060,
     zoom: 11,
   },
   reducers: {
