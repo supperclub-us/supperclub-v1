@@ -4,8 +4,6 @@ const app = express.Router()
 module.exports = app
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY)
 
-console.log("PROCESS DOT ENV IN STRIPE BACKEND, ", process.env)
-
 // POST /payment
 app.post("/payment", async (req, res) => {
     try {
