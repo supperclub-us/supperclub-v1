@@ -159,10 +159,6 @@ const EditChefForm = () => {
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
-  // console.log("USER", user);
-  // console.log("USER.id", user.id);
-
-
 
   // handle submit for chef form
   const handleSubmit = async (e) => {
@@ -184,7 +180,6 @@ const EditChefForm = () => {
       );
 
       const location = data.features[0].center;
-      console.log("///LOCATION////:", location)
 
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
       if (location) {

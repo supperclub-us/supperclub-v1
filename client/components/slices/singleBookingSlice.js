@@ -18,14 +18,11 @@ export const addMemberBookings = createAsyncThunk(
   async ({ ...booking }) => {
     const { id, userId, newAmountOfOpenSeats, guests } = booking;
     try {
-      console.log("BOOKING", booking);
-      console.log("NEW AMT OF OPEN SEATS --->", newAmountOfOpenSeats);
       const { data } = await axios.put(`/api/bookings/${id}/user/${userId}`, {
         id,
         openSeats: newAmountOfOpenSeats,
         reservedSeats: guests
       });
-      console.log("DATA FROM BOOKINGS ---->", data);
       return data;
     } catch (err) {
       console.error(err);
@@ -36,14 +33,11 @@ export const addMemberBookings = createAsyncThunk(
 export const editMemberBooking = createAsyncThunk("edit/memberBooking",   async ({ ...booking }) => {
   const { id, userId, newAmountOfOpenSeats, newReservedSeats } = booking;
   try {
-    console.log("BOOKING", booking);
-    console.log("NEW AMT OF OPEN SEATS --->", newAmountOfOpenSeats);
     const { data } = await axios.put(`/api/bookings/${id}/user/${userId}`, {
       id,
       openSeats: newAmountOfOpenSeats,
       reservedSeats: newReservedSeats
     });
-    console.log("DATA FROM BOOKINGS ---->", data);
     return data;
   } catch (err) {
     console.error(err);
@@ -53,12 +47,9 @@ export const editMemberBooking = createAsyncThunk("edit/memberBooking",   async 
 export const deleteMemberBooking = createAsyncThunk("delete/memberBooking",   async ({ ...booking }) => {
   const { id, userId, newAmountOfOpenSeats } = booking;
   try {
-    console.log("SLICE ID", id);
-    console.log("SLICE userId", userId);
     const { data } = await axios.put(`/api/bookings/${id}/user/delete/${userId}`, {
       openSeats: newAmountOfOpenSeats
     });
-    console.log("DATA FROM DELETE/PUT ---->", data);
     return data;
   } catch (err) {
     console.error(err);

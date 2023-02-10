@@ -68,9 +68,6 @@ const ChefForm = () => {
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
-  // console.log("USER", user)
-  // console.log("USER.id", user.id)
-
 
   useEffect(() => {
     dispatch(fetchSingleChef(userId));
@@ -87,8 +84,6 @@ const ChefForm = () => {
 
   // handle submit for chef form
   const handleSubmit = async () => {
-    console.log("handleSubmit clicked! from ChefForm.js");
-
     setOpen(true)
 
       setTimeout(() => {

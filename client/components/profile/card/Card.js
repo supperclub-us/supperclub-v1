@@ -51,7 +51,6 @@ export const ModalCard = ({ booking }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log("chefs booking clicked!!!");
     navigate(`/bookings/${booking.id}`);
   };
 

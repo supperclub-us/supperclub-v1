@@ -27,15 +27,11 @@ const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const user = useSelector((state) => state.auth.me);
 
-  console.log("AM I LOGGED IN???---->", isLoggedIn);
-  console.log("FIND USER: ", user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(me());
   }, []);
-
-  console.log("HELLO USER!", user);
 
   if (isLoading)
     return (

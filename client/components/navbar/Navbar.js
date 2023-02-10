@@ -18,9 +18,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("USER", user)
-  console.log("USER.id", user.id)
-
   const handleOpen = (str) => {
     setModalScreen(str);
     setOpen(true);

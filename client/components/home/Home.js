@@ -2,18 +2,12 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Header } from "../index";
-import "./Home.css";
+import "./home.css";
 
 /**
  * COMPONENT
  */
 const Home = (props) => {
-  const email = useSelector((state) => state.auth.me.email);
-
-
-  console.log("PROCESS ENV IN HOME PAGE --->", process.env.RICHARD_COOKIE_KEY)
-  console.log("PROCESS ENV IN HOME PAGE --->", process.env.STRIPE_PUBLISHABLE_KEY)
-
   return (
     <div>
       <Box

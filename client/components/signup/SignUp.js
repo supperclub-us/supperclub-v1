@@ -17,36 +17,18 @@ import { margin } from "@mui/system";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
-  console.log("role-->", role);
-
   // set state for firstName, lastName, bio, mobileNumber, email, password
   const [firstName, setFirstName] = useState("");
-  console.log("firstName-->", firstName);
-
   const [lastName, setLastName] = useState("");
-  console.log("lastName-->", lastName);
-
   const [bio, setBio] = useState("");
-  console.log("bio-->", bio);
-
   const [mobileNumber, setMobileNumber] = useState("");
-  console.log("mobileNumber-->", mobileNumber);
-
   const [email, setEmail] = useState("");
-  console.log("email-->", email);
-
   const [password, setPassword] = useState("");
-  console.log("password-->", password);
-
   const [open, setOpen] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log("button clicked!");
-
     setOpen(true);
 
     dispatch(
@@ -82,7 +64,7 @@ const SignUp = ({handleOpen}) => {
         <hr />
 
         <div className="navbar-role-selection">
-          
+
           <br />
 
           <div className="navbar-role-selection">
@@ -152,7 +134,7 @@ const SignUp = ({handleOpen}) => {
             label="Email"
           />
 
-          <TextField 
+          <TextField
           className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}

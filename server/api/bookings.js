@@ -82,11 +82,8 @@ router.put("/:bookingId/user/:userId", async (req, res, next) => {
       res.status(401).send("no booking available");
     }
     const { openSeats, reservedSeats } = req.body;
-    console.log("API OPENSEATS", openSeats);
-    console.log("API RESERVEDSEATS", reservedSeats);
     // req.body will need to take in the updated seats and reserved booking
     await booking.update({ openSeats });
-    console.log("USER BACKEND", user)
     // update the UsersBookings as well with second parameter
     await booking.addMemberBooking(user, {
       through: { reservedSeats: reservedSeats },
@@ -122,7 +119,6 @@ router.put("/:bookingId/user/delete/:userId", async (req, res, next) => {
     const { openSeats } = req.body;
     await booking.update({ openSeats });
     await booking.removeMemberBooking(user);
-    console.log("API NEW BOOKING", booking);
     res.status(201).json(await booking.reload());
   } catch (err) {
     next(err);

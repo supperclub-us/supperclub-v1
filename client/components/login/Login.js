@@ -16,13 +16,12 @@ const SignIn = ({handleOpen}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("button clicked!")
 
     setOpen(true)
 
     dispatch(authenticate({ email, password, method: 'login' }));
   }
-  
+
 
   const handleSnackClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -65,13 +64,13 @@ const SignIn = ({handleOpen}) => {
               </Button>
             </div>
 
-           
+
 
           </div>
         </div>
         <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
           <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
-            You successfully logged in! 
+            You successfully logged in!
           </Alert>
         </Snackbar>
 

@@ -35,9 +35,6 @@ const Payment = ({
     clientSecret,
   };
 
-  console.log("Reserved Seats and Booking Donation:", {guests, suggestedDonation: booking?.suggestedDonation})
-  console.log("TOTAL: ", parseInt(booking?.suggestedDonation * guests))
-
   return (
     <div>
       <h1>TOTAL: ${booking?.suggestedDonation * reservedSeats}</h1>

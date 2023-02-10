@@ -30,7 +30,6 @@ import Payment from "../stripePayment/Payment";
 import "./memberBooking.css";
 
 const MemberBooking = ({ user }) => {
-  console.log("----USER--->", user, "<---USE----");
 
   const { bookingId } = useParams();
   const { id } = user;
@@ -42,26 +41,16 @@ const MemberBooking = ({ user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(id));
   }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
-  console.log("booking ---<>>>", booking);
-
   const [loginSignUp, setLoginSignup] = useState(false);
-  console.log("loginSignup ---->", loginSignUp);
-
   const { currentMember } = useSelector(selectSingleMember);
-  console.log("current member, ", currentMember);
-
   const memberBookings = booking?.memberBooking;
-  console.log("MEMBER BOOKINGS >>>>", memberBookings);
   const memberBooking = memberBookings?.find((member) => member.id == userId);
-  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
-  console.log("RESERVED SEATS>>>>", reservedSeats);
 
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
@@ -71,7 +60,6 @@ const MemberBooking = ({ user }) => {
     }
 
     if (e.target.name === "deleteBtn") {
-      console.log("DELETE EVENT HERE");
       const oldAmtOfOpenSeats = booking.openSeats;
       const newAmountOfOpenSeats = oldAmtOfOpenSeats + reservedSeats;
       dispatch(
@@ -220,7 +208,7 @@ const MemberBooking = ({ user }) => {
                   value={guests}
                   label="guests"
                   onChange={(e) => {
-                    console.log(e.target.value), setGuests(e.target.value);
+                  setGuests(e.target.value);
                   }}
                 >
                   {availableSeatsArray?.map((guest) => (
@@ -252,7 +240,7 @@ const MemberBooking = ({ user }) => {
                   value={guests}
                   label="guests"
                   onChange={(e) => {
-                    console.log(e.target.value), setGuests(e.target.value);
+                   setGuests(e.target.value);
                   }}
                 >
                   {openSeatsArray?.map((guest) => (
@@ -307,7 +295,7 @@ const MemberBooking = ({ user }) => {
           <Box>
             <Payment
               reservedSeats={reservedSeats}
-             
+
               guests={guests}
               bookingId={bookingId}
             />
