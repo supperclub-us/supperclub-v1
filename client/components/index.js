@@ -8,7 +8,6 @@ export { default as ChefForm } from "./chefs/ChefForm";
 export { default as SignUp } from "./signup/SignUp";
 export { default as Login } from "./login/Login";
 export { default as Chefs } from "./chefs/Chefs";
-export { default as About } from "./home/about/About";
 export { default as ChefProfile } from "./profile/ChefProfile";
 export { default as PageNotFound } from "./pageNotFound/PageNotFound";
 export { default as MemberProfile } from "./profile/MemberProfile";

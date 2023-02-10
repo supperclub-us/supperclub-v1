@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Navbar } from '../index';
 import AppRoutes from './AppRoutes';
 

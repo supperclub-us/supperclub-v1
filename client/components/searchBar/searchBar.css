@@ -6,10 +6,15 @@ z-index: 2;
   cursor: pointer;
 }
 
-.search-bar {
+.search-bar-container {
+  border: 1px solid red;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   height: 100px;
+}
+
+.search-bar-input {
+  border: 2px solid yellowgreen;
 }

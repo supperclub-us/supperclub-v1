@@ -11,6 +11,7 @@ const Location = ({ handleChange, value, setValue, suggestions, setSuggestions }
         variant="outlined"
         onChange={handleChange}
         value={value}
+        className="searchBar-input"
       />
       {suggestions?.length > 0 && (
         <Box className="searchBar-suggestionWrapper" sx={{ bgcolor: '#FCFCFC', position: 'absolute', width: 400, mt: 7, mb: 0, mx: 0, borderRadius: '5px', boxShadow: 3 }} >

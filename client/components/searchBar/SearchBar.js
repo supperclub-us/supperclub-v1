@@ -69,9 +69,8 @@ const SearchBar = () => {
   return (
     // will switch box to formControl
     <Box
-      className="search-bar"
+      className="search-bar-container"
       variant="contained"
-      sx={{ p: 2, border: "1px solid grey", borderRadius: "50px" }}
     >
       <Location
         handleChange={handleChange}
@@ -89,7 +88,7 @@ const SearchBar = () => {
           color: "whitesmoke",
         }}
       >
-        Submit
+        Search
       </Button>
     </Box>
   );
