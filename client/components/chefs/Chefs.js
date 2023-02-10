@@ -5,11 +5,20 @@ import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
 import { ModalCard } from "../profile/card/Card";
 import ClearIcon from "@mui/icons-material/Clear";
+import dayjs from "dayjs";
 
 const Chefs = () => {
 
   const dispatch = useDispatch();
   const chefs = useSelector(selectAllChefs);
+  console.log("CHEFS", chefs)
+
+  const bookingIsFuture = (booking) => {
+      const bookingDateTime = booking.startDateTime.split(' ');
+      const bookingDate = bookingDateTime[0].split('/');
+      const intBookingDate = bookingDate.map((element) => parseInt(element));
+      return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  }
 
   useEffect(() => {
     dispatch(fetchAllChefsAsync());
@@ -79,7 +88,7 @@ const Chefs = () => {
                 <div className="chefs-card-bookingcards-container">
                   {chef.chefBooking && chef.chefBooking.length ? (
                     chef.chefBooking.map((booking) => {
-                      return (
+                      return bookingIsFuture(booking) ? (
                         // Button
                         <Button
                           onClick={() => handleOpen(booking)}
@@ -103,7 +112,7 @@ const Chefs = () => {
                         >
                           <p>{booking.title}</p>
                         </Button>
-                      );
+                      ) : '';
                     })
                   ) : (
                     <p>No Hostings Yet...</p>

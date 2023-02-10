@@ -9,47 +9,34 @@ import CheckoutForm from "./CheckoutForm.js";
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
-const Payment = ({ reservedSeats, guests }) => {
+const Payment = ({
+  reservedSeats,
+  guests,
+  newBookingState,
+  booking,
+  userId,
+  newAmountOfOpenSeats,
+}) => {
+
   const [clientSecret, setClientSecret] = useState("");
-
-  const booking = useSelector(state=>state.singleBooking.booking)
-
-  console.log("PAYMENT COMPONENT --->", reservedSeats);
-  console.log("PAYMENT COMPONENT --->", booking);
-  console.log("LINE 17 PAYMENT --->", {
-    ...booking,
-    reservedSeats,
-  });
-
-
-
-  const seatsRemaining = booking?.openSeats - guests;
   const user = useSelector((state) => state.auth.me);
 
-
+  async function getClientSecret() {
+    let { data } = await axios.post("/payment", newBookingState);
+    let clientSecret = await data.clientSecret;
+    setClientSecret(clientSecret);
+  }
 
   useEffect(() => {
-    console.log("RESERVED SEATS:", reservedSeats);
-    console.log("BOOKING in PAYMENT -->", booking)
-
-    async function getClientSecret() {
-      console.log("RESERVED SEATS:", reservedSeats);
-
-      const response = await axios.post("/payment", {...booking, reservedSeats});
-
-      console.log("RESPONSE FROM AXIOS CALL", response);
-      console.log("DATA FROM AXIOS CALL", response.data);
-
-      let clientSecret =  await response.data.clientSecret;
-
-      setClientSecret(clientSecret);
-    }
     getClientSecret();
-  }, []);
+  }, [newBookingState]);
 
-  const options = {
+  const options ={
     clientSecret,
   };
+
+  console.log("Reserved Seats and Booking Donation:", {guests, suggestedDonation: booking?.suggestedDonation})
+  console.log("TOTAL: ", parseInt(booking?.suggestedDonation * guests))
 
   return (
     <div>

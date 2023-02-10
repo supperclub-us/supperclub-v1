@@ -46,8 +46,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/map" element={<Map user={user} />} />
-      <Route path="/chefs" element={<Chefs />} />
+      {user.role === "CHEF" ? null : <Route path="/map" element={<Map user={user} />} />}
+      {user.role === "CHEF" ? null : <Route path="/chefs" element={<Chefs />} />}
       <Route
         path="/bookings/:bookingId"
         element={<MemberBooking user={user} />}

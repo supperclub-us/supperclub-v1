@@ -31,7 +31,6 @@ const Navbar = () => {
     setModalScreen("");
 
     user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
-    user.role === "MEMBER" ? navigate(`${window.location.pathname}`) : null
   };
 
   const renderModalScreen = () => {
@@ -84,9 +83,9 @@ const Navbar = () => {
         <Link className="navbar-link-spacing" to="/home">
           Home
         </Link>
-        <Link className="navbar-link-spacing" to="/chefs">
+        {user.role === "CHEF" ? null : <Link className="navbar-link-spacing" to="/chefs">
           Chefs
-        </Link>
+        </Link>}
 
         {isLoggedIn ? (
           <>
