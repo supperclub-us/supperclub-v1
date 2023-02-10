@@ -12,7 +12,7 @@ const About = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          height: "100vh",
+          height: "50%",
           width: "100%",
           backgroundAttachment: "fixed",
           backgroundOrigin: "border-box",

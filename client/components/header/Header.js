@@ -15,6 +15,7 @@ const Header = () => {
         sx={{
           backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
           backgroundSize: "cover",
+          
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "100vh",
