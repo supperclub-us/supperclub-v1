@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { SearchBar, Map } from '../index'
-// import { setReduxViewport } from '../../slices/viewportSlice';
-// import { useDispatch } from "react-redux";
+import { Box } from '@mui/system'
+
 
 const Header = () => {
-  // const [viewport, setViewport] = useState({
-  //   width: "100%",
-  //   height: "100%",
-  //   // Quincy --> lat: 42.251389 lng: -71.002342
-  //   latitude: 42.251389,
-  //   longitude: -71.002342,
-  //   zoom: 13,
-  // });
 
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log("HEADER VIEWPORT", viewport)
-  //   dispatch(setReduxViewport(viewport));
-  // }, [viewport, dispatch])
 
   return (
     <div>
       <h1>A tight-knit dining experience</h1>
       <SearchBar />
-      {/* <Map viewport={viewport} setViewport={setViewport} /> */}
+      <Box
+        className="about-image"
+        sx={{
+          backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
+          width: "100%",
+          backgroundAttachment: "fixed",
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box",
+          backgroundBlendMode: "normal",
+          color: "#f5f5f5"
+        }}
+      >
+      </Box>
     </div>
   )
 }
