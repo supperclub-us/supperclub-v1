@@ -36,9 +36,10 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
       {filteredBookings && filteredBookings.length ? (
         filteredBookings.map((booking) => {
           return (
+
             <div key={booking.id} className="map-booking-container" onClick={() => handleClick(booking.id)} style={selectedMarker && selectedMarker.id === booking.id ? { background: "green" } : { background: "#f2f2f2" }}>
               <p>{booking.title}</p>
-              {getMatches(memberBookings, booking) ? <p>YOU HAVE BOOKED THIS EVENT</p> : ''}
+              {currentMember && getMatches(memberBookings, booking) ? <p>YOU HAVE BOOKED THIS EVENT</p> : ''}
               <p>
                 Host: Chef {booking.chefBooking.firstName}{" "}
                 {booking.chefBooking.lastName}
