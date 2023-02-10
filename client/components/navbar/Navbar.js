@@ -31,11 +31,7 @@ const Navbar = () => {
     setModalScreen("");
 
     user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
-<<<<<<< HEAD
-    // user.role === "MEMBER" ? navigate(`/map`) : null
-=======
     user.role === "MEMBER" ? navigate(`${window.location.pathname}`) : null
->>>>>>> 3762623f500c83f2828d4512d90d03bb935d2ec3
   };
 
   const renderModalScreen = () => {
