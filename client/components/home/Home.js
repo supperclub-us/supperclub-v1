@@ -16,14 +16,9 @@ const Home = (props) => {
         sx={{
           backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
           backgroundSize: "cover",
-          // backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "100vh",
           width: "100%",
-          // backgroundAttachment: "fixed",
-          // backgroundOrigin: "border-box",
-          // backgroundClip: "content-box",
-          // backgroundBlendMode: "normal",
         }}
       >
         <h1 className="about-title">Welcome to the Neighborhood</h1>
