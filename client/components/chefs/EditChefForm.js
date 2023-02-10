@@ -162,11 +162,11 @@ const EditChefForm = () => {
   // console.log("USER", user);
   // console.log("USER.id", user.id);
 
+
+
   // handle submit for chef form
-  const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN_KEY
-  
-  const handleSubmit = async () => {
-    // console.log("handleSubmit clicked! in EditChefForm.js!");
+  const handleSubmit = async (e) => {
+
     setOpenEditConfirm(true);
 
     setTimeout(() => {
@@ -180,9 +180,9 @@ const EditChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxToken}` 
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
-      
+
       const location = data.features[0].center;
       console.log("///LOCATION////:", location)
 

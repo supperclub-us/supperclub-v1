@@ -226,7 +226,7 @@ const ChefForm = () => {
                 <img src={imageUrl} style={{
                     height: "213px",
                   }}/>
-                <Upload setImageUrl={setImageUrl}/>       
+                <Upload setImageUrl={setImageUrl}/>
               </div>
 
 
