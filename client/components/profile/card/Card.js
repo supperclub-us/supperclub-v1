@@ -11,11 +11,9 @@ export const Card = ({booking}) => {
     const user = useSelector((state) => state.auth.me);
  
     const handleClick = () => {
-        console.log("chefs booking clicked!!!")
         navigate(`/bookings/${booking.id}`)
       }
 
-    // http://localhost:8080/users/chefs/7/bookings/9
     return (
         <div key={booking.id} className="cards">
             <h5>{booking.title}</h5>

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   addSingleChefBooking,
   fetchSingleChefBooking,
-  selectSingleChefBookings,
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home, Upload } from "../index";
@@ -17,7 +16,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Link,
   OutlinedInput,
   InputAdornment,
   Typography,
@@ -43,6 +41,9 @@ const states = [
 
 const ChefForm = () => {
   const userId = useSelector((state) => state.auth.me.id)
+  const user = useSelector((state) => state.auth.me);
+
+  // useStates for the Chef Form
   const [title, setTitle] = useState("");
   const [menu, setMenu] = useState("");
   const [cuisineId, setCuisineId] = useState("");
@@ -56,8 +57,8 @@ const ChefForm = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-
   const [imageUrl, setImageUrl ] = useState("")
+
 
   const { chefId } = useParams();
   const dispatch = useDispatch();
@@ -67,9 +68,6 @@ const ChefForm = () => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.me);
-  // console.log("USER", user)
-  // console.log("USER.id", user.id)
 
 
   useEffect(() => {
@@ -102,7 +100,7 @@ const ChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapBoxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
       const location = data.features[0].center;
 

@@ -119,6 +119,7 @@ const EditChefForm = () => {
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
+
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingsId));
   }, []);
@@ -162,13 +163,11 @@ const EditChefForm = () => {
   // console.log("USER", user);
   // console.log("USER.id", user.id);
 
-  
+
 
   // handle submit for chef form
-  const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN_KEY
-  
-  const handleSubmit = async () => {
-    // console.log("handleSubmit clicked! in EditChefForm.js!");
+  const handleSubmit = async (e) => {
+
     setOpenEditConfirm(true);
 
     setTimeout(() => {
@@ -182,13 +181,14 @@ const EditChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxToken}` 
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
-      
+
       const location = data.features[0].center;
       console.log("///LOCATION////:", location)
 
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
+
       if (location) {
         dispatch(
           // will need to check on this CHEF ID and auth because as of right now anyone who<TextFields an id into the url that is a chef
