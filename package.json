@@ -42,6 +42,7 @@
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
+    "react-icons": "^4.7.1",
     "react-map-gl": "^7.0.21",
     "sequelize": "^6.25.3",
     "stripe": "^11.9.1",

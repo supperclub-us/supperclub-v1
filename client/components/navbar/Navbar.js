@@ -41,6 +41,14 @@ const Navbar = () => {
 
   };
 
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setTimeout(() => {
+  //       setOpen(false);
+  //     }, 500);
+  //   }
+  // }, [isLoggedIn]);
+
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate("/");

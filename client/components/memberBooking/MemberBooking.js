@@ -30,34 +30,26 @@ import Payment from "../stripePayment/Payment";
 import "./memberBooking.css";
 
 const MemberBooking = ({ user }) => {
+
   const { bookingId } = useParams();
   const { id } = user;
   const userId = id;
   const [guests, setGuests] = useState("");
   const [payment, setPayment] = useState(false);
 
-  // NEW BOOKING STATE:
-  const [newBookingState, setNewBookingState] = useState({});
-  // END NEW BOOKING STATE
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
     dispatch(fetchSingleMember(id));
   }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
-
   const [loginSignUp, setLoginSignup] = useState(false);
-
   const { currentMember } = useSelector(selectSingleMember);
-
   const memberBookings = booking?.memberBooking;
-
   const memberBooking = memberBookings?.find((member) => member.id == userId);
-
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
 
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
@@ -110,17 +102,13 @@ const MemberBooking = ({ user }) => {
           })
         );
         setPayment(true);
-        setNewBookingState({
-          ...booking,
-          userId,
-          newAmountOfOpenSeats,
-          guests,
-        });
+        // navigate("/");
       } else {
         alert("please select number of guests/seats");
       }
     }
   };
+
   // END BUTTON FUNCTIONALITY //
 
   const openSeatsArray = [];
@@ -144,8 +132,6 @@ const MemberBooking = ({ user }) => {
     return <div>{error}</div>;
   }
 
-  const bookingAmtOfGuests = booking.openSeats;
-  const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
   return (
     <div className="memberBooking-container">
       <div className="memberBooking-allInfo">
@@ -222,7 +208,7 @@ const MemberBooking = ({ user }) => {
                   value={guests}
                   label="guests"
                   onChange={(e) => {
-                    console.log(e.target.value), setGuests(e.target.value);
+                  setGuests(e.target.value);
                   }}
                 >
                   {availableSeatsArray?.map((guest) => (
@@ -254,7 +240,7 @@ const MemberBooking = ({ user }) => {
                   value={guests}
                   label="guests"
                   onChange={(e) => {
-                    console.log(e.target.value), setGuests(e.target.value);
+                   setGuests(e.target.value);
                   }}
                 >
                   {openSeatsArray?.map((guest) => (
@@ -309,12 +295,9 @@ const MemberBooking = ({ user }) => {
           <Box>
             <Payment
               reservedSeats={reservedSeats}
+
               guests={guests}
               bookingId={bookingId}
-              newBookingState={newBookingState}
-              booking={booking}
-              userId={userId}
-              newAmountOfOpenSeats={newAmountOfOpenSeats}
             />
           </Box>
         )}

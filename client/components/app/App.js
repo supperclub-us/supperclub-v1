@@ -1,5 +1,6 @@
 import React from 'react';
-import { Navbar } from '../index';
+
+import {Header, Map, Navbar, Footer} from '../index';
 import AppRoutes from './AppRoutes';
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <div>
       <Navbar />
       <AppRoutes />
+      <Footer />
 
     </div>
   );

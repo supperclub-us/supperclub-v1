@@ -183,7 +183,6 @@ const Map = ({ user }) => {
 
 
   const handleGeo = (e) => {
-    console.log("GEO E", e.coords.latitude)
     const userLat = e.coords.latitude;
     const userLng = e.coords.longitude;
     dispatch(setReduxViewport({ ...reduxViewport, latitude: userLat, longitude: userLng }))

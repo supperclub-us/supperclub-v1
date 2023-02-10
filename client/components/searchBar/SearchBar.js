@@ -39,7 +39,6 @@ const SearchBar = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const newViewport = await getCoordinates(value);
-    console.log("VIEWPORT", viewport);
     dispatch(setReduxViewport(newViewport));
     navigate('/map');
   };
@@ -49,9 +48,7 @@ const SearchBar = () => {
       const { data } = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
-      console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
-      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
       setViewport({ ...viewport, latitude: lat, longitude: lng, zoom: 11})
       setLatitude(lat);
       setLongitude(lng);

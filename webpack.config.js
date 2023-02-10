@@ -7,12 +7,14 @@ module.exports = {
   },
   context: __dirname,
   devtool: 'source-map',
+  // this allows .env to happen
   plugins: [ new Dotenv({
     path: '.env', // or '.env.local', '.env.[mode]', etc.
     }) ],
   module: {
     rules: [
       {
+        // this allows css styling loader
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../../store/store';
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -20,32 +21,18 @@ const AuthForm = ({ name, displayName }) => {
     const email = evt.target.email.value;
     const password = evt.target.password.value;
 
-    console.log("formName-->", formName)
-    console.log("email-->", email)
-    console.log("password-->", password)
-
     let role = ""
-    let firstName = "" 
+    let firstName = ""
     let lastName = ""
     let bio = ""
     let mobileNumber = ""
 
     if (formName === "signup") {
       role = evt.target.role.value;
-      console.log("role-->", role)
-
       firstName = evt.target.firstName.value;
-      console.log("firstName-->", firstName)
-
       lastName = evt.target.lastName.value;
-      console.log("lastName-->", lastName)  
-
       bio = evt.target.bio.value;
-      console.log("bio-->", bio)  
-
-      mobileNumber = evt.target.mobileNumber.value;
-      console.log("mobileNumber-->", mobileNumber)  
-
+      mobileNumber = evt.target.mobileNumber.value
     }
     dispatch(authenticate({ role, firstName, lastName, bio ,mobileNumber, email, password, method: formName }));
 
@@ -57,7 +44,7 @@ const AuthForm = ({ name, displayName }) => {
 
         {name === "signup" ? (
           <div>
-            
+
             <div>
               <label htmlFor='role'>
                 <small>role</small>
@@ -93,7 +80,7 @@ const AuthForm = ({ name, displayName }) => {
               <input name='mobileNumber' type="text" placeholder='Mobile Number' />
             </div>
 
-            
+
 
           </div>
         ) : null }

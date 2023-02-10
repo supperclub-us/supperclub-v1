@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import AuthForm from "../auth/AuthForm";
 import {
   ChefForm,
   Home,
@@ -22,7 +23,6 @@ import ConfirmationPage from "../stripePayment/ConfirmationPage";
  */
 
 const AppRoutes = () => {
-
   const isLoading = useSelector((state) => state.auth.isLoading);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const user = useSelector((state) => state.auth.me);
@@ -33,14 +33,11 @@ const AppRoutes = () => {
     dispatch(me());
   }, []);
 
- 
-
-  // Condition for loading screen and not render pageNotFound Component
   if (isLoading)
     return (
       <LinearProgress/>
     );
-
+  // users/chefs/7/bookings/1
   return (
     <Routes>
       <Route path="/" element={<Home />} />

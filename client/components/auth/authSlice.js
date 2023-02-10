@@ -34,7 +34,7 @@ export const me = createAsyncThunk('auth/me', async () => {
 
 // create a thunk to authenticate signup
 export const authenticate = createAsyncThunk(
-  'auth/authenticate', 
+  'auth/authenticate',
   async ({role, firstName, lastName, bio , mobileNumber, email, password, method}, thunkAPI) => {
     try{
       const res = await axios.post(`/auth/${method}`, {role, firstName, lastName, bio ,mobileNumber, email, password});
@@ -74,8 +74,7 @@ export const authSlice = createSlice({
       state.error = null
     })
     builder.addCase(me.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = null;
+      state.isLoading = false
       state.me = action.payload;
     });
     builder.addCase(me.rejected, (state, action) => {
