@@ -44,7 +44,7 @@ const MemberBooking = ({ user }) => {
   useEffect(() => {
     console.log("booking id and user id", { bookingId, userId });
     dispatch(fetchSingleBookingAsync(bookingId));
-    dispatch(fetchSingleMember(userId));
+    dispatch(fetchSingleMember(id));
   }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
@@ -301,8 +301,9 @@ const MemberBooking = ({ user }) => {
           <Box>
             <Payment
               reservedSeats={reservedSeats}
-              booking={booking}
+             
               guests={guests}
+              bookingId={bookingId}
             />
           </Box>
         )}

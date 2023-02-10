@@ -9,8 +9,10 @@ import CheckoutForm from "./CheckoutForm.js";
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
-const Payment = ({ reservedSeats, booking, guests }) => {
+const Payment = ({ reservedSeats, guests }) => {
   const [clientSecret, setClientSecret] = useState("");
+
+  const booking = useSelector(state=>state.singleBooking.booking)
 
   console.log("PAYMENT COMPONENT --->", reservedSeats);
   console.log("PAYMENT COMPONENT --->", booking);
@@ -20,6 +22,7 @@ const Payment = ({ reservedSeats, booking, guests }) => {
   });
 
 
+
   const seatsRemaining = booking?.openSeats - guests;
   const user = useSelector((state) => state.auth.me);
 
@@ -27,19 +30,17 @@ const Payment = ({ reservedSeats, booking, guests }) => {
 
   useEffect(() => {
     console.log("RESERVED SEATS:", reservedSeats);
+    console.log("BOOKING in PAYMENT -->", booking)
 
     async function getClientSecret() {
       console.log("RESERVED SEATS:", reservedSeats);
 
-      const response = await axios.post("/payment", {
-        ...booking,
-        reservedSeats,
-      });
+      const response = await axios.post("/payment", {...booking, reservedSeats});
 
       console.log("RESPONSE FROM AXIOS CALL", response);
       console.log("DATA FROM AXIOS CALL", response.data);
 
-      let clientSecret = response.data.clientSecret;
+      let clientSecret =  await response.data.clientSecret;
 
       setClientSecret(clientSecret);
     }

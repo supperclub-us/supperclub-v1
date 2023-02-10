@@ -72,12 +72,12 @@ const CheckoutForm = () => {
             disabled={isLoading || !stripe || !elements}
             id="submit"
           >
-            <span id="button-text" className="flex flex-col justify-center">
+            <span id="button-text">
               {isLoading ? (
                 <span></span>
               ) : (
-                <div className="m-0 p-0 flex justify-around">
-                  <span className="mr-2"> Book Event </span>
+                <div >
+                  <span> Book Event </span>
                   <LockIcon width={20} height={20} />
                 </div>
               )}
@@ -86,7 +86,7 @@ const CheckoutForm = () => {
 
           {/* Show any error or success messages */}
           {message && (
-            <div id="payment-message" className="text-red-700">
+            <div id="payment-message">
               {message}
             </div>
           )}

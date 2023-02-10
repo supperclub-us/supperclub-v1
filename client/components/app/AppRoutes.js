@@ -16,6 +16,7 @@ import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
 import EditChefForm from "../chefs/EditChefForm";
 import { LinearProgress } from "@mui/material";
+import ConfirmationPage from "../stripePayment/ConfirmationPage";
 
 /**
  * COMPONENT
@@ -74,6 +75,7 @@ const AppRoutes = () => {
           )}
         </Route>
       )}
+      <Route path="/confirmation" element={<ConfirmationPage/>}/>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
