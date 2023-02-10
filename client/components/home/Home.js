@@ -14,11 +14,15 @@ const Home = (props) => {
       <Box
         className="about-image"
         sx={{
+          // center image and make it cover the entire div but no zooming
           backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
-          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           height: "100vh",
-          width: "100%",
+          width: "100vw",
+          position: "absolute",
+          zIndex: "-1",
         }}
       >
         <h1 className="about-title"> blah blah blah 🚀 </h1>
