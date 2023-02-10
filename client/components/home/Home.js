@@ -2,13 +2,12 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Header } from "../index";
-import "./Home.css";
+import "./home.css";
 
 /**
  * COMPONENT
  */
 const Home = (props) => {
-
   return (
     <div>
       <Box

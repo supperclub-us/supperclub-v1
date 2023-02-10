@@ -119,7 +119,6 @@ const EditChefForm = () => {
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingsId));
   }, []);
@@ -161,7 +160,6 @@ const EditChefForm = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
 
-
   // handle submit for chef form
   const handleSubmit = async (e) => {
 
@@ -180,10 +178,10 @@ const EditChefForm = () => {
       const { data } = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
+
       const location = data.features[0].center;
 
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
-
       if (location) {
         dispatch(
           // will need to check on this CHEF ID and auth because as of right now anyone who<TextFields an id into the url that is a chef
@@ -313,13 +311,10 @@ const EditChefForm = () => {
                 />
               </Box>
 
-                <div>
-                  <img src={imageUrl} style={{
+              <div>
+                <img src={imageUrl} style={{
                     height: "213px",
                   }}/>
-                </div>
-
-              <div>
                 <Upload setImageUrl={setImageUrl} />
               </div>
 

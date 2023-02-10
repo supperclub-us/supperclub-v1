@@ -10,33 +10,25 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
+import { margin } from "@mui/system";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
-
   // set state for firstName, lastName, bio, mobileNumber, email, password
   const [firstName, setFirstName] = useState("");
-
   const [lastName, setLastName] = useState("");
-
   const [bio, setBio] = useState("");
-
   const [mobileNumber, setMobileNumber] = useState("");
-
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
-
   const [open, setOpen] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setOpen(true);
 
     dispatch(
@@ -51,6 +43,7 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
+      // handleOpen();
   };
 
   const handleClose = (event, reason) => {
@@ -71,7 +64,7 @@ const SignUp = ({handleOpen}) => {
         <hr />
 
         <div className="navbar-role-selection">
-          
+
           <br />
 
           <div className="navbar-role-selection">
@@ -141,7 +134,7 @@ const SignUp = ({handleOpen}) => {
             label="Email"
           />
 
-          <TextField 
+          <TextField
           className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}

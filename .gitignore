@@ -7,4 +7,5 @@ yarn-error.log
 package-lock.json
 .env
 .history
-
+client/env.js
+.env

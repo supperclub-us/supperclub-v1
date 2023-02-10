@@ -8,6 +8,7 @@ export const fetchSingleChef = createAsyncThunk(
     const token = localStorage.getItem("token")
     try {
       const { data } = await axios.get(`/api/users/chefs/${id}`, { headers: { authorization: token }});
+
       return data;
     } catch (err) {
       console.log(err);

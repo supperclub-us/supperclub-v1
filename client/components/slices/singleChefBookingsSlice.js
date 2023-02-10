@@ -56,7 +56,6 @@ export const addSingleChefBooking = createAsyncThunk(
         longitude,
         chefId: id
       });
-
       return data;
     } catch (err) {
       console.log(err);

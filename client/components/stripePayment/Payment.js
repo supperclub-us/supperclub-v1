@@ -17,7 +17,7 @@ const Payment = ({
   userId,
   newAmountOfOpenSeats,
 }) => {
-  
+
   const [clientSecret, setClientSecret] = useState("");
   const user = useSelector((state) => state.auth.me);
 
@@ -33,20 +33,16 @@ const Payment = ({
 
   const options ={
     clientSecret,
-  }
+  };
 
   return (
     <div>
-      <h1>TOTAL: ${booking?.suggestedDonation * guests}</h1>
+      <h1>TOTAL: ${booking?.suggestedDonation * reservedSeats}</h1>
       {user && user.id && (
         <div>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
-              <CheckoutForm
-                booking={booking}
-                userId={userId}
-                newAmountOfOpenSeats={newAmountOfOpenSeats}
-              />
+              <CheckoutForm />
             </Elements>
           )}
         </div>

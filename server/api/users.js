@@ -166,7 +166,6 @@ router.post("/chefs/:id/bookings", async (req, res, next) => {
       ],
     });
     if (chef.role === "CHEF") {
-
       res.status(201).json(await Booking.create(req.body));
     } else {
       throw new Error("Not Authenticated");
@@ -178,7 +177,6 @@ router.post("/chefs/:id/bookings", async (req, res, next) => {
 
 // CHEFS BOOKINGS PUT /api/users/chefs/:id/bookings/:bookingId
 router.put("/chefs/:id/bookings/:bookingId", async (req, res, next) => {
-
   try {
     const chef = await User.findByPk(req.params.id, {
       where: {
