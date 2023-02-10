@@ -163,6 +163,8 @@ const EditChefForm = () => {
   // console.log("USER.id", user.id);
 
   // handle submit for chef form
+  const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN_KEY
+  
   const handleSubmit = async () => {
     // console.log("handleSubmit clicked! in EditChefForm.js!");
     setOpenEditConfirm(true);
@@ -178,9 +180,11 @@ const EditChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapBoxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxToken}` 
       );
+      
       const location = data.features[0].center;
+      console.log("///LOCATION////:", location)
 
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
       if (location) {
@@ -312,13 +316,10 @@ const EditChefForm = () => {
                 />
               </Box>
 
-                <div>
-                  <img src={imageUrl} style={{
+              <div>
+                <img src={imageUrl} style={{
                     height: "213px",
                   }}/>
-                </div>
-
-              <div>
                 <Upload setImageUrl={setImageUrl} />
               </div>
 

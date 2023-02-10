@@ -141,23 +141,6 @@ const ChefForm = () => {
     return <div> LOADING ...</div>
   }
 
-  // const handleUpload = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("file", selectedImage)
-  //   formData.append("upload_preset", "jeux3vde")
-
-  //   Axios.post(
-  //     "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
-  //   ).then(res => {
-  //     console.log("/////res.data/////:", res.data)
-  //      console.log("/////res.data.pulic_id/////:", res.data.public_id)
-  //      console.log("/////res.data.url/////:", res.data.url)
-  //     setSelectedPublicId(res.data.public_id)
-  //     setImageUrl(res.data.url)
-  //   })
-  // }
-
   return (
     <>
       {userId !== parseInt(chefId) ? (
@@ -240,12 +223,10 @@ const ChefForm = () => {
               </Box>
 
               <div>
-                {/* UPLOAD COMPONENT HERE */}
-                <Upload
-                setImageUrl={setImageUrl}
-                // setSelectedImage={setSelectedImage}
-                />
-                {/* UPLOAD COMPONENT HERE */}
+                <img src={imageUrl} style={{
+                    height: "213px",
+                  }}/>
+                <Upload setImageUrl={setImageUrl}/>       
               </div>
 
 
