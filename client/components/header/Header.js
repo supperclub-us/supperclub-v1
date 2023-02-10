@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { SearchBar, Map } from '../index'
+import { useSelector } from 'react-redux';
 // import { setReduxViewport } from '../../slices/viewportSlice';
 // import { useDispatch } from "react-redux";
 
 const Header = () => {
+  const user = useSelector((state) => state.auth.me);
   // const [viewport, setViewport] = useState({
   //   width: "100%",
   //   height: "100%",
@@ -23,7 +25,7 @@ const Header = () => {
   return (
     <div>
       <h1>A tight-knit dining experience</h1>
-      <SearchBar />
+      {user.role === "CHEF" ? null : <SearchBar />}
       {/* <Map viewport={viewport} setViewport={setViewport} /> */}
     </div>
   )

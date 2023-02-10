@@ -83,9 +83,9 @@ const Navbar = () => {
         <Link className="navbar-link-spacing" to="/home">
           Home
         </Link>
-        <Link className="navbar-link-spacing" to="/chefs">
+        {user.role === "CHEF" ? null : <Link className="navbar-link-spacing" to="/chefs">
           Chefs
-        </Link>
+        </Link>}
 
         {isLoggedIn ? (
           <>
