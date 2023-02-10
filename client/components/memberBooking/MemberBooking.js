@@ -88,6 +88,12 @@ const MemberBooking = ({ user }) => {
           newReservedSeats,
         })
       );
+      setNewBookingState({
+        ...booking,
+        userId,
+        newAmountOfOpenSeats,
+        guests,
+      })
     } else if (e.target.name === "bookBtn") {
       if (guests && !user.id) {
         setLoginSignup(true);
@@ -290,7 +296,7 @@ const MemberBooking = ({ user }) => {
                   onClick={handleClick}
                   name="bookBtn"
                 >
-                  Book
+                  Reserve
                 </Button>
               )}
             </Box>

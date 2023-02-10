@@ -17,36 +17,23 @@ const Payment = ({
   userId,
   newAmountOfOpenSeats,
 }) => {
+  
   const [clientSecret, setClientSecret] = useState("");
-
-  console.log("NEW BOOKING STATE!!!! OUTSIDE USEEFFECT - DONATION?", newBookingState?.suggestedDonation);
-
   const user = useSelector((state) => state.auth.me);
 
+  async function getClientSecret() {
+    let { data } = await axios.post("/payment", newBookingState);
+    let clientSecret = await data.clientSecret;
+    setClientSecret(clientSecret);
+  }
+
   useEffect(() => {
-    console.log("NEW BOOKING STATE IN PAYMENT: ", newBookingState);
-
-    async function getClientSecret() {
-      console.log("RESERVED SEATS:", reservedSeats);
-
-      const response = await axios.post("/payment", newBookingState);
-
-      console.log("RESPONSE FROM AXIOS CALL", response);
-      console.log("DATA FROM AXIOS CALL", response.data);
-
-      let clientSecret = await response.data.clientSecret;
-
-      setClientSecret(clientSecret);
-    }
     getClientSecret();
-  }, [guests]);
+  }, [newBookingState]);
 
-  const options = {
+  const options ={
     clientSecret,
-  };
-  
-  console.log("Reserved Seats and Booking Donation:", {guests, suggestedDonation: booking?.suggestedDonation})
-  console.log("TOTAL: ", parseInt(booking?.suggestedDonation * guests))
+  }
 
   return (
     <div>
