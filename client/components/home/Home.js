@@ -21,7 +21,7 @@ const Home = (props) => {
           width: "100%",
         }}
       >
-        <h1 className="about-title">Welcome to the Neighborhood</h1>
+        <h1 className="about-title"> blah blah blah 🚀 </h1>
         <Header />
       </Box>
 
