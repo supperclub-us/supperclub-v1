@@ -12,7 +12,7 @@ app.post("/payment", async (req, res) => {
         const { suggestedDonation, guests } = req.body
 
       // Create a PaymentIntent with the order amount and currency
-      const paymentIntent = await stripe.paymentIntents.create({
+      let paymentIntent = await stripe.paymentIntents.create({
         amount: suggestedDonation * guests * 100,
         currency: "usd",
         automatic_payment_methods: {
