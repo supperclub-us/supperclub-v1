@@ -52,6 +52,8 @@ const MemberBooking = ({ user }) => {
   const memberBooking = memberBookings?.find((member) => member.id == userId);
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
 
+  const [newBookingState, setNewBookingState] = useState({})
+
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
     e.preventDefault();
@@ -101,8 +103,13 @@ const MemberBooking = ({ user }) => {
             guests,
           })
         );
+        setNewBookingState({
+          ...booking,
+          userId,
+          newAmountOfOpenSeats,
+          guests,
+        })
         setPayment(true);
-        // navigate("/");
       } else {
         alert("please select number of guests/seats");
       }
@@ -294,9 +301,9 @@ const MemberBooking = ({ user }) => {
         {payment && (
           <Box>
             <Payment
-              reservedSeats={reservedSeats}
-
+              newBookingState={newBookingState}
               guests={guests}
+              booking={booking}
               bookingId={bookingId}
             />
           </Box>

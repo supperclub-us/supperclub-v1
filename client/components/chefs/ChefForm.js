@@ -132,9 +132,6 @@ const ChefForm = () => {
     }
   };
 
-  if (isLoading || !currentChef){
-    return <div> LOADING ...</div>
-  }
 
   return (
     <>
