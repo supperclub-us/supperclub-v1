@@ -200,8 +200,8 @@ const Map = ({ user }) => {
           {/* React Map Component to Access the Map */}
           <ReactMapGL
             {...viewport}
-            mapStyle={process.env.MapBoxStyle}
-            mapboxAccessToken={process.env.MapboxAccessToken}
+            mapStyle={process.env.MAPBOX_STYLE}
+            mapboxAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
             // this let's us be able to move the map
             onMove={handleMoveMap}
             onRender={handleRender}

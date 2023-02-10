@@ -22,9 +22,7 @@ const MapSearchBar = ({
   setNumGuests,
   startDate,
   setStartDate,
-  filterStartDate,
   setFilterStartDate,
-  filterEndDate,
   setFilterEndDate,
   setFilterNumGuests,
   endDate,
@@ -78,7 +76,7 @@ const MapSearchBar = ({
   const handleChange = async (event) => {
     setValue(event.target.value);
     try {
-      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MapboxAccessToken}&autocomplete=true`;
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}&autocomplete=true`;
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features);
@@ -98,7 +96,7 @@ const MapSearchBar = ({
     try {
       if (address) {
         const { data } = await axios.get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapboxAccessToken}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
         );
 
         const [lng, lat] = data.features[0].geometry.coordinates;
