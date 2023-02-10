@@ -18,9 +18,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("USER", user)
-  console.log("USER.id", user.id)
-
   const handleOpen = (str) => {
     setModalScreen(str);
     setOpen(true);
@@ -31,7 +28,6 @@ const Navbar = () => {
     setModalScreen("");
 
     user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
-    user.role === "MEMBER" ? navigate(`/map`) : null
   };
 
   const renderModalScreen = () => {
@@ -44,14 +40,6 @@ const Navbar = () => {
     }
 
   };
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     setTimeout(() => {
-  //       setOpen(false);
-  //     }, 500);
-  //   }
-  // }, [isLoggedIn]);
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -84,9 +72,9 @@ const Navbar = () => {
         <Link className="navbar-link-spacing" to="/home">
           Home
         </Link>
-        <Link className="navbar-link-spacing" to="/chefs">
+        {user.role === "CHEF" ? null : <Link className="navbar-link-spacing" to="/chefs">
           Chefs
-        </Link>
+        </Link>}
 
         {isLoggedIn ? (
           <>

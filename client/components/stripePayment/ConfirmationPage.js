@@ -9,7 +9,7 @@ const ConfirmationPage = () => {
   
     useEffect(() => {
       const timer = setTimeout(() => {
-        navigate("/home");
+        navigate(`/users/memberprofile/${user.id}`);
       }, timeRemaining * 1000);
       return () => clearTimeout(timer);
     }, [navigate, timeRemaining]);
@@ -23,8 +23,9 @@ const ConfirmationPage = () => {
 
   return (
     <div style={{width: "100vw", display: "flex", flexDirection: "column", gap: "2rem", justifyContent: "center", alignContent: "center"}}>
-        <h1 style={{fontSize: "4rem", fontWeight: "bold"}}> THANK FOR YOU {user.firstName} for booking! 🎉 </h1>
-        <p> Navigating back to home page in {timeRemaining}</p>
+        <h3 style={{fontSize: "4rem", fontWeight: "bold"}}> Thank you for booking with us, {user.firstName}! 🎉 </h3>
+        <h3 style={{fontSize: "4rem", fontWeight: "bold"}}> Looking forward to sharing a wonderful meal 🍲  </h3>
+        <p> Navigating back to your dashboard in {timeRemaining}</p>
     </div>
   )
 }

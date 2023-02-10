@@ -5,29 +5,29 @@ import { fetchAllChefsAsync, selectAllChefs } from "../slices/allChefsSlice";
 import "./chefForm.css";
 import { ModalCard } from "../profile/card/Card";
 import ClearIcon from "@mui/icons-material/Clear";
+import dayjs from "dayjs";
 
 const Chefs = () => {
 
   const dispatch = useDispatch();
   const chefs = useSelector(selectAllChefs);
+  console.log("CHEFS", chefs)
+
+  const bookingIsFuture = (booking) => {
+      const bookingDateTime = booking.startDateTime.split(' ');
+      const bookingDate = bookingDateTime[0].split('/');
+      const intBookingDate = bookingDate.map((element) => parseInt(element));
+      return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
+  }
 
   useEffect(() => {
     dispatch(fetchAllChefsAsync());
   }, [dispatch]);
 
-  console.log("CHEFS-->", chefs);
-
-  const handleClick = (bookingId) => {
-    console.log("chefs booking clicked!!!");
-  };
-
-
   const [open, setOpen] = useState(false);
-  const [modalScreen, setModalScreen] = useState("");
   const [selectBooking, setSelectBooking] = useState();
-  const handleOpen = (booking) => {
-    console.log("ME", booking);
 
+  const handleOpen = (booking) => {
     setSelectBooking(booking);
     setOpen(true);
   };
@@ -36,13 +36,6 @@ const Chefs = () => {
     setOpen(false);
   };
 
-  const renderModalScreen = () => {
-    if (modalScreen === "booking") {
-      return <chefBooking handleOpen={handleOpen} />;
-    }
-
-    return <p>default</p>;
-  };
 
   const style = {
     position: "absolute",
@@ -79,7 +72,7 @@ const Chefs = () => {
                 <div className="chefs-card-bookingcards-container">
                   {chef.chefBooking && chef.chefBooking.length ? (
                     chef.chefBooking.map((booking) => {
-                      return (
+                      return bookingIsFuture(booking) ? (
                         // Button
                         <Button
                           onClick={() => handleOpen(booking)}
@@ -103,7 +96,7 @@ const Chefs = () => {
                         >
                           <p>{booking.title}</p>
                         </Button>
-                      );
+                      ) : '';
                     })
                   ) : (
                     <p>No Hostings Yet...</p>
