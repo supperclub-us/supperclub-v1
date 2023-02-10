@@ -1,6 +1,5 @@
 import { Box } from "@mui/system";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Header } from "../index";
 import "./home.css";
 

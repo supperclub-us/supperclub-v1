@@ -10,14 +10,13 @@ import CheckoutForm from "./CheckoutForm.js";
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
 const Payment = ({
-  reservedSeats,
   guests,
   newBookingState,
   booking,
   userId,
   newAmountOfOpenSeats,
 }) => {
-
+  
   const [clientSecret, setClientSecret] = useState("");
   const user = useSelector((state) => state.auth.me);
 
@@ -33,16 +32,20 @@ const Payment = ({
 
   const options ={
     clientSecret,
-  };
+  }
 
   return (
     <div>
-      <h1>TOTAL: ${booking?.suggestedDonation * reservedSeats}</h1>
+      <h1>TOTAL: ${booking?.suggestedDonation * guests}</h1>
       {user && user.id && (
         <div>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
-              <CheckoutForm />
+              <CheckoutForm
+                booking={booking}
+                userId={userId}
+                newAmountOfOpenSeats={newAmountOfOpenSeats}
+              />
             </Elements>
           )}
         </div>
