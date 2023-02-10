@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Header, Map, Navbar} from '../index';
+import { Navbar } from '../index';
 import AppRoutes from './AppRoutes';
 
 const App = () => {

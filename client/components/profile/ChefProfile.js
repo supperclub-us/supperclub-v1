@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
-import { Link } from "react-router-dom";
-import { Button, Skeleton, Box } from "@mui/material";
-import { PageNotFound } from "../index";
+import { Button } from "@mui/material";
 import "./profile.css";
-import EditIcon from "@mui/icons-material/Edit";
 import { Card } from "./card/Card";
 import dayjs from "dayjs";
 
 const ChefProfile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const user = useSelector((state) => state.auth.me);
   const [futureEvents, setFutureEvents] = useState(true)
 
   // the different states from the selectSingleChef State
-  const { currentChef, isLoading, error } = useSelector(selectSingleChef);
+  const { currentChef, error } = useSelector(selectSingleChef);
   const chefBookings = currentChef?.chefBooking
 
   const futureChefBookings = chefBookings?.filter((booking) => {
@@ -44,24 +40,6 @@ const ChefProfile = () => {
     dispatch(fetchSingleChef(id));
   }, [dispatch, id]);
 
-  // error handling client side.
-  if (isLoading || !currentChef) {
-    return (
-      <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignContent: "center" }}>
-        <Skeleton />
-        <Skeleton animation="wave" />
-        <Skeleton animation={false} />
-      </Box>
-    );
-  }
-
-  if (user.id !== Number(id)) {
-    return <PageNotFound />;
-  }
-
-  // if (error) {
-  //   return <PageNotFound />;
-  // }
 
   return (
     <>
