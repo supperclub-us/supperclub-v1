@@ -10,33 +10,25 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
-import { margin } from "@mui/system";
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
-  console.log("role-->", role);
 
   // set state for firstName, lastName, bio, mobileNumber, email, password
   const [firstName, setFirstName] = useState("");
-  console.log("firstName-->", firstName);
 
   const [lastName, setLastName] = useState("");
-  console.log("lastName-->", lastName);
 
   const [bio, setBio] = useState("");
-  console.log("bio-->", bio);
 
   const [mobileNumber, setMobileNumber] = useState("");
-  console.log("mobileNumber-->", mobileNumber);
 
   const [email, setEmail] = useState("");
-  console.log("email-->", email);
 
   const [password, setPassword] = useState("");
-  console.log("password-->", password);
 
   const [open, setOpen] = useState(false);
 
@@ -44,8 +36,6 @@ const SignUp = ({handleOpen}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log("button clicked!");
 
     setOpen(true);
 
@@ -61,7 +51,6 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
-      // handleOpen();
   };
 
   const handleClose = (event, reason) => {

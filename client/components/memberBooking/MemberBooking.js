@@ -30,15 +30,16 @@ import Payment from "../stripePayment/Payment";
 import "./memberBooking.css";
 
 const MemberBooking = ({ user }) => {
-  console.log("----USER--->", user, "<---USE----");
-
   const { bookingId } = useParams();
   const { id } = user;
   const userId = id;
   const [guests, setGuests] = useState("");
   const [payment, setPayment] = useState(false);
 
-  const navigate = useNavigate();
+  // NEW BOOKING STATE:
+  const [newBookingState, setNewBookingState] = useState({});
+  // END NEW BOOKING STATE
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,20 +49,16 @@ const MemberBooking = ({ user }) => {
   }, [dispatch, user]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
-  console.log("booking ---<>>>", booking);
 
   const [loginSignUp, setLoginSignup] = useState(false);
-  console.log("loginSignup ---->", loginSignUp);
 
   const { currentMember } = useSelector(selectSingleMember);
-  console.log("current member, ", currentMember);
 
   const memberBookings = booking?.memberBooking;
-  console.log("MEMBER BOOKINGS >>>>", memberBookings);
+
   const memberBooking = memberBookings?.find((member) => member.id == userId);
-  console.log("MEMBER BOOKING >>>>>>>>>", memberBooking);
+
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
-  console.log("RESERVED SEATS>>>>", reservedSeats);
 
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
@@ -71,7 +68,6 @@ const MemberBooking = ({ user }) => {
     }
 
     if (e.target.name === "deleteBtn") {
-      console.log("DELETE EVENT HERE");
       const oldAmtOfOpenSeats = booking.openSeats;
       const newAmountOfOpenSeats = oldAmtOfOpenSeats + reservedSeats;
       dispatch(
@@ -92,6 +88,12 @@ const MemberBooking = ({ user }) => {
           newReservedSeats,
         })
       );
+      setNewBookingState({
+        ...booking,
+        userId,
+        newAmountOfOpenSeats,
+        guests,
+      })
     } else if (e.target.name === "bookBtn") {
       if (guests && !user.id) {
         setLoginSignup(true);
@@ -108,13 +110,17 @@ const MemberBooking = ({ user }) => {
           })
         );
         setPayment(true);
-        // navigate("/");
+        setNewBookingState({
+          ...booking,
+          userId,
+          newAmountOfOpenSeats,
+          guests,
+        });
       } else {
         alert("please select number of guests/seats");
       }
     }
   };
-
   // END BUTTON FUNCTIONALITY //
 
   const openSeatsArray = [];
@@ -138,6 +144,8 @@ const MemberBooking = ({ user }) => {
     return <div>{error}</div>;
   }
 
+  const bookingAmtOfGuests = booking.openSeats;
+  const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
   return (
     <div className="memberBooking-container">
       <div className="memberBooking-allInfo">
@@ -288,7 +296,7 @@ const MemberBooking = ({ user }) => {
                   onClick={handleClick}
                   name="bookBtn"
                 >
-                  Book
+                  Reserve
                 </Button>
               )}
             </Box>
@@ -301,9 +309,12 @@ const MemberBooking = ({ user }) => {
           <Box>
             <Payment
               reservedSeats={reservedSeats}
-             
               guests={guests}
               bookingId={bookingId}
+              newBookingState={newBookingState}
+              booking={booking}
+              userId={userId}
+              newAmountOfOpenSeats={newAmountOfOpenSeats}
             />
           </Box>
         )}
