@@ -6,7 +6,6 @@ const Header = () => {
 
   return (
     <div>
-      <h1>A tight-knit dining experience</h1>
       <SearchBar />
     </div>
   )
