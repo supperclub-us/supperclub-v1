@@ -141,7 +141,6 @@ const ChefForm = () => {
     return <div> LOADING ...</div>
   }
 
-
   return (
     <>
       {userId !== parseInt(chefId) ? (
@@ -224,12 +223,10 @@ const ChefForm = () => {
               </Box>
 
               <div>
-                {/* UPLOAD COMPONENT HERE */}
-                <Upload
-                setImageUrl={setImageUrl}
-                // setSelectedImage={setSelectedImage}
-                />
-                {/* UPLOAD COMPONENT HERE */}
+                <img src={imageUrl} style={{
+                    height: "213px",
+                  }}/>
+                <Upload setImageUrl={setImageUrl}/>
               </div>
 
 

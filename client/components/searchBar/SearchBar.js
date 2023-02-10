@@ -50,7 +50,7 @@ const SearchBar = () => {
   const handleChange = async (event) => {
     setValue(event.target.value);
     try {
-      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MapboxAccessToken}&autocomplete=true`;
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}&autocomplete=true`;
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features);
@@ -73,7 +73,7 @@ const SearchBar = () => {
   async function getCoordinates(address) {
     try {
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapboxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;
