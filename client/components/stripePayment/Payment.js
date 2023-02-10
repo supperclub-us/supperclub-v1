@@ -9,33 +9,23 @@ import CheckoutForm from "./CheckoutForm.js";
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
-const Payment = ({ reservedSeats, guests }) => {
+const Payment = ({ reservedSeats, guests, newBookingState }) => {
   const [clientSecret, setClientSecret] = useState("");
 
-  const booking = useSelector(state=>state.singleBooking.booking)
+  console.log("NEW BOOKING STATE!!!! OUTSIDE USEEFFECT", newBookingState)
 
-  console.log("PAYMENT COMPONENT --->", reservedSeats);
-  console.log("PAYMENT COMPONENT --->", booking);
-  console.log("LINE 17 PAYMENT --->", {
-    ...booking,
-    reservedSeats,
-  });
-
-
-
-  const seatsRemaining = booking?.openSeats - guests;
   const user = useSelector((state) => state.auth.me);
 
 
 
   useEffect(() => {
-    console.log("RESERVED SEATS:", reservedSeats);
-    console.log("BOOKING in PAYMENT -->", booking)
+
+    console.log("NEW BOOKING STATE IN PAYMENT: ", newBookingState)
 
     async function getClientSecret() {
       console.log("RESERVED SEATS:", reservedSeats);
 
-      const response = await axios.post("/payment", {...booking, reservedSeats});
+      const response = await axios.post("/payment", newBookingState);
 
       console.log("RESPONSE FROM AXIOS CALL", response);
       console.log("DATA FROM AXIOS CALL", response.data);
@@ -53,7 +43,7 @@ const Payment = ({ reservedSeats, guests }) => {
 
   return (
     <div>
-      <h1>TOTAL: ${booking?.suggestedDonation * reservedSeats}</h1>
+      <h1>TOTAL: ${newBookingState?.suggestedDonation * reservedSeats}</h1>
       {user && user.id && (
         <div>
           {clientSecret && (

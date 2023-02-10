@@ -37,6 +37,10 @@ const MemberBooking = ({ user }) => {
   const [guests, setGuests] = useState("");
   const [payment, setPayment] = useState(false);
 
+  // NEW BOOKING STATE:
+  const [newBookingState, setNewBookingState] = useState({})
+  // END NEW BOOKING STATE
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -103,6 +107,12 @@ const MemberBooking = ({ user }) => {
           })
         );
         setPayment(true);
+        setNewBookingState({
+          ...booking,
+          userId,
+          newAmountOfOpenSeats,
+          guests,
+        })
 
       } else {
         alert("please select number of guests/seats");
@@ -295,9 +305,9 @@ const MemberBooking = ({ user }) => {
           <Box>
             <Payment
               reservedSeats={reservedSeats}
-             
               guests={guests}
               bookingId={bookingId}
+              newBookingState={newBookingState}
             />
           </Box>
         )}
