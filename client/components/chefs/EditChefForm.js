@@ -167,8 +167,6 @@ const EditChefForm = () => {
 
     setOpenEditConfirm(true);
 
-    console.log("PROCESS ENV: ", process.env.MAPBOX_ACCESS_TOKEN_KEY)
-
     setTimeout(() => {
       setOpenEditConfirm(false);
       navigate(`/users/chefprofile/${user.id}`);
