@@ -162,6 +162,8 @@ const EditChefForm = () => {
   // console.log("USER", user);
   // console.log("USER.id", user.id);
 
+  
+
   // handle submit for chef form
   const handleSubmit = async () => {
     // console.log("handleSubmit clicked! in EditChefForm.js!");
