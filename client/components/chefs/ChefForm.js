@@ -97,7 +97,7 @@ const ChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapBoxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN_KEY}`
       );
       const location = data.features[0].center;
 
@@ -132,9 +132,6 @@ const ChefForm = () => {
     }
   };
 
-  if (isLoading || !currentChef){
-    return <div> LOADING ...</div>
-  }
 
   return (
     <>

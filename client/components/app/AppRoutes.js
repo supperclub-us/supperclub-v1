@@ -37,7 +37,7 @@ const AppRoutes = () => {
     return (
       <LinearProgress/>
     );
-  // users/chefs/7/bookings/1
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
