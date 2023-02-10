@@ -30,7 +30,6 @@ import Payment from "../stripePayment/Payment";
 import "./memberBooking.css";
 
 const MemberBooking = ({ user }) => {
-
   const { bookingId } = useParams();
   const { id } = user;
   const userId = id;
@@ -38,7 +37,7 @@ const MemberBooking = ({ user }) => {
   const [payment, setPayment] = useState(false);
 
   // NEW BOOKING STATE:
-  const [newBookingState, setNewBookingState] = useState({})
+  const [newBookingState, setNewBookingState] = useState({});
   // END NEW BOOKING STATE
 
   const dispatch = useDispatch();
@@ -61,7 +60,6 @@ const MemberBooking = ({ user }) => {
 
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
 
-
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
     e.preventDefault();
@@ -70,7 +68,6 @@ const MemberBooking = ({ user }) => {
     }
 
     if (e.target.name === "deleteBtn") {
-
       const oldAmtOfOpenSeats = booking.openSeats;
       const newAmountOfOpenSeats = oldAmtOfOpenSeats + reservedSeats;
       dispatch(
@@ -112,8 +109,7 @@ const MemberBooking = ({ user }) => {
           userId,
           newAmountOfOpenSeats,
           guests,
-        })
-
+        });
       } else {
         alert("please select number of guests/seats");
       }
@@ -142,6 +138,8 @@ const MemberBooking = ({ user }) => {
     return <div>{error}</div>;
   }
 
+  const bookingAmtOfGuests = booking.openSeats;
+  const newAmountOfOpenSeats = bookingAmtOfGuests - guests;
   return (
     <div className="memberBooking-container">
       <div className="memberBooking-allInfo">
@@ -308,6 +306,9 @@ const MemberBooking = ({ user }) => {
               guests={guests}
               bookingId={bookingId}
               newBookingState={newBookingState}
+              booking={booking}
+              userId={userId}
+              newAmountOfOpenSeats={newAmountOfOpenSeats}
             />
           </Box>
         )}
