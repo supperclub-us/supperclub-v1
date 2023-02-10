@@ -16,15 +16,17 @@ const Home = (props) => {
           // center image and make it cover the entire div but no zooming
           backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
           backgroundPosition: "center",
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           height: "100vh",
           width: "100vw",
-          position: "absolute",
-          zIndex: "-1",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+
         }}
       >
-        <h1 className="about-title"> blah blah blah 🚀 </h1>
+        {/* <h1 className="about-title"> blah blah blah 🚀 </h1> */}
         <Header />
       </Box>
 
