@@ -36,7 +36,7 @@ export const addSingleChefBooking = createAsyncThunk(
     longitude
   }) => {
     try {
-
+      // console.log("/////imageUrl////:", imageUrl)
       const { data } = await axios.post(`/api/users/chefs/${id}/bookings`, {
         title,
         menu,
@@ -56,7 +56,7 @@ export const addSingleChefBooking = createAsyncThunk(
         longitude,
         chefId: id
       });
-
+    //  console.log("/////DATA////:", data)
       return data;
     } catch (err) {
       console.log(err);

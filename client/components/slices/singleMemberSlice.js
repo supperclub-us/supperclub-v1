@@ -6,6 +6,7 @@ export const fetchSingleMember = createAsyncThunk(
   async (id) => {
     try {
       const { data } = await axios.get(`/api/users/members/${id}`);
+      console.log("WOAHH--->>>", data);
       return data;
     } catch (err) {
       console.error(err);

@@ -119,7 +119,6 @@ const EditChefForm = () => {
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
-
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingsId));
   }, []);
@@ -188,7 +187,6 @@ const EditChefForm = () => {
       console.log("///LOCATION////:", location)
 
       // conditional to CHECK AND SEE if there is a location prior to dispatching the POST to the store and backend
-
       if (location) {
         dispatch(
           // will need to check on this CHEF ID and auth because as of right now anyone who<TextFields an id into the url that is a chef

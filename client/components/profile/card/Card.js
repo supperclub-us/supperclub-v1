@@ -9,12 +9,11 @@ import { fetchSingleBookingAsync, selectSingleBooking } from "../../slices/singl
 export const Card = ({ booking }) => {
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.auth.me);
+    const user = useSelector((state) => state.auth.me);
 
-  const handleClick = () => {
-    navigate(`/bookings/${booking.id}`);
-  };
-
+    const handleClick = () => {
+        navigate(`/bookings/${booking.id}`)
+      }
 
   return (
     <div key={booking.id} className="cards">

@@ -15,10 +15,19 @@ const Chefs = () => {
     dispatch(fetchAllChefsAsync());
   }, [dispatch]);
 
-  const [open, setOpen] = useState(false);
-  const [selectBooking, setSelectBooking] = useState();
+  console.log("CHEFS-->", chefs);
 
+  const handleClick = (bookingId) => {
+    console.log("chefs booking clicked!!!");
+  };
+
+
+  const [open, setOpen] = useState(false);
+  const [modalScreen, setModalScreen] = useState("");
+  const [selectBooking, setSelectBooking] = useState();
   const handleOpen = (booking) => {
+    console.log("ME", booking);
+
     setSelectBooking(booking);
     setOpen(true);
   };
@@ -27,6 +36,13 @@ const Chefs = () => {
     setOpen(false);
   };
 
+  const renderModalScreen = () => {
+    if (modalScreen === "booking") {
+      return <chefBooking handleOpen={handleOpen} />;
+    }
+
+    return <p>default</p>;
+  };
 
   const style = {
     position: "absolute",
