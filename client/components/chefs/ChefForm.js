@@ -8,7 +8,6 @@ import {
 } from "../slices/singleChefBookingsSlice";
 import { fetchSingleChef, selectSingleChef } from "../slices/singleChefSlice";
 import { Home, Upload } from "../index";
-import MapBoxAccessToken from "../../env";
 import axios from "axios";
 import "./chefForm.css";
 import {
@@ -103,7 +102,7 @@ const ChefForm = () => {
 
       // axios call to the MapBox GeoCode API to get the lat/long values
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapBoxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapBoxAccessToken}`
       );
       const location = data.features[0].center;
 

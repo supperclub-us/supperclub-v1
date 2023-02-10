@@ -7,7 +7,6 @@ import ReactMapGL, {
 } from "react-map-gl";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChefsBookingsAsync } from "../slices/chefsBookingsSlice";
-import MapboxAccessToken, { MapBoxStyle } from "../../env";
 import { MapSearchBar, SidebarList } from "../index";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
@@ -201,8 +200,8 @@ const Map = ({ user }) => {
           {/* React Map Component to Access the Map */}
           <ReactMapGL
             {...viewport}
-            mapStyle={MapBoxStyle}
-            mapboxAccessToken={MapboxAccessToken}
+            mapStyle={process.env.MapBoxStyle}
+            mapboxAccessToken={process.env.MapboxAccessToken}
             // this let's us be able to move the map
             onMove={handleMoveMap}
             onRender={handleRender}

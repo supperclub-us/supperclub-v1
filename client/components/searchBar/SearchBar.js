@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box, FormGroup, Button } from "@mui/material";
-import MapboxAccessToken from "../../env";
 import axios from "axios";
 import "./searchBar.css";
 import Location from "./Location";
@@ -51,7 +50,7 @@ const SearchBar = () => {
   const handleChange = async (event) => {
     setValue(event.target.value);
     try {
-      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${MapboxAccessToken}&autocomplete=true`;
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MapboxAccessToken}&autocomplete=true`;
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features);
@@ -74,7 +73,7 @@ const SearchBar = () => {
   async function getCoordinates(address) {
     try {
       const { data } = await axios.get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapboxAccessToken}`
       );
       console.log("THIS IS DATA RETURNED!!!!!!", data);
       const [lng, lat] = data.features[0].geometry.coordinates;

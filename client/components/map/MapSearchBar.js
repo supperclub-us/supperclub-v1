@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { GeolocateControl } from "react-map-gl";
 import { Box, Button } from "@mui/material";
-import MapboxAccessToken from "../../env";
 import axios from "axios";
 import "../searchBar/searchBar.css";
 import Location from "../searchBar/Location";
@@ -79,7 +78,7 @@ const MapSearchBar = ({
   const handleChange = async (event) => {
     setValue(event.target.value);
     try {
-      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${MapboxAccessToken}&autocomplete=true`;
+      const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.target.value}.json?access_token=${process.env.MapboxAccessToken}&autocomplete=true`;
       const response = await fetch(endpoint);
       const results = await response.json();
       setSuggestions(results?.features);
@@ -99,7 +98,7 @@ const MapSearchBar = ({
     try {
       if (address) {
         const { data } = await axios.get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${MapboxAccessToken}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.MapboxAccessToken}`
         );
 
         const [lng, lat] = data.features[0].geometry.coordinates;
