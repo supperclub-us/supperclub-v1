@@ -13,7 +13,7 @@ const Home = (props) => {
         className="about-image"
         sx={{
           // center image and make it cover the entire div but no zooming
-          // backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
+          backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
