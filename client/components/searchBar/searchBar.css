@@ -13,5 +13,6 @@ z-index: 2;
   justify-content: space-evenly;
   align-items: center;
   height: 100px;
+  background-color: transparent;
 }
 
