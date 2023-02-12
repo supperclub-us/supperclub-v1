@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import authReducer from '../components/auth/authSlice';
 import chefsBookingsReducer from '../components/slices/chefsBookingsSlice'
 import singleChefReducer from '../components/slices/singleChefSlice'
@@ -23,7 +23,7 @@ const store = configureStore({
     singleBooking: singleBookingReducer,
     searchBarFilter: searchBarFilterReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;

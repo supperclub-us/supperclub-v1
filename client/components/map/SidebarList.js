@@ -16,13 +16,15 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
   const memberBookings = currentMember?.memberBooking;
 
   useEffect(() => {
-      dispatch(fetchSingleMember(userId));
-  }, []);
+    if (userId) dispatch(fetchSingleMember(userId));
+  }, [userId]);
 
   const getMatches = (memberBookings, booking) => {
-    for (let singleMemberBooking of memberBookings) {
-      if (singleMemberBooking.id == booking.id) {
-        return true;
+    if (memberBookings) {
+      for (let singleMemberBooking of memberBookings) {
+        if (singleMemberBooking.id == booking.id) {
+          return true;
+        }
       }
     }
   };
@@ -40,11 +42,15 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
               key={booking.id}
               className="map-booking-container"
               onClick={() => handleClick(booking.id)}
-              style={
-                selectedMarker && selectedMarker.id === booking.id
-                  ? { background: "green" }
-                  : { background: "#f2f2f2" }
-              }
+              style={{
+                background:
+                  selectedMarker && selectedMarker.id === booking.id
+                    ? "green"
+                    : "#252b3d",
+                ":hover": {
+                  background: "#3b3f4f",
+                },
+              }}
             >
               <p>{booking.title}</p>
               {currentMember && getMatches(memberBookings, booking) ? (
