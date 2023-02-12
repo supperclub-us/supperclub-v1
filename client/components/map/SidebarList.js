@@ -5,6 +5,7 @@ import {
   fetchSingleMember,
   selectSingleMember,
 } from "../slices/singleMemberSlice";
+import CheckIcon from "@mui/icons-material/Check";
 import "./map.css";
 
 const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
@@ -52,12 +53,15 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
                 },
               }}
             >
-              <p>{booking.title}</p>
-              {currentMember && getMatches(memberBookings, booking) ? (
-                <p>YOU HAVE BOOKED THIS EVENT</p>
-              ) : (
-                ""
+              {currentMember && getMatches(memberBookings, booking) && (
+                <>
+                  <p style={{ color: "red" }}>
+                    Booked
+                    <CheckIcon />
+                  </p>
+                </>
               )}
+              <p>Event: {booking.title}</p>
               <p>
                 Host: Chef {booking.chefBooking.firstName}{" "}
                 {booking.chefBooking.lastName}
