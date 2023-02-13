@@ -33,34 +33,40 @@
   z-index: 1;
 }
 .map-sidebar-container {
-  float: left;
-  width: 100%;
+  /* float: left; */
+  background: #16202c;
+  /* width: 100%; */
+  /* height: 100%; */
   display: flex;
+  flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
   overflow: auto;
   gap: 1rem;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   padding: 1rem;
 }
 
 .map-map-container {
-  width: 100%;
+  /* width: 100%; */
+  flex: 1;
 }
 
 .map-booking-container {
   display: flex;
+  color: #f2f2f2;
   width: 100px;
+  max-height: 200px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 5px 10px;
 }
 
 .map-booking-container:hover {
-    background: #f2f2f2;
+    background: #f53e3e;
     cursor: pointer;
 }
 
