@@ -11,23 +11,12 @@ const Home = (props) => {
     <div>
       <Box
         className="about-image"
-        sx={{
-          // center image and make it cover the entire div but no zooming
-          backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          // backgroundColor: "black",
-
-        }}
       >
-        {/* <h1 className="about-title"> blah blah blah 🚀 </h1> */}
-        <Header />
+        <div className="home-title-and-header-container">
+          <h1 className="about-title"> Discover dinner events hosted by chefs</h1>
+          <Header />
+        </div>
+
       </Box>
 
     </div>
