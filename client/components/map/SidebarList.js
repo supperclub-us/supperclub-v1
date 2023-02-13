@@ -5,6 +5,7 @@ import {
   fetchSingleMember,
   selectSingleMember,
 } from "../slices/singleMemberSlice";
+import CheckIcon from "@mui/icons-material/Check";
 import "./map.css";
 
 const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
@@ -16,13 +17,15 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
   const memberBookings = currentMember?.memberBooking;
 
   useEffect(() => {
-      dispatch(fetchSingleMember(userId));
-  }, []);
+    if (userId) dispatch(fetchSingleMember(userId));
+  }, [userId]);
 
   const getMatches = (memberBookings, booking) => {
-    for (let singleMemberBooking of memberBookings) {
-      if (singleMemberBooking.id == booking.id) {
-        return true;
+    if (memberBookings) {
+      for (let singleMemberBooking of memberBookings) {
+        if (singleMemberBooking.id == booking.id) {
+          return true;
+        }
       }
     }
   };
@@ -40,18 +43,25 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
               key={booking.id}
               className="map-booking-container"
               onClick={() => handleClick(booking.id)}
-              style={
-                selectedMarker && selectedMarker.id === booking.id
-                  ? { background: "green" }
-                  : { background: "#f2f2f2" }
-              }
+              style={{
+                background:
+                  selectedMarker && selectedMarker.id === booking.id
+                    ? "green"
+                    : "#252b3d",
+                ":hover": {
+                  background: "#3b3f4f",
+                },
+              }}
             >
-              <p>{booking.title}</p>
-              {currentMember && getMatches(memberBookings, booking) ? (
-                <p>YOU HAVE BOOKED THIS EVENT</p>
-              ) : (
-                ""
+              {currentMember && getMatches(memberBookings, booking) && (
+                <>
+                  <p style={{ color: "red" }}>
+                    Booked
+                    <CheckIcon />
+                  </p>
+                </>
               )}
+              <p>Event: {booking.title}</p>
               <p>
                 Host: Chef {booking.chefBooking.firstName}{" "}
                 {booking.chefBooking.lastName}

@@ -42,8 +42,9 @@ const MemberBooking = ({ user }) => {
 
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingId));
-    dispatch(fetchSingleMember(id));
-  }, [dispatch, user]);
+    if (id){
+    dispatch(fetchSingleMember(id));}
+  }, [dispatch, user, id]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
   const [loginSignUp, setLoginSignup] = useState(false);
