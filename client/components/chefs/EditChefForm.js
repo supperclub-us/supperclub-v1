@@ -120,6 +120,7 @@ const EditChefForm = () => {
   const [zip, setZip] = useState("");
   const [openEditConfirm, setOpenEditConfirm] = useState(false);
   const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
+  const [openUploadConfirm, setOpenUploadConfirm] = useState(false)
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
@@ -159,6 +160,13 @@ const EditChefForm = () => {
     }
     setOpenWarningConfirm(false);
   };
+
+  const handleSnackCloseUpload = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenUploadConfirm(false);
+  }
 
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.me);
@@ -320,7 +328,7 @@ const EditChefForm = () => {
                     border: "1px solid rgb(205, 205, 205)",
                     borderRadius: "5px",
                   }}/>
-                <Upload setImageUrl={setImageUrl} />
+                <Upload setImageUrl={setImageUrl} setOpenUploadConfirm={setOpenUploadConfirm} />
               </div>
 
               <div className="chefForm-event-date-and-time">
@@ -511,6 +519,21 @@ const EditChefForm = () => {
                   Are you sure you want to delete this event?
                 </Alert>
               </Snackbar>
+
+              <Snackbar
+                open={openUploadConfirm}
+                autoHideDuration={2000}
+                onClose={handleSnackCloseUpload}
+              >
+                <Alert
+                  onClose={handleSnackCloseUpload}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  File Uploaded!
+                </Alert>
+              </Snackbar>
+
             </div>
           </div>
         </>

@@ -58,6 +58,7 @@ const ChefForm = () => {
   const [zip, setZip] = useState("");
 
   const [imageUrl, setImageUrl ] = useState("")
+  const [openUploadConfirm, setOpenUploadConfirm] = useState(false)
 
   const { chefId } = useParams();
   const dispatch = useDispatch();
@@ -81,6 +82,13 @@ const ChefForm = () => {
 
     setOpen(false);
   };
+
+  const handleSnackCloseUpload = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenUploadConfirm(false);
+  }
 
   // handle submit for chef form
   const handleSubmit = async () => {
@@ -218,7 +226,8 @@ const ChefForm = () => {
                 <img src={imageUrl} style={{
                     height: "213px",
                   }}/>
-                <Upload setImageUrl={setImageUrl}/>
+                <Upload setImageUrl={setImageUrl}
+                setOpenUploadConfirm={setOpenUploadConfirm} />
               </div>
 
 
@@ -348,6 +357,21 @@ const ChefForm = () => {
                 You successfully created an event!
               </Alert>
             </Snackbar>
+
+            <Snackbar
+                open={openUploadConfirm}
+                autoHideDuration={2000}
+                onClose={handleSnackCloseUpload}
+              >
+                <Alert
+                  onClose={handleSnackCloseUpload}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  File Uploaded!
+                </Alert>
+              </Snackbar>
+
           </div>
         </>
       )}
