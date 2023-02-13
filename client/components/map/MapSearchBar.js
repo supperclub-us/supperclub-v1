@@ -90,7 +90,6 @@ const MapSearchBar = ({
 
   // submit function to map search and filter
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
   };

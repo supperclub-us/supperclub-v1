@@ -35,6 +35,9 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
+import "./editchefform.css";
 
 const states = [
   "AL",
@@ -319,9 +322,11 @@ const EditChefForm = () => {
                 />
               </Box>
 
-              <div>
+              <div className="chef-form-upload-image-container">
                 <img src={imageUrl} style={{
                     height: "213px",
+                    border: "1px solid rgb(205, 205, 205)",
+                    borderRadius: "5px",
                   }}/>
                 <Upload setImageUrl={setImageUrl} setOpenUploadConfirm={setOpenUploadConfirm} />
               </div>
@@ -434,7 +439,7 @@ const EditChefForm = () => {
               </div>
             </Box>
 
-            <div>
+            <div className="editchefform-edit-and-delete-buttons-container">
               <Button
                 className="chefForm-button-Edit"
                 onClick={() => handleSubmit()}
@@ -447,8 +452,9 @@ const EditChefForm = () => {
                   backgroundColor: "#EB5757",
                   color: "whitesmoke",
                 }}
+                startIcon={<SaveIcon />}
               >
-                Edit
+                Save Edit
               </Button>
 
               <Button
@@ -463,6 +469,7 @@ const EditChefForm = () => {
                   backgroundColor: "#EB5757",
                   color: "whitesmoke",
                 }}
+                startIcon={<DeleteIcon />}
               >
                 Delete
               </Button>

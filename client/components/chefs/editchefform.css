@@ -1,0 +1,22 @@
+.upload-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(205, 205, 205);
+    width: 498px;
+    /* margin-bottom: 15px; */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 4px;
+}
+
+.editchefform-edit-and-delete-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border: 5px solid greenyellow; */
+    width: 500px;
+    margin-bottom: 15px;
+}
+

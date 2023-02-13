@@ -189,7 +189,6 @@ p1 {
 }
 
 .modalCard {
-   
 	width: 500px;
 	height: 400px;
 	margin: 10px;
@@ -198,5 +197,15 @@ p1 {
 
 }
 
-
-
+.chef-form-upload-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(205, 205, 205);
+  width: 498px;
+  /* margin-bottom: 15px; */
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 4px;
+}
