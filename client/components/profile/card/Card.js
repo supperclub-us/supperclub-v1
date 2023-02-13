@@ -4,26 +4,31 @@ import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchSingleBookingAsync, selectSingleBooking } from "../../slices/singleBookingSlice";
+import {
+  fetchSingleBookingAsync,
+  selectSingleBooking,
+} from "../../slices/singleBookingSlice";
 
 export const Card = ({ booking }) => {
   const navigate = useNavigate();
 
-    const user = useSelector((state) => state.auth.me);
+  const user = useSelector((state) => state.auth.me);
 
-    const handleClick = () => {
-        navigate(`/bookings/${booking.id}`)
-      }
+  const handleClick = () => {
+    navigate(`/bookings/${booking.id}`);
+  };
 
   return (
     <div key={booking.id} className="cards">
       <h5>{booking.title}</h5>
-      <p className="bookingMenu">{booking.menu}</p>
       <img className="food-image" src={booking.imageUrl} />
       {user.role === "CHEF" && (
         <div>
-
-            <p> Seats Reserved: {booking.maxSeats - booking.openSeats} / {booking.maxSeats}</p>
+          <p>
+            {" "}
+            Seats Reserved: {booking.maxSeats - booking.openSeats} /{" "}
+            {booking.maxSeats}
+          </p>
 
           <Button
             variant="contained"
@@ -34,7 +39,6 @@ export const Card = ({ booking }) => {
           >
             Edit Event
           </Button>
-
         </div>
       )}
 
@@ -57,9 +61,17 @@ export const ModalCard = ({ booking }) => {
   return (
     <div key={booking.id} className="modal-cards">
       <h5>{booking.title}</h5>
-      <p>{booking.menu}</p>
       <p style={{ padding: "10px" }}> Donation ${booking.suggestedDonation}</p>
-      <img className="modalCards" src={booking.imageUrl} />
+      <div style={{padding: "3px"}}>
+        <img
+          className="modal-cards-image"
+          src={booking.imageUrl}
+          style={{
+            height: "100%",
+          }}
+        />
+      </div>
+
       <p>Date of Event: {booking.startDateTime} </p>
       <p style={{ padding: "10px" }}>
         End of Event Time: {booking.endDateTime}{" "}

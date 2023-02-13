@@ -16,8 +16,6 @@ import {
   Box,
   Button,
   FormControl,
-  ImageList,
-  ImageListItem,
   InputLabel,
   LinearProgress,
   MenuItem,
@@ -29,8 +27,16 @@ import Payment from "../stripePayment/Payment";
 //css
 import "./memberBooking.css";
 
-const MemberBooking = ({ user }) => {
+const ButtonStyle = {
+  "&:hover": {
+    backgroundColor: "#EB5757",
+    color: "whitesmoke",
+  },
+  backgroundColor: "#EB5757",
+  color: "whitesmoke",
+}
 
+const MemberBooking = ({ user }) => {
   const { bookingId } = useParams();
   const { id } = user;
   const userId = id;
@@ -42,8 +48,9 @@ const MemberBooking = ({ user }) => {
 
   useEffect(() => {
     dispatch(fetchSingleBookingAsync(bookingId));
-    if (id){
-    dispatch(fetchSingleMember(id));}
+    if (id) {
+      dispatch(fetchSingleMember(id));
+    }
   }, [dispatch, user, id]);
 
   const { booking, error, isLoading } = useSelector(selectSingleBooking);
@@ -53,7 +60,7 @@ const MemberBooking = ({ user }) => {
   const memberBooking = memberBookings?.find((member) => member.id == userId);
   const reservedSeats = memberBooking?.users_bookings.reservedSeats;
 
-  const [newBookingState, setNewBookingState] = useState({})
+  const [newBookingState, setNewBookingState] = useState({});
 
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
@@ -88,7 +95,7 @@ const MemberBooking = ({ user }) => {
         userId,
         newAmountOfOpenSeats,
         guests,
-      })
+      });
     } else if (e.target.name === "bookBtn") {
       if (guests && !user.id) {
         setLoginSignup(true);
@@ -109,7 +116,7 @@ const MemberBooking = ({ user }) => {
           userId,
           newAmountOfOpenSeats,
           guests,
-        })
+        });
         setPayment(true);
       } else {
         alert("please select number of guests/seats");
@@ -143,27 +150,35 @@ const MemberBooking = ({ user }) => {
   return (
     <div className="memberBooking-container">
       <div className="memberBooking-allInfo">
-        <div className="memberBooking-images-title">
-          <ImageList className="memberBooking-images">
-            <ImageListItem>
-              <img /> A BUNCH OF IMAGES GO HERE!!!
-            </ImageListItem>
-            <ImageListItem>
-              <img /> A BUNCH OF IMAGES GO HERE!!!
-            </ImageListItem>
-            <ImageListItem>
-              <img /> A BUNCH OF IMAGES GO HERE!!!
-            </ImageListItem>
-            <ImageListItem>
-              <img /> A BUNCH OF IMAGES GO HERE!!!
-            </ImageListItem>
-          </ImageList>
+        <div
+          className="memberBooking-images-title"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url(${booking.imageUrl})`,
+            height: "250px",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            borderRadius: "25px",
+          }}
+        >
+
           <div className="memberBooking-title">
-            <h1>{booking.title}</h1>
+            <h1
+            style={{
+              color: '#F2F2F2',
+              fontSize: "3rem",
+            }} >
+              {booking.title}
+              </h1>
             <p>
-              <small>
+              <small style={{
+              color: '#F2F2F2',
+              background: 'rgba(27, 32, 44, .8)',
+              borderRadius: '25px',
+              padding: '5px'
+            }}>
                 Hosted by{" "}
-                <Link to={`/chefs`} style={{ color: "red" }}>
+                <Link to={`/chefs`} style={{textDecoration: "underline", color: "#eb5757" }}>
                   {booking?.chefBooking?.firstName}{" "}
                 </Link>
                 in {booking?.city}
@@ -198,7 +213,13 @@ const MemberBooking = ({ user }) => {
           </div>
         </div>
       </div>
-      <Box className="memberBooking-form-container">
+      <Box
+        className="memberBooking-form-container"
+        sx={{
+          backgroundColor: "white",
+          maxHeight: "600px"
+        }}
+      >
         {reservedSeats ? (
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
@@ -208,15 +229,15 @@ const MemberBooking = ({ user }) => {
                   } for this booking`
                 : ""}
             </div>
-            <br />
-            <Box sx={{ width: "200px" }}>
+
+            <Box sx={{ width: "100%" }}>
               <FormControl fullWidth>
-                <InputLabel id="guests">Change Seat Amount</InputLabel>
+                <InputLabel id="change-seat-amount">Change Seat Amount</InputLabel>
                 <Select
                   value={guests}
-                  label="guests"
+                  label="change-seat-amount"
                   onChange={(e) => {
-                  setGuests(e.target.value);
+                    setGuests(e.target.value);
                   }}
                 >
                   {availableSeatsArray?.map((guest) => (
@@ -228,16 +249,18 @@ const MemberBooking = ({ user }) => {
               </FormControl>
             </Box>
             ${booking?.suggestedDonation} per person
-            <br />
+
             {/* Total: ${booking?.suggestedDonation * reservedSeats} */}
-            <Button variant="contained" onClick={handleClick} name="editBtn">
+            <Box style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <Button variant="contained" onClick={handleClick} name="editBtn" sx={ButtonStyle}>
               {" "}
               Edit Seats{" "}
             </Button>
-            <Button variant="contained" onClick={handleClick} name="deleteBtn">
+            <Button variant="contained" onClick={handleClick} name="deleteBtn" sx={ButtonStyle}>
               {" "}
               Cancel Booking{" "}
             </Button>
+            </Box>
           </Box>
         ) : (
           <>
@@ -248,7 +271,7 @@ const MemberBooking = ({ user }) => {
                   value={guests}
                   label="guests"
                   onChange={(e) => {
-                   setGuests(e.target.value);
+                    setGuests(e.target.value);
                   }}
                 >
                   {openSeatsArray?.map((guest) => (
@@ -272,14 +295,7 @@ const MemberBooking = ({ user }) => {
               {booking?.openSeats <= 0 ? (
                 <Button
                   variant="contained"
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: "#EB5757",
-                      color: "whitesmoke",
-                    },
-                    backgroundColor: "#EB5757",
-                    color: "whitesmoke",
-                  }}
+                  sx={ButtonStyle}
                 >
                   {" "}
                   Sold Out{" "}
@@ -289,6 +305,7 @@ const MemberBooking = ({ user }) => {
                   variant="contained"
                   onClick={handleClick}
                   name="bookBtn"
+                  sx={ButtonStyle}
                 >
                   Reserve
                 </Button>
