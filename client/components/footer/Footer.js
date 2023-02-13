@@ -9,12 +9,13 @@ import {
   FaPaypal,
 } from "react-icons/fa";
 import { Typography } from "@mui/material";
+import "./footer.css";
 
 function Footer() {
   const container = {
     marginTop: "auto",
     color: "white",
-    backgroundColor: "rgb(54, 54, 54)",
+    backgroundColor: "#1B202C",
     paddingTop: "1em",
     bottom: "0",
     width: "100",
@@ -93,7 +94,6 @@ function Footer() {
         </div>
         <p>
           © 2023 Supper Club | We are best turtles at FullStack 
-           2209 - Grace Shopper Team Numero Uno
         </p>
       </div>
     </div>

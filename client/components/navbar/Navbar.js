@@ -71,8 +71,12 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-left">
-        <h1>
-          <Link to="/">SupperClub</Link>
+        <h1 className="navbar-supper-club-name">
+          <Link id="link-logo" to="/">
+            {/* <img src="https://i.imgur.com/wl0Y3tL.png" id="logo"/> */}
+            <h3 id="name">supperclub</h3>
+          </Link>
+
         </h1>
       </div>
 

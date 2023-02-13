@@ -14,6 +14,7 @@ import {
 } from "../slices/searchBarFilterSlice";
 import { useDispatch } from "react-redux";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
+import "./map.css"
 
 const MapSearchBar = ({
   viewport,
@@ -119,32 +120,20 @@ const MapSearchBar = ({
   return (
     // will switch box to formControl
     <Box
-      className="search-bar"
+      // className="search-bar"
       variant="contained"
       sx={{ p: 2, border: "1px solid grey" }}
     >
       <Location
-        style={{ borderRadius: "50px" }}
-        sx={{ borderRadius: "50px" }}
-        endIcon={<LocationSearchingIcon />}
         handleChange={handleChange}
+        handleSubmit={handleSubmit}
         value={value}
         setValue={setValue}
         suggestions={suggestions}
         setSuggestions={setSuggestions}
+        className="map-searchBar-input"
       />
-      <Button
-        onClick={handleSubmit}
-        sx={{
-          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-          backgroundColor: "#EB5757",
-          color: "whitesmoke",
-          width: "200px",
-        }}
-      >
-        Locate
-        <LocationSearchingIcon />
-      </Button>
+
       {/* <GeolocateControl /> */}
       <Guests numGuests={numGuests} handleGuests={handleGuests} />
       <StartEndDate
