@@ -10,24 +10,30 @@ const Location = ({ handleChange, handleSubmit, value, setValue, suggestions, se
     <>
       <div className='search-function'>
         <Paper
-            component="form"
-            // sx={{ p: '2px 4px', display: 'flex', alignItems: 'center'}}
-            // sx={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", m: "1em" }}
             sx={{display: "flex", m: "1em"}}
         >
             <InputBase 
-                // sx={{ ml: 1, flex: 1, width: "600px", height: "55.5px" }}
-                // sx={{ ml: 1, flex: 1, width: "600px"}}
                 type="search" 
                 onChange={handleChange}
                 value={value}
                 placeholder="Enter city for nearest event" 
                 className='searchBar-input'
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && value.length > 0) {
+                    // console.log('Enter key pressed');
+                    handleSubmit();
+                  } 
+                }}
             />
             
             <IconButton
                 type="button" sx={{ p: '10px' }} 
-                onClick={handleSubmit}
+                onClick={ () => {
+                   if (value.length > 0) {
+                    // console.log('icon button clicked!');
+                    handleSubmit();
+                  }}
+                }
                 color={'primary'}
             >
                 <SearchIcon />

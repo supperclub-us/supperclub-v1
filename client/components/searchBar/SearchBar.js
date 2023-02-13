@@ -3,9 +3,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import "./searchBar.css";
 import Location from "./Location";
-
 import { setReduxViewport } from "../slices/viewportSlice";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
@@ -37,7 +35,6 @@ const SearchBar = () => {
   };
 
   const handleSubmit = async (evt) => {
-    evt.preventDefault();
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
     navigate('/map');
@@ -77,17 +74,6 @@ const SearchBar = () => {
         setSuggestions={setSuggestions}
         handleSubmit={handleSubmit}
       />
-      {/* <Button
-        variant="contained"
-        onClick={handleSubmit}
-        sx={{
-          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-          backgroundColor: "#EB5757",
-          color: "whitesmoke",
-        }}
-      >
-        Search
-      </Button> */}
     </Box>
   );
 };
