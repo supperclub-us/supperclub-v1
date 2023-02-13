@@ -75,8 +75,9 @@ const SearchBar = () => {
         setValue={setValue}
         suggestions={suggestions}
         setSuggestions={setSuggestions}
+        handleSubmit={handleSubmit}
       />
-      <Button
+      {/* <Button
         variant="contained"
         onClick={handleSubmit}
         sx={{
@@ -86,7 +87,7 @@ const SearchBar = () => {
         }}
       >
         Search
-      </Button>
+      </Button> */}
     </Box>
   );
 };

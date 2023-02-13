@@ -11,16 +11,12 @@ const Home = (props) => {
     <div>
       <Box
         className="about-image"
-        sx={{
-          backgroundImage: `url(https://i.imgur.com/1yADk1l.jpg)`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          height: "100vh",
-          width: "100%",
-        }}
       >
-        <h1 className="about-title"> blah blah blah 🚀 </h1>
-        <Header />
+        <div className="home-title-and-header-container">
+          <h1 className="about-title"> Discover dinner events hosted by chefs</h1>
+          <Header />
+        </div>
+
       </Box>
 
     </div>
