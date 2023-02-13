@@ -13,16 +13,18 @@ import "./footer.css";
 
 function Footer() {
   const container = {
-    marginTop: "auto",
+    // marginTop: "auto",
     color: "white",
-    backgroundColor: "#1B202C",
+    backgroundColor: "#252b3d",
     paddingTop: "1em",
-    bottom: "0",
-    width: "100",
+    width: "100%",
     padding: 1,
-    position: "relative",
+    position: "static",
+    bottom: "0",
+    margin: "0",
+    height: "250px",
     // display: "flex",
-   
+
   };
   const footerRowStyle = {
     display: "flex",
@@ -53,7 +55,7 @@ function Footer() {
       </div>
 
       <div className="footer-column" style={{...footerColumnStyle, flex: 1}}>
-        
+
         <Typography variant="body1"> Contact Us </Typography>
         <Typography variant="body1"> About Us </Typography>
         <Typography variant="body1"> FAQ </Typography>
@@ -64,7 +66,7 @@ function Footer() {
       <div className="socials-container" style={{...footerColumnStyle, flex: 1, textAlign: "center"}}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <p>Follow us!</p>
-        
+
         <Twitter fontSize="medium" />
         <Instagram fontSize="medium" />
         <Facebook fontSize="medium" />
@@ -90,10 +92,10 @@ function Footer() {
           <FaCcAmex />
           <FaCcMastercard />
           <FaCcStripe />
-          
+
         </div>
         <p>
-          © 2023 Supper Club | We are best turtles at FullStack 
+          © 2023 Supper Club | We are best turtles at FullStack
         </p>
       </div>
     </div>
