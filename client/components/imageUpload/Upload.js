@@ -6,6 +6,8 @@ import {
   Button,
   OutlinedInput
 } from "@mui/material";
+import UploadIcon from '@mui/icons-material/Upload';
+import "./upload.css";
 
 const Upload = ({setImageUrl}) => {
   const [selectedImage, setSelectedImage] = useState("");
@@ -25,12 +27,24 @@ const Upload = ({setImageUrl}) => {
   };
 
   return (
-    <div>
+    <div className="upload-container">
       <OutlinedInput
         type="file"
         onChange={(event) => setSelectedImage(event.target.files[0])}
+        className="upload-input"
       />
-      <Button variant="outlined" onClick={handleUpload}> Upload </Button>
+      <Button 
+        className="upload-button" 
+        variant="contained" 
+        onClick={handleUpload} 
+        startIcon={<UploadIcon />}
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      > 
+        Upload </Button>
     </div>
   )
 }

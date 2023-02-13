@@ -214,7 +214,7 @@ const ChefForm = () => {
                 />
               </Box>
 
-              <div>
+              <div className="chef-form-upload-image-container">
                 <img src={imageUrl} style={{
                     height: "213px",
                   }}/>
