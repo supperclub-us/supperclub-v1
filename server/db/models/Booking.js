@@ -72,7 +72,7 @@ const Booking = db.define("booking", {
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    
+
   },
   suggestedDonation: {
     type: Sequelize.DOUBLE,

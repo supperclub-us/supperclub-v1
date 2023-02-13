@@ -235,7 +235,7 @@ const Map = ({ user }) => {
                   >
                     <img
                       className="map-pineapple-image"
-                      src="/pineapple.png"
+                      src="./map_location_marker_supperClub3.png"
                       alt="pineapple marker"
                     />
                   </button>

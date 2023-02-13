@@ -5,7 +5,7 @@
 	justify-content: center;
 	gap: 1rem;
 	text-align: center;
-	
+
 }
 
 .cards {
@@ -13,17 +13,31 @@
 	border-radius: 30px;
 	width: 320px;
 	height: 400px;
-	margin: 10px;
+	/* margin: 10px; */
 	padding: 10px;
 }
 
 .modal-cards {
 	/* border: 2px grey solid; */
-	border-radius: 30px;
+	/* position: relative; */
+	/* display: flex; */
+	flex-direction: column;
+	border-radius: 25px;
 	width: 320px;
 	height: 400px;
-	margin: auto;
 	padding: 10px;
+	margin: auto;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.modal-cards-image {
+	/* border: 2px grey solid; */
+	border-radius: 25px;
+	width: 100%;
+	height: 100%;
+	padding: 5px;
 	justify-content: center;
 	align-items: center;
 
@@ -40,7 +54,7 @@ h3 {
 }
 
 .food-image {
-	
+
 	margin-left: auto;
 	margin-right: auto;
 	width: 320px;
