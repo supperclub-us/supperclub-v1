@@ -68,8 +68,19 @@ const MemberProfile = ({ user }) => {
       <h1>{`Welcome, ${currentMember.firstName}!`}</h1>
       <h3> Your Dashboard</h3>
       <hr />
-      <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} SUPPERS </h2>
-      <Button variant="contained" size="small" onClick={handleClick}> View {futureEvents ? 'Previous': 'Upcoming'} Suppers </Button>
+      <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} EVENTS </h2>
+      <Button 
+        variant="contained" 
+        size="small" 
+        onClick={handleClick}
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      > 
+        View {futureEvents ? 'Previous': 'Upcoming'} EVENTS 
+      </Button>
       <div className="profileContainer">
         {futureEvents ? futureMemberBookings && futureMemberBookings.length ? futureMemberBookings?.map((booking) => (
             <Card

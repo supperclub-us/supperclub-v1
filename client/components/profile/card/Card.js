@@ -36,6 +36,11 @@ export const Card = ({ booking }) => {
             onClick={() => {
               navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`);
             }}
+            sx={{
+              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+              backgroundColor: "#EB5757",
+              color: "whitesmoke",
+            }}
           >
             Edit Event
           </Button>
@@ -43,7 +48,15 @@ export const Card = ({ booking }) => {
       )}
 
       {user.role === "MEMBER" && (
-        <Button onClick={handleClick} variant="contained">
+        <Button 
+          onClick={handleClick} 
+          variant="contained"
+          sx={{
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            backgroundColor: "#EB5757",
+            color: "whitesmoke",
+          }}
+        >
           View Details
         </Button>
       )}
@@ -77,7 +90,15 @@ export const ModalCard = ({ booking }) => {
         End of Event Time: {booking.endDateTime}{" "}
       </p>
       <p style={{ padding: "10px" }}>{booking.openSeats} Seats Left </p>
-      <Button onClick={handleClick} variant="contained">
+      <Button 
+        onClick={handleClick} 
+        variant="contained"
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      >
         View Details
       </Button>
     </div>

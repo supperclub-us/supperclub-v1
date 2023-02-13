@@ -356,34 +356,3 @@ a:link    { color: #DFE2EA; text-decoration: none; }
 a:visited { color: #DFE2EA; text-decoration: none; }
 a:hover   { color: #DFE2EA; text-decoration: none; }
 a:active  { color: #DFE2EA; text-decoration: none; }
-
-
-
-/* .authForm {
-  border: 1px solid purple;
-} */
-
-
-
-/* nav a {
-  display: inline-block;
-  margin: 1em;
-} */
-
-/* form div {
-  margin: 1em;
-  display: inline-block;
-} */
-
-
-/* .form-control > * {
-  margin: 3em;
-}
-
-.navBar {
-  border: 1px solid purple;
-}
-
-.authForm {
-  border: 1px solid green;
-} */

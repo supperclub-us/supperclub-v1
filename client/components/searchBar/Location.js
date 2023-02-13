@@ -10,34 +10,39 @@ const Location = ({ handleChange, handleSubmit, value, setValue, suggestions, se
     <>
       <div className='search-function'>
         <Paper
-            component="form"
-            // sx={{ p: '2px 4px', display: 'flex', alignItems: 'center'}}
-            // sx={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-start", m: "1em" }}
             sx={{display: "flex", m: "1em"}}
         >
+            <IconButton
+              type="button" sx={{ p: '10px' }} 
+              onClick={ () => {
+                  if (value.length > 0) {
+                  handleSubmit();
+                }}
+              }
+              color={'primary'}
+            >
+            <SearchIcon />
+            </IconButton>
             <InputBase 
-                // sx={{ ml: 1, flex: 1, width: "600px", height: "55.5px" }}
-                // sx={{ ml: 1, flex: 1, width: "600px"}}
                 type="search" 
                 onChange={handleChange}
                 value={value}
                 placeholder="Enter city for nearest event" 
                 className='searchBar-input'
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && value.length > 0) {
+                    handleSubmit();
+                  } 
+                }}
             />
             
-            <IconButton
-                type="button" sx={{ p: '10px' }} 
-                onClick={handleSubmit}
-                color={'primary'}
-            >
-                <SearchIcon />
-            </IconButton>
+
 
             {suggestions?.length > 0 && (
-              <Box className="searchBar-suggestionWrapper" sx={{ bgcolor: '#FCFCFC', position: 'absolute', width: "651px", mt: 5.58, mb: 0, mx: 0, borderRadius: '5px', boxShadow: 3 }} >
+              <Box className="searchBar-suggestionWrapper" sx={{ bgcolor: '#FCFCFC', position: 'absolute', width: "651.9px", mt: 5.58, mb: 0, mx: 0, borderRadius: '5px', boxShadow: 3 }} >
                 {suggestions.map((suggestion, index) => {
                   return (
-                    <Box className="searchBar-suggestion" sx={{ width: "680px", p: 1.0, "&:hover": { color: 'midnightblue' } }} key={index}
+                    <Box className="searchBar-suggestion" sx={{ width: "651px", p: 1.0, "&:hover": { color: 'midnightblue' } }} key={index}
                       onClick={() => {
                         setValue(suggestion.place_name);
                         setSuggestions([]);
