@@ -7,7 +7,7 @@ import {
   OutlinedInput
 } from "@mui/material";
 
-const Upload = ({setImageUrl}) => {
+const Upload = ({setImageUrl, setOpenUploadConfirm}) => {
   const [selectedImage, setSelectedImage] = useState("");
 
 
@@ -16,6 +16,7 @@ const Upload = ({setImageUrl}) => {
     const formData = new FormData();
     formData.append("file", selectedImage)
     formData.append("upload_preset", "jeux3vde")
+    setOpenUploadConfirm(true)
 
     Axios.post(
       "https://api.cloudinary.com/v1_1/dm8eizfpl/image/upload", formData
