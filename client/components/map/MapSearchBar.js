@@ -14,7 +14,7 @@ import {
 } from "../slices/searchBarFilterSlice";
 import { useDispatch } from "react-redux";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import "./map.css"
+import "./map.css";
 
 const MapSearchBar = ({
   viewport,
@@ -43,7 +43,7 @@ const MapSearchBar = ({
     dispatch(setReduxNumGuests(numGuests));
     dispatch(setReduxStartDate(newIntStartDate));
     dispatch(setReduxEndDate(newIntEndDate));
-  }, [ numGuests, startDate, endDate ]);
+  }, [numGuests, startDate, endDate]);
 
   // formatting of start and end date to array of integers
   const newStartDate = startDate.format("MM DD YYYY").split(" ");
@@ -121,7 +121,14 @@ const MapSearchBar = ({
     <Box
       // className="search-bar"
       variant="contained"
-      sx={{ p: 2, border: "1px solid grey" }}
+      sx={{
+        p: 2,
+        border: "1px solid grey",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Location
         handleChange={handleChange}
@@ -134,26 +141,32 @@ const MapSearchBar = ({
       />
 
       {/* <GeolocateControl /> */}
-      <Guests numGuests={numGuests} handleGuests={handleGuests} />
-      <StartEndDate
-        startDate={startDate}
-        setStartDate={setStartDate}
-        handleStartDate={handleStartDate}
-        handleEndDate={handleEndDate}
-        endDate={endDate}
-        setEndDate={setEndDate}
-      />
-      <Button 
-        onClick={handleReset}
-        variant="contained"
-        sx={{
-          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-          backgroundColor: "#EB5757",
-          color: "whitesmoke",
-        }}
-      > 
-        Reset 
-      </Button>
+      <Box
+        className="map-filter-and-reset"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <Guests numGuests={numGuests} handleGuests={handleGuests} />
+        <StartEndDate
+          startDate={startDate}
+          setStartDate={setStartDate}
+          handleStartDate={handleStartDate}
+          handleEndDate={handleEndDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
+        <Button
+          onClick={handleReset}
+          variant="contained"
+          sx={{
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            backgroundColor: "#EB5757",
+            color: "whitesmoke",
+            height: "40px",
+          }}
+        >
+          Reset
+        </Button>
+      </Box>
     </Box>
   );
 };
