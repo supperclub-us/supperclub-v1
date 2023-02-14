@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     height: 100%;
     padding: 20px 400px;
-    background: #1b202c;
+    background-color: #252b3d;
 }
 
 .memberBooking-allInfo {
@@ -19,6 +19,7 @@
     padding: 40px;
     gap: 1rem;
     max-width: 600px;
+    box-shadow: 5px 5px 17px -5px rgba(0,0,0,0.75);
 }
 
 .memberBooking-images-title {
@@ -65,7 +66,7 @@
     padding: 20px;
     /* border: 1px solid #1b202c; */
     border-radius: 25px;
-    box-shadow: rgba(255, 255, 255, 0.704) 0px 6px 16px;
+    box-shadow: 5px 5px 17px -5px rgba(0,0,0,0.75);
 }
 
 .memberBooking-form {

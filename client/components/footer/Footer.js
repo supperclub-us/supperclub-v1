@@ -23,6 +23,7 @@ function Footer() {
     bottom: "0",
     margin: "0",
     height: "250px",
+    background: "#1b202c"
     // display: "flex",
   };
   const footerRowStyle = {

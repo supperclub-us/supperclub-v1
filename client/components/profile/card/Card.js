@@ -21,8 +21,10 @@ export const Card = ({ booking }) => {
 
   return (
     <div key={booking.id} className="cards">
-      <h2>{booking.title}</h2>
       <img className="food-image" src={booking.imageUrl} />
+      <div className="card-booking-title">
+        <h2>{booking.title}</h2>
+      </div>
       {user.role === "CHEF" && (
         <div>
           <h4>
@@ -77,7 +79,7 @@ export const ModalCard = ({ booking }) => {
     <div key={booking.id} className="modal-cards">
       <h5>{booking.title}</h5>
       <p style={{ padding: "10px" }}> Donation ${booking.suggestedDonation}</p>
-      <div style={{padding: "3px"}}>
+      <div style={{ padding: "3px" }}>
         <img
           className="modal-cards-image"
           src={booking.imageUrl}

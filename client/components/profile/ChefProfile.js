@@ -96,7 +96,7 @@ const ChefProfile = () => {
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
-            mb: 2.5
+            mb: 2.49
           }}
           variant="contained"
           size="small"
