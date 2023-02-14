@@ -46,26 +46,59 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
               style={{
                 background:
                   selectedMarker && selectedMarker.id === booking.id
-                    ? "green"
-                    : "#252b3d",
-                ":hover": {
+                    ? "#EB5757"
+                    : "whitesmoke",
+                color:
+                  selectedMarker && selectedMarker.id === booking.id
+                    ? "whitesmoke"
+                    : "#1B202C",
+                "&:hover": {
                   background: "#3b3f4f",
                 },
               }}
             >
+              <div className="map-booking-container-image">
+                <img src={booking.imageUrl} alt={booking.title} />
+              </div>
+              <div>
+                <p className="map-booking-container-location">
+                  <small>
+                    {booking.city}, {booking.state}
+                  </small>
+                </p>
+              </div>
+              <div>
+                <p className="map-booking-container-title">
+                  <small>{booking.title}</small>
+                </p>
+              </div>
+              <div>
+                <small>${booking.suggestedDonation} / guest</small>
+              </div>
+              <div>
+                <p className="map-booking-container-host">
+                  <small>
+                    Host: Chef {booking.chefBooking.firstName}{" "}
+                    {booking.chefBooking.lastName}
+                  </small>
+                </p>
+              </div>
               {currentMember && getMatches(memberBookings, booking) && (
-                <>
-                  <p style={{ color: "red" }}>
-                    Booked
+                <div
+                className="map-booking-container-reserved"
+                  style={{
+                    color:
+                      selectedMarker && selectedMarker.id === booking.id
+                        ? "black"
+                        : "#EB5757",
+                  }}
+                >
+                  <small>
+                    <p style={{ margin: "0" }}>Reserved</p>
                     <CheckIcon />
-                  </p>
-                </>
+                  </small>
+                </div>
               )}
-              <p>Event: {booking.title}</p>
-              <p>
-                Host: Chef {booking.chefBooking.firstName}{" "}
-                {booking.chefBooking.lastName}
-              </p>
             </div>
           );
         })

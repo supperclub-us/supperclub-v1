@@ -92,6 +92,8 @@ const MapSearchBar = ({
   const handleSubmit = async (e) => {
     const newViewport = await getCoordinates(value);
     dispatch(setReduxViewport(newViewport));
+    setValue("")
+    setSuggestions([])
   };
 
   async function getCoordinates(address) {
@@ -119,53 +121,44 @@ const MapSearchBar = ({
   return (
     // will switch box to formControl
     <Box
-      // className="search-bar"
+      className="mapbox-search-bar"
       variant="contained"
-      sx={{
-        p: 2,
-        border: "1px solid grey",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
     >
-      <Location
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        value={value}
-        setValue={setValue}
-        suggestions={suggestions}
-        setSuggestions={setSuggestions}
-        className="map-searchBar-input"
-      />
-
-      {/* <GeolocateControl /> */}
-      <Box
-        className="map-filter-and-reset"
-        style={{ display: "flex", alignItems: "center" }}
-      >
-        <Guests numGuests={numGuests} handleGuests={handleGuests} />
-        <StartEndDate
-          startDate={startDate}
-          setStartDate={setStartDate}
-          handleStartDate={handleStartDate}
-          handleEndDate={handleEndDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
+      <Box className="mapbox-search-and-filters">
+        <Location
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          value={value}
+          setValue={setValue}
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
+          className="map-searchBar-input"
         />
-        <Button
-          onClick={handleReset}
-          variant="contained"
-          sx={{
-            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-            backgroundColor: "#EB5757",
-            color: "whitesmoke",
-            height: "40px",
-          }}
+        <Box
+          className="map-filter-and-reset"
         >
-          Reset
-        </Button>
+          <Guests numGuests={numGuests} handleGuests={handleGuests} />
+          <StartEndDate
+            startDate={startDate}
+            setStartDate={setStartDate}
+            handleStartDate={handleStartDate}
+            handleEndDate={handleEndDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
+          <Button
+            onClick={handleReset}
+            variant="contained"
+            sx={{
+              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+              backgroundColor: "#EB5757",
+              color: "whitesmoke",
+              height: "56px",
+            }}
+          >
+            Reset
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

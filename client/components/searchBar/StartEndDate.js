@@ -10,7 +10,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 const StartEndDate = ({ startDate, handleStartDate, endDate, setEndDate, handleEndDate }) => {
   return (
     <>
-      <FormControl className="form-control" sx={{ m: "1em" }}>
+      <FormControl className="form-control" sx={{ m: "1em", background:"white" }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start Date"
@@ -21,13 +21,14 @@ const StartEndDate = ({ startDate, handleStartDate, endDate, setEndDate, handleE
           />
         </LocalizationProvider>
       </FormControl>
-      <FormControl className="form-control" sx={{ m: "1em" }}>
+      <FormControl className="form-control" sx={{ m: "1em", background: "white" }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="End Date"
             value={endDate}
             onChange={(newValue) => handleEndDate(newValue)}
             renderInput={(params) => <TextField {...params} />}
+            sx={{background:"white"}}
             disablePast
           />
         </LocalizationProvider>
