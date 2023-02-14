@@ -8,6 +8,7 @@ import {
   fetchSingleBookingAsync,
   selectSingleBooking,
 } from "../../slices/singleBookingSlice";
+import "../profile.css"
 
 export const Card = ({ booking }) => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const Card = ({ booking }) => {
 
   return (
     <div key={booking.id} className="cards">
-      <h5>{booking.title}</h5>
+      <h2>{booking.title}</h2>
       <img className="food-image" src={booking.imageUrl} />
       {user.role === "CHEF" && (
         <div>
@@ -48,13 +49,14 @@ export const Card = ({ booking }) => {
       )}
 
       {user.role === "MEMBER" && (
-        <Button 
-          onClick={handleClick} 
+        <Button
+          onClick={handleClick}
           variant="contained"
           sx={{
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
+            mb: 4
           }}
         >
           View Details
@@ -90,8 +92,8 @@ export const ModalCard = ({ booking }) => {
         End of Event Time: {booking.endDateTime}{" "}
       </p>
       <p style={{ padding: "10px" }}>{booking.openSeats} Seats Left </p>
-      <Button 
-        onClick={handleClick} 
+      <Button
+        onClick={handleClick}
         variant="contained"
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },

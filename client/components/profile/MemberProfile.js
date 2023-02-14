@@ -9,6 +9,7 @@ import { LinearProgress, Button, Skeleton, Box } from "@mui/material";
 import { PageNotFound } from "../";
 import { Card } from "./card/Card";
 import dayjs from "dayjs";
+import "./profile.css"
 
 const MemberProfile = ({ user }) => {
   const { id } = useParams();
@@ -66,20 +67,21 @@ const MemberProfile = ({ user }) => {
   return (
     <div className="links">
       <h1>{`Welcome, ${currentMember.firstName}!`}</h1>
-      <h3> Your Dashboard</h3>
       <hr />
-      <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} EVENTS </h2>
-      <Button 
-        variant="contained" 
-        size="small" 
+      <h1>Your {futureEvents ? 'Upcoming' : 'Previous'} Events </h1>
+      <Button
+        className="mbrprofile-events-button"
+        variant="contained"
+        size="small"
         onClick={handleClick}
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
           backgroundColor: "#EB5757",
           color: "whitesmoke",
+          mb: 2.49,
         }}
-      > 
-        View {futureEvents ? 'Previous': 'Upcoming'} EVENTS 
+      >
+        View {futureEvents ? 'Previous': 'Upcoming'} Events
       </Button>
       <div className="profileContainer">
         {futureEvents ? futureMemberBookings && futureMemberBookings.length ? futureMemberBookings?.map((booking) => (

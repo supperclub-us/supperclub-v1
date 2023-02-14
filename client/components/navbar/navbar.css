@@ -19,6 +19,7 @@
   /* position: sticky;
   top: 0; */
   display: flex;
+  /* position: static; */
   flex-direction: row;
   justify-content: space-between;
   background-color: #252b3d;

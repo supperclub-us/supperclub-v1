@@ -5,10 +5,14 @@
 	justify-content: center;
 	gap: 1rem;
 	text-align: center;
-
+	margin-bottom: 20px;
 }
 
 .cards {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 	border: 2px grey solid;
 	border-radius: 30px;
 	width: 320px;
@@ -41,6 +45,14 @@
 	justify-content: center;
 	align-items: center;
 
+}
+
+h1 {
+	margin: 30px 0;
+}
+
+h2 {
+	margin: 20px 0 0 0;
 }
 
 h3 {
