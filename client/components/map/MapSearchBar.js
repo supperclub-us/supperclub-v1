@@ -143,7 +143,17 @@ const MapSearchBar = ({
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Button onClick={handleReset}> Reset </Button>
+      <Button 
+        onClick={handleReset}
+        variant="contained"
+        sx={{
+          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          backgroundColor: "#EB5757",
+          color: "whitesmoke",
+        }}
+      > 
+        Reset 
+      </Button>
     </Box>
   );
 };
