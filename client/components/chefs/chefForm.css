@@ -17,6 +17,7 @@
   gap: 1em;
   min-width: 300px;
   width: 500px;
+  /* border: 2px solid rgb(0, 26, 128) */
 }
 
 .chefForm-title-of-event {
@@ -171,7 +172,7 @@ p1 {
   flex-direction: column;
   /* gap: 1.0em; */
   width: 242px;
-  /* border: 1px solid red; */
+  border: 1px solid red;
 }
 
 .chefForm-suggested-donation {

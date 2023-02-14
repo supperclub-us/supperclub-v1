@@ -44,7 +44,6 @@ const SignUp = ({handleOpen}) => {
         method: "signup",
       })
     );
-      // handleOpen();
   };
 
   const handleClose = (event, reason) => {
@@ -58,18 +57,12 @@ const SignUp = ({handleOpen}) => {
   return (
     <div className="signup-form-container">
       <form id="signup-signup-form" onSubmit={handleSubmit}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography id="signup-form-title" variant="h6" component="h2">
           Sign-Up Form
         </Typography>
 
-        <hr />
-
-        <div className="navbar-role-selection">
-
-          <br />
-
-          <div className="navbar-role-selection">
-             <FormControl style={{ width: 197, mt: 10 }} fullWidth>
+          <div className="signup-role-selection">
+             <FormControl >
               <InputLabel>Role </InputLabel>
               <Select
                 onChange={(e) => setRole(e.target.value)}
@@ -81,11 +74,11 @@ const SignUp = ({handleOpen}) => {
               </Select>
             </FormControl>
           </div>
-        </div>
 
-        <div>
+
+        <div className="signup-first-name-and-last-name-container">
           <TextField
-            className="in"  style={{ marginTop: '10px' }}
+            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setFirstName(e.target.value)}
             name="firstName"
             value={firstName}
@@ -94,9 +87,8 @@ const SignUp = ({handleOpen}) => {
             label="First Name"
             required
           />
-
           <TextField
-            className="in"  style={{ marginTop: '10px' }}
+            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setLastName(e.target.value)}
             name="lastName"
             value={lastName}
@@ -105,19 +97,24 @@ const SignUp = ({handleOpen}) => {
             label="Last Name"
             required
           />
+        </div>
 
+        <div className="signup-bio-container">
           <TextField
-            className="in"  style={{ marginTop: '10px' }}
+            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setBio(e.target.value)}
             name="bio"
+            multiline
+            rows={5}
             value={bio}
             type="text"
             placeholder="Biography"
             label="Biography"
           />
+        </div>
 
           <TextField
-            className="in"  style={{ marginTop: '10px' }}
+            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setMobileNumber(e.target.value)}
             name="mobileNumber"
             value={mobileNumber}
@@ -127,7 +124,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
-            className="info" style={{ marginTop: '30px' }}
+            // className="info" style={{ marginTop: '30px' }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
@@ -136,7 +133,7 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
-          className="in"  style={{ marginTop: '10px' }}
+          // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
@@ -144,7 +141,7 @@ const SignUp = ({handleOpen}) => {
             label="Password"
           />
 
-          <div>
+          <div id="signup-button">
             <Button 
               type="submit" 
               variant="contained" 
@@ -159,7 +156,8 @@ const SignUp = ({handleOpen}) => {
               Sign Up
             </Button>
           </div>
-        </div>
+
+        
         {/* need to make error handling for the snackbar, as it stands this message will pop up with all log in attempts even unauth or wrong inputs */}
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
           <Alert
@@ -171,7 +169,7 @@ const SignUp = ({handleOpen}) => {
           </Alert>
         </Snackbar>
       </form>
-      <p style={{fontSize: ".7rem"}}>
+      <p className="signup-to-login-question">
         Already have an account?
         <Button onClick={() => handleOpen("login")}>Login</Button>
       </p>
