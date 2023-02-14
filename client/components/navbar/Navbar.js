@@ -41,13 +41,25 @@ const Navbar = () => {
 
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     setTimeout(() => {
-  //       setOpen(false);
-  //     }, 500);
-  //   }
-  // }, [isLoggedIn]);
+  // State to track the scroll position
+  const [scrollTop, setScrollTop] = useState(0);
+
+  // Handle the scroll event
+  const handleScroll = () => {
+    setScrollTop(window.pageYOffset || document.documentElement.scrollTop);
+  };
+
+  // Add the scroll event listener on mount
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Remove the scroll event listener on unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Determine the opacity based on the scroll position
+  const opacity = scrollTop > 150 ? 0.6 : 1;
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -69,7 +81,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-container" style={{opacity, position: "sticky", top: 0}}>
       <div className="navbar-left">
         <h1 className="navbar-supper-club-name">
           <Link id="link-logo" to="/">
