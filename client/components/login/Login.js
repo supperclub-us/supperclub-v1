@@ -77,9 +77,15 @@ const SignIn = ({handleOpen}) => {
               </Button>
             </div>
         </div>
-        <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
+        <Snackbar
+          open={open} 
+          autoHideDuration={30000} 
+          onClose={handleSnackClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+
+        >
           <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
-            You successfully logged in!
+            You logged in!
           </Alert>
         </Snackbar>
 
