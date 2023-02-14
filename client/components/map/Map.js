@@ -253,8 +253,9 @@ const Map = ({ user }) => {
                 onClose={() => setSelectedMarker(null)}
               >
                 <div className="map-marker-popup" onClick={() => handleClick(selectedMarker.id)} >
-                  <h3>{selectedMarker.title}</h3>
-                  <p>{selectedMarker.menu}</p>
+                  {/* <img src={selectedMarker.imageUrl}/> */}
+                  <h3>Title: {selectedMarker.title}</h3>
+                  {/* <p>{selectedMarker.menu}</p> */}
                   <p>
                     {selectedMarker.city}, {selectedMarker.state}
                   </p>

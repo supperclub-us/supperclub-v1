@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #1b202c;
     background: white;
     border-radius: 25px;
     padding: 40px;
@@ -62,20 +62,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px 20px;
-    border: 1px solid black;
+    padding: 20px;
+    /* border: 1px solid #1b202c; */
     border-radius: 25px;
-    box-shadow: rgb(255 255 255 / 12%) 0px 6px 16px;
+    box-shadow: rgba(255, 255, 255, 0.704) 0px 6px 16px;
 }
 
 .memberBooking-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border: 1px solid black;
+    border-bottom: 1px solid #1b202c;
     width: 400px;
     padding: 10px 20px;
-    border-radius: 25px;
+    /* border-radius: 25px; */
 
 }
 

@@ -1,10 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authSlice";
 import { Button, Typography, Modal, Box } from "@mui/material";
 import "./navbar.css";
-import ClearIcon from '@mui/icons-material/Clear'
+import ClearIcon from "@mui/icons-material/Clear";
 
 import { SignUp, Login } from "../index";
 
@@ -27,7 +27,7 @@ const Navbar = () => {
     setOpen(false);
     setModalScreen("");
 
-    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
+    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null;
   };
 
   const renderModalScreen = () => {
@@ -38,7 +38,6 @@ const Navbar = () => {
     if (modalScreen === "login") {
       return <Login handleOpen={handleOpen} />;
     }
-
   };
 
   // State to track the scroll position
@@ -59,7 +58,7 @@ const Navbar = () => {
   }, []);
 
   // Determine the opacity based on the scroll position
-  const opacity = scrollTop > 150 ? 0.6 : 1;
+  const opacity = Math.max(0, 1 - (scrollTop-50) / 100);
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -81,14 +80,21 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-container" style={{opacity, position: "sticky", top: 0}}>
+    <div
+      className="navbar-container"
+      style={{
+        opacity,
+        position: "sticky",
+        top: 0,
+        transition: "opacity 200ms ease-in",
+      }}
+    >
       <div className="navbar-left">
         <h1 className="navbar-supper-club-name">
           <Link id="link-logo" to="/">
             {/* <img src="https://i.imgur.com/wl0Y3tL.png" id="logo"/> */}
             <h3 id="name">supperclub</h3>
           </Link>
-
         </h1>
       </div>
 
@@ -96,27 +102,35 @@ const Navbar = () => {
         <Link className="navbar-link-spacing" to="/home">
           Home
         </Link>
-        {user.role === "CHEF" ? null : <Link className="navbar-link-spacing" to="/chefs">
-          Chefs
-        </Link>}
+        {user.role === "CHEF" ? null : (
+          <Link className="navbar-link-spacing" to="/chefs">
+            Chefs
+          </Link>
+        )}
 
         {isLoggedIn ? (
           <>
             {user.role === "CHEF" ? (
               <Link
-              className="navbar-link-spacing"
-              to={`/users/chefprofile/${user.id}`}
-            >
-              Profile
-            </Link> ) : (
+                className="navbar-link-spacing"
+                to={`/users/chefprofile/${user.id}`}
+              >
+                Profile
+              </Link>
+            ) : (
               <Link
-              className="navbar-link-spacing"
-              to={`/users/memberprofile/${user.id}`}
-            >
-              Profile
-            </Link> )}
+                className="navbar-link-spacing"
+                to={`/users/memberprofile/${user.id}`}
+              >
+                Profile
+              </Link>
+            )}
 
-            <Button type="button" onClick={logoutAndRedirectHome} sx={{ marginRight: "25px", color: "whitesmoke" }}>
+            <Button
+              type="button"
+              onClick={logoutAndRedirectHome}
+              sx={{ marginRight: "25px", color: "whitesmoke" }}
+            >
               Log out
             </Button>
           </>
@@ -148,16 +162,17 @@ const Navbar = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>{renderModalScreen()}
-          <Button
-            onClick={handleClose}
-            startIcon={<ClearIcon />}
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-            }}>
-          </Button>
+          <Box sx={style}>
+            {renderModalScreen()}
+            <Button
+              onClick={handleClose}
+              startIcon={<ClearIcon />}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+              }}
+            ></Button>
           </Box>
         </Modal>
       </div>
