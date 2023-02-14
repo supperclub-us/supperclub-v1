@@ -78,7 +78,7 @@ const MemberProfile = ({ user }) => {
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
           backgroundColor: "#EB5757",
           color: "whitesmoke",
-          mb: 2.49,
+          mb: 2.5,
         }}
       >
         View {futureEvents ? 'Previous': 'Upcoming'} Events

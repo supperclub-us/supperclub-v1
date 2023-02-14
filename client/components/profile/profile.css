@@ -48,7 +48,7 @@
 }
 
 h1 {
-	margin: 30px 0;
+	margin: 20px 0;
 }
 
 h2 {
@@ -57,6 +57,10 @@ h2 {
 
 h3 {
     text-align: center;
+}
+
+h4 {
+	margin-top: 0;
 }
 
 .links {

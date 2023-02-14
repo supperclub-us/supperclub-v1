@@ -25,11 +25,11 @@ export const Card = ({ booking }) => {
       <img className="food-image" src={booking.imageUrl} />
       {user.role === "CHEF" && (
         <div>
-          <p>
+          <h4>
             {" "}
             Seats Reserved: {booking.maxSeats - booking.openSeats} /{" "}
             {booking.maxSeats}
-          </p>
+          </h4>
 
           <Button
             variant="contained"
