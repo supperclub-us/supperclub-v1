@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authSlice";
@@ -32,7 +32,7 @@ const Navbar = () => {
     setOpen(false);
     setModalScreen("");
 
-    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null
+    user.role === "CHEF" ? navigate(`/users/chefprofile/${user.id}`) : null;
   };
 
   const renderModalScreen = () => {
@@ -43,9 +43,27 @@ const Navbar = () => {
     if (modalScreen === "login") {
       return <Login handleOpen={handleOpen} />;
     }
-
   };
 
+  // State to track the scroll position
+  const [scrollTop, setScrollTop] = useState(0);
+
+  // Handle the scroll event
+  const handleScroll = () => {
+    setScrollTop(window.pageYOffset || document.documentElement.scrollTop);
+  };
+
+  // Add the scroll event listener on mount
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Remove the scroll event listener on unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Determine the opacity based on the scroll position
+  const opacity = Math.max(0, 1 - (scrollTop-50) / 100);
   const handleNavToProfile = () => {
     if (user.role === "CHEF") {
       navigate(`/users/chefprofile/${user.id}`);
@@ -78,21 +96,25 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-container">
+    <div
+      className="navbar-container"
+      style={{
+        opacity,
+        position: "sticky",
+        top: 0,
+        transition: "opacity 200ms ease-in",
+      }}
+    >
       <div className="navbar-left">
         <h1 className="navbar-supper-club-name">
           <Link id="link-logo" to="/">
             {/* <img src="https://i.imgur.com/wl0Y3tL.png" id="logo"/> */}
             <h3 id="name">supperclub</h3>
           </Link>
-
         </h1>
       </div>
 
       <div className="navbar-right">
-        {/* <Link className="navbar-link-spacing" to="/home">
-          Home
-        </Link> */}
 
         <Button
           type="button"
@@ -113,30 +135,11 @@ const Navbar = () => {
             >
               Chefs
             </Button> 
-              
-
-            // <Link className="navbar-link-spacing" to="/chefs">
-            //   Chefs
-            // </Link>
             
         }
 
         {isLoggedIn ? (
           <>
-            {/* {user.role === "CHEF" ? (
-              <Link
-                className="navbar-link-spacing"
-                to={`/users/chefprofile/${user.id}`}
-              >
-                Profile
-              </Link> ) : (
-              <Link
-                className="navbar-link-spacing"
-                to={`/users/memberprofile/${user.id}`}
-              >
-                Profile
-              </Link> )} */}
-
             <Button
               type="button"
               onClick={handleNavToProfile}
@@ -187,16 +190,17 @@ const Navbar = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>{renderModalScreen()}
-          <Button
-            onClick={handleClose}
-            startIcon={<ClearIcon />}
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-            }}>
-          </Button>
+          <Box sx={style}>
+            {renderModalScreen()}
+            <Button
+              onClick={handleClose}
+              startIcon={<ClearIcon />}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+              }}
+            ></Button>
           </Box>
         </Modal>
       </div>
