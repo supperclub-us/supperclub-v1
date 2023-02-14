@@ -92,7 +92,17 @@ const ChefProfile = () => {
           Create Event
         </Button>
         <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} EVENTS</h2>
-        <Button variant="contained" size="small" onClick={handleClick}> View {futureEvents ? 'Previous': 'Upcoming'} Events </Button>
+        <Button 
+          sx={{
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            backgroundColor: "#EB5757",
+            color: "whitesmoke",
+          }}
+          variant="contained" 
+          size="small" 
+          onClick={handleClick}
+        > View {futureEvents ? 'Previous': 'Upcoming'} Events 
+        </Button>
         <div className="profileContainer">
           {futureEvents ? futureChefBookings && futureChefBookings.length ?
           futureChefBookings.map((booking) => (

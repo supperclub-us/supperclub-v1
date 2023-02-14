@@ -11,6 +11,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HomeIcon from '@mui/icons-material/Home';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -164,7 +165,8 @@ const Navbar = () => {
                 color: "whitesmoke",
               }}
               onClick={() => handleOpen("signup")}
-              
+              startIcon={<EmojiEmotionsIcon />}
+
             >
               Sign Up
             </Button>

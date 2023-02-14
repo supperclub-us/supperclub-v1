@@ -65,6 +65,11 @@ const SignIn = ({handleOpen}) => {
                 variant="contained" 
                 color="primary"
                 startIcon={<LoginIcon />}
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
               >
                 Log in
               </Button>
