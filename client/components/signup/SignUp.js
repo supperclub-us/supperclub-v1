@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
 import { margin } from "@mui/system";
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const SignUp = ({handleOpen}) => {
   const [role, setRole] = useState("");
@@ -144,7 +145,17 @@ const SignUp = ({handleOpen}) => {
           />
 
           <div>
-            <Button type="submit" variant="contained" color="primary">
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary"
+              sx={{
+                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                backgroundColor: "#EB5757",
+                color: "whitesmoke",
+              }}
+              startIcon={<EmojiEmotionsIcon />}
+            >
               Sign Up
             </Button>
           </div>

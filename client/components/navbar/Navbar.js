@@ -4,9 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../auth/authSlice";
 import { Button, Typography, Modal, Box } from "@mui/material";
 import "./navbar.css";
-import ClearIcon from "@mui/icons-material/Clear";
-
+import ClearIcon from '@mui/icons-material/Clear'
+import LogoutIcon from '@mui/icons-material/Logout';
 import { SignUp, Login } from "../index";
+import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import HomeIcon from '@mui/icons-material/Home';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -59,6 +64,17 @@ const Navbar = () => {
 
   // Determine the opacity based on the scroll position
   const opacity = Math.max(0, 1 - (scrollTop-50) / 100);
+  const handleNavToProfile = () => {
+    if (user.role === "CHEF") {
+      navigate(`/users/chefprofile/${user.id}`);
+    } else {
+      navigate(`/users/memberprofile/${user.id}`);
+    }
+  };
+
+  const handleNavToChefs = () => {
+    navigate(`/chefs`);
+  }
 
   const logoutAndRedirectHome = () => {
     dispatch(logout());
@@ -99,37 +115,45 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-right">
-        <Link className="navbar-link-spacing" to="/home">
+
+        <Button
+          type="button"
+          onClick={() => navigate("/home")}
+          startIcon={<HomeIcon />}
+          sx={{ marginRight: "25px", color: "whitesmoke" }}
+
+        >
           Home
-        </Link>
-        {user.role === "CHEF" ? null : (
-          <Link className="navbar-link-spacing" to="/chefs">
-            Chefs
-          </Link>
-        )}
+        </Button>
+        {user.role === "CHEF" ? null : 
+            <Button
+              type="button"
+              onClick={handleNavToChefs}
+              startIcon={<RestaurantIcon />}
+              sx={{ marginRight: "25px", color: "whitesmoke" }}
+
+            >
+              Chefs
+            </Button> 
+            
+        }
 
         {isLoggedIn ? (
           <>
-            {user.role === "CHEF" ? (
-              <Link
-                className="navbar-link-spacing"
-                to={`/users/chefprofile/${user.id}`}
-              >
-                Profile
-              </Link>
-            ) : (
-              <Link
-                className="navbar-link-spacing"
-                to={`/users/memberprofile/${user.id}`}
-              >
-                Profile
-              </Link>
-            )}
-
             <Button
               type="button"
-              onClick={logoutAndRedirectHome}
+              onClick={handleNavToProfile}
+              startIcon={<AccountCircleIcon />}
               sx={{ marginRight: "25px", color: "whitesmoke" }}
+            >
+              Profile
+            </Button>
+
+            <Button 
+              type="button" 
+              onClick={logoutAndRedirectHome} 
+              sx={{ marginRight: "25px", color: "whitesmoke" }}
+              startIcon={<LogoutIcon />}
             >
               Log out
             </Button>
@@ -144,12 +168,16 @@ const Navbar = () => {
                 color: "whitesmoke",
               }}
               onClick={() => handleOpen("signup")}
+              startIcon={<EmojiEmotionsIcon />}
+
             >
               Sign Up
             </Button>
             <Button
               sx={{ marginRight: "25px", color: "whitesmoke" }}
               onClick={() => handleOpen("login")}
+              startIcon={<LoginIcon />}
+
             >
               Log in
             </Button>

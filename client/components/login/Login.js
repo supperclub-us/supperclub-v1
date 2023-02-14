@@ -3,6 +3,7 @@ import { Button, TextField, Typography, Snackbar, Alert } from '@mui/material';
 import { authenticate } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import LoginIcon from '@mui/icons-material/Login';
 
 
 
@@ -59,7 +60,17 @@ const SignIn = ({handleOpen}) => {
             />
 
             <div>
-              <Button type="submit" variant="contained" color="primary">
+              <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary"
+                startIcon={<LoginIcon />}
+                sx={{
+                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+                  backgroundColor: "#EB5757",
+                  color: "whitesmoke",
+                }}
+              >
                 Log in
               </Button>
             </div>
