@@ -153,13 +153,18 @@ const SignUp = ({handleOpen}) => {
 
         
         {/* need to make error handling for the snackbar, as it stands this message will pop up with all log in attempts even unauth or wrong inputs */}
-        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+        <Snackbar 
+          open={open} 
+          autoHideDuration={10000} 
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
           <Alert
             onClose={handleClose}
             severity="success"
             sx={{ width: "100%" }}
           >
-            You successfully signed up!
+            You signed up!
           </Alert>
         </Snackbar>
       </form>
