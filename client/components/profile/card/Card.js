@@ -25,6 +25,7 @@ export const Card = ({ booking }) => {
       <div className="card-booking-title">
         <h2>{booking.title}</h2>
       </div>
+      <h4>{booking.city}, {booking.state}</h4>
       {user.role === "CHEF" && (
         <div>
           <h4>
