@@ -9,6 +9,8 @@ import "./profile.css";
 import EditIcon from "@mui/icons-material/Edit";
 import { Card } from "./card/Card";
 import dayjs from "dayjs";
+import AddIcon from '@mui/icons-material/Add';
+
 
 const ChefProfile = () => {
   const dispatch = useDispatch();
@@ -84,6 +86,8 @@ const ChefProfile = () => {
             backgroundColor: "#EB5757",
             color: "whitesmoke",
           }}
+          startIcon={<AddIcon />}
+
         >
           Create Event
         </Button>

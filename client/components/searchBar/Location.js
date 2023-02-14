@@ -13,13 +13,19 @@ const Location = ({ handleChange, handleSubmit, value, setValue, suggestions, se
             sx={{display: "flex", m: "1em"}}
         >
             <IconButton
-              type="button" sx={{ p: '10px' }} 
+              type="button" 
               onClick={ () => {
                   if (value.length > 0) {
                   handleSubmit();
                 }}
               }
+              
               color={'primary'}
+
+              sx={{
+                p: '10px',
+                color: "#EB5757",
+              }}
             >
             <SearchIcon />
             </IconButton>
