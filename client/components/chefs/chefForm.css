@@ -81,15 +81,14 @@
 }
 
 .chefs-card-bookingcards-container {
-    max-width: 100%;
-    display: flex;
-    
-    overflow-x: auto;
-    border-top: 1px solid rgb(208, 208, 208);
-    padding: 1em;
-    margin: auto;
-   justify-content: center;
-   object-fit: covered;
+  max-width: 100%;
+  display: flex;
+  overflow-x: auto;
+  border-top: 1px solid rgb(208, 208, 208);
+  padding: 1em;
+  margin: auto;
+  justify-content: center;
+  object-fit: covered;
 }
 
 .common-button {
@@ -172,7 +171,7 @@ p1 {
   flex-direction: column;
   /* gap: 1.0em; */
   width: 242px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .chefForm-suggested-donation {

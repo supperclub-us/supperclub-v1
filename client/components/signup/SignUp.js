@@ -55,10 +55,10 @@ const SignUp = ({handleOpen}) => {
   };
 
   return (
-    <div className="signup-form-container">
+    <div>
       <form id="signup-signup-form" onSubmit={handleSubmit}>
-        <Typography id="signup-form-title" variant="h6" component="h2">
-          Sign-Up Form
+        <Typography id="signup-form-title" variant="h6">
+          Sign Up Form
         </Typography>
 
           <div className="signup-role-selection">
@@ -78,7 +78,6 @@ const SignUp = ({handleOpen}) => {
 
         <div className="signup-first-name-and-last-name-container">
           <TextField
-            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setFirstName(e.target.value)}
             name="firstName"
             value={firstName}
@@ -88,7 +87,6 @@ const SignUp = ({handleOpen}) => {
             required
           />
           <TextField
-            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setLastName(e.target.value)}
             name="lastName"
             value={lastName}
@@ -101,7 +99,6 @@ const SignUp = ({handleOpen}) => {
 
         <div className="signup-bio-container">
           <TextField
-            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setBio(e.target.value)}
             name="bio"
             multiline
@@ -114,7 +111,6 @@ const SignUp = ({handleOpen}) => {
         </div>
 
           <TextField
-            // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setMobileNumber(e.target.value)}
             name="mobileNumber"
             value={mobileNumber}
@@ -124,7 +120,6 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
-            // className="info" style={{ marginTop: '30px' }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
@@ -133,7 +128,6 @@ const SignUp = ({handleOpen}) => {
           />
 
           <TextField
-          // className="in"  style={{ marginTop: '10px' }}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
