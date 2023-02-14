@@ -17,13 +17,34 @@
 
 
 .map-marker-popup {
-  background: transparent;
+  /* background: #16202c; */
+  /* color: #f2f2f2; */
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.map-marker-popup > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+/* .mapboxgl-popup-close-button {
+  width: 30px;
+  height: 30px;
   border: none;
   outline: none;
   cursor: pointer;
 }
+
+.mapboxgl-popup-close-button:before {
+  font-size: 30px;
+} */
+
 
 .map-container {
   display: flex;
