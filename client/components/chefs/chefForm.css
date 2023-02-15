@@ -17,6 +17,7 @@
   gap: 1em;
   min-width: 300px;
   width: 500px;
+  /* border: 2px solid rgb(0, 26, 128) */
 }
 
 .chefForm-title-of-event {
@@ -82,7 +83,6 @@
 .chefs-card-bookingcards-container {
   max-width: 100%;
   display: flex;
-
   overflow-x: auto;
   border-top: 1px solid rgb(208, 208, 208);
   padding: 1em;
@@ -106,10 +106,6 @@
 p {
   margin: auto;
   text-align: center;
-}
-
-p1 {
-  margin: auto;
 }
 
 .chefForm-max-seats {

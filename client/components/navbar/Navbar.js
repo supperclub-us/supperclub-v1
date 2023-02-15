@@ -64,6 +64,7 @@ const Navbar = () => {
 
   // Determine the opacity based on the scroll position
   const opacity = Math.max(0, 1 - (scrollTop-50) / 100);
+
   const handleNavToProfile = () => {
     if (user.role === "CHEF") {
       navigate(`/users/chefprofile/${user.id}`);
@@ -92,7 +93,7 @@ const Navbar = () => {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-    borderRadius: 7,
+    borderRadius: "12px",
   };
 
   return (
@@ -200,7 +201,8 @@ const Navbar = () => {
                 top: "10px",
                 right: "10px",
               }}
-            ></Button>
+            >
+            </Button>
           </Box>
         </Modal>
       </div>
