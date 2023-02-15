@@ -36,6 +36,7 @@
     display: flex;
     padding: 20px;
     gap: 4px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.709);
     /* border-radius: 25px; */
     justify-content: center;
     align-items: center;
@@ -115,10 +116,11 @@
     color: #eb5757ef
 }
 
-hr {
+.memberBooking-experience-hr {
     border-bottom: 2px solid #1b202cc0;
     border-radius: 4px;
     margin-bottom: 3em;
+    width: 100%;
 }
 
 .menu-title {

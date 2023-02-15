@@ -370,9 +370,11 @@ a:active  { color: #DFE2EA; text-decoration: none; }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #c64848;
+  background: #acacac;
   border-radius: 12px;
 }
+
+
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {

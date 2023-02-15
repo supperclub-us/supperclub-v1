@@ -243,7 +243,6 @@ const MemberBooking = ({ user }) => {
             </div>
           </div>
           <div className="memberBooking-experience-menu">
-            <hr></hr>
             <div className="menu-title">
               <p
                 style={{
