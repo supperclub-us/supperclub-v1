@@ -249,11 +249,12 @@ const Map = ({ user }) => {
                 longitude={selectedMarker.longitude}
                 latitude={selectedMarker.latitude}
                 closeButton={true}
+                closeButtonSize={20}
                 closeOnClick={false}
                 onClose={() => setSelectedMarker(null)}
               >
                 <div className="map-marker-popup" onClick={() => handleClick(selectedMarker.id)} >
-                  {/* <img src={selectedMarker.imageUrl}/> */}
+                  <img src={selectedMarker.imageUrl}/>
                   <h3>Title: {selectedMarker.title}</h3>
                   {/* <p>{selectedMarker.menu}</p> */}
                   <p>

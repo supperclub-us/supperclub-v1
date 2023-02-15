@@ -69,12 +69,11 @@ const ChefProfile = () => {
     <>
       <div className="links">
         <h1>
-          Welcome
+          Welcome,
           {currentChef.role === "CHEF"
             ? ` Chef ${currentChef.firstName}`
-            : currentChef.firstName}
+            : currentChef.firstName}!
         </h1>
-        <h3> Your Dashboard</h3>
         <hr />
         <Button
           variant="contained"
@@ -85,23 +84,24 @@ const ChefProfile = () => {
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
+            mt: 2.5
           }}
           startIcon={<AddIcon />}
-
         >
           Create Event
         </Button>
-        <h2>YOUR {futureEvents ? 'UPCOMING' : 'PREVIOUS'} EVENTS</h2>
-        <Button 
+        <h1>Your {futureEvents ? 'Upcoming' : 'Previous'} Events</h1>
+        <Button
           sx={{
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
+            mb: 2.49
           }}
-          variant="contained" 
-          size="small" 
+          variant="contained"
+          size="small"
           onClick={handleClick}
-        > View {futureEvents ? 'Previous': 'Upcoming'} Events 
+        > View {futureEvents ? 'Previous': 'Upcoming'} Events
         </Button>
         <div className="profileContainer">
           {futureEvents ? futureChefBookings && futureChefBookings.length ?
