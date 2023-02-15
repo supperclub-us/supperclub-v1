@@ -8,6 +8,7 @@ import {
   fetchSingleBookingAsync,
   selectSingleBooking,
 } from "../../slices/singleBookingSlice";
+import "../profile.css"
 
 export const Card = ({ booking }) => {
   const navigate = useNavigate();
@@ -20,15 +21,18 @@ export const Card = ({ booking }) => {
 
   return (
     <div key={booking.id} className="cards">
-      <h5>{booking.title}</h5>
       <img className="food-image" src={booking.imageUrl} />
+      <div className="card-booking-title">
+        <h2>{booking.title}</h2>
+      </div>
+      <h4>{booking.city}, {booking.state}</h4>
       {user.role === "CHEF" && (
         <div>
-          <p>
+          <h4>
             {" "}
             Seats Reserved: {booking.maxSeats - booking.openSeats} /{" "}
             {booking.maxSeats}
-          </p>
+          </h4>
 
           <Button
             variant="contained"
@@ -48,13 +52,14 @@ export const Card = ({ booking }) => {
       )}
 
       {user.role === "MEMBER" && (
-        <Button 
-          onClick={handleClick} 
+        <Button
+          onClick={handleClick}
           variant="contained"
           sx={{
             "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
+            mb: 4
           }}
         >
           View Details
@@ -75,7 +80,7 @@ export const ModalCard = ({ booking }) => {
     <div key={booking.id} className="modal-cards">
       <h5>{booking.title}</h5>
       <p style={{ padding: "10px" }}> Donation ${booking.suggestedDonation}</p>
-      <div style={{padding: "3px"}}>
+      <div style={{ padding: "3px" }}>
         <img
           className="modal-cards-image"
           src={booking.imageUrl}
@@ -90,8 +95,8 @@ export const ModalCard = ({ booking }) => {
         End of Event Time: {booking.endDateTime}{" "}
       </p>
       <p style={{ padding: "10px" }}>{booking.openSeats} Seats Left </p>
-      <Button 
-        onClick={handleClick} 
+      <Button
+        onClick={handleClick}
         variant="contained"
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },

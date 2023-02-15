@@ -149,6 +149,7 @@ const ChefForm = () => {
       ) : (
         <>
           <div className="chefEvent-container">
+            <div className="chefForm-form">
             <Typography variant="h5">Create Your Supper Club Event!</Typography>
             <Box
               component="form"
@@ -359,7 +360,6 @@ const ChefForm = () => {
                 You successfully created an event!
               </Alert>
             </Snackbar>
-
             <Snackbar
                 open={openUploadConfirm}
                 autoHideDuration={2000}
@@ -373,7 +373,7 @@ const ChefForm = () => {
                   File Uploaded!
                 </Alert>
               </Snackbar>
-
+            </div>
           </div>
         </>
       )}

@@ -92,6 +92,7 @@ const Chefs = () => {
                             fontSize: "11px",
                             height: "65px",
                             width: "140px",
+                            marginRight: "15px"
                           }}
                           sx={{
                             "&:hover": {
