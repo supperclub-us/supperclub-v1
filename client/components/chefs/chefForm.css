@@ -92,10 +92,10 @@
 }
 
 .common-button {
-    height: 80px;
-    width: 150px;
-    font-size: 50px;
-    margin: auto;
+  height: 80px;
+  width: 150px;
+  font-size: 50px;
+  margin: auto;
 }
 
 .chefName {
@@ -106,10 +106,6 @@
 p {
   margin: auto;
   text-align: center;
-}
-
-p1 {
-  margin: auto;
 }
 
 .chefForm-max-seats {
@@ -189,11 +185,11 @@ p1 {
 }
 
 .modalCard {
-	width: 500px;
-	height: 400px;
-	margin: 10px;
-	padding: 10px;
-    border: none;
+  width: 500px;
+  height: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: none;
 
 }
 
@@ -208,4 +204,16 @@ p1 {
   padding-top: 15px;
   padding-bottom: 15px;
   border-radius: 4px;
+}
+
+.chefForm-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: whitesmoke;
+  border-radius: 12px;
+  box-shadow: 5px 5px 17px -5px rgba(0, 0, 0, 0.75);
+  border: 1px solid #1b202c;
+  padding: 20px;
 }
