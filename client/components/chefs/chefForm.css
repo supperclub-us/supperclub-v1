@@ -58,12 +58,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #252b3d;
 }
 
 .chefs-page-banner {
   display: flex;
   flex-direction: column;
-
+  color: #DFE2EA;
   align-items: center;
 
   padding: 2em;
@@ -73,11 +74,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  background-color: whitesmoke;
   border: 1px solid black;
   border-radius: 1em;
   margin: 1em;
   padding: 1em;
+  margin-bottom: 50px;
+  
 }
 
 .chefs-card-bookingcards-container {
@@ -89,6 +92,8 @@
   margin: auto;
   justify-content: center;
   object-fit: covered;
+  margin-bottom: 1px;
+  
 }
 
 .common-button {
@@ -217,3 +222,4 @@ p {
   border: 1px solid #1b202c;
   padding: 20px;
 }
+
