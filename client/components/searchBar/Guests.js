@@ -13,7 +13,7 @@ const Guests = ({ numGuests, handleGuests }) => {
         value={numGuests}
         label="Guests"
         onChange={(e) => handleGuests(e)}
-        sx={{ width: "25ch" }}
+        sx={{ width: "25ch", background: "white" }}
         placeholder="Guests"
       >
         {guestRange.map(num => (

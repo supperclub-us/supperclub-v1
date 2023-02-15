@@ -4,8 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const viewportSlice = createSlice({
   name: "viewport",
   initialState: {
-    width: "50%",
-    height: "50%",
+    width: "60%",
+    // height: "50%",
     float: "right",
     latitude: 40.7128,
     longitude: -74.0060,

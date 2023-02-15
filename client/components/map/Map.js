@@ -14,7 +14,6 @@ import { setReduxViewport } from "../slices/viewportSlice";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
-
 const Map = ({ user }) => {
   // states for the selected markers and their popups
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -25,9 +24,13 @@ const Map = ({ user }) => {
 
   // REDUX SLICE CALLS
   const reduxViewport = useSelector((state) => state.viewport);
-  const reduxNumGuests = useSelector((state) => state.searchBarFilter.numGuests)
-  const reduxStartDate = useSelector((state) => state.searchBarFilter.startDate);
-  const reduxEndDate = useSelector((state) => state.searchBarFilter.endDate)
+  const reduxNumGuests = useSelector(
+    (state) => state.searchBarFilter.numGuests
+  );
+  const reduxStartDate = useSelector(
+    (state) => state.searchBarFilter.startDate
+  );
+  const reduxEndDate = useSelector((state) => state.searchBarFilter.endDate);
 
   const [numGuests, setNumGuests] = useState(reduxNumGuests);
   const [startDate, setStartDate] = useState(dayjs());
@@ -38,7 +41,6 @@ const Map = ({ user }) => {
   const [filterStartDate, setFilterStartDate] = useState(false);
   const [filterEndDate, setFilterEndDate] = useState(false);
 
-
   // useState for the bounds which will be how we filter out what is rendered in the sidebar
   const [bounds, setBounds] = useState({
     latitude: [-42.1, -43.26],
@@ -47,13 +49,12 @@ const Map = ({ user }) => {
 
   const [viewport, setViewport] = useState(reduxViewport);
 
-  const rawDate = dayjs().format('MM/DD/YYYY hh:mmA')
+  const rawDate = dayjs().format("MM/DD/YYYY hh:mmA");
 
-  const currentDateTime = rawDate.split(' ');
-  const currentDate = currentDateTime[0].split('/');
+  const currentDateTime = rawDate.split(" ");
+  const currentDate = currentDateTime[0].split("/");
 
   const intCurrentDate = currentDate.map((element) => parseInt(element));
-
 
   //FILTER LOGIC
   // selecting all bookings that have been created
@@ -62,18 +63,20 @@ const Map = ({ user }) => {
   // get the current date right now
 
   const filteredBookings = bookings.filter((booking) => {
-    const bookingBooking = booking.startDateTime;
+    // const bookingBooking = booking.startDateTime;
 
-    const bookingDateTime = booking.startDateTime.split(' ');
-    const bookingDate = bookingDateTime[0].split('/');
+    const bookingDateTime = booking.startDateTime.split(" ");
+    const bookingDate = bookingDateTime[0].split("/");
 
     const intBookingDate = bookingDate.map((element) => parseInt(element));
 
-
-
     // filter from current date onward
     // return currentDate and onwards
-    if (dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))) {
+    if (
+      dayjs().isBefore(
+        dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`)
+      )
+    ) {
       // logic to filter map bounds on start/end dates
       if (filterNumGuests && filterStartDate && filterEndDate) {
         return (
@@ -81,7 +84,6 @@ const Map = ({ user }) => {
           booking.latitude <= bounds.latitude[1] &&
           booking.longitude >= bounds.longitude[0] &&
           booking.longitude <= bounds.longitude[1] &&
-
           // year
           reduxStartDate[2] == intBookingDate[2] &&
           // edgeCase:booking near the end of the year
@@ -91,10 +93,8 @@ const Map = ({ user }) => {
           // day
           reduxStartDate[1] <= intBookingDate[1] &&
           reduxEndDate[1] >= intBookingDate[1] &&
-
           booking.openSeats >= reduxNumGuests
-
-        )
+        );
       }
 
       if (filterStartDate && filterEndDate) {
@@ -112,7 +112,7 @@ const Map = ({ user }) => {
           // day
           reduxStartDate[1] <= intBookingDate[1] &&
           reduxEndDate[1] >= intBookingDate[1]
-        )
+        );
       }
 
       if (filterNumGuests) {
@@ -122,7 +122,7 @@ const Map = ({ user }) => {
           booking.longitude >= bounds.longitude[0] &&
           booking.longitude <= bounds.longitude[1] &&
           booking.openSeats >= reduxNumGuests
-        )
+        );
       }
 
       return (
@@ -145,9 +145,7 @@ const Map = ({ user }) => {
     }
   }, [dispatch, viewport, handleRender, hasFetchedBookings]);
 
-
   const handleMoveMap = (e) => {
-
     setViewport({
       ...viewport,
       latitude: e.viewState.latitude,
@@ -168,7 +166,6 @@ const Map = ({ user }) => {
   };
 
   const handleRender = (e) => {
-
     setBounds({
       latitude: [
         e.target.getBounds().getSouth(),
@@ -181,25 +178,49 @@ const Map = ({ user }) => {
     });
   };
 
-
   const handleGeo = (e) => {
     const userLat = e.coords.latitude;
     const userLng = e.coords.longitude;
-    dispatch(setReduxViewport({ ...reduxViewport, latitude: userLat, longitude: userLng }))
-    return [userLat, userLng]
-  }
+    dispatch(
+      setReduxViewport({
+        ...reduxViewport,
+        latitude: userLat,
+        longitude: userLng,
+      })
+    );
+    return [userLat, userLng];
+  };
 
   const handleClick = (markerId) => {
-    navigate(`/bookings/${markerId}`)
-  }
+    navigate(`/bookings/${markerId}`);
+  };
 
   return (
     // setting up the mapbox container
     <div className="map-page-container">
-      <MapSearchBar viewport={viewport} setViewport={setViewport} numGuests={numGuests} setNumGuests={setNumGuests} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} setFilterStartDate={setFilterStartDate} setFilterEndDate={setFilterEndDate} setFilterNumGuests={setFilterNumGuests} filterStartDate={filterStartDate} filterEndDate={filterEndDate} />
+      <MapSearchBar
+        viewport={viewport}
+        setViewport={setViewport}
+        numGuests={numGuests}
+        setNumGuests={setNumGuests}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        setFilterStartDate={setFilterStartDate}
+        setFilterEndDate={setFilterEndDate}
+        setFilterNumGuests={setFilterNumGuests}
+        filterStartDate={filterStartDate}
+        filterEndDate={filterEndDate}
+      />
 
       <div className="map-container">
-        <SidebarList user={user} bounds={bounds} selectedMarker={selectedMarker} filteredBookings={filteredBookings} />
+        <SidebarList
+          user={user}
+          bounds={bounds}
+          selectedMarker={selectedMarker}
+          filteredBookings={filteredBookings}
+        />
 
         <div className="map-map-container">
           {/* React Map Component to Access the Map */}
@@ -215,7 +236,6 @@ const Map = ({ user }) => {
             <NavigationControl />
             <GeolocateControl onGeolocate={handleGeo} />
 
-
             {/* If there are bookings then we want to render the markers on the map */}
             {filteredBookings &&
               filteredBookings.map((booking) => (
@@ -225,12 +245,15 @@ const Map = ({ user }) => {
                   latitude={booking.latitude}
                 >
                   <button
+                    id="marker-btn"
                     className="map-marker-button"
                     onClick={(e) => {
                       e.preventDefault();
                       if (selectedMarker === booking) {
                         setSelectedMarker(null);
-                      } else setSelectedMarker(booking);
+                      } else {
+                        setSelectedMarker(booking);
+                      }
                     }}
                   >
                     <img
@@ -246,20 +269,27 @@ const Map = ({ user }) => {
             {selectedMarker ? (
               <Popup
                 key={selectedMarker.id}
+                dynamicPosition={true}
                 longitude={selectedMarker.longitude}
                 latitude={selectedMarker.latitude}
                 closeButton={true}
                 closeButtonSize={20}
                 closeOnClick={false}
                 onClose={() => setSelectedMarker(null)}
+                offsetTop={20}
+                offsetLeft={20}
               >
-                <div className="map-marker-popup" onClick={() => handleClick(selectedMarker.id)} >
-                  <img src={selectedMarker.imageUrl}/>
-                  <h3>Title: {selectedMarker.title}</h3>
-                  {/* <p>{selectedMarker.menu}</p> */}
+                <div
+                  className="map-marker-popup"
+                  onClick={() => handleClick(selectedMarker.id)}
+                >
+                  <img src={selectedMarker.imageUrl} />
+                  <p className="map-marker-popup-title">{selectedMarker.title}</p>
                   <p>
                     {selectedMarker.city}, {selectedMarker.state}
                   </p>
+                  <p>${selectedMarker.suggestedDonation} / guest</p>
+                  {selectedMarker.openSeats < 1 && <p style={{color: "#EB5757"}}> SOLD OUT </p>}
                 </div>
               </Popup>
             ) : null}

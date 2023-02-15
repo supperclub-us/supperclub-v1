@@ -219,7 +219,7 @@ const EditChefForm = () => {
           })
         );
       }
-    } catch (err) {}
+    } catch (err) { }
   };
   // useEffect ---------------------------------------------------------
 
@@ -250,292 +250,293 @@ const EditChefForm = () => {
       ) : (
         <>
           <div className="chefEvent-container">
-            <Typography variant="h5">Edit Your Supper Club Event!</Typography>
-            <Box component="form" className="chefEvent-form">
-              <div className="chefForm-title-of-event">
-                <TextField
-                  label="Title of Event"
-                  onChange={(e) => setTitle(e.target.value)}
-                  type="text"
-                  value={title}
-                  fullWidth
-                />
-              </div>
-              <div className="cuisineCategory-and-donation">
-                <div className="chefEvent-cuisineCategory">
-                  <FormControl>
-                    <InputLabel id="demo-simple-select-label">
-                      Cuisine
-                    </InputLabel>
-                    <Select
-                      onChange={(e) => setCuisineId(Number(e.target.value))}
-                      value={cuisineId}
-                      label="cuisine"
-                    >
-                      <MenuItem value="1">Chinese</MenuItem>
-                      <MenuItem value="2">Japanese</MenuItem>
-                      <MenuItem value="3">Indian</MenuItem>
-                      <MenuItem value="4">French</MenuItem>
-                      <MenuItem value="5">Thai</MenuItem>
-                      <MenuItem value="6">Nigerian</MenuItem>
-                      <MenuItem value="7">Brazilian</MenuItem>
-                      <MenuItem value="8">Mexican</MenuItem>
-                      <MenuItem value="9">Italian</MenuItem>
-                      <MenuItem value="10">Fusion</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="chefForm-suggested-donation">
-                  <FormControl>
-                    <InputLabel htmlFor="outlined-adornment-amount">
-                      Donation
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-amount"
-                      startAdornment={
-                        <InputAdornment position="start">$</InputAdornment>
-                      }
-                      label="Donation"
-                      value={suggestedDonation}
-                      onChange={(e) => setSuggestedDonation(e.target.value)}
-                    />
-                  </FormControl>
-                </div>
-              </div>
-
-              <Box
-                className="chefForm-menu-and-description"
-                component="div"
-                sx={{
-                  "& .MuiTextField-root": { width: "100%" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Menu"
-                  multiline
-                  rows={20}
-                  value={menu}
-                  onChange={(e) => setMenu(e.target.value)}
-                />
-              </Box>
-
-              <div className="chef-form-upload-image-container">
-                <img src={imageUrl} style={{
-                    height: "213px",
-                    border: "1px solid rgb(205, 205, 205)",
-                    borderRadius: "5px",
-                  }}/>
-                <Upload setImageUrl={setImageUrl} setOpenUploadConfirm={setOpenUploadConfirm} />
-              </div>
-
-              <div className="chefForm-event-date-and-time">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker
-                    renderInput={(props) => <TextField {...props} />}
-                    label="Start"
-                    value={startValue}
-                    onChange={(newValue) => {
-                      setStartValue(newValue);
-                    }}
-                    className="chefForm-event-start-date"
-                    disablePast
-                  />
-                </LocalizationProvider>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker
-                    renderInput={(props) => <TextField {...props} />}
-                    label="End"
-                    value={endValue}
-                    onChange={(newValue) => {
-                      setEndValue(newValue);
-                    }}
-                    className="chefForm-event-end-date"
-                    disablePast
-                  />
-                </LocalizationProvider>
-              </div>
-
-              <div className="chefForm-max-open-seats-container">
-                <div className="chefForm-open-seats">
+            <div className="editChefForm-form">
+              <Typography variant="h5">Edit Your Supper Club Event!</Typography>
+              <Box component="form" className="chefEvent-form">
+                <div className="chefForm-title-of-event">
                   <TextField
-                    label="Open Seats"
-                    onChange={(e) => setOpenSeats(e.target.value)}
-                    type="number"
-                    value={openSeats}
-                    InputProps={{
-                      inputProps: { min: 0 },
-                    }}
-                  />
-                </div>
-                <div className="chefForm-max-seats">
-                  <TextField
-                    label="Max Seats"
-                    onChange={(e) => setMax(e.target.value)}
-                    type="number"
-                    value={max}
-                    InputProps={{
-                      inputProps: { min: 0 },
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="chefForm-event-address-information">
-                <div className="chefForm-address1">
-                  <TextField
-                    onChange={(e) => setAddress1(e.target.value)}
+                    label="Title of Event"
+                    onChange={(e) => setTitle(e.target.value)}
                     type="text"
-                    value={address1}
-                    label="Address 1"
+                    value={title}
                     fullWidth
                   />
                 </div>
-                <div className="chefForm-address2">
-                  <TextField
-                    onChange={(e) => setAddress2(e.target.value)}
-                    type="text"
-                    value={address2}
-                    label="Address 2"
-                    fullWidth
-                  />
-                </div>
-                <div className="chefForm-city">
-                  <TextField
-                    onChange={(e) => setCity(e.target.value)}
-                    type="text"
-                    value={city}
-                    label="City"
-                    fullWidth
-                  />
-                </div>
-                <div className="chefForm-state-and-zipcode">
-                  <div className="chefForm-state">
-                    <FormControl fullWidth>
-                      <InputLabel>State</InputLabel>
+                <div className="cuisineCategory-and-donation">
+                  <div className="chefEvent-cuisineCategory">
+                    <FormControl>
+                      <InputLabel id="demo-simple-select-label">
+                        Cuisine
+                      </InputLabel>
                       <Select
-                        onChange={(e) => setState(e.target.value)}
-                        label="State"
-                        value={state}
+                        onChange={(e) => setCuisineId(Number(e.target.value))}
+                        value={cuisineId}
+                        label="cuisine"
                       >
-                        {states.map((state) => (
-                          <MenuItem key={state} value={state}>
-                            {state}
-                          </MenuItem>
-                        ))}
+                        <MenuItem value="1">Chinese</MenuItem>
+                        <MenuItem value="2">Japanese</MenuItem>
+                        <MenuItem value="3">Indian</MenuItem>
+                        <MenuItem value="4">French</MenuItem>
+                        <MenuItem value="5">Thai</MenuItem>
+                        <MenuItem value="6">Nigerian</MenuItem>
+                        <MenuItem value="7">Brazilian</MenuItem>
+                        <MenuItem value="8">Mexican</MenuItem>
+                        <MenuItem value="9">Italian</MenuItem>
+                        <MenuItem value="10">Fusion</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="chefForm-zipcode">
+                  <div className="chefForm-suggested-donation">
+                    <FormControl>
+                      <InputLabel htmlFor="outlined-adornment-amount">
+                        Donation
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-amount"
+                        startAdornment={
+                          <InputAdornment position="start">$</InputAdornment>
+                        }
+                        label="Donation"
+                        value={suggestedDonation}
+                        onChange={(e) => setSuggestedDonation(e.target.value)}
+                      />
+                    </FormControl>
+                  </div>
+                </div>
+
+                <Box
+                  className="chefForm-menu-and-description"
+                  component="div"
+                  sx={{
+                    "& .MuiTextField-root": { width: "100%" },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Menu"
+                    multiline
+                    rows={20}
+                    value={menu}
+                    onChange={(e) => setMenu(e.target.value)}
+                  />
+                </Box>
+
+                <div className="chef-form-upload-image-container">
+                  <img src={imageUrl} style={{
+                    height: "213px",
+                    border: "1px solid rgb(205, 205, 205)",
+                    borderRadius: "5px",
+                  }} />
+                  <Upload setImageUrl={setImageUrl} setOpenUploadConfirm={setOpenUploadConfirm} />
+                </div>
+
+                <div className="chefForm-event-date-and-time">
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                      renderInput={(props) => <TextField {...props} />}
+                      label="Start"
+                      value={startValue}
+                      onChange={(newValue) => {
+                        setStartValue(newValue);
+                      }}
+                      className="chefForm-event-start-date"
+                      disablePast
+                    />
+                  </LocalizationProvider>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateTimePicker
+                      renderInput={(props) => <TextField {...props} />}
+                      label="End"
+                      value={endValue}
+                      onChange={(newValue) => {
+                        setEndValue(newValue);
+                      }}
+                      className="chefForm-event-end-date"
+                      disablePast
+                    />
+                  </LocalizationProvider>
+                </div>
+
+                <div className="chefForm-max-open-seats-container">
+                  <div className="chefForm-open-seats">
                     <TextField
-                      onChange={(e) => setZip(e.target.value)}
-                      type="text"
-                      value={zip}
-                      label="Zip Code"
+                      label="Open Seats"
+                      onChange={(e) => setOpenSeats(e.target.value)}
+                      type="number"
+                      value={openSeats}
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
+                    />
+                  </div>
+                  <div className="chefForm-max-seats">
+                    <TextField
+                      label="Max Seats"
+                      onChange={(e) => setMax(e.target.value)}
+                      type="number"
+                      value={max}
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </div>
                 </div>
-              </div>
-            </Box>
-
-            <div className="editchefform-edit-and-delete-buttons-container">
-              <Button
-                className="chefForm-button-Edit"
-                onClick={() => handleSubmit()}
-                variant="contained"
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "#EB5757",
-                    color: "whitesmoke",
-                  },
-                  backgroundColor: "#EB5757",
-                  color: "whitesmoke",
-                  mt: 2,
-                }}
-                startIcon={<SaveIcon />}
-              >
-                Save Edit
-              </Button>
-
-              <Button
-                className="chefForm-button-remove"
-                onClick={handleWarning}
-                variant="contained"
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "#EB5757",
-                    color: "whitesmoke",
-                  },
-                  backgroundColor: "#EB5757",
-                  color: "whitesmoke",
-                  mt: 2,
-                }}
-                startIcon={<DeleteIcon />}
-              >
-                Delete
-              </Button>
-
-              <Snackbar
-                open={openEditConfirm}
-                autoHideDuration={10000}
-                onClose={handleSnackCloseEdit}
-              >
-                <Alert
-                  onClose={handleSnackCloseEdit}
-                  severity="success"
-                  sx={{ width: "100%" }}
-                >
-                  You successfully edited an event!
-                </Alert>
-              </Snackbar>
-
-              <Snackbar
-                open={openWarningConfirm}
-                autoHideDuration={10000}
-                onClose={handleSnackCloseWarning}
-              >
-                <Alert
-                  onClose={handleSnackCloseWarning}
-                  severity="warning"
-                  sx={{ width: "100%" }}
-                  action={
-                    <div>
-                      <Button
-                        color="inherit"
-                        size="small"
-                        onClick={handleDelete}
-                      >
-                        DELETE
-                      </Button>
-                      <Button
-                        color="inherit"
-                        size="small"
-                        onClick={handleSnackCloseWarning}
-                      >
-                        CANCEL
-                      </Button>
+                <div className="chefForm-event-address-information">
+                  <div className="chefForm-address1">
+                    <TextField
+                      onChange={(e) => setAddress1(e.target.value)}
+                      type="text"
+                      value={address1}
+                      label="Address 1"
+                      fullWidth
+                    />
+                  </div>
+                  <div className="chefForm-address2">
+                    <TextField
+                      onChange={(e) => setAddress2(e.target.value)}
+                      type="text"
+                      value={address2}
+                      label="Address 2"
+                      fullWidth
+                    />
+                  </div>
+                  <div className="chefForm-city">
+                    <TextField
+                      onChange={(e) => setCity(e.target.value)}
+                      type="text"
+                      value={city}
+                      label="City"
+                      fullWidth
+                    />
+                  </div>
+                  <div className="chefForm-state-and-zipcode">
+                    <div className="chefForm-state">
+                      <FormControl fullWidth>
+                        <InputLabel>State</InputLabel>
+                        <Select
+                          onChange={(e) => setState(e.target.value)}
+                          label="State"
+                          value={state}
+                        >
+                          {states.map((state) => (
+                            <MenuItem key={state} value={state}>
+                              {state}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </div>
-                  }
-                >
-                  Are you sure you want to delete this event?
-                </Alert>
-              </Snackbar>
+                    <div className="chefForm-zipcode">
+                      <TextField
+                        onChange={(e) => setZip(e.target.value)}
+                        type="text"
+                        value={zip}
+                        label="Zip Code"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Box>
 
-              <Snackbar
-                open={openUploadConfirm}
-                autoHideDuration={2000}
-                onClose={handleSnackCloseUpload}
-              >
-                <Alert
+              <div className="editchefform-edit-and-delete-buttons-container">
+                <Button
+                  className="chefForm-button-Edit"
+                  onClick={() => handleSubmit()}
+                  variant="contained"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#EB5757",
+                      color: "whitesmoke",
+                    },
+                    backgroundColor: "#EB5757",
+                    color: "whitesmoke",
+                    mt: 2
+                  }}
+                  startIcon={<SaveIcon />}
+                >
+                  Save Edit
+                </Button>
+
+                <Button
+                  className="chefForm-button-remove"
+                  onClick={handleWarning}
+                  variant="contained"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#EB5757",
+                      color: "whitesmoke",
+                    },
+                    backgroundColor: "#EB5757",
+                    color: "whitesmoke",
+                    mt: 2
+                  }}
+                  startIcon={<DeleteIcon />}
+                >
+                  Delete
+                </Button>
+
+                <Snackbar
+                  open={openEditConfirm}
+                  autoHideDuration={10000}
+                  onClose={handleSnackCloseEdit}
+                >
+                  <Alert
+                    onClose={handleSnackCloseEdit}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    You successfully edited an event!
+                  </Alert>
+                </Snackbar>
+
+                <Snackbar
+                  open={openWarningConfirm}
+                  autoHideDuration={10000}
+                  onClose={handleSnackCloseWarning}
+                >
+                  <Alert
+                    onClose={handleSnackCloseWarning}
+                    severity="warning"
+                    sx={{ width: "100%" }}
+                    action={
+                      <div>
+                        <Button
+                          color="inherit"
+                          size="small"
+                          onClick={handleDelete}
+                        >
+                          DELETE
+                        </Button>
+                        <Button
+                          color="inherit"
+                          size="small"
+                          onClick={handleSnackCloseWarning}
+                        >
+                          CANCEL
+                        </Button>
+                      </div>
+                    }
+                  >
+                    Are you sure you want to delete this event?
+                  </Alert>
+                </Snackbar>
+
+                <Snackbar
+                  open={openUploadConfirm}
+                  autoHideDuration={2000}
                   onClose={handleSnackCloseUpload}
-                  severity="success"
-                  sx={{ width: "100%" }}
                 >
-                  File Uploaded!
-                </Alert>
-              </Snackbar>
-
+                  <Alert
+                    onClose={handleSnackCloseUpload}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    File Uploaded!
+                  </Alert>
+                </Snackbar>
+              </div>
             </div>
           </div>
         </>

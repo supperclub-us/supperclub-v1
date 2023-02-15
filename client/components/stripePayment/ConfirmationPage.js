@@ -22,7 +22,7 @@ const ConfirmationPage = () => {
     }, []);
 
   return (
-    <div style={{width: "100vw", display: "flex", flexDirection: "column", gap: "2rem", justifyContent: "center", alignContent: "center"}}>
+    <div style={{width: "100vw", display: "flex", flexDirection: "column", gap: "2rem", justifyContent: "center", alignContent: "center", flex: "1"}}>
         <h3 style={{fontSize: "4rem", fontWeight: "bold"}}> Thank you for booking with us, {user.firstName}! 🎉 </h3>
         <h3 style={{fontSize: "4rem", fontWeight: "bold"}}> Looking forward to sharing a wonderful meal 🍲  </h3>
         <p> Navigating back to your dashboard in {timeRemaining}</p>
