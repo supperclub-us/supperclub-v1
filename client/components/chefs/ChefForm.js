@@ -349,11 +349,7 @@ const ChefForm = () => {
                 "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
                 backgroundColor: "#EB5757",
                 color: "whitesmoke",
-<<<<<<< HEAD
-                m: 2
-=======
                 mt: 2,
->>>>>>> main
               }}
               startIcon={<AddIcon />}
             >
