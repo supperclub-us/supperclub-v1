@@ -27,6 +27,15 @@ import Payment from "../stripePayment/Payment";
 //css
 import "./memberBooking.css";
 
+// icons
+import {
+  LocalDining,
+  TableBar,
+  AccessTime,
+  AccessAlarm,
+  PeopleAlt,
+} from "@mui/icons-material";
+
 const ButtonStyle = {
   "&:hover": {
     backgroundColor: "#EB5757",
@@ -98,7 +107,7 @@ const MemberBooking = ({ user }) => {
           guests,
         });
       } else {
-        alert("To edit number of guests please select from the dropdown")
+        alert("To edit number of guests please select from the dropdown");
       }
     } else if (e.target.name === "bookBtn") {
       if (guests && !user.id) {
@@ -162,7 +171,7 @@ const MemberBooking = ({ user }) => {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            borderRadius: "25px",
+            borderRadius: "12px",
           }}
         >
           <div className="memberBooking-title">
@@ -190,7 +199,7 @@ const MemberBooking = ({ user }) => {
                 >
                   {booking?.chefBooking?.firstName}{" "}
                 </Link>
-                in {booking?.city}
+                in {booking?.city}, {booking?.state}
               </small>
             </p>
           </div>
@@ -198,27 +207,57 @@ const MemberBooking = ({ user }) => {
         <div className="memberBooking-experience">
           <div className="memberBooking-experience-shortDetails">
             <div className="memberBooking-experience-cuisine">
-              Cuisine: {booking?.cuisine?.category}
+              <LocalDining />
+              <p>Cuisine:</p>
+              <p className="memberBooking-experience-shortDetails-info">
+                {" "}
+                {booking?.cuisine?.category}
+              </p>
             </div>
             <div className="memberBooking-experience-guests">
-              {booking.openSeats === 1
-                ? `${booking.openSeats} seat left`
-                : `${booking.openSeats} seats left`}
+              <TableBar />
+              <p>Remaining:</p>
+              <p className="memberBooking-experience-shortDetails-info">
+                {booking.openSeats}
+              </p>
             </div>
             <div className="memberBooking-experience-guests">
-              {booking.maxSeats} guests maximum
+              <PeopleAlt />
+              <p>Total:</p>
+              <p className="memberBooking-experience-shortDetails-info">
+                {booking.maxSeats}
+              </p>
             </div>
-            <div className="memberBooking-experience-time">
-              <div className="memberBooking-experience-time-start">
-                Start: {booking.startDateTime}
-              </div>
-              <div className="memberBooking-experience-time-end">
-                End: {booking.endDateTime}
-              </div>
+            <div className="memberBooking-experience-time-start">
+              <AccessTime /> <p>Start:</p>
+              <p className="memberBooking-experience-shortDetails-info">
+                {" "}
+                {booking.startDateTime}
+              </p>
+            </div>
+            <div className="memberBooking-experience-time-end">
+              <AccessAlarm /> <p>End:</p>
+              <p className="memberBooking-experience-shortDetails-info">
+                {booking.endDateTime}
+              </p>
             </div>
           </div>
           <div className="memberBooking-experience-menu">
-            Menu: {booking.menu}
+            <div className="menu-title">
+              <p
+                style={{
+                  padding: "12px",
+                  backgroundColor: "#252b3dd3",
+                  borderRadius: "12px",
+                  boxShadow: "rgba(108, 108, 108, 0.704) 0px 6px 16px",
+                  width: "10rem",
+                }}
+              >
+                Menu
+              </p>
+            </div>{" "}
+            <p></p>
+            {booking.menu}
           </div>
         </div>
       </div>
@@ -226,7 +265,8 @@ const MemberBooking = ({ user }) => {
         className="memberBooking-form-container"
         sx={{
           backgroundColor: "white",
-          maxHeight: "600px",
+          maxHeight: "650px",
+          borderRadius: "12px",
         }}
       >
         {reservedSeats ? (

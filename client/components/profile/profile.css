@@ -81,6 +81,7 @@ hr {
     justify-content: center;
 		background-color: #252b3d;
 		color: whitesmoke;
+		flex: 1;
 }
 
 .food-image {
