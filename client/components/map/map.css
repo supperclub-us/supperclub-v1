@@ -15,12 +15,8 @@
   cursor: pointer;
 }
 
-
 .map-marker-popup {
-  /* background: #16202c; */
-  /* color: #f2f2f2; */
-  padding: 5px;
-  border-radius: 25px;
+  border-radius: 12px;
   border: none;
   outline: none;
   cursor: pointer;
@@ -33,6 +29,9 @@
   border-radius: 25px;
 }
 
+.map-marker-popup-title {
+  font-weight: 600;
+}
 
 .map-container {
   display: flex;
@@ -55,7 +54,7 @@
 
 .map-map-container {
   /* width: 100%; */
-  flex: 1;
+  flex: 1.5;
 }
 
 .map-booking-container {
@@ -64,9 +63,8 @@
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  gap: 7px;
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 320px;
   border-radius: 12px;
   padding: 5px 10px;
 }
@@ -75,28 +73,49 @@
   width: 100%;
 }
 
-
 .map-booking-container-image {
   width: 100%;
-  height: 130px
+  height: 130px;
 }
 .map-booking-container-image > img {
   width: 100%;
   height: 100%;
   border-radius: 12px;
+  padding: 2px;
 }
 
 .map-booking-container-location {
   font-weight: 600;
-  border-bottom: .5px solid #1B202C;
+  border-bottom: 0.5px solid #1b202c;
   padding-bottom: 5px;
 }
 
 .map-booking-container-host {
-  background: #252B3D;
+  background: #252b3d;
   border-radius: 25px;
   padding: 5px;
   color: whitesmoke;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.map-booking-container-host > small {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-booking-container-host > small > img {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+}
+
+.map-booking-container-reserved {
+  display: flex;
+  width: 100%;
 }
 
 .map-booking-container-reserved > small {
@@ -114,6 +133,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 3px
+}
+
+.map-booking-container-date {
+  padding: 3px
+}
+
+.map-booking-container-price {
+  padding: 3px;
 }
 
 .map-booking-container-title > small {
@@ -122,8 +150,8 @@
 }
 
 .map-booking-container:hover {
-    background: #f53e3e;
-    cursor: pointer;
+  background: #f53e3e;
+  cursor: pointer;
 }
 
 .mapbox-search-bar {
@@ -132,7 +160,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: whitesmoke;
+  background: #f5f5f5;
 }
 
 .mapbox-search-and-filters {

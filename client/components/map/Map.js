@@ -63,7 +63,7 @@ const Map = ({ user }) => {
   // get the current date right now
 
   const filteredBookings = bookings.filter((booking) => {
-    const bookingBooking = booking.startDateTime;
+    // const bookingBooking = booking.startDateTime;
 
     const bookingDateTime = booking.startDateTime.split(" ");
     const bookingDate = bookingDateTime[0].split("/");
@@ -144,7 +144,6 @@ const Map = ({ user }) => {
       setHasFetchedBookings(true);
     }
   }, [dispatch, viewport, handleRender, hasFetchedBookings]);
-
 
   const handleMoveMap = (e) => {
     setViewport({
@@ -252,7 +251,9 @@ const Map = ({ user }) => {
                       e.preventDefault();
                       if (selectedMarker === booking) {
                         setSelectedMarker(null);
-                      } else setSelectedMarker(booking);
+                      } else {
+                        setSelectedMarker(booking);
+                      }
                     }}
                   >
                     <img
@@ -268,22 +269,27 @@ const Map = ({ user }) => {
             {selectedMarker ? (
               <Popup
                 key={selectedMarker.id}
+                dynamicPosition={true}
                 longitude={selectedMarker.longitude}
                 latitude={selectedMarker.latitude}
                 closeButton={true}
                 closeButtonSize={20}
                 closeOnClick={false}
                 onClose={() => setSelectedMarker(null)}
+                offsetTop={20}
+                offsetLeft={20}
               >
                 <div
                   className="map-marker-popup"
                   onClick={() => handleClick(selectedMarker.id)}
                 >
                   <img src={selectedMarker.imageUrl} />
-                  <h3>Title: {selectedMarker.title}</h3>
+                  <p className="map-marker-popup-title">{selectedMarker.title}</p>
                   <p>
                     {selectedMarker.city}, {selectedMarker.state}
                   </p>
+                  <p>${selectedMarker.suggestedDonation} / guest</p>
+                  {selectedMarker.openSeats < 1 && <p style={{color: "#EB5757"}}> SOLD OUT </p>}
                 </div>
               </Popup>
             ) : null}

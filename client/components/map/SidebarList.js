@@ -72,20 +72,29 @@ const SidebarList = ({ bounds, selectedMarker, filteredBookings, user }) => {
                   <small>{booking.title}</small>
                 </p>
               </div>
-              <div>
+              <div className="map-booking-container-date">
+                <p>
+                  <small>{booking.startDateTime}</small>
+                </p>
+                <p>
+                  <small>{booking.endDateTime}</small>
+                </p>
+              </div>
+              <div className="map-booking-container-price">
                 <small>${booking.suggestedDonation} / guest</small>
               </div>
               <div>
                 <p className="map-booking-container-host">
                   <small>
-                    Host: Chef {booking.chefBooking.firstName}{" "}
+                    <img src={"./chef-hat2.png"} alt={"chef hat"} /> - Chef{" "}
+                    {booking.chefBooking.firstName}{" "}
                     {booking.chefBooking.lastName}
                   </small>
                 </p>
               </div>
               {currentMember && getMatches(memberBookings, booking) && (
                 <div
-                className="map-booking-container-reserved"
+                  className="map-booking-container-reserved"
                   style={{
                     color:
                       selectedMarker && selectedMarker.id === booking.id
