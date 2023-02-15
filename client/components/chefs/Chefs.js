@@ -56,7 +56,7 @@ const Chefs = () => {
     border: "none",
     boxShadow: 24,
     p: 4,
-
+    borderRadius: "12px",
     textAlign: "center",
   };
 
