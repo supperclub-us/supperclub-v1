@@ -452,6 +452,7 @@ const EditChefForm = () => {
                     },
                     backgroundColor: "#EB5757",
                     color: "whitesmoke",
+                    mt: 2
                   }}
                   startIcon={<SaveIcon />}
                 >
@@ -469,6 +470,7 @@ const EditChefForm = () => {
                     },
                     backgroundColor: "#EB5757",
                     color: "whitesmoke",
+                    mt: 2
                   }}
                   startIcon={<DeleteIcon />}
                 >
