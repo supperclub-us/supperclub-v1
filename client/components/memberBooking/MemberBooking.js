@@ -265,7 +265,7 @@ const MemberBooking = ({ user }) => {
         className="memberBooking-form-container"
         sx={{
           backgroundColor: "white",
-          maxHeight: "650px",
+          maxHeight: "850px",
           borderRadius: "12px",
         }}
       >

@@ -2,7 +2,7 @@
     display: flex;
     flex: 1;
     gap: 2rem;
-    justify-content: space-evenly;
+    justify-content: center;
     height: 100%;
     padding: 20px 400px;
     background-color: #252b3d;
@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    width: 100%;
+    max-width: 600px;
     padding: 20px;
     /* border: 1px solid #1b202c; */
     border-radius: 12px;

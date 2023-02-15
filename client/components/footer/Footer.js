@@ -12,20 +12,7 @@ import { Typography } from "@mui/material";
 import "./footer.css";
 
 function Footer() {
-  const container = {
-    // marginTop: "auto",
-    color: "white",
-    backgroundColor: "#252b3d",
-    paddingTop: "1em",
-    width: "100%",
-    padding: 1,
-    position: "static",
-    bottom: "0",
-    margin: "0",
-    height: "250px",
-    background: "#1b202c"
-    // display: "flex",
-  };
+
   const footerRowStyle = {
     display: "flex",
     justifyContent: "space-around",
@@ -45,7 +32,7 @@ function Footer() {
     fontSize: "24px",
   };
   return (
-    <div style={container}>
+    <footer className="footer-container">
       <div
         className="footer-row"
         style={{
@@ -115,7 +102,7 @@ function Footer() {
         </div>
         <p>© 2023 Supper Club | We are best turtles at FullStack</p>
       </div>
-    </div>
+    </footer>
   );
 }
 
