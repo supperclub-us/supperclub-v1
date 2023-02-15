@@ -1,0 +1,47 @@
+#login-form {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    width: 400px;
+    margin-top: 100px;
+}
+
+.login-email-and-password {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    /* border: 1px solid yellowgreen; */
+    /* align-items: center; */
+    gap: 0.7em;
+
+}
+
+#login-form-title {
+    text-align: center;
+  }
+
+.login-email {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    /* border: 1px solid pink; */
+    margin-top: 20px;
+}
+
+.login-password {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    /* border: 1px solid green; */
+}
+
+#login-button {
+    text-align: center;
+    margin: 25px;
+}
+
+.login-to-sign-question {
+    text-align: center;
+    margin-top: 20px;
+}

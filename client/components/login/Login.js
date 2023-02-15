@@ -4,7 +4,7 @@ import { authenticate } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
-
+import './login.css';
 
 
 const SignIn = ({handleOpen}) => {
@@ -34,15 +34,13 @@ const SignIn = ({handleOpen}) => {
 
   return (
     <div>
-      <form id='signup-signup-form' onSubmit={handleSubmit}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Log in
+      <form id='login-form' onSubmit={handleSubmit}>
+        <Typography id="login-form-title" variant="h5">
+          Log In
         </Typography>
-        <hr />
-        <div className='navbar-select-role-container'>
 
-          <br />
-          <div>
+        <div className='login-email-and-password'>
+          <div className='login-email'>
             <TextField
               onChange={(e) => setEmail(e.target.value)}
               name='email'
@@ -50,16 +48,20 @@ const SignIn = ({handleOpen}) => {
               type="text"
               placeholder='Email'
             />
+          </div>
 
+          <div className='login-password'>
             <TextField
-              onChange={(e) => setPassword(e.target.value)}
-              name="password"
-              value={password}
-              type="password"
-              placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={password}
+                type="password"
+                placeholder='Password'
             />
+          </div>
 
-            <div>
+
+            <div id="login-button">
               <Button 
                 type="submit" 
                 variant="contained" 
@@ -74,19 +76,21 @@ const SignIn = ({handleOpen}) => {
                 Log in
               </Button>
             </div>
-
-
-
-          </div>
         </div>
-        <Snackbar open={open} autoHideDuration={30000} onClose={handleSnackClose}>
+        <Snackbar
+          open={open} 
+          autoHideDuration={30000} 
+          onClose={handleSnackClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+
+        >
           <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
-            You successfully logged in!
+            You logged in!
           </Alert>
         </Snackbar>
 
       </form>
-      <p style={{fontSize: ".7rem"}}>Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
+      <p className="login-to-sign-question">Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
     </div>
   );
 }

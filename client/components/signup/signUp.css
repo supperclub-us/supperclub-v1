@@ -1,85 +1,42 @@
-/* .signup-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 620px;
-    
-}
- */
-
-
-/* .navbar-select-role-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    border: 1px solid green;
-} */
-
-
-
-
-
-.signup-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 450px;
-    height: 600px;
-    padding: 2rem;
-    box-sizing: border-box;
-   
-    border-radius: 5px; 
-   
+#signup-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  width: 400px;
+  /* border: 1px solid yellowgreen; */
+  /* align-items: center; */
 }
 
-#signup-form {
-    width: 500px;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+#signup-form-title {
+  text-align: center;
 }
 
-.navbar-select-role-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1rem 2rem;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+.signup-role-selection {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  /* border: 1px solid pink; */
 }
 
-.info{
-  bottom: 10%;
+.signup-first-name-and-last-name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+.signup-bio-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  /* border: 1px solid pink; */
+}
 
+#signup-button {
+  text-align: center;
+  /* margin: 10px; */
+}
 
-.navbar-role-selection {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-  }
-  
-  .navbar-role-selection > Typography {
-    margin-bottom: 5px;
-    margin: auto;
-  }
-  
-  .navbar-role-selection > FormControl {
-    width: 197x;
-    margin-top: 8px;
-  }
-
+.signup-to-login-question {
+  text-align: center;
+  margin-top: 10px;
+}
