@@ -72,7 +72,6 @@ const AppRoutes = () => {
         </Route>
       )}
       <Route path="/confirmation" element={<ConfirmationPage/>}/>
-      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

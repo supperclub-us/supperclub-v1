@@ -33,7 +33,7 @@ const SignIn = ({handleOpen}) => {
   };
 
   return (
-    <div>
+    <div className="login-form-container">
       <form id='login-form' onSubmit={handleSubmit}>
         <Typography id="login-form-title" variant="h5">
           Log In

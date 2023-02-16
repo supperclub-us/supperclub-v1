@@ -14,9 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../../store/store";
 import "./signUp.css";
 import { margin } from "@mui/system";
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 
-const SignUp = ({handleOpen}) => {
+const SignUp = ({ handleOpen }) => {
   const [role, setRole] = useState("");
   // set state for firstName, lastName, bio, mobileNumber, email, password
   const [firstName, setFirstName] = useState("");
@@ -55,26 +55,25 @@ const SignUp = ({handleOpen}) => {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <form id="signup-signup-form" onSubmit={handleSubmit}>
         <Typography id="signup-form-title" variant="h6">
           Sign Up Form
         </Typography>
 
-          <div className="signup-role-selection">
-             <FormControl >
-              <InputLabel>Role </InputLabel>
-              <Select
-                onChange={(e) => setRole(e.target.value)}
-                value={role}
-                label="role"
-              >
-                <MenuItem value="CHEF">Chef</MenuItem>
-                <MenuItem value="MEMBER">Member</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-
+        <div className="signup-role-selection">
+          <FormControl className="signup-role">
+            <InputLabel>Role </InputLabel>
+            <Select
+              onChange={(e) => setRole(e.target.value)}
+              value={role}
+              label="role"
+            >
+              <MenuItem value="CHEF">Chef</MenuItem>
+              <MenuItem value="MEMBER">Member</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
 
         <div className="signup-first-name-and-last-name-container">
           <TextField
@@ -110,54 +109,57 @@ const SignUp = ({handleOpen}) => {
           />
         </div>
 
-          <TextField
-            onChange={(e) => setMobileNumber(e.target.value)}
-            name="mobileNumber"
-            value={mobileNumber}
-            type="text"
-            placeholder="Mobile Number"
-            label="Mobile Number"
-          />
+        <TextField
+          onChange={(e) => setMobileNumber(e.target.value)}
+          name="mobileNumber"
+          value={mobileNumber}
+          type="text"
+          placeholder="Mobile Number"
+          label="Mobile Number"
+        />
 
-          <TextField
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type="text"
-            placeholder="Email"
-            label="Email"
-          />
+        <TextField
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          type="text"
+          placeholder="Email"
+          label="Email"
+        />
 
-          <TextField
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            type="password"
-            placeholder="Password"
-            label="Password"
-          />
+        <TextField
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          type="password"
+          placeholder="Password"
+          label="Password"
+        />
 
-          <div id="signup-button">
-            <Button 
-              type="submit" 
-              variant="contained" 
-              color="primary"
-              sx={{
-                "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-                backgroundColor: "#EB5757",
-                color: "whitesmoke",
-              }}
-              startIcon={<EmojiEmotionsIcon />}
-            >
-              Sign Up
-            </Button>
-          </div>
+        <div id="signup-button">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+              backgroundColor: "#EB5757",
+              color: "whitesmoke",
+            }}
+            startIcon={<EmojiEmotionsIcon />}
+          >
+            Sign Up
+          </Button>
+          <p className="signup-to-login-question">
+            Already have an account?
+            <Button onClick={() => handleOpen("login")}>Login</Button>
+          </p>
+        </div>
 
-        
         {/* need to make error handling for the snackbar, as it stands this message will pop up with all log in attempts even unauth or wrong inputs */}
-        <Snackbar 
-          open={open} 
-          autoHideDuration={10000} 
+        <Snackbar
+          open={open}
+          autoHideDuration={10000}
           onClose={handleClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
           <Alert
             onClose={handleClose}
@@ -168,10 +170,6 @@ const SignUp = ({handleOpen}) => {
           </Alert>
         </Snackbar>
       </form>
-      <p className="signup-to-login-question">
-        Already have an account?
-        <Button onClick={() => handleOpen("login")}>Login</Button>
-      </p>
     </div>
   );
 };
