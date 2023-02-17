@@ -1,3 +1,8 @@
+.home-container {
+  height: 100vh;
+  background: #252b3d;
+}
+
 .about-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
     url(https://i.imgur.com/1yADk1l.jpg);

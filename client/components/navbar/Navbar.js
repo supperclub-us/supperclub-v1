@@ -103,15 +103,12 @@ const Navbar = () => {
       className="navbar-container"
       style={{
         opacity,
-        position: "sticky",
-        top: 0,
-        transition: "opacity 200ms ease-in",
       }}
     >
       <div className="navbar-left">
         <img
           className="navbar-logo"
-          src={"/logo_supperClub4.png"}
+          src={"/supperclub-logo.png"}
           alt="supperclub logo"
         />
         <h1 className="navbar-supper-club-name">
