@@ -8,7 +8,8 @@ import {
   fetchSingleBookingAsync,
   selectSingleBooking,
 } from "../../slices/singleBookingSlice";
-import "../profile.css"
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import "../profile.css";
 
 export const Card = ({ booking }) => {
   const navigate = useNavigate();
@@ -25,7 +26,9 @@ export const Card = ({ booking }) => {
       <div className="card-booking-title">
         <h2>{booking.title}</h2>
       </div>
-      <h4>{booking.city}, {booking.state}</h4>
+      <h4>
+        {booking.city}, {booking.state}
+      </h4>
       {user.role === "CHEF" && (
         <div>
           <h4>
@@ -41,7 +44,11 @@ export const Card = ({ booking }) => {
               navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`);
             }}
             sx={{
-              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+              "&:hover": {
+                backgroundColor: "#EB5757",
+                color: "whitesmoke",
+                opacity: ".8",
+              },
               backgroundColor: "#EB5757",
               color: "whitesmoke",
             }}
@@ -54,12 +61,17 @@ export const Card = ({ booking }) => {
       {user.role === "MEMBER" && (
         <Button
           onClick={handleClick}
+          startIcon={<VisibilityIcon />}
           variant="contained"
           sx={{
-            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            "&:hover": {
+              backgroundColor: "#EB5757",
+              color: "whitesmoke",
+              opacity: ".8",
+            },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
-            mb: 4
+            mb: 4,
           }}
         >
           View Details
@@ -97,6 +109,7 @@ export const ModalCard = ({ booking }) => {
       <p style={{ padding: "10px" }}>{booking.openSeats} Seats Left </p>
       <Button
         onClick={handleClick}
+        startIcon={<VisibilityIcon />}
         variant="contained"
         sx={{
           "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },

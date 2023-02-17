@@ -21,6 +21,9 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import CancelIcon from "@mui/icons-material/Cancel";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
 
 import Payment from "../stripePayment/Payment";
 
@@ -167,7 +170,6 @@ const MemberBooking = ({ user }) => {
           className="memberBooking-images-title"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url(${booking?.imageUrl})`,
-            height: "250px",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -261,14 +263,7 @@ const MemberBooking = ({ user }) => {
           </div>
         </div>
       </div>
-      <Box
-        className="memberBooking-form-container"
-        sx={{
-          backgroundColor: "white",
-          maxHeight: "850px",
-          borderRadius: "12px",
-        }}
-      >
+      <Box className="memberBooking-form-container">
         {reservedSeats ? (
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
@@ -298,17 +293,12 @@ const MemberBooking = ({ user }) => {
                 </Select>
               </FormControl>
             </Box>
-            ${booking?.suggestedDonation} per person
+            ${booking?.suggestedDonation} per guest
             {/* Total: ${booking?.suggestedDonation * reservedSeats} */}
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <Box className="memberBooking-form-btns">
               <Button
                 variant="contained"
+                startIcon={<EditIcon />}
                 onClick={handleClick}
                 name="editBtn"
                 sx={ButtonStyle}
@@ -318,12 +308,13 @@ const MemberBooking = ({ user }) => {
               </Button>
               <Button
                 variant="contained"
+                startIcon={<CancelIcon />}
                 onClick={handleClick}
                 name="deleteBtn"
                 sx={ButtonStyle}
               >
                 {" "}
-                Cancel Booking{" "}
+                Cancel Seats{" "}
               </Button>
             </Box>
           </Box>
@@ -365,6 +356,7 @@ const MemberBooking = ({ user }) => {
               ) : (
                 <Button
                   variant="contained"
+                  startIcon={<RestaurantIcon />}
                   onClick={handleClick}
                   name="bookBtn"
                   sx={ButtonStyle}
@@ -378,17 +370,17 @@ const MemberBooking = ({ user }) => {
             </Box>
           </>
         )}
-        {payment && (
-          <Box>
-            <Payment
-              newBookingState={newBookingState}
-              guests={guests}
-              booking={booking}
-              bookingId={bookingId}
-            />
-          </Box>
-        )}
       </Box>
+      {payment && (
+        <Box>
+          <Payment
+            newBookingState={newBookingState}
+            guests={guests}
+            booking={booking}
+            bookingId={bookingId}
+          />
+        </Box>
+      )}
     </div>
   );
 };

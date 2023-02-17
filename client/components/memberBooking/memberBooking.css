@@ -1,136 +1,158 @@
 .memberBooking-container {
-    display: flex;
-    flex: 1;
-    gap: 2rem;
-    justify-content: center;
-    height: 100%;
-    padding: 20px 400px;
-    background-color: #252b3d;
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  justify-content: center;
+  /* height: 100%; */
+  width: 100%;
+  padding: 100px;
+  background-color: #252b3d;
 }
 
 .memberBooking-allInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border: 1px solid #1b202c;
-    background: whitesmoke;
-    border-radius: 12px;
-    padding: 40px;
-    gap: 1rem;
-    max-width: 800px;
-    box-shadow: 5px 5px 17px -5px rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #1b202c;
+  background: whitesmoke;
+  border-radius: 12px;
+  padding: 25px;
+  gap: 1rem;
+  max-width: 800px;
+  box-shadow: 5px 5px 17px -5px rgba(0, 0, 0, 0.75);
 }
 
 .memberBooking-images-title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* background: rgb(236, 193, 189); */
-    max-height: 400px;
-    width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: rgb(236, 193, 189); */
+  height: 100%;
+  width: 100%;
 }
 
 .memberBooking-experience-shortDetails {
-    display: flex;
-    padding: 20px;
-    gap: 4px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.709);
-    /* border-radius: 25px; */
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  gap: 4px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.709);
+  /* border-radius: 25px; */
+  justify-content: center;
+  align-items: center;
 }
 
 .memberBooking-experience {
-    display: flex;
-    flex-direction: column;
-    background: #f2f2f2;
-    max-width: 600px;
-    gap: 1rem;
-    padding: 20px;
-    box-shadow: 10px -2px 20px 2px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    border-radius: 12px;
-    overflow: auto;
-    scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #f2f2f2;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
+  padding: 20px;
+  box-shadow: 10px -2px 20px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border-radius: 12px;
+  overflow-y: scroll;
 }
 
 .memberBooking-experience-menu {
-    padding: 10px;
-    color: #252b3d;
+  padding: 10px;
+  color: #252b3d;
 }
 
 .memberBooking-form-container {
-    display: flex;
-    flex-direction: column;
-    border-radius: 12px;
-    max-width: 600px;
-    padding: 20px;
-    /* border: 1px solid #1b202c; */
-    border-radius: 12px;
-    box-shadow: 5px 5px 17px -5px rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border-radius: 12px;
+  box-shadow: 5px 5px 17px -5px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  max-height: 300px;
+  max-width: 800px;
+  border-radius: 12px;
 }
 
 .memberBooking-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border-bottom: 1px solid #1b202c;
-    width: 400px;
-    padding: 10px 20px;
-    /* border-radius: 12px; */
-
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 300px;
+  max-width: 800px;
+  padding: 10px 20px;
+  /* border-radius: 12px; */
 }
 
 .memberBooking-form-donation {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.memberBooking-form-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .memberBooking-login-signup {
-    color: red;
-    width: 50%;
+  color: red;
+  width: 50%;
 }
 
 .memberBooking-experience-cuisine,
 .memberBooking-experience-guests,
 .memberBooking-experience-time-start,
 .memberBooking-experience-time-end {
-    padding: 4px;
-    background-color: #252b3dd3;
-    color: whitesmoke;
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    border-radius: 12px;
-    min-width: 6rem;
-    max-width: 7rem;
-    min-height: 6rem;
-    box-shadow: rgba(108, 108, 108, 0.704) 0px 6px 16px;
+  padding: 4px;
+  background-color: #252b3dd3;
+  color: whitesmoke;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 12px;
+  min-width: 6rem;
+  max-width: 7rem;
+  min-height: 6rem;
+  box-shadow: rgba(108, 108, 108, 0.704) 0px 6px 16px;
 }
 
-
-
 .memberBooking-experience-shortDetails-info {
-    color: #eb5757ef
+  color: #eb5757ef;
 }
 
 .memberBooking-experience-hr {
-    border-bottom: 2px solid #1b202cc0;
-    border-radius: 4px;
-    margin-bottom: 3em;
-    width: 100%;
+  border-bottom: 2px solid #1b202cc0;
+  border-radius: 4px;
+  margin-bottom: 3em;
+  width: 100%;
 }
 
 .menu-title {
-    color: whitesmoke;
-    font-size: x-large;
-    font-weight: bold;
+  color: whitesmoke;
+  font-size: x-large;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+/*  MEDIA QUERIES */
+
+@media screen and (max-width: 1200px) {
+  /* body {
+    overflow-y: scroll;
+  } */
+  .memberBooking-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 24px;
-
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+  }
 }

@@ -1,10 +1,17 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; 
+  height: 100%;
+}
+
 #signup-signup-form {
   display: flex;
   flex-direction: column;
-  gap: 0.7em;
-  width: 400px;
-  /* border: 1px solid yellowgreen; */
-  /* align-items: center; */
+  gap: 0.5em;
+  width: 100%;
+  height: 100%;
 }
 
 #signup-form-title {
@@ -14,8 +21,7 @@
 .signup-role-selection {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  /* border: 1px solid pink; */
+  width: 100%;
 }
 
 .signup-first-name-and-last-name-container {
@@ -27,16 +33,15 @@
 .signup-bio-container {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  /* border: 1px solid pink; */
+  width: 100%
 }
 
 #signup-button {
   text-align: center;
-  /* margin: 10px; */
+  display: flex;
 }
 
 .signup-to-login-question {
   text-align: center;
-  margin-top: 10px;
+  font-size: 10px;
 }

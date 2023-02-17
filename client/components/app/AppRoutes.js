@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import AuthForm from "../auth/AuthForm";
 import {
   ChefForm,
   Home,
@@ -15,8 +14,8 @@ import {
 import { me } from "../auth/authSlice";
 import ProtectedRoute from "./ProtectedRoute";
 import EditChefForm from "../chefs/EditChefForm";
-import { LinearProgress } from "@mui/material";
 import ConfirmationPage from "../stripePayment/ConfirmationPage";
+import Loading from "../loading/Loading";
 
 /**
  * COMPONENT
@@ -33,17 +32,18 @@ const AppRoutes = () => {
     dispatch(me());
   }, []);
 
-  if (isLoading)
-    return (
-      <LinearProgress/>
-    );
+  if (isLoading) return <Loading />;
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
-      {user.role === "CHEF" ? null : <Route path="/map" element={<Map user={user} />} />}
-      {user.role === "CHEF" ? null : <Route path="/chefs" element={<Chefs />} />}
+      {user.role === "CHEF" ? null : (
+        <Route path="/map" element={<Map user={user} />} />
+      )}
+      {user.role === "CHEF" ? null : (
+        <Route path="/chefs" element={<Chefs />} />
+      )}
       <Route
         path="/bookings/:bookingId"
         element={<MemberBooking user={user} />}
@@ -64,15 +64,16 @@ const AppRoutes = () => {
             </>
           )}
           {user.role === "MEMBER" && (
-            <Route
-              path="/users/memberprofile/:id"
-              element={<MemberProfile user={user} />}
-            />
+            <>
+              <Route
+                path="/users/memberprofile/:id"
+                element={<MemberProfile user={user} />}
+              />
+              <Route path="/confirmation" element={<ConfirmationPage />} />
+            </>
           )}
         </Route>
       )}
-      <Route path="/confirmation" element={<ConfirmationPage/>}/>
-      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

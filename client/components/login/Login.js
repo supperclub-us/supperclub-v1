@@ -1,31 +1,35 @@
-import React, { useState } from 'react'
-import { Button, TextField, Typography, Snackbar, Alert } from '@mui/material';
-import { authenticate } from '../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login';
-import './login.css';
+import React, { useState } from "react";
+import { Button, TextField, Typography, Snackbar, Alert } from "@mui/material";
+import { authenticate } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
+import "./login.css";
 
+const btnStyle = {
+  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+  backgroundColor: "#EB5757",
+  color: "whitesmoke",
+};
 
-const SignIn = ({handleOpen}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const SignIn = ({ handleOpen }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    setOpen(true)
+    setOpen(true);
 
-    dispatch(authenticate({ email, password, method: 'login' }));
-  }
-
+    dispatch(authenticate({ email, password, method: "login" }));
+  };
 
   const handleSnackClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -33,66 +37,76 @@ const SignIn = ({handleOpen}) => {
   };
 
   return (
-    <div>
-      <form id='login-form' onSubmit={handleSubmit}>
+    <div className="login-form-container">
+      <form id="login-form" onSubmit={handleSubmit}>
         <Typography id="login-form-title" variant="h5">
           Log In
         </Typography>
 
-        <div className='login-email-and-password'>
-          <div className='login-email'>
+        <div className="login-email-and-password">
+          <div className="login-email">
             <TextField
               onChange={(e) => setEmail(e.target.value)}
-              name='email'
+              name="email"
               value={email}
               type="text"
-              placeholder='Email'
+              placeholder="Email"
             />
           </div>
 
-          <div className='login-password'>
+          <div className="login-password">
             <TextField
-                onChange={(e) => setPassword(e.target.value)}
-                name="password"
-                value={password}
-                type="password"
-                placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={password}
+              type="password"
+              placeholder="Password"
             />
           </div>
 
-
-            <div id="login-button">
-              <Button 
-                type="submit" 
-                variant="contained" 
-                color="primary"
-                startIcon={<LoginIcon />}
-                sx={{
-                  "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
-                  backgroundColor: "#EB5757",
-                  color: "whitesmoke",
-                }}
-              >
-                Log in
-              </Button>
-            </div>
+          <div id="login-button">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              startIcon={<LoginIcon />}
+              sx={btnStyle}
+            >
+              Log in
+            </Button>
+          </div>
         </div>
         <Snackbar
-          open={open} 
-          autoHideDuration={30000} 
+          open={open}
+          autoHideDuration={30000}
           onClose={handleSnackClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
-          <Alert onClose={handleSnackClose} severity="success" sx={{ width: '100%' }}>
+          <Alert
+            onClose={handleSnackClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
             You logged in!
           </Alert>
         </Snackbar>
-
       </form>
-      <p className="login-to-sign-question">Don't have an account? <Button onClick={()=> handleOpen("signup")}>Sign Up</Button></p>
+      <p className="login-to-sign-question">
+        Don't have an account?{" "}
+        <Button
+          onClick={() => handleOpen("signup")}
+          sx={{
+            "&:hover": { backgroundColor: "whitesmoke", color: "#EB5757" },
+            color: "#EB5757",
+            fontSize: "12px"
+          }}
+          variant="text"
+        >
+          Sign Up
+        </Button>
+      </p>
     </div>
   );
-}
+};
 
-export default SignIn
+export default SignIn;
