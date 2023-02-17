@@ -20,7 +20,12 @@ import {
   LinearProgress,
   MenuItem,
   Select,
+  Snackbar,
+  Alert,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import CancelIcon from "@mui/icons-material/Cancel";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
 
 import Payment from "../stripePayment/Payment";
 
@@ -51,6 +56,7 @@ const MemberBooking = ({ user }) => {
   const userId = id;
   const [guests, setGuests] = useState("");
   const [payment, setPayment] = useState(false);
+  const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -71,6 +77,19 @@ const MemberBooking = ({ user }) => {
 
   const [newBookingState, setNewBookingState] = useState({});
 
+  // wanring
+  // Warning Click handle button
+  const handleWarning = async () => {
+    setOpenWarningConfirm(true);
+  };
+
+  const handleSnackCloseWarning = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenWarningConfirm(false);
+  };
+
   // CLICK FUNCTIONALITY FOR BOOKING, EDITING AND CANCELING!!!
   const handleClick = (e) => {
     e.preventDefault();
@@ -86,6 +105,7 @@ const MemberBooking = ({ user }) => {
       );
       setGuests("");
       setPayment(false);
+      setOpenWarningConfirm(false);
     } else if (e.target.name === "editBtn") {
       const newReservedSeats = guests;
       const bookingAmtOfGuests = booking.openSeats;
@@ -167,7 +187,6 @@ const MemberBooking = ({ user }) => {
           className="memberBooking-images-title"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url(${booking?.imageUrl})`,
-            height: "250px",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -261,14 +280,7 @@ const MemberBooking = ({ user }) => {
           </div>
         </div>
       </div>
-      <Box
-        className="memberBooking-form-container"
-        sx={{
-          backgroundColor: "white",
-          maxHeight: "850px",
-          borderRadius: "12px",
-        }}
-      >
+      <Box className="memberBooking-form-container">
         {reservedSeats ? (
           <Box className="memberBooking-form" component="form">
             <div className="reservedSeats">
@@ -298,97 +310,123 @@ const MemberBooking = ({ user }) => {
                 </Select>
               </FormControl>
             </Box>
-            ${booking?.suggestedDonation} per person
+            ${booking?.suggestedDonation} per guest
             {/* Total: ${booking?.suggestedDonation * reservedSeats} */}
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <Box className="memberBooking-form-btns">
               <Button
                 variant="contained"
+                startIcon={<EditIcon />}
                 onClick={handleClick}
                 name="editBtn"
                 sx={ButtonStyle}
               >
                 {" "}
-                Edit Seats{" "}
+                Edit{" "}
               </Button>
               <Button
                 variant="contained"
-                onClick={handleClick}
-                name="deleteBtn"
+                startIcon={<CancelIcon />}
+                onClick={handleWarning}
                 sx={ButtonStyle}
               >
                 {" "}
-                Cancel Booking{" "}
+                Cancel{" "}
               </Button>
             </Box>
           </Box>
         ) : (
-          <>
-            <Box className="memberBooking-form" component="form">
-              <FormControl fullWidth>
-                <InputLabel id="guests">Guests</InputLabel>
-                <Select
-                  value={guests}
-                  label="guests"
-                  onChange={(e) => {
-                    setGuests(e.target.value);
-                  }}
-                >
-                  {openSeatsArray?.map((guest) => (
-                    <MenuItem key={guest} value={guest}>
-                      {guest} {guest <= 1 ? "guest" : "guests"}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+          <Box className="memberBooking-form" component="form">
+            <FormControl fullWidth>
+              <InputLabel id="guests">Guests</InputLabel>
+              <Select
+                value={guests}
+                label="guests"
+                onChange={(e) => {
+                  setGuests(e.target.value);
+                }}
+              >
+                {openSeatsArray?.map((guest) => (
+                  <MenuItem key={guest} value={guest}>
+                    {guest} {guest <= 1 ? "guest" : "guests"}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-              <Box className="memberBooking-form-donation" fullwidth="true">
-                <Box
-                  id="outlined-adornment-amount"
-                  label="Donation Amount"
-                  defaultValue={`${booking?.suggestedDonation}`}
-                >
-                  {" "}
-                  ${booking?.suggestedDonation} per person
-                </Box>
+            <Box className="memberBooking-form-donation" fullwidth="true">
+              <Box
+                id="outlined-adornment-amount"
+                label="Donation Amount"
+                defaultValue={`${booking?.suggestedDonation}`}
+              >
+                {" "}
+                ${booking?.suggestedDonation} per person
               </Box>
-              {booking?.openSeats <= 0 ? (
-                <Button variant="contained" sx={ButtonStyle}>
-                  {" "}
-                  Sold Out{" "}
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  onClick={handleClick}
-                  name="bookBtn"
-                  sx={ButtonStyle}
-                >
-                  Reserve
-                </Button>
-              )}
             </Box>
+            {booking?.openSeats <= 0 ? (
+              <Button variant="contained" sx={ButtonStyle}>
+                {" "}
+                Sold Out{" "}
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                startIcon={<RestaurantIcon />}
+                onClick={handleClick}
+                name="bookBtn"
+                sx={ButtonStyle}
+              >
+                Reserve
+              </Button>
+            )}
             <Box className="memberBooking-login-signup">
               {loginSignUp ? "PLEASE LOGIN OR SIGNUP TO BOOK EVENT" : null}{" "}
             </Box>
-          </>
-        )}
-        {payment && (
-          <Box>
-            <Payment
-              newBookingState={newBookingState}
-              guests={guests}
-              booking={booking}
-              bookingId={bookingId}
-            />
           </Box>
         )}
+        <Snackbar
+          open={openWarningConfirm}
+          autoHideDuration={10000}
+          onClose={handleSnackCloseWarning}
+        >
+          <Alert
+            onClose={handleSnackCloseWarning}
+            severity="warning"
+            sx={{ width: "100%" }}
+            action={
+              <div>
+                <Button
+                  color="inherit"
+                  size="small"
+                  onClick={handleClick}
+                  name="deleteBtn"
+                >
+                  DELETE
+                </Button>
+                <Button
+                  color="inherit"
+                  size="small"
+                  onClick={handleSnackCloseWarning}
+                >
+                  CANCEL
+                </Button>
+              </div>
+            }
+          >
+            Are you sure you want to cancel this event?
+          </Alert>
+        </Snackbar>
       </Box>
+      {payment && (
+        <Box>
+          <Payment
+            newBookingState={newBookingState}
+            guests={guests}
+            booking={booking}
+            bookingId={bookingId}
+          />
+        </Box>
+      )}
     </div>
   );
 };

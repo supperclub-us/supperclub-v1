@@ -1,74 +1,82 @@
 #link-logo {
-  width: 150px;
-  /* height: 150px; */
-  /* margin: 1em 1em; */
+  width: 100%;
   text-align: center;
   margin: 0 auto;
 }
 
 #logo {
-  width: 150px;
-  /* height: 150px; */
-  /* margin: 1em 1em; */
+  width: 100%;
   text-align: center;
-  margin: 0 auto;
 }
 
 .navbar-container {
-  /* border: 4px solid red; */
-  /* position: sticky;
-  top: 0; */
   display: flex;
-  /* position: static; */
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background: #1b202c;
-  color: #DFE2EA;
+  color: #dfe2ea;
+  transition: opacity 200ms ease-in;
+  flex: 1;
+  position: sticky;
+  top: 0;
   z-index: 1;
-  /* height: 100px; */
+  padding: 10px;
+  /* height: 150px; */
+  max-height: 90px;
 }
 
 .navbar-left {
-  /* border: 4px solid pink; */
-  margin-left: 15px;
+  padding-left: 15px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-decoration: none;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  gap: 1rem;
+}
+
+.navbar-logo {
+  height: 60px;
+  width: 60px;
+}
+
+#name {
+  margin: 0;
+  width: 100%;
 }
 
 .navbar-supper-club-name {
-  /* border: 1px solid green; */
   font-size: 30px;
   font-weight: 600;
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: #DFE2EA;
+  color: #dfe2ea;
   display: flex;
   flex-direction: row-reverse;
   text-align: center;
   justify-content: center;
-  width: 150px;
-
 }
-
-#name {
-  margin: 10px
-
-}
-
 
 .navbar-right {
-  /* border: 4px solid purple; */
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex: 1.5;
+  justify-content: flex-end;
   align-items: center;
   text-decoration: none;
 }
-.navbar-link-spacing {
-  /* border: 2px solid yellow ; */
-  margin: 25px;
+
+.navbar-smallScreen {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar-smallScreen {
+    display: flex;
+  }
+  .navbar-largeScreen {
+    display: none;
+  }
 }

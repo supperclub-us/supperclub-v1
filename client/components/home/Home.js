@@ -8,18 +8,17 @@ import "./home.css";
  */
 const Home = (props) => {
   return (
-    <div>
-      <Box
-        className="about-image"
-      >
+    <Box className="home-container">
+      <Box className="about-image">
         <div className="home-title-and-header-container">
-          <h1 className="about-title"> Discover dinner events hosted by chefs</h1>
+          <h1 className="about-title">
+            {" "}
+            Discover dinner events hosted by chefs
+          </h1>
           <Header />
         </div>
-
       </Box>
-
-    </div>
+    </Box>
   );
 };
 

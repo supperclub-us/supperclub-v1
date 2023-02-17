@@ -16,7 +16,6 @@ const Payment = ({
   userId,
   newAmountOfOpenSeats,
 }) => {
-  
   const [clientSecret, setClientSecret] = useState("");
   const user = useSelector((state) => state.auth.me);
 
@@ -30,13 +29,25 @@ const Payment = ({
     getClientSecret();
   }, [newBookingState]);
 
-  const options ={
+  const options = {
     clientSecret,
-  }
+  };
 
   return (
-    <div>
-      <h1>TOTAL: ${booking?.suggestedDonation * guests}</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "white",
+        padding: "2em",
+        borderRadius: "12px",
+        maxWidth: "800px",
+      }}
+    >
+      <h1 style={{ color: "#eb5757" }}>
+        {" "}
+        TOTAL: ${booking?.suggestedDonation * guests}{" "}
+      </h1>
       {user && user.id && (
         <div>
           {clientSecret && (

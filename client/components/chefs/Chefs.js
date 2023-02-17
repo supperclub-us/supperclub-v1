@@ -8,27 +8,26 @@ import ClearIcon from "@mui/icons-material/Clear";
 import dayjs from "dayjs";
 
 const Chefs = () => {
-
   const dispatch = useDispatch();
   const chefs = useSelector(selectAllChefs);
 
   const bookingIsFuture = (booking) => {
-      const bookingDateTime = booking.startDateTime.split(' ');
-      const bookingDate = bookingDateTime[0].split('/');
-      const intBookingDate = bookingDate.map((element) => parseInt(element));
-      return dayjs().isBefore(dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`))
-  }
+    const bookingDateTime = booking.startDateTime.split(" ");
+    const bookingDate = bookingDateTime[0].split("/");
+    const intBookingDate = bookingDate.map((element) => parseInt(element));
+    return dayjs().isBefore(
+      dayjs(`${intBookingDate[2]}-${intBookingDate[0]}-${intBookingDate[1]}`)
+    );
+  };
 
   useEffect(() => {
     dispatch(fetchAllChefsAsync());
   }, [dispatch]);
 
-  
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
   const [selectBooking, setSelectBooking] = useState();
   const handleOpen = (booking) => {
-
     setSelectBooking(booking);
     setOpen(true);
   };
@@ -92,7 +91,7 @@ const Chefs = () => {
                             fontSize: "11px",
                             height: "65px",
                             width: "140px",
-                            marginRight: "15px"
+                            marginRight: "15px",
                           }}
                           sx={{
                             "&:hover": {
@@ -100,7 +99,7 @@ const Chefs = () => {
                               color: "whitesmoke",
                               opacity: ".8",
                               animation: "shake 3s",
-                              animationIterationCount: "infinite"
+                              animationIterationCount: "infinite",
                             },
                             backgroundColor: "#EB5757",
                             color: "whitesmoke",
@@ -108,7 +107,9 @@ const Chefs = () => {
                         >
                           <p>{booking.title}</p>
                         </Button>
-                      ) : '';
+                      ) : (
+                        ""
+                      );
                     })
                   ) : (
                     <p>No Hostings Yet...</p>

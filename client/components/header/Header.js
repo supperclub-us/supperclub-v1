@@ -1,17 +1,11 @@
-import React from 'react'
-import { SearchBar } from '../index'
-import { useSelector } from 'react-redux';
+import React from "react";
+import { SearchBar } from "../index";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.me);
 
+  return user.role === "CHEF" ? null : <SearchBar />;
+};
 
-  return (
-    <div>
-      {user.role === "CHEF" ? null : <SearchBar />}
-    </div>
-  )
-}
-
-export default Header
-
+export default Header;
