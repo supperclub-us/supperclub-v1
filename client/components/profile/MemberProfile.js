@@ -55,6 +55,7 @@ const MemberProfile = ({ user }) => {
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
+          
         }}
       >
         <Skeleton />
@@ -70,15 +71,21 @@ const MemberProfile = ({ user }) => {
       <hr />
       <h1>Your {futureEvents ? 'Upcoming' : 'Previous'} Events </h1>
       <Button
+
         className="mbrprofile-events-button"
         variant="contained"
         size="small"
         onClick={handleClick}
         sx={{
-          "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+          "&:hover": { backgroundColor: "#EB5757",
+           color: "whitesmoke",
+           opacity: ".8",
+           },
+          
           backgroundColor: "#EB5757",
           color: "whitesmoke",
           mb: 2.5,
+          
         }}
       >
         View {futureEvents ? 'Previous': 'Upcoming'} Events

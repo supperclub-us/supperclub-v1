@@ -41,7 +41,7 @@ export const Card = ({ booking }) => {
               navigate(`/users/chefs/${booking.chefId}/bookings/${booking.id}`);
             }}
             sx={{
-              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+              "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke", opacity: ".8", },
               backgroundColor: "#EB5757",
               color: "whitesmoke",
             }}
@@ -56,7 +56,7 @@ export const Card = ({ booking }) => {
           onClick={handleClick}
           variant="contained"
           sx={{
-            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke", opacity: ".8", },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
             mb: 4

@@ -81,7 +81,7 @@ const ChefProfile = () => {
             window.location.href = `/chefs/${currentChef.id}/event`;
           }}
           sx={{
-            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke", opacity: ".8", },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
             mt: 2.5
@@ -93,7 +93,7 @@ const ChefProfile = () => {
         <h1>Your {futureEvents ? 'Upcoming' : 'Previous'} Events</h1>
         <Button
           sx={{
-            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke" },
+            "&:hover": { backgroundColor: "#EB5757", color: "whitesmoke", opacity: ".8", },
             backgroundColor: "#EB5757",
             color: "whitesmoke",
             mb: 2.49

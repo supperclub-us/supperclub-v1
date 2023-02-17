@@ -23,7 +23,7 @@ const Chefs = () => {
     dispatch(fetchAllChefsAsync());
   }, [dispatch]);
 
-
+  
   const [open, setOpen] = useState(false);
   const [modalScreen, setModalScreen] = useState("");
   const [selectBooking, setSelectBooking] = useState();
@@ -98,6 +98,9 @@ const Chefs = () => {
                             "&:hover": {
                               backgroundColor: "#EB5757",
                               color: "whitesmoke",
+                              opacity: ".8",
+                              animation: "shake 3s",
+                              animationIterationCount: "infinite"
                             },
                             backgroundColor: "#EB5757",
                             color: "whitesmoke",
