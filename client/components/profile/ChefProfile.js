@@ -10,12 +10,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Card } from "./card/Card";
 import dayjs from "dayjs";
 import AddIcon from "@mui/icons-material/Add";
+import UndoIcon from "@mui/icons-material/Undo";
+import RedoIcon from "@mui/icons-material/Redo";
 
 const ChefProfile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.auth.me);
   const [futureEvents, setFutureEvents] = useState(true);
+  const navigate = useNavigate();
 
   // the different states from the selectSingleChef State
   const { currentChef, isLoading, error } = useSelector(selectSingleChef);
@@ -69,10 +72,6 @@ const ChefProfile = () => {
     return <PageNotFound />;
   }
 
-  // if (error) {
-  //   return <PageNotFound />;
-  // }
-
   return (
     <>
       <div className="links">
@@ -88,7 +87,7 @@ const ChefProfile = () => {
         <Button
           variant="contained"
           onClick={() => {
-            window.location.href = `/chefs/${currentChef.id}/event`;
+            navigate(`/chefs/${currentChef.id}/event`);
           }}
           sx={{
             "&:hover": {
@@ -115,6 +114,8 @@ const ChefProfile = () => {
           variant="contained"
           size="small"
           onClick={handleClick}
+          startIcon={futureEvents && <UndoIcon />}
+          endIcon={!futureEvents && <RedoIcon />}
         >
           {" "}
           View {futureEvents ? "Previous" : "Upcoming"} Events

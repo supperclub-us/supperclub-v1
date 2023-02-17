@@ -66,7 +66,8 @@ const Navbar = () => {
   // Determine the opacity based on the scroll position
   const opacity = Math.max(0, 1 - (scrollTop - 50) / 100);
 
-  const handleNavToProfile = () => {
+  const handleNavToProfile = (e) => {
+    e.preventDefault();
     if (user.role === "CHEF") {
       navigate(`/users/chefprofile/${user.id}`);
     } else {
@@ -115,7 +116,6 @@ const Navbar = () => {
         />
         <h1 className="navbar-supper-club-name">
           <Link id="link-logo" to="/">
-            {/* <img src="https://i.imgur.com/wl0Y3tL.png" id="logo"/> */}
             <h3 id="name">supperclub</h3>
           </Link>
         </h1>
