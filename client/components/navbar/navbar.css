@@ -11,12 +11,17 @@
 
 .navbar-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background: #1b202c;
   color: #dfe2ea;
+  transition: opacity 200ms ease-in;
   flex: 1;
+  position: sticky;
+  top: 0;
   z-index: 1;
+  padding: 10px;
+  /* height: 150px; */
   max-height: 90px;
 }
 
@@ -29,6 +34,7 @@
   height: 100%;
   width: 100%;
   flex: 1;
+  gap: 1rem;
 }
 
 .navbar-logo {
