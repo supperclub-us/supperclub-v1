@@ -1,11 +1,12 @@
 .footer-container {
-    color: whitesmoke;
-    background-color: #1B202C;
-    padding-top: 1em;
-    width: 100%;
-    padding: 1;
-    position: static;
-    bottom:0;
-    margin: 0;
-    height: 250px
+  color: whitesmoke;
+  background-color: #1b202c;
+  padding-top: 1em;
+  width: 100%;
+  padding: 1;
+  position: static;
+  bottom: 0;
+  margin: 0;
+  height: 250px;
+  z-index: 2;
 }

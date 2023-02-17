@@ -150,7 +150,17 @@ const SignUp = ({ handleOpen }) => {
           </Button>
           <p className="signup-to-login-question">
             Already have an account?
-            <Button onClick={() => handleOpen("login")}>Login</Button>
+            <Button
+              onClick={() => handleOpen("login")}
+              sx={{
+                "&:hover": { backgroundColor: "whitesmoke", color: "#EB5757" },
+                color: "#EB5757",
+                fontSize: "12px",
+              }}
+              variant="text"
+            >
+              Login
+            </Button>
           </p>
         </div>
 
