@@ -9,3 +9,4 @@ package-lock.json
 .history
 client/env.js
 .env
+.vercel
