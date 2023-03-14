@@ -17,7 +17,7 @@
     "test:dev:models": "npm run test:dev -- --grep=model",
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "supperclub",
   "license": "MIT",
   "dependencies": {
     "@date-io/date-fns": "^2.16.0",
