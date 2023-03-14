@@ -45,8 +45,8 @@ function Footer() {
           className="footer-column"
           style={{ ...footerColumnStyle, flex: 1 }}
         >
-          <p>Where to Waze Us </p>
-          <Typography variant="body1">123 Team G FullStack Street</Typography>
+          <p>Where To Find Us </p>
+          <Typography variant="body1">198 10th Avenue</Typography>
           <Typography variant="body1">New York, NY, USA</Typography>
           <Typography variant="body1">Tel: 718-123-4567</Typography>
         </div>
@@ -92,15 +92,15 @@ function Footer() {
           alignItems: "center",
         }}
       >
-        <div className="payment-icons" style={paymentIconContainerStyle}>
+        {/* <div className="payment-icons" style={paymentIconContainerStyle}>
           <FaPaypal />
           <FaCcVisa />
           <FaCcDiscover />
           <FaCcAmex />
           <FaCcMastercard />
           <FaCcStripe />
-        </div>
-        <p>© 2023 Supper Club | We are best turtles at FullStack</p>
+        </div> */}
+        {/* <p>2023 Supper Club</p> */}
       </div>
     </footer>
   );
